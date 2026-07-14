@@ -1,0 +1,100 @@
+---
+import Button from "../ui/Button.astro";
+import Hamburger from "../ui/Hamburger.astro";
+import IconButton from "../ui/IconButton.astro";
+
+import { URLS } from "@/infrastructure/constants/urls";
+
+// Props
+interface Props {
+  navItems: {
+    name: string;
+    href: string;
+    active?: boolean;
+    target?: string;
+    id?: string;
+  }[];
+}
+
+const { navItems } = Astro.props as Props;
+---
+
+<nav class="font-secondary flex items-center gap-6 lg:gap-9 2xl:gap-11">
+  <!-- Pages Links -->
+  <ul
+    class="hidden items-center gap-6 text-base font-medium xl:flex xl:gap-9 2xl:gap-11"
+  >
+    {
+      navItems.map((navItem) => (
+        <li class="text-nowrap">
+          <a
+            id={navItem.id}
+            href={navItem.href}
+            target={navItem.target}
+            class={`relative transition-colors duration-200 hover:text-orange-500 ${
+              navItem.active
+                ? "font-medium text-orange-500"
+                : "text-n-800 hover:text-n-900"
+            }`}
+          >
+            {navItem.name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="flex gap-3.5">
+    <!-- Apply Now button -->
+    <a
+      class="hidden sm:block"
+      id="apply-now-desktop"
+      href={URLS.ADMISSIONS.ROOT}
+    >
+      <Button text="Apply Now" variant="solid" rightArrow />
+    </a>
+
+    <!-- Apply Now Icon Button on mobile -->
+    <div class="block sm:hidden" id="apply-now-mobile">
+      <IconButton href={URLS.ADMISSIONS.ROOT} extraClasses="!rounded-lg" />
+    </div>
+
+    <!-- Explore button -->
+    <a href="/" id="explore-btn" class="hidden sm:flex">
+      <Button text="Explore" leftIcon variant="ghost" />
+    </a>
+
+    <!-- Hamburger  -->
+    <Hamburger />
+  </div>
+</nav>
+
+<script>
+  // SCRIPTS //
+  import {
+    setupClickTracking,
+    trackApplyNowClick,
+    trackCommonClickEvents,
+  } from "@/scripts/analytics";
+
+  // ENUMS //
+  import { EVENTS } from "@/enums/analytics.enum";
+
+  // Track Apply Now button clicks (desktop and mobile)
+  setupClickTracking("apply-now-desktop", trackApplyNowClick);
+  setupClickTracking("apply-now-mobile", trackApplyNowClick);
+
+  // Track Explore button clicks
+  setupClickTracking("explore-btn", () =>
+    trackCommonClickEvents(EVENTS.MENU_EXPLORE_BTN_CLICKED),
+  );
+
+  // Track Pay Fees button clicks
+  setupClickTracking("pay-fee", () =>
+    trackCommonClickEvents(EVENTS.MENU_PAY_FEES_CLICKED),
+  );
+
+  // Track School Tour button clicks
+  setupClickTracking("school-tour", () =>
+    trackCommonClickEvents(EVENTS.SCHOOL_TOUR_CLICKED),
+  );
+</script>

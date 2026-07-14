@@ -1,0 +1,116 @@
+---
+interface Props {
+  text: string;
+  onClick?: string;
+  variant?: "outline" | "solid" | "ghost" | "soft";
+  size?: "small" | "medium" | "large";
+  rightArrow?: boolean;
+  leftIcon?: boolean;
+  extraClasses?: string;
+  type?: "button" | "submit" | "reset";
+  mode?: "inline" | "block";
+  [key: string]: any;
+}
+
+const {
+  text,
+  onClick,
+  variant = "solid",
+  size = "medium",
+  rightArrow = false,
+  leftIcon = false,
+  extraClasses = "",
+  type = "button",
+  mode = "inline",
+  ...rest
+} = Astro.props;
+
+// Base skeleton
+const base =
+  "inline-flex relative overflow-hidden text-nowrap z-1 items-center justify-center rounded-lg text-lg font-medium cursor-pointer gap-1.5 transition-colors duration-200 font-secondary before:content-[''] before:absolute  before:inset-0 hover:before:scale-x-100 before:scale-x-0 before:transition before:duration-300 before:ease-out before:origin-left before:-z-2";
+
+// Variants
+const variants = {
+  solid:
+    "bg-orange-500 text-n-50 border border-transparent hover:bg-orange-600 hover:text-orange-500 hover:before:bg-n-50",
+  outline:
+    "bg-transparent text-orange-500 border border-orange-500 hover:bg-orange-500 hover:text-orange-50 hover:before:bg-orange-500",
+  ghost: "bg-n-100 text-n-600  hover:before:bg-n-300",
+  soft: "font-secondary bg-orange-50 text-orange-600 font-semibold hover:before:bg-orange-100",
+};
+
+// Sizes
+const sizes = {
+  small: "px-3 py-2 md:px-4 md:py-2.5 text-xs md:text-base lg:text-lg ",
+  medium: "px-5 py-2.5 text-sm md:text-lg",
+  large: "px-6 py-2 lg:px-8 lg:py-4 text-sm md:text-base md:text-xl",
+};
+
+// Modes
+const modes = {
+  inline: "w-fit",
+  block: "w-full",
+};
+
+// Final classes
+const classes = `${base} ${variants[variant]} ${sizes[size]} ${modes[mode]} ${extraClasses}`;
+---
+
+<button type={type} onclick={onClick} class={classes} {...rest}>
+  {
+    leftIcon && (
+      <span class="inline-flex">
+        <svg
+          width="17"
+          height="17"
+          viewBox="0 0 17 17"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M1.49386 1.94319C1.17794 1.99685 0.96914 2.30231 1.03154 2.61953C1.07282 2.82932 1.2342 3.0025 1.43932 3.05714C1.55938 3.08911 15.4165 3.08911 15.5365 3.05714C15.8068 2.98517 15.9879 2.71317 15.9528 2.43205C15.9284 2.23697 15.7797 2.04684 15.5919 1.97068L15.5039 1.93498L8.53592 1.93281C4.70352 1.93161 1.5346 1.93628 1.49386 1.94319ZM1.4696 7.78356C1.30264 7.81674 1.14608 7.94473 1.06908 8.11098C1.03141 8.19229 1.02464 8.22778 1.02476 8.34298C1.02488 8.45829 1.03184 8.49415 1.07048 8.57873C1.12559 8.69932 1.2358 8.80781 1.36444 8.8681L1.45592 8.91098H8.48792H15.5199L15.6114 8.8681C15.7401 8.80781 15.8503 8.69932 15.9054 8.57873C15.9441 8.49402 15.9509 8.45849 15.9509 8.34298C15.9509 8.22748 15.9441 8.19194 15.9054 8.10724C15.8503 7.98665 15.7401 7.87815 15.6114 7.81786L15.5199 7.77498L8.52792 7.77268C4.68232 7.77141 1.50608 7.77631 1.4696 7.78356ZM1.4318 13.6298C1.23343 13.6846 1.07204 13.8606 1.03154 14.0664C0.9781 14.3381 1.1262 14.6107 1.38392 14.7153L1.47192 14.751H8.48792H15.5039L15.5919 14.7153C15.7797 14.6391 15.9284 14.449 15.9528 14.2539C15.9879 13.9728 15.8068 13.7008 15.5365 13.6288C15.4217 13.5982 1.5426 13.5992 1.4318 13.6298Z"
+            fill="currentColor"
+          />
+        </svg>
+      </span>
+    )
+  }
+
+  {text}
+
+  {
+    rightArrow && (
+      <span class="inline-flex rotate-0">
+        <svg
+          class="size-3.5 md:size-5"
+          width="23"
+          height="23"
+          viewBox="0 0 23 23"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <g clip-path="url(#clip0_3038_73)">
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M9.0577 4.54769C8.94116 4.79393 8.93967 4.99122 9.05234 5.24446C9.12334 5.40401 9.31882 5.57547 9.50096 5.63795C9.69115 5.70316 9.85054 5.6932 10.1625 5.59657C10.9701 5.34642 11.7381 5.19807 12.6507 5.11597C13.8683 5.00642 15.1173 5.04915 16.29 5.24051L16.6511 5.29944L10.6333 11.3329C5.89178 16.0868 4.60786 17.3822 4.57935 17.4412C4.5279 17.5476 4.49705 17.7559 4.51275 17.8907C4.55331 18.2388 4.85219 18.5347 5.20555 18.5765C5.31737 18.5897 5.52121 18.5557 5.64365 18.5033C5.70849 18.4756 6.62453 17.5685 11.753 12.4532L17.7861 6.43564L17.8371 6.74246C18.0615 8.09305 18.0899 9.56765 17.9179 10.9453C17.8409 11.5618 17.6937 12.2487 17.507 12.8623C17.4516 13.0445 17.4052 13.2512 17.404 13.3216C17.4007 13.5091 17.4698 13.6906 17.6017 13.8405C17.7346 13.9918 17.8436 14.0556 18.041 14.098C18.2142 14.1352 18.3711 14.1123 18.5498 14.0237C18.7963 13.9014 18.8804 13.7714 19.0275 13.2852C19.4097 12.0225 19.5895 10.7571 19.6022 9.2412C19.6158 7.61551 19.4238 6.21952 18.9983 4.85011C18.8203 4.27746 18.7384 4.21654 17.8024 3.96142C16.5651 3.62414 15.3129 3.47303 13.8444 3.48375C12.338 3.49478 11.0859 3.67252 9.80312 4.05742C9.31525 4.2038 9.17754 4.29437 9.0577 4.54769Z"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0_3038_73">
+              <rect
+                width="22"
+                height="22"
+                fill="currentColor"
+                transform="translate(0.739014 0.342823)"
+              />
+            </clipPath>
+          </defs>
+        </svg>
+      </span>
+    )
+  }
+</button>

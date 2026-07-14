@@ -1,0 +1,113 @@
+---
+import Meta from "@/components/layout/Meta.astro";
+import Header from "@/components/layout/Header.astro";
+import Footer from "@/components/layout/Footer.astro";
+import SocialStickyBar from "@/components/ui/SocialStickyBar.astro";
+import SideMenu from "@/components/layout/SideMenu.astro";
+import DevNav from "@/components/ui/DevNav.astro";
+
+import "@/styles/global.css";
+
+const { meta = {} } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <!-- Metadata -->
+    <Meta
+      title={meta.title}
+      description={meta.description}
+      image={meta.image}
+      noIndex={meta.noIndex}
+    />
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  </head>
+  <body>
+    <main>
+      <div>
+        <Header />
+      </div>
+      <SideMenu />
+      <slot />
+      <!-- Footer -->
+      <Footer />
+    </main>
+    <SocialStickyBar />
+    <DevNav />
+
+    <script is:inline>
+      (function () {
+        const fontLink = document.createElement("link");
+        fontLink.rel = "stylesheet";
+        fontLink.href =
+          "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap";
+
+        requestAnimationFrame(() => {
+          document.head.appendChild(fontLink);
+        });
+      })();
+    </script>
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+            }
+          });
+        },
+        // reveal when 20% visible
+      );
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document
+          .querySelectorAll(
+            ".fade-in, .scale-in, .card-anim, .fade-in-down, .article-root > *",
+          )
+          .forEach((el) => {
+            observer.observe(el);
+          });
+      });
+    </script>
+    <script>
+      import { animate, stagger } from "motion";
+
+      const containers = Array.from(document.querySelectorAll(".animatedText"));
+      const once = new WeakSet();
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting || once.has(entry.target)) return;
+            once.add(entry.target);
+
+            const el = entry.target;
+            const children = el.querySelectorAll("span");
+
+            if (children.length > 0) {
+              // Animate child spans
+              animate(
+                children,
+                { opacity: [0, 1], y: [20, 0] },
+                { duration: 0.6, delay: stagger(0.08), easing: "ease-out" },
+              );
+            } else {
+              // Animate the container itself if it has no spans
+              animate(
+                el,
+                { opacity: [0, 1], y: [20, 0] },
+                { duration: 0.6, easing: "ease-out" },
+              );
+            }
+          });
+        },
+        { threshold: 0.3 },
+      );
+
+      containers.forEach((el) => io.observe(el));
+    </script>
+
+  </body>
+</html>

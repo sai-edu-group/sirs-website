@@ -1,0 +1,45 @@
+---
+interface Props {
+  href: string;
+  extraClasses?: string;
+  iconClasses?: string;
+}
+const { href = "#", extraClasses, iconClasses } = Astro.props as Props;
+---
+
+<a
+  href={href}
+  class=`${extraClasses} group flex lg:flex size-9 items-center justify-center rounded-3xl bg-orange-500 md:size-14 md:scale-75 lg:opacity-0 md:transition-all md:duration-300 md:ease-out md:group-hover:scale-100 md:group-hover:opacity-100 lg:size-16 lg:rounded-3xl`
+>
+  <span
+    class="text-n-50 transform md:transition-all md:duration-300 md:ease-out md:group-hover:translate-x-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 lg:translate-x-[-50%] lg:translate-y-[50%] lg:opacity-0"
+  >
+    <svg
+      class={`${iconClasses} size-4 md:size-7`}
+      width="23"
+      height="23"
+      aria-label="Apply Now"
+      viewBox="0 0 23 23"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <g clip-path="url(#clip0_3038_73)">
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M9.0577 4.54769C8.94116 4.79393 8.93967 4.99122 9.05234 5.24446C9.12334 5.40401 9.31882 5.57547 9.50096 5.63795C9.69115 5.70316 9.85054 5.6932 10.1625 5.59657C10.9701 5.34642 11.7381 5.19807 12.6507 5.11597C13.8683 5.00642 15.1173 5.04915 16.29 5.24051L16.6511 5.29944L10.6333 11.3329C5.89178 16.0868 4.60786 17.3822 4.57935 17.4412C4.5279 17.5476 4.49705 17.7559 4.51275 17.8907C4.55331 18.2388 4.85219 18.5347 5.20555 18.5765C5.31737 18.5897 5.52121 18.5557 5.64365 18.5033C5.70849 18.4756 6.62453 17.5685 11.753 12.4532L17.7861 6.43564L17.8371 6.74246C18.0615 8.09305 18.0899 9.56765 17.9179 10.9453C17.8409 11.5618 17.6937 12.2487 17.507 12.8623C17.4516 13.0445 17.4052 13.2512 17.404 13.3216C17.4007 13.5091 17.4698 13.6906 17.6017 13.8405C17.7346 13.9918 17.8436 14.0556 18.041 14.098C18.2142 14.1352 18.3711 14.1123 18.5498 14.0237C18.7963 13.9014 18.8804 13.7714 19.0275 13.2852C19.4097 12.0225 19.5895 10.7571 19.6022 9.2412C19.6158 7.61551 19.4238 6.21952 18.9983 4.85011C18.8203 4.27746 18.7384 4.21654 17.8024 3.96142C16.5651 3.62414 15.3129 3.47303 13.8444 3.48375C12.338 3.49478 11.0859 3.67252 9.80312 4.05742C9.31525 4.2038 9.17754 4.29437 9.0577 4.54769Z"
+        ></path>
+      </g>
+      <defs>
+        <clipPath id="clip0_3038_73">
+          <rect
+            width="22"
+            height="22"
+            fill="currentColor"
+            transform="translate(0.739014 0.342823)"></rect>
+        </clipPath>
+      </defs>
+    </svg>
+  </span>
+</a>

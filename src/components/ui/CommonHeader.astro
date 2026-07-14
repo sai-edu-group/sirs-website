@@ -1,0 +1,51 @@
+---
+const { eyebrowText, title } = Astro.props;
+
+// Split the title into words safely
+const words = title ? title.trim().split(" ") : [];
+const lastWord = words.pop();
+const firstPart = words.join(" ");
+---
+
+<div class="relative inline-block">
+  {
+    eyebrowText && (
+      <p class="text-n-600 mb-2.5 text-sm font-light md:mb-1 md:text-xl">
+        {eyebrowText}
+      </p>
+    )
+  }
+
+  <p
+    id="animatedText"
+    class="animatedText text-n-800 flex flex-wrap gap-0 text-4xl/11 font-medium md:text-6xl/20 md:leading-[73px]"
+  >
+    {
+      firstPart
+        .split(" ")
+        .map((word: string) => (
+          <span class="inline-block opacity-0">{word}&nbsp;</span>
+        ))
+    }
+    <span class="relative inline-block opacity-0">
+      <span class="relative z-1 inline-block">{lastWord}</span>
+      <span class="opacity-0">
+        <svg
+          class="absolute -right-5 -bottom-[15px] z-0 h-[19px] w-[130px] md:right-0 md:h-[34px] md:w-[232px] lg:-bottom-[30px] xl:h-[47px] xl:w-[300px]"
+          xmlns="http://www.w3.org/2000/svg"
+          width="353"
+          height="48"
+          viewBox="0 0 353 48"
+          fill="none"
+        >
+          <path
+            d="M2.65555 37.4599C45.9937 21.9912 176.227 -18.7216 349.156 10.0028C351.335 10.3648 352.808 12.4252 352.447 14.6044C352.085 16.7836 350.024 18.2573 347.845 17.8954C176.774 -10.5203 48.0069 29.7668 5.345 44.994C3.26442 45.7367 0.975312 44.6518 0.232694 42.5712C-0.509571 40.4908 0.575204 38.2025 2.65555 37.4599Z"
+            fill="#CC554D"></path>
+          <path
+            d="M78.626 39.4146C111.296 27.468 218.006 8.01027 330.683 27.5278C332.859 27.9049 334.318 29.9752 333.941 32.1519C333.564 34.3286 331.494 35.7876 329.317 35.4106C217.995 16.1276 112.705 35.4706 81.374 46.9272C79.2992 47.6859 77.0019 46.6192 76.2432 44.5444C75.4847 42.4699 76.5515 40.1733 78.626 39.4146Z"
+            fill="#CC554D"></path>
+        </svg>
+      </span>
+    </span>
+  </p>
+</div>

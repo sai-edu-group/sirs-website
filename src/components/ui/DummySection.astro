@@ -1,0 +1,23 @@
+---
+// TYPES //
+interface Props {
+  name: string;
+}
+
+// PROPS //
+const { name } = Astro.props;
+---
+
+<!-- ============================================================
+     DUMMY SECTION — Development placeholder only
+     Replace this entire component with real section content.
+     Shows section name centered on a full-height violet background.
+     ============================================================ -->
+<section class="flex min-h-screen items-center justify-center bg-violet-50 font-secondary">
+  <!-- Label -->
+  <div class="text-center">
+    <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-violet-400">Section</p>
+    <!-- Section name -->
+    <h2 class="text-4xl font-bold text-violet-700">{name}</h2>
+  </div>
+</section>

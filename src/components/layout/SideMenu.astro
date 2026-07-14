@@ -1,0 +1,387 @@
+---
+import { menu, type MenuItemData } from "@/infrastructure/constants/side-menu";
+import Image from "astro/components/Image.astro";
+---
+
+<!-- Backdrop --><!-- This is the dark overlay behind the sidebar when open -->
+<div
+  id="menu-backdrop"
+  class="bg-n-950/50 invisible fixed inset-0 z-51 overflow-y-auto! opacity-0 backdrop-blur-sm transition-opacity duration-300 ease-in-out"
+>
+</div>
+
+<!-- Sidebar -->
+<!-- The main sidebar navigation -->
+<aside
+  id="modal"
+  class="fixed inset-y-0 right-0 z-52 w-full translate-x-full transform overflow-y-scroll bg-violet-600 transition-transform duration-300 ease-in-out xl:max-w-[704px]"
+>
+  <nav class="flex h-full flex-col" data-accordion>
+    <div class="py-10">
+      <!-- Close Button for Sidebar -->
+      <div class="z-3 mb-10 flex w-full justify-end bg-violet-600 pr-10">
+        <div
+          class="bg-n-50/10 hover:bg-n-50/20 cursor-pointer items-center justify-center rounded-xl p-3 transition-all duration-300 hover:scale-110 md:p-5"
+          id="menu-close"
+          role="button"
+          tabindex="0"
+          title="Close Button"
+        >
+          <!-- Close (X) Icon SVG -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+          >
+            <g clip-path="url(#clip0_3871_1253)">
+              <path
+                d="M0.958597 0.67093C1.19644 0.463586 1.55755 0.488367 1.76496 0.726175C5.97244 5.55037 10.4491 10.0271 15.2733 14.2345C15.5111 14.442 15.5359 14.8031 15.3286 15.0409C15.1212 15.2787 14.7601 15.3035 14.5222 15.0962C9.65879 10.8545 5.14504 6.34072 0.903352 1.47729C0.696008 1.23945 0.720789 0.878337 0.958597 0.67093Z"
+                fill="white"></path>
+              <path
+                d="M14.2345 0.726176C14.442 0.488366 14.8031 0.463586 15.0409 0.67093C15.2787 0.878337 15.3035 1.23945 15.0962 1.47729C10.8545 6.34073 6.34072 10.8545 1.47729 15.0962C1.23945 15.3035 0.878338 15.2787 0.670931 15.0409C0.463585 14.8031 0.488367 14.442 0.726177 14.2345C5.55037 10.0271 10.0271 5.55038 14.2345 0.726176Z"
+                fill="white"></path>
+            </g>
+            <defs>
+              <clipPath id="clip0_3871_1253">
+                <rect width="16" height="16" fill="white"></rect>
+              </clipPath>
+            </defs>
+          </svg>
+        </div>
+      </div>
+      {
+        // Render each main menu item
+        menu.map((menuItem: MenuItemData, menuIndex: number) => {
+          const open = !!menuItem.active;
+          return (
+            <section
+              class="flex flex-col px-8 py-3 data-[open=true]:bg-violet-700 data-[open=true]:py-6 md:px-10 md:py-3.5 md:data-[open=true]:py-7 lg:px-28"
+              data-menu-item
+              data-open={open ? "true" : "false"}
+              data-index={menuIndex}
+            >
+              {/* Main menu button */}
+              <button
+                class="flex w-full cursor-pointer items-center justify-between text-left outline-none"
+                data-menu-header
+                aria-expanded={open}
+              >
+                <span class="flex items-center gap-5">
+                  {/* Menu icon */}
+                  <span class="inline-flex size-5">
+                    <Image
+                      src={`/icons/${menuItem.icon}.svg`}
+                      alt=""
+                      class="h-full w-full"
+                      loading="lazy"
+                      decoding="async"
+                      width={20}
+                      height={20}
+                    />
+                  </span>
+                  {/* Menu title */}
+                  <span class="font-secondary text-base text-white data-[open=true]:font-semibold md:text-xl">
+                    {menuItem.title}
+                  </span>
+                </span>
+
+                {/* Expand/collapse icon */}
+                <span class="inline-flex items-center" aria-hidden="true">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 18 18"
+                    fill="none"
+                    class="icon"
+                  >
+                    <rect
+                      x="3.8"
+                      y="8.3"
+                      width="10.4"
+                      height="1.4"
+                      rx="0.7"
+                      class="icon-minus"
+                    />
+                    <rect
+                      x="8.3"
+                      y="3.8"
+                      width="1.4"
+                      height="10.4"
+                      rx="0.7"
+                      class="icon-plus-vert"
+                    />
+                  </svg>
+                </span>
+              </button>
+
+              {/* Submenu for each main menu item */}
+              <div
+                data-menu-submenu
+                data-open={open ? "true" : "false"}
+                style={open ? "height:auto" : "height:0"}
+                class="overflow-hidden transition-[height] duration-300 ease-in-out"
+              >
+                <div
+                  data-menu-submenu-inner
+                  class="flex flex-col gap-2 pt-7 lg:gap-4"
+                >
+                  {menuItem.submenu?.map((subMenuItem) => (
+                    <div class="group flex h-[34px] cursor-pointer flex-col gap-1.5 md:gap-2">
+                      <a
+                        target={subMenuItem.target}
+                        href={subMenuItem.href}
+                        data-href={subMenuItem.href}
+                        class="submenu-link text-n-100 font-secondary text-sm tracking-[1.28px] uppercase transition-all duration-300 ease-in-out group-hover:font-semibold group-hover:text-orange-500 md:text-base"
+                      >
+                        {subMenuItem.title}
+                      </a>
+                      {/* Underline */}
+                      <div
+                        class={`submenu-underline h-px w-[73px] transition-all duration-300 ease-in-out ${subMenuItem.active ? "h-0.5 bg-orange-500" : "bg-n-50/10 group-hover:h-0.5 group-hover:bg-orange-500"} `}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          );
+        })
+      }
+    </div>
+  </nav>
+</aside>
+
+<script is:inline>
+  // Get DOM elements for sidebar, backdrop, toggle button, accordion container, and close button
+  const sidebar = document.getElementById("modal");
+  const backdrop = document.getElementById("menu-backdrop");
+  const exploreBtn = document.getElementById("explore-btn");
+  const hamburgerBtn = document.getElementById("hamburger-btn");
+  const container = document.querySelector("[data-accordion]");
+  const closeBtn = document.getElementById("menu-close");
+
+  // Function to open the sidebar menu
+  function openMenu() {
+    sidebar.classList.remove("translate-x-full");
+    backdrop.classList.remove("opacity-0", "invisible");
+    backdrop.classList.add("opacity-100", "visible");
+    hamburgerBtn?.classList.add("is-open");
+
+    // ⛔ Disable body scroll
+    document.body.style.overflowY = "hidden";
+  }
+
+  // Function to close the sidebar menu
+  function closeMenu() {
+    sidebar.classList.add("translate-x-full");
+    backdrop.classList.add("opacity-0", "invisible");
+    backdrop.classList.remove("opacity-100", "visible");
+    hamburgerBtn?.classList.remove("is-open");
+
+    // ✅ Re-enable body scroll
+    document.body.style.overflowY = "";
+  }
+
+  // Open sidebar when clicking Explore button
+  exploreBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (sidebar.classList.contains("translate-x-full")) {
+      openMenu();
+    } else {
+      closeMenu();
+    }
+  });
+
+  // Open sidebar when clicking Hamburger button
+  hamburgerBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (sidebar.classList.contains("translate-x-full")) {
+      openMenu();
+    } else {
+      closeMenu();
+    }
+  });
+
+  // Close sidebar when clicking on backdrop
+  backdrop?.addEventListener("click", closeMenu);
+
+  // Close sidebar when clicking the close button
+  closeBtn?.addEventListener("click", closeMenu);
+
+  // Accordion logic for expanding/collapsing menu sections
+  if (container) {
+    const openSection = (section) => {
+      const submenu = section.querySelector("[data-menu-submenu]");
+      const inner = section.querySelector("[data-menu-submenu-inner]");
+      if (!submenu || !inner) return;
+
+      section.setAttribute("data-open", "true");
+      submenu.setAttribute("data-open", "true");
+
+      // Start collapsed, then force reflow so the next height sticks
+      submenu.style.height = "0px";
+      submenu.offsetHeight; // force reflow
+
+      const target = inner.scrollHeight; // gap/padding now included correctly
+      submenu.style.height = target + "px";
+
+      const onEnd = (ev) => {
+        if (ev.propertyName !== "height") return;
+        submenu.removeEventListener("transitionend", onEnd);
+        submenu.style.height = "auto"; // allow dynamic content afterwards
+      };
+      submenu.addEventListener("transitionend", onEnd);
+
+      const btn = section.querySelector("[data-menu-header]");
+      btn && btn.setAttribute("aria-expanded", "true");
+    };
+
+    const closeSection = (section) => {
+      const submenu = section.querySelector("[data-menu-submenu]");
+      if (!submenu) return;
+
+      // If currently auto, lock current pixel height first
+      if (
+        getComputedStyle(submenu).height === "auto" ||
+        submenu.style.height === "auto"
+      ) {
+        const inner = section.querySelector("[data-menu-submenu-inner]");
+        if (inner) {
+          submenu.style.height = inner.scrollHeight + "px";
+        } else {
+          submenu.style.height = submenu.scrollHeight + "px";
+        }
+        submenu.offsetHeight; // reflow
+      }
+
+      submenu.style.height = "0px";
+      section.setAttribute("data-open", "false");
+      submenu.setAttribute("data-open", "false");
+
+      const btn = section.querySelector("[data-menu-header]");
+      btn && btn.setAttribute("aria-expanded", "false");
+    };
+
+    container.addEventListener("click", (e) => {
+      const header = e.target.closest?.("[data-menu-header]");
+      if (!header) return;
+
+      const item = header.closest("[data-menu-item]");
+      if (!item) return;
+
+      const isOpen = item.getAttribute("data-open") === "true";
+
+      // Close all
+      container.querySelectorAll("[data-menu-item]").forEach(closeSection);
+
+      // Open clicked one if it was closed
+      if (!isOpen) openSection(item);
+    });
+
+    // ✅ Utility: get current pathname + hash
+    function getCurrentUrlKey() {
+      return window.location.pathname + window.location.hash;
+    }
+
+    // ✅ Auto open submenu if current page matches any submenu link
+    function openActiveSubmenu() {
+      const current = getCurrentUrlKey();
+
+      const activeLink = Array.from(
+        document.querySelectorAll(".submenu-link"),
+      ).find((link) => link.getAttribute("data-href") === current);
+
+      if (!activeLink) return;
+
+      const section = activeLink.closest("[data-menu-item]");
+      if (!section) return;
+
+      // Close all other sections
+      container.querySelectorAll("[data-menu-item]").forEach(closeSection);
+
+      // Open the active one
+      openSection(section);
+    }
+
+    // Run on first load + url changes
+    document.addEventListener("DOMContentLoaded", openActiveSubmenu);
+    window.addEventListener("hashchange", openActiveSubmenu);
+    window.addEventListener("popstate", openActiveSubmenu);
+
+    /** Update Active State + underline styles */
+    function updateActiveMenu() {
+      const current = getCurrentUrlKey();
+
+      document.querySelectorAll(".submenu-link").forEach((link) => {
+        link.addEventListener("click", closeMenu);
+
+        const target = link.getAttribute("data-href");
+        const underline =
+          link.parentElement.querySelector(".submenu-underline");
+
+        // Reset old classes
+        link.classList.remove("font-semibold", "text-orange-500");
+        underline?.classList.remove("h-0.5", "bg-orange-500");
+
+        // Apply new ones
+        if (target === current) {
+          link.classList.add("font-semibold", "text-orange-500");
+          underline?.classList.add("h-0.5", "bg-orange-500");
+        }
+      });
+
+      // ✅ Also open the correct submenu
+      openActiveSubmenu();
+    }
+
+    // Trigger on first load
+    document.addEventListener("DOMContentLoaded", updateActiveMenu);
+
+    // Trigger when URL hash (#) changes
+    window.addEventListener("hashchange", updateActiveMenu);
+
+    // Trigger on browser back/forward
+    window.addEventListener("popstate", updateActiveMenu);
+  }
+</script>
+
+<style>
+  /* Transition for submenu open/close using height for smooth auto-size */
+  [data-menu-submenu] {
+    transition:
+      height 0.3s ease,
+      opacity 0.3s ease,
+      padding 0.3s ease;
+    will-change: height;
+  }
+
+  /* Icon color styling */
+  [data-menu-item] .icon rect {
+    fill: var(--color-n-50);
+    stroke: var(--color-n-50);
+    stroke-width: 0.4;
+  }
+
+  /* Make the menu title semibold when submenu is open */
+  [data-menu-item][data-open="true"] [data-menu-header] span:last-child {
+    font-weight: 600; /* semibold */
+  }
+
+  /* Hide plus icon when open */
+  [data-menu-item][data-open="true"] .icon .icon-plus-vert {
+    opacity: 0;
+  }
+
+  /* Show plus icon when closed */
+  [data-menu-item][data-open="false"] .icon .icon-plus-vert {
+    opacity: 1;
+  }
+
+  /* Make backdrop visible when menu is open */
+  #menu-backdrop.visible {
+    visibility: visible;
+  }
+</style>

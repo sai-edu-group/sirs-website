@@ -1,0 +1,56 @@
+---
+interface Props {
+  id?: string; // e.g., "step-1"
+  step?: number; // 1..total
+  total: number; // e.g., 3
+  title?: string;
+  accent?: string;
+  as?: string; // 'article' by default
+  class?: string;
+}
+
+const {
+  id,
+  step,
+  total,
+  title,
+  accent = "#C9443A",
+  as = "article",
+  class: extra = "",
+} = Astro.props;
+
+const percent = Math.round((step / total) * 100);
+---
+
+<div
+  id={id}
+  data-step
+  class={`border-n-200 flex flex-col bg-n-50 container mx-auto gap-8 md:gap-12 rounded-xl border p-6 lg:px-16 md:px-10 md:py-8 lg:py-14
+     ${extra}`}
+>
+  {
+    title && (
+      <div class="space-y-4 lg:space-y-8">
+        <div class="flex items-center justify-between">
+          {/* Step label and current section title  */}
+          <h3 class="text-n-600 font-secondary text-lg font-normal md:text-2xl">
+            Step {step}/{total}: <span class="font-medium">{title}</span>
+          </h3>
+        </div>
+
+        {/* Progress bar  */}
+        <div
+          class="h-2.5 w-full rounded-4xl"
+          style={`background-color:${accent}33;`}
+        >
+          <div
+            class="h-2.5 rounded-4xl"
+            style={`width:${percent}%; background-color:${accent}`}
+          />
+        </div>
+      </div>
+    )
+  }
+
+  <slot />
+</div>

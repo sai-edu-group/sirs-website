@@ -1,0 +1,133 @@
+---
+// COMPONENTS //
+import Image from "astro/components/Image.astro";
+
+// OTHERS //
+import IconButton from "./IconButton.astro";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  img: string;
+  topText?: string;
+  title: string;
+  description?: string;
+  tags?: string[];
+  date?: string;
+  href?: string;
+  badgeText?: string;
+}
+const {
+  img = "/images/default/news-article-image.png",
+  topText = "",
+  title = "",
+  description = "",
+  tags = [],
+  href = "#",
+  date = "",
+  badgeText = "",
+} = Astro.props as Props;
+
+// Format the Date
+const formattedDate = new Date(date).toLocaleDateString("en-GB", {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+});
+---
+
+<a href={href}>
+  <div
+    class="group bg-n-50 border-n-200 relative h-full w-full overflow-hidden rounded-2xl border-2"
+  >
+    <!-- Article image -->
+    <div class="relative">
+      <Image
+        src={img}
+        alt=""
+        class="scale-up-on-hover h-[215px] w-full lg:h-[276px]"
+        loading="lazy"
+        decoding="async"
+        width={500}
+        height={276}
+      />
+
+      <!-- Badge -->
+      {
+        badgeText && badgeText !== "" && (
+          <div class="font-secondary text-n-600 bg-n-50 absolute top-6 right-6 rounded-lg px-2.5 py-2 text-xs font-medium shadow lg:text-base">
+            {badgeText}
+          </div>
+        )
+      }
+    </div>
+
+    <div
+      class="flex flex-col gap-4 px-4 pt-4 pb-8 md:px-6 md:pt-5 md:pb-9 lg:gap-6 lg:px-6 lg:pt-6 lg:pb-11"
+    >
+      {
+        date && (
+          <div class="mb-4 flex items-center gap-2">
+            <span class="text-orange-500">
+              <Icon name="calendar" class="color-orange-500 size-4 lg:size-5" />
+            </span>
+            <span class="font-secondary text-n-600 text-sm font-normal md:text-base">
+              {formattedDate}
+            </span>
+          </div>
+        )
+      }
+      <!-- Article title -->
+      <div class="flex flex-col gap-3 lg:gap-5">
+        {
+          topText && (
+            <div class="flex items-center gap-3">
+              <span class="text-orange-500">
+                <Icon name="users" class="size-4 lg:size-5" />
+              </span>
+              <p class="text-n-600 font-secondary text-sm leading-normal font-normal lg:text-base">
+                {topText}
+              </p>
+            </div>
+          )
+        }
+
+        <div class="flex flex-col gap-2.5 lg:gap-3.5">
+          <!-- Title -->
+          <p
+            class="text-n-700 text-xl font-medium transition-colors duration-200 group-hover:text-orange-500 md:text-2xl lg:text-3xl"
+          >
+            {title}
+          </p>
+
+          <!-- Description -->
+          {
+            description && (
+              <p class="font-secondary text-n-500 text-xs leading-tight md:w-full md:text-sm lg:text-lg">
+                {description}
+              </p>
+            )
+          }
+
+          {
+            tags && tags.length > 0 && (
+              <div class="font-secondary text-n-600 flex flex-wrap gap-1.5 lg:gap-2">
+                {tags.map((tag) => (
+                  <span class="bg-n-100 rounded-lg px-5 py-1.5 text-xs lg:text-sm">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )
+          }
+        </div>
+      </div>
+
+      <!-- Icon Button  -->
+      <div
+        class="absolute right-4 bottom-6 hidden md:right-5 md:bottom-10 lg:right-6 lg:bottom-11 lg:block"
+      >
+        <IconButton href={href} />
+      </div>
+    </div>
+  </div>
+</a>

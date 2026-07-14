@@ -1,0 +1,29 @@
+---
+export interface Props {
+  number: string;
+  icon?: string; // optional if inline SVG
+  title: string;
+  description: string;
+}
+const { number, icon = "", title, description } = Astro.props;
+---
+
+<div
+  class="border-n-200 relative flex flex-col gap-3 overflow-hidden rounded-3xl border p-8 lg:min-h-[270px] xl:min-h-[310px]"
+>
+  <!-- Big backdrop number -->
+  <p
+    class="text-n-100 font-secondary absolute -right-[10%] bottom-[40%] text-[250px] leading-0 font-bold lg:-right-[8%]"
+  >
+    {number}
+  </p>
+  <!-- Icon -->
+  <div>
+    <img src={icon} alt="" />
+  </div>
+  <!-- Text wrapper -->
+  <div class="text-n-800 z-2 space-y-3 md:space-y-6">
+    <p class="w-[90%] text-xl font-medium lg:text-2xl 2xl:text-3xl">{title}</p>
+    <p class="font-secondary text-sm font-normal lg:text-base">{description}</p>
+  </div>
+</div>

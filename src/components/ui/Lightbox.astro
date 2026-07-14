@@ -1,0 +1,175 @@
+---
+
+---
+
+<div
+  id="lightboxOverlay"
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 transition-opacity duration-300"
+>
+  <button
+    id="lightboxPrev"
+    class="absolute left-5 cursor-pointer text-4xl text-white transition-transform hover:scale-110"
+    >&lsaquo;</button
+  >
+  <button
+    id="lightboxNext"
+    class="absolute right-5 cursor-pointer text-4xl text-white transition-transform hover:scale-110"
+    >&rsaquo;</button
+  >
+  <button
+    id="lightboxClose"
+    class="absolute top-5 right-5 cursor-pointer text-3xl text-white transition-transform hover:scale-110"
+    >&times;</button
+  >
+
+  <img
+    id="lightboxImage"
+    src=""
+    alt="Expanded view"
+    class="max-h-[90vh] max-w-[90vw] rounded-lg object-contain"
+    loading="lazy"
+    decoding="async"
+  />
+</div>
+
+<style>
+  @keyframes genieOut {
+    0% {
+      transform: scale(0.1) translateY(100vh);
+      opacity: 0;
+      filter: blur(10px);
+    }
+    100% {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+
+  @keyframes genieIn {
+    0% {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+      filter: blur(0);
+    }
+
+    100% {
+      transform: scale(0.1) translateY(100vh);
+      opacity: 0;
+      filter: blur(10px);
+    }
+  }
+
+  .genie-enter {
+    animation: genieOut 0.6s forwards;
+  }
+
+  .genie-exit {
+    animation: genieIn 0.5s cubic-bezier(0.36, 0, 0.66, -0.56) forwards;
+  }
+
+  #lightboxOverlay.show {
+    opacity: 1;
+  }
+
+  #lightboxOverlay.hide {
+    opacity: 0;
+  }
+</style>
+
+<script is:inline>
+  const overlay = document.getElementById("lightboxOverlay");
+  const image = document.getElementById("lightboxImage");
+  const closeButton = document.getElementById("lightboxClose");
+  const nextBtn = document.getElementById("lightboxNext");
+  const prevBtn = document.getElementById("lightboxPrev");
+  let images = [];
+  let currentIndex = 0;
+
+  // Collect all expandable images
+  const buttons = document.querySelectorAll("[data-lightbox-src]");
+  images = Array.from(buttons).map((btn) => btn.dataset.lightboxSrc);
+
+  // Open lightbox with genie effect
+  buttons.forEach((btn, idx) => {
+    btn.addEventListener("click", () => {
+      currentIndex = idx;
+      image.src = images[currentIndex];
+
+      // Show overlay
+      overlay.classList.remove("hidden");
+      overlay.classList.add("flex", "show");
+
+      // Remove any existing animation classes
+      image.classList.remove("genie-exit");
+
+      // Trigger genie entrance
+      requestAnimationFrame(() => {
+        image.classList.add("genie-enter");
+      });
+
+      // Clean up animation class after it completes
+      setTimeout(() => {
+        image.classList.remove("genie-enter");
+      }, 600);
+    });
+  });
+
+  // Close lightbox with genie effect
+  function closeLightbox() {
+    // Add exit animation
+    image.classList.remove("genie-enter");
+    image.classList.add("genie-exit");
+    overlay.classList.remove("show");
+    overlay.classList.add("hide");
+
+    // Hide overlay after animation completes
+    setTimeout(() => {
+      overlay.classList.add("hidden");
+      overlay.classList.remove("flex", "hide");
+      image.classList.remove("genie-exit");
+    }, 500);
+  }
+
+  closeButton.addEventListener("click", closeLightbox);
+
+  // Navigation with smooth transition
+  function changeImage(newIndex) {
+    image.style.opacity = "0";
+    setTimeout(() => {
+      currentIndex = newIndex;
+      image.src = images[currentIndex];
+      image.style.opacity = "1";
+    }, 150);
+  }
+
+  nextBtn.addEventListener("click", () => {
+    const newIndex = (currentIndex + 1) % images.length;
+    changeImage(newIndex);
+  });
+
+  prevBtn.addEventListener("click", () => {
+    const newIndex = (currentIndex - 1 + images.length) % images.length;
+    changeImage(newIndex);
+  });
+
+  // Close on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !overlay.classList.contains("hidden")) {
+      closeLightbox();
+    }
+    if (e.key === "ArrowRight" && !overlay.classList.contains("hidden")) {
+      nextBtn.click();
+    }
+    if (e.key === "ArrowLeft" && !overlay.classList.contains("hidden")) {
+      prevBtn.click();
+    }
+  });
+
+  // Close on overlay click (not on image)
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      closeLightbox();
+    }
+  });
+</script>

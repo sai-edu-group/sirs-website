@@ -1,0 +1,10 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import DummySection from "@/components/ui/DummySection.astro";
+
+const { slug } = Astro.params;
+---
+
+<Layout meta={{ title: "About" }}>
+  <DummySection name={`About — ${slug}`} />
+</Layout>

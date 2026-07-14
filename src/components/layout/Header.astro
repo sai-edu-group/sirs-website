@@ -1,0 +1,53 @@
+---
+import Image from "astro/components/Image.astro";
+import Navbar from "../ui/Navbar.astro";
+import { URLS } from "@/infrastructure/constants/urls";
+
+const baseItems = [
+  { name: "Home", href: URLS.HOME },
+  { name: "About Us", href: URLS.ABOUT.ROOT },
+  { name: "SIRS Experience", href: URLS.SIRS_EXPERIENCE.ROOT },
+  { name: "Admissions", href: URLS.ADMISSIONS.ROOT },
+  { name: "Contact", href: URLS.CONTACT },
+];
+
+// Normalize a path (removes trailing slash except for "/")
+function normalizePath(path: string): string {
+  if (path.endsWith("/") && path !== "/") {
+    return path.slice(0, -1);
+  }
+  return path;
+}
+
+// Get current path from Astro
+const currentPath = normalizePath(Astro.url.pathname);
+
+// Add active to current page path
+const navItemWithActive = baseItems.map((item) => {
+  const itemPath = normalizePath(item.href);
+  return {
+    ...item,
+    active: itemPath === currentPath,
+  };
+});
+---
+
+<!-- Header Component -->
+<header
+  class="bg-n-50 fade-in-down border-n-200 fixed top-6 left-1/2 z-50 mx-auto flex -translate-x-1/2 items-center gap-25 rounded-xl border px-6 py-4 shadow-md md:z-48 xl:gap-36"
+>
+  <!-- Brand logo -->
+  <a href="/" class="w-22 xl:w-26">
+    <Image
+      src="/images/sai-brand-logo.png"
+      alt=""
+      aria-label="SAI Logo"
+      class="h-full w-full"
+      width={104}
+      height={33}
+    />
+  </a>
+
+  <!-- Navbar component -->
+  <Navbar navItems={navItemWithActive} />
+</header>

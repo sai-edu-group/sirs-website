@@ -1,0 +1,87 @@
+---
+import Image from "astro/components/Image.astro";
+
+interface Props {
+  statsCount: string;
+  title: string;
+  subTitle?: string;
+  img: string;
+}
+
+const { statsCount = "", title = "", subTitle = "", img = "" } = Astro.props;
+---
+
+<div
+  class="border-n-200 bg-n-50 relative flex h-[140px] w-full items-center justify-between gap-6 overflow-hidden rounded-3xl border-2 p-1.5 md:h-[380px] md:flex-col md:p-3 lg:h-[230px] lg:flex-row lg:gap-5 xl:gap-6"
+>
+  <!-- Stat image -->
+  <div
+    class="relative h-full w-[115px] rounded-xl md:h-[190px] md:w-full lg:h-full lg:w-[180px]"
+    data-name="stats-image"
+  >
+    <Image
+      alt=""
+      class="pointer-events-none h-full w-full rounded-xl object-cover"
+      src={img}
+      width={180}
+      height={230}
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+
+  <!-- Stat content -->
+  <div
+    class="flex w-full flex-1 flex-col items-start gap-1 md:items-center md:gap-3 lg:items-start lg:gap-4"
+    data-name="stats-content"
+  >
+    <!-- Stat Number -->
+    <p class="text-n-700 w-min text-4xl font-bold md:text-5xl 2xl:text-6xl">
+      {statsCount}
+    </p>
+
+    <!-- Stat card title -->
+    <div
+      class="font-secondary flex flex-col gap-3 md:w-[85%] md:text-center lg:w-[92%] lg:text-left"
+    >
+      <p class="text-n-600 text-sm font-medium md:text-lg lg:text-base">
+        {title}
+      </p>
+
+      <!-- Stat card subtitle -->
+      <p class="text-n-500 hidden text-xs font-medium md:block">{subTitle}</p>
+    </div>
+  </div>
+
+  <!-- Backdrop illustration logo -->
+  <div
+    class="absolute top-[-46px] right-[-40px] text-orange-500/80 md:top-auto md:right-[-47px] md:bottom-[-22.3px] lg:top-[-28.6px] lg:right-[-13.33px]"
+  >
+    <!-- Illustration -->
+    <svg
+      class="size-[127px] md:size-[157px]"
+      width="157"
+      height="157"
+      viewBox="0 0 157 157"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0 0H52.6646C65.8355 0 76.5127 10.6772 76.5127 23.8481V76.5127H23.8481C10.6772 76.5127 0 65.8355 0 52.6646V0Z"
+        fill="#CC554D"
+        fill-opacity="0.08"></path>
+      <path
+        d="M157 0H104.335C91.1645 0 80.4873 10.6772 80.4873 23.8481V76.5127H133.152C146.323 76.5127 157 65.8355 157 52.6646V0Z"
+        fill="#CC554D"
+        fill-opacity="0.08"></path>
+      <path
+        d="M0 157H52.6646C65.8355 157 76.5127 146.323 76.5127 133.152V80.4873H23.8481C10.6772 80.4873 0 91.1645 0 104.335V157Z"
+        fill="#CC554D"
+        fill-opacity="0.08"></path>
+      <path
+        d="M157 157H104.335C91.1645 157 80.4873 146.323 80.4873 133.152V80.4873H133.152C146.323 80.4873 157 91.1645 157 104.335V157Z"
+        fill="#CC554D"
+        fill-opacity="0.08"></path>
+    </svg>
+  </div>
+</div>

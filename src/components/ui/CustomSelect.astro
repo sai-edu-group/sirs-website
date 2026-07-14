@@ -1,0 +1,97 @@
+---
+const { label, options = [], name, placeholder } = Astro.props;
+---
+
+<!-- Custom Dropdown -->
+<div class="relative space-y-1" id="modal">
+  <button
+    id="dropdownButton"
+    type="button"
+    class="border-n-500 text-n-800 flex w-full items-center justify-between rounded-lg border bg-white px-4 py-3 text-base font-medium focus:ring-2 focus:ring-orange-500 focus:outline-none"
+  >
+    <span id="dropdownLabel">{label}</span>
+    <svg
+      class="text-n-600 h-5 w-5 transition-transform duration-200"
+      id="dropdownArrow"
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M1.87229 5.32223C1.75397 5.34999 1.59153 5.45117 1.50195 5.55293C1.38471 5.68611 1.33247 5.83375 1.33169 6.03403L1.33105 6.19819L1.53561 6.60403C2.07689 7.67783 2.75491 8.79387 3.36319 9.61219C4.64095 11.3312 6.08645 12.5919 8.18047 13.8137C8.71375 14.1249 8.97249 14.2342 9.38751 14.3237C9.66271 14.3831 10.2961 14.3881 10.5698 14.3331C10.9845 14.2496 11.2951 14.1211 11.8105 13.8199C13.9213 12.586 15.3373 11.3523 16.6318 9.61905C17.2434 8.80015 17.9647 7.61007 18.4954 6.54421L18.6675 6.19855L18.6681 6.03421C18.6692 5.73951 18.5325 5.51219 18.277 5.38387C18.0591 5.27441 17.8344 5.27847 17.6147 5.39589C17.4647 5.47603 17.3816 5.58487 17.1915 5.95021C16.5827 7.11975 16.0383 8.01771 15.5001 8.73987C14.3294 10.3107 13.0319 11.4454 11.1505 12.5436C10.567 12.8842 10.431 12.9299 10.0005 12.9299C9.56995 12.9299 9.43399 12.8842 8.85047 12.5436C7.61657 11.8233 6.72601 11.1561 5.84337 10.2906C4.73297 9.20181 3.82187 7.90159 2.83119 5.99197C2.72335 5.78413 2.60333 5.57889 2.56447 5.53587C2.39593 5.34931 2.11995 5.26413 1.87229 5.32223Z"
+        fill="#62748E"></path>
+    </svg>
+  </button>
+
+  <!-- Dropdown Menu -->
+  <ul
+    id="dropdownMenu"
+    style="-webkit-overflow-scrolling: touch"
+    class="border-n-300 absolute z-100 mt-1 hidden max-h-[200px] w-full overflow-y-auto rounded-lg border bg-white shadow-lg transition-all duration-200"
+  >
+    {
+      options.map((option: string) => (
+        <li
+          class="text-n-700 font-secondary cursor-pointer px-4 py-2 hover:bg-orange-100 hover:text-orange-700"
+          data-value={option}
+        >
+          {option}
+        </li>
+      ))
+    }
+  </ul>
+
+  <input
+    type="hidden"
+    id="dropdownValue"
+    name={name}
+    placeholder={placeholder}
+    required
+  />
+</div>
+
+<script is:inline>
+  const btn = document.getElementById("dropdownButton");
+  const menu = document.getElementById("dropdownMenu");
+  const label = document.getElementById("dropdownLabel");
+  const hiddenInput = document.getElementById("dropdownValue");
+  const arrow = document.getElementById("dropdownArrow");
+
+  const toggleBodyScroll = (disable) => {
+    if (disable) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  };
+
+  btn.addEventListener("click", () => {
+    const open = !menu.classList.contains("hidden");
+    menu.classList.toggle("hidden");
+    arrow.style.transform = open ? "rotate(0deg)" : "rotate(180deg)";
+    toggleBodyScroll(!open);
+  });
+
+  menu.querySelectorAll("li").forEach((item) => {
+    item.addEventListener("click", () => {
+      label.textContent = item.textContent;
+      hiddenInput.value = item.dataset.value;
+      menu.classList.add("hidden");
+      arrow.style.transform = "rotate(0deg)";
+      toggleBodyScroll(false);
+    });
+  });
+
+  // Close on outside click
+  document.addEventListener("click", (e) => {
+    if (!btn.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.add("hidden");
+      arrow.style.transform = "rotate(0deg)";
+      toggleBodyScroll(false);
+    }
+  });
+</script>

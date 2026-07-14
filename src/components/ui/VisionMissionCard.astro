@@ -1,0 +1,45 @@
+---
+import Image from "astro/components/Image.astro";
+import Button from "./Button.astro";
+import IconButton from "./IconButton.astro";
+interface Props {
+  img: string;
+  title: string;
+}
+const { img, title = "" } = Astro.props as Props;
+---
+
+<div
+  class="group bg-n-50 border-n-300 flex h-full w-full flex-col gap-3.5 overflow-hidden rounded-3xl border-2 p-4 pb-6 md:flex-row md:gap-6 md:pb-4"
+>
+  <!-- Vision image -->
+  <div
+    class="group relative h-56 w-full cursor-pointer overflow-hidden rounded-xl md:w-[320px]"
+  >
+    <Image
+      src={img}
+      alt={title}
+      class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+      loading="lazy"
+      decoding="async"
+      width={320}
+      height={224}
+    />
+
+    <!-- Overlay animation -->
+    <span
+      class="pointer-events-none absolute inset-0 before:absolute before:inset-0 before:-translate-x-[150%] before:bg-[linear-gradient(128deg,rgba(255,255,255,0)_-3.31%,rgba(255,255,255,0.56)_31.94%,rgba(255,255,255,0.78)_49.57%,rgba(255,255,255,0.26)_63.89%,rgba(255,255,255,0)_111.26%)] before:opacity-0 before:transition-all before:duration-[500ms] before:ease-in group-hover:before:translate-x-[150%] group-hover:before:opacity-100"
+    ></span>
+  </div>
+
+  <div class="flex flex-1 flex-col justify-center gap-3 md:gap-3.5">
+    <!-- Title -->
+    <p
+      class="text-2xl leading-[120%] font-semibold text-orange-500 md:text-4xl"
+    >
+      {title}
+    </p>
+
+    <slot />
+  </div>
+</div>

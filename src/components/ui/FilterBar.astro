@@ -1,0 +1,289 @@
+---
+import { Icon } from "astro-icon/components";
+import { buildFinalYearOptions } from "@/utils/year.utils";
+
+const currentYear = new Date().getFullYear();
+
+const {
+  showSearch = true,
+  showSort = true,
+  years = [2025, 2024, 2023, 2022, 2021],
+  shouldIncludeCurrentYear = true,
+  sortOptions = [],
+  queryParamName = "year",
+} = Astro.props;
+
+const finalYears = buildFinalYearOptions({
+  years,
+  shouldIncludeCurrentYear,
+  currentYear,
+});
+
+const visibleYears = finalYears.slice(0, 2);
+const dropdownYears = finalYears.slice(2);
+---
+
+<section
+  class="bg-n-50 flex flex-col gap-3 rounded-2xl md:gap-7 lg:gap-8"
+  data-filter-bar="true"
+  data-query-param={queryParamName}
+>
+  <!-- Year Filter -->
+  <div class="flex flex-col gap-2 md:gap-3">
+    <p class="font-secondary text-n-600 text-base md:text-lg lg:text-3xl">
+      Select a Year
+    </p>
+
+    <!-- Year Button wrapper -->
+    <div class="flex flex-wrap items-center gap-2 md:gap-4 xl:gap-5">
+      {
+        visibleYears.map((yearOption) => (
+          <button
+            class="font-secondary bg-n-50 text-n-500 cursor-pointer rounded-xl px-4 py-3 text-sm leading-[21px] font-medium transition-colors duration-200 hover:bg-orange-50 md:rounded-2xl md:px-7 md:py-3.5 md:text-xl md:leading-[30px] xl:rounded-4xl xl:px-14 xl:py-4 xl:text-3xl xl:leading-[54px]"
+            data-year={yearOption.value}
+          >
+            {yearOption.label}
+          </button>
+        ))
+      }
+
+      {
+        dropdownYears.length > 0 && (
+          <details class="group relative" id="modal">
+            <summary class="border-n-500 text-n-500 hover:bg-n-50 flex cursor-pointer list-none items-center gap-3 rounded-full border px-3.5 py-3 font-medium select-none md:gap-5 md:px-6 lg:px-8 lg:py-4">
+              <span
+                id="year-selected"
+                class="font-secondary text-n-500 text-sm font-medium md:text-lg lg:leading-[27px]"
+              >
+                Previous Years
+              </span>
+              {/* Down Arrow icon */}
+              <Icon
+                name="down-arrow"
+                class="size-4 transition-transform group-open:rotate-180"
+              />
+            </summary>
+
+            {/* Year Dropdown List */}
+            <ul
+              class="border-n-500 scrollbar-hide bg-n-50 absolute top-full left-0 z-10 mt-2 max-h-[250px] w-full overflow-y-auto rounded-xl border shadow-lg transition duration-300 ease-in-out"
+              id="year-dropdown-list"
+            >
+              {dropdownYears.map((yearOption) => (
+                <li>
+                  <button
+                    class="font-secondary text-n-500 block w-full cursor-pointer px-6 py-3 text-left text-base font-medium hover:bg-orange-50"
+                    data-year={yearOption.value}
+                  >
+                    {yearOption.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </details>
+        )
+      }
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="border-n-300 border-t"></div>
+
+  <!-- Search & Sort Bar -->
+  <div class="flex flex-wrap items-center justify-between gap-4 md:gap-8">
+    {
+      showSearch && (
+        <div class="relative min-w-[250px] flex-1">
+          <Icon
+            name="search"
+            class="text-n-600 absolute top-1/2 left-0 size-4 -translate-y-1/2 md:size-5"
+          />
+          {/* Search Input */}
+          <input
+            id="search-input"
+            type="text"
+            name="search"
+            placeholder="Search..."
+            class="border-n-600 text-n-600 font-secondary placeholder-n-600 w-full border-b py-2 pr-3 pl-7 text-base font-medium transition-colors focus:border-[#C3543A] focus:outline-none md:py-3 md:pl-9 md:text-lg lg:py-4 lg:text-2xl"
+          />
+        </div>
+      )
+    }
+
+    <!-- Sort Dropdown -->
+    {
+      showSort && sortOptions.length > 0 && (
+        <div
+          class="border-n-500 text-n-500 font-secondary relative flex items-center gap-2 rounded-lg border px-4 py-2 text-lg md:px-4 md:py-3 lg:px-6 lg:py-4"
+          id="sort-dropdown"
+        >
+          <label class="font-normal whitespace-nowrap">Sort By:</label>
+
+          {/* Trigger */}
+          <div
+            id="sort-trigger"
+            class="flex cursor-pointer items-center gap-3 select-none"
+          >
+            <span id="sort-selected" class="font-semibold capitalize">
+              Recommended
+            </span>
+
+            {/* Down Arrow Icon */}
+            <Icon
+              name="down-arrow"
+              class="text-n-600 h-4 w-4 transition-transform duration-200"
+              id="sort-arrow"
+            />
+          </div>
+
+          {/* Sort By Dropdown List  */}
+          <ul
+            id="sort-options"
+            class="border-n-500 bg-n-50 absolute top-full left-0 z-10 mt-2 hidden w-full overflow-hidden rounded-xl border shadow-lg"
+          >
+            {sortOptions.map(({ label, value }) => (
+              // Text item
+              <li
+                class="text-n-600 cursor-pointer px-4 py-3 text-base hover:bg-orange-50"
+                data-value={value}
+              >
+                {value}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const filterBarRoot = document.querySelector('[data-filter-bar="true"]');
+    const yearQueryParamName =
+      filterBarRoot?.getAttribute("data-query-param") || "year";
+    const params = new URLSearchParams(window.location.search);
+    const currentYear = params.get(yearQueryParamName) || "";
+    const currentSort = params.get("sort") || "recommended";
+    const currentSearch = params.get("search");
+
+    const yearButtons = document.querySelectorAll("[data-year]");
+    const searchInput = document.getElementById("search-input");
+    const dropdown = document.getElementById("year-dropdown-list");
+    const yearSelected = document.getElementById("year-selected");
+
+    // Sort Dropdown Elements
+    const sortDropdown = document.getElementById("sort-dropdown");
+    const sortTrigger = document.getElementById("sort-trigger");
+    const sortList = document.getElementById("sort-options");
+    const sortSelected = document.getElementById("sort-selected");
+    const sortArrow = document.getElementById("sort-arrow");
+
+    // Default-select first year button when no year in URL
+    if (!currentYear && yearButtons.length) {
+      const firstBtn = yearButtons[0];
+      firstBtn.classList.add(
+        "bg-orange-500",
+        "text-white",
+        "hover:bg-orange-500",
+      );
+      firstBtn.classList.remove("bg-n-50", "text-n-500");
+    }
+
+    // Highlight Selected Year
+    yearButtons.forEach((btn) => {
+      if (btn.dataset.year === currentYear) {
+        btn.classList.add("bg-orange-500", "text-white", "hover:bg-orange-500");
+        btn.classList.remove("bg-n-50", "text-n-500");
+
+        // If year is from dropdown, update summary label
+        if (dropdown?.contains(btn)) {
+          yearSelected.textContent = btn.textContent;
+        }
+      }
+
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        params.set(yearQueryParamName, btn.dataset.year);
+        params.set("page", "1");
+        window.location.href = `${window.location.pathname}?${params}`;
+      });
+    });
+
+    // Handle Search Input
+    if (searchInput && currentSearch) searchInput.value = currentSearch;
+    if (searchInput)
+      searchInput.addEventListener("change", () => {
+        params.set("search", searchInput.value);
+        params.set("page", "1");
+        window.location.href = `${window.location.pathname}?${params}`;
+      });
+
+    // Set initial dropdown label if no year selected
+    if (yearSelected && !currentYear) {
+      yearSelected.textContent = "Previous Years";
+    }
+
+    // Custom Sort Dropdown
+    if (sortDropdown) {
+      // Set current sort text
+      const activeSortItem = sortDropdown.querySelector(
+        `[data-value="${currentSort}"]`,
+      );
+      if (activeSortItem) {
+        sortSelected.textContent = activeSortItem.textContent;
+        activeSortItem.classList.add(
+          "bg-orange-500",
+          "text-white",
+          "rounded-md",
+        );
+      } else {
+        sortSelected.textContent = "Recommended";
+      }
+
+      // Toggle dropdown open/close
+      sortTrigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        sortList.classList.toggle("hidden");
+        sortArrow.classList.toggle("rotate-180");
+      });
+
+      // Select sort option
+      sortList.querySelectorAll("li").forEach((item) => {
+        item.addEventListener("click", (e) => {
+          e.stopPropagation();
+
+          // Remove highlight from all
+          sortList
+            .querySelectorAll("li")
+            .forEach((li) =>
+              li.classList.remove("bg-orange-500", "text-white", "rounded-md"),
+            );
+
+          // Highlight the selected one
+          item.classList.add("bg-orange-500", "text-white", "rounded-md");
+
+          const selectedValue = item.dataset.value;
+          sortSelected.textContent = item.textContent;
+          sortList.classList.add("hidden");
+          sortArrow.classList.remove("rotate-180");
+
+          // Update URL
+          params.set("sort", selectedValue);
+          window.location.href = `${window.location.pathname}?${params}`;
+        });
+      });
+    }
+
+    // Close dropdowns when clicking outside
+    document.addEventListener("click", (e) => {
+      document.querySelectorAll("details").forEach((el) => {
+        if (!el.contains(e.target)) el.removeAttribute("open");
+      });
+      if (sortList && !sortDropdown.contains(e.target)) {
+        sortList.classList.add("hidden");
+        sortArrow.classList.remove("rotate-180");
+      }
+    });
+  });
+</script>

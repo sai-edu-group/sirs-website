@@ -1,0 +1,313 @@
+---
+// OTHERS //
+import MetaStrip from "./MetaStrip.astro";
+import PhotoHighlights from "./PhotoHighlights.astro";
+import SectionHeaderMain from "./SectionHeaderMain.astro";
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  eyebrowText?: string;
+  ctaText?: string;
+  metaStripDetails?: {
+    author: string;
+    date: string | number;
+    readTimeMins?: number;
+    onShare?: string;
+  };
+  photos?: string[];
+  photo_path?: string;
+}
+
+const {
+  title = "",
+  subtitle = "",
+  ctaText = "",
+  eyebrowText = "",
+  metaStripDetails,
+  photos,
+  photo_path,
+} = Astro.props as Props;
+---
+
+<div class="flex flex-col gap-9">
+  <!-- Header Container -->
+  <div class="flex flex-col gap-9">
+    <SectionHeaderMain
+      title={title}
+      subtitle={subtitle}
+      eyebrowText={eyebrowText}
+      ctaText={ctaText}
+    />
+
+    <!-- Meta Strip -->
+    {metaStripDetails && <MetaStrip {...metaStripDetails} />}
+  </div>
+  <div class="article-root">
+    <slot />
+  </div>
+
+  <!-- Photo Highlights -->
+  {
+    photos && photo_path && (
+      <PhotoHighlights photos={photos} photo_path={photo_path} />
+    )
+  }
+</div>
+
+<style is:global>
+  /* ------------------------------------
+   📌 DESKTOP DEFAULT (≥1024px)
+------------------------------------- */
+
+  .article-root div {
+    margin-bottom: 40px;
+  }
+  .article-root img {
+    border-radius: 24px;
+    object-fit: contain;
+    height: auto;
+    margin-bottom: 32px;
+    object-position: top;
+  }
+
+  .article-root h1 {
+    color: var(--color-n-800);
+    font-size: var(--text-6xl);
+    font-weight: 600;
+    margin-bottom: 44px;
+  }
+
+  .article-root h2 {
+    color: var(--color-n-800);
+    font-size: var(--text-5xl);
+    font-weight: 600;
+    margin-bottom: 40px;
+  }
+
+  .article-root h3 {
+    color: var(--color-n-800);
+    font-size: var(--text-4xl);
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .article-root h4 {
+    color: var(--color-n-800);
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    margin-bottom: 32px;
+  }
+
+  .article-root h5 {
+    color: var(--color-n-800);
+    font-size: var(--text-xl);
+    font-weight: 600;
+    margin-bottom: 32px;
+  }
+
+  .article-root h6 {
+    color: var(--color-n-800);
+    font-size: var(--text-base);
+    font-weight: 600;
+    margin-bottom: 32px;
+  }
+
+  .article-root p {
+    color: var(--color-n-600);
+    font-family: "Poppins", sans-serif;
+    font-size: var(--text-xl);
+    font-weight: 400;
+    line-height: 150%;
+    margin-bottom: 32px;
+  }
+
+  .article-root ol,
+  .article-root ul {
+    color: var(--color-n-600);
+    font-family: "Poppins", sans-serif;
+    font-size: var(--text-xl);
+    font-weight: 400;
+    line-height: 162.5%;
+    letter-spacing: 0.2px;
+    list-style-type: disc;
+    padding-left: 1.25rem;
+    margin-bottom: 8px;
+  }
+
+  .article-root a {
+    color: var(--color-orange-500);
+    font-family: "Poppins", sans-serif;
+    font-size: var(--text-xl);
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    text-decoration-line: underline;
+    margin-bottom: 32px;
+  }
+
+  .table-wrapper {
+    width: 100%;
+    padding-top: 64px;
+  }
+
+  .article-root table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid var(--color-n-800);
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--color-n-50);
+  }
+
+  .article-root thead {
+    background-color: var(--color-n-100);
+  }
+
+  .article-root thead th {
+    color: var(--color-n-600);
+    font-family: "Poppins", sans-serif;
+    font-size: var(--text-xl);
+    font-weight: 600;
+    padding: 20px;
+    text-align: center;
+    min-width: 200px;
+  }
+
+  .article-root tbody th {
+    color: var(--color-n-600);
+    font-family: "Poppins", sans-serif;
+    font-size: var(--text-xl);
+    font-weight: 500;
+    padding: 20px;
+    text-align: center;
+    min-width: 200px;
+  }
+
+  .article-root tbody td {
+    color: var(--color-n-600);
+    font-family: "Poppins", sans-serif;
+    font-size: var(--text-lg);
+    padding: 20px;
+    text-align: center;
+    min-width: 200px;
+  }
+
+  /* ------------------------------------
+   📌 TABLET (768–1023px)
+------------------------------------- */
+  @media (max-width: 1023px) and (min-width: 768px) {
+    /* Tablet Margins */
+
+    .article-root div {
+      margin-bottom: 52px;
+    }
+
+    .article-root img {
+      margin-bottom: 0;
+    }
+
+    .article-root h1 {
+      margin-bottom: 36px;
+    }
+
+    .article-root h2 {
+      margin-bottom: 32px;
+    }
+
+    .article-root h3,
+    .article-root h4,
+    .article-root h5,
+    .article-root h6 {
+      margin-bottom: 18px;
+    }
+
+    .article-root p,
+    .article-root ol,
+    .article-root ul,
+    .article-root a {
+      font-size: var(--text-lg);
+      margin-bottom: 24px;
+    }
+
+    .article-root table {
+      padding-top: 54px;
+    }
+  }
+
+  /* ------------------------------------
+   📌 MOBILE (≤767px)
+------------------------------------- */
+  @media (max-width: 767px) {
+    /* Font sizes */
+    .article-root div {
+      margin-bottom: 44px;
+    }
+    .article-root img {
+      margin-bottom: 0;
+    }
+
+    .article-root ol,
+    .article-root p,
+    .article-root a {
+      font-size: var(--text-base);
+    }
+
+    /* Mobile Margins */
+    .article-root h1 {
+      margin-bottom: 28px;
+    }
+
+    .article-root h2 {
+      margin-bottom: 24px;
+    }
+
+    .article-root h3,
+    .article-root h4,
+    .article-root h5,
+    .article-root h6 {
+      margin-bottom: 16px;
+    }
+
+    .article-root p,
+    .article-root ol,
+    .article-root a {
+      margin-bottom: 20px;
+    }
+
+    .article-root table {
+      padding-top: 40px;
+    }
+
+    .article-root thead {
+      background-color: var(--color-n-100);
+    }
+
+    .article-root thead th,
+    .article-root tbody th,
+    .article-root tbody td {
+      font-size: var(--text-sm);
+      padding: 10px;
+      min-width: 180px;
+    }
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const articleRoot = document.querySelector(".article-root");
+    if (!articleRoot) return;
+
+    const tables = articleRoot.querySelectorAll("table");
+
+    tables.forEach((table) => {
+      // If already wrapped, skip
+      if (table.parentElement?.classList.contains("table-wrapper")) return;
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "table-wrapper overflow-x-auto";
+      table.parentNode.insertBefore(wrapper, table);
+      wrapper.appendChild(table);
+    });
+  });
+</script>

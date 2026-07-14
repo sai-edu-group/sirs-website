@@ -1,0 +1,189 @@
+---
+// COMPONENTS //
+import Image from "astro/components/Image.astro";
+
+// CONSTANTS //
+import { URLS } from "@/infrastructure/constants/urls";
+
+// OTHERS //
+import Button from "./Button.astro";
+import ProgressBar from "./ProgressBar.astro";
+
+// Accordion data
+const {
+  items,
+  title = "",
+  id,
+} = Astro.props as {
+  items: any;
+  title: string;
+  id: number;
+};
+---
+
+<div
+  class="box-border flex w-full flex-col items-start gap-2.5 rounded-3xl bg-white px-3.5 py-4 md:gap-12 md:p-6 lg:flex-row-reverse lg:gap-14 lg:p-12"
+>
+  <!-- Image Section -->
+  <div
+    class="h-[169px] w-full shrink-0 md:h-[360px] lg:h-[430px] lg:w-[480px] xl:w-[530px] 2xl:w-[670px]"
+  >
+    <Image
+      id="learning-active-image"
+      data-active-image
+      src={items[0].imageUrl}
+      alt=""
+      class="pointer-events-none inset-0 h-full w-full rounded-xl object-cover"
+      loading="lazy"
+      decoding="async"
+      width={670}
+      height={430}
+    />
+  </div>
+
+  <!-- Accordion -->
+  <div
+    class="flex w-full flex-col items-start gap-7 py-4 md:gap-8 md:py-0 lg:flex-1"
+    data-accordion
+    data-accordion-autoplay="true"
+  >
+    {
+      items.map((item: any, idx: number) => (
+        <div
+          class="w-full"
+          data-accordion-item
+          data-open={idx === 0 ? "true" : "false"}
+          data-img={item.imageUrl}
+        >
+          <div class="flex flex-col">
+            <div
+              class="flex w-full cursor-pointer items-center"
+              data-accordion-toggle
+              aria-label="Toggle"
+              aria-expanded={idx === 0 ? "true" : "false"}
+            >
+              <p
+                class="w-full text-base leading-none"
+                data-accordion-title
+                data-index={idx}
+              >
+                {item.title}
+              </p>
+
+              <div class="flex h-6 w-6 flex-col items-center justify-center">
+                {/* <!-- Icon swap is handled by CSS using [data-open] --> */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  data-icon-plus
+                >
+                  <path
+                    d="M6 0.799805C6.38661 0.799805 6.7002 1.11341 6.7002 1.5V5.2998H10.5C10.8866 5.2998 11.2002 5.61339 11.2002 6C11.2002 6.38661 10.8866 6.7002 10.5 6.7002H6.7002V10.5C6.7002 10.8866 6.38661 11.2002 6 11.2002C5.61339 11.2002 5.2998 10.8866 5.2998 10.5V6.7002H1.5C1.11341 6.7002 0.799805 6.38661 0.799805 6C0.799805 5.61339 1.11341 5.2998 1.5 5.2998H5.2998V1.5C5.2998 1.11341 5.61339 0.799805 6 0.799805Z"
+                    fill="#45556C"
+                    stroke="#45556C"
+                    stroke-width="0.4"
+                  />
+                </svg>
+                <div
+                  class="bg-n-600 border-n-600 hidden h-0.5 w-2 rounded-xs border-[0.4px] border-solid"
+                  data-icon-minus
+                />
+              </div>
+            </div>
+
+            {/* <!-- Panel --> */}
+            <div
+              class="accordion-panel overflow-hidden"
+              style={item.isOpen ? "max-height: auto;" : "max-height: 0px;"}
+              data-accordion-panel
+              data-index={idx}
+            >
+              <div class="flex flex-col items-start gap-7 pt-2.5 md:gap-7">
+                <p class="text-n-500 font-secondary w-[95%] text-sm leading-[120%] md:text-base md:leading-[140%]">
+                  {item.description}
+                </p>
+                <div class="w-full">
+                  <ProgressBar value={item.progress} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style is:global>
+  /* Smooth height + fade; visuals driven entirely by [data-open] */
+
+  [data-accordion] [data-accordion-panel] {
+    opacity: 0;
+    transition:
+      max-height 300ms ease,
+      opacity 300ms ease;
+  }
+
+  [data-accordion]
+    [data-accordion-item][data-open="true"]
+    [data-accordion-panel] {
+    opacity: 1;
+  }
+
+  /* Title styling when open/closed */
+  [data-accordion]
+    [data-accordion-item][data-open="true"]
+    [data-accordion-title] {
+    font-size: 1.125rem; /* ~text-lg */
+    font-weight: 600; /* font-semibold */
+    color: var(--color-orange-500); /* text-orange-500 */
+  }
+  [data-accordion]
+    [data-accordion-item]:not([data-open="true"])
+    [data-accordion-title] {
+    color: var(--color-n-600); /* text-n-600 */
+  }
+
+  /* Icon swap (plus -> minus line) */
+  [data-accordion] [data-icon-minus] {
+    display: none;
+  }
+  [data-accordion] [data-accordion-item][data-open="true"] [data-icon-plus] {
+    display: none;
+  }
+  [data-accordion] [data-accordion-item][data-open="true"] [data-icon-minus] {
+    display: block;
+  }
+
+  /* Motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    [data-accordion] [data-accordion-panel] {
+      transition: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    [data-accordion] [data-accordion-title] {
+      font-size: 1.25rem; /* ~text-xl */
+    }
+    [data-accordion]
+      [data-accordion-item][data-open="true"]
+      [data-accordion-title] {
+      font-size: 1.5rem; /* ~text-2xl */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    [data-accordion] [data-accordion-title] {
+      font-size: 1.5rem; /* ~text-2xl */
+    }
+    [data-accordion]
+      [data-accordion-item][data-open="true"]
+      [data-accordion-title] {
+      font-size: 1.875rem; /* ~text-3xl */
+    }
+  }
+</style>

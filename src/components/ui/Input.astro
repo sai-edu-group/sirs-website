@@ -1,0 +1,100 @@
+---
+interface Props {
+  label: string;
+  name: string;
+  required?: boolean;
+  type?: string;
+  value?: string;
+  placeholder?: string;
+  errorMessage?: string;
+  hintText?: string;
+}
+
+const {
+  label,
+  name,
+  required = false,
+  type = "text",
+  value = "",
+  placeholder = "Enter Input",
+  errorMessage = "Error message",
+  hintText,
+} = Astro.props;
+---
+
+<div class="flex w-full flex-col gap-2 md:gap-3.5">
+  <!-- Label -->
+  <label
+    for={name}
+    class="text-n-600 text-base font-normal md:text-lg lg:text-xl"
+  >
+    {label}{required && <span class="text-red-500">*</span>}
+  </label>
+
+  <!-- Input -->
+  <div class="relative">
+    <input
+      type={type}
+      placeholder={placeholder}
+      id={name}
+      name={name}
+      value={value}
+      required={required}
+      aria-describedby={`${name}-error ${hintText ? `${name}-hint` : ""}`}
+      class=`text-n-700 focus:border-n-950 placeholder:text-n-400 font-secondary border-n-600 lg::text-3xl w-full border-b bg-n-50 px-0 pb-1 md:pb-3.5 text-sm font-medium focus:ring-0 focus:outline-none md:text-xl lg:text-2xl `
+    />
+
+    {
+      type === "date" && (
+        <span
+          class="pointer-events-none absolute right-0 bottom-3.5 z-10"
+          aria-hidden="true"
+        >
+          <svg
+            class="size-4 md:size-6 lg:size-8"
+            width="30"
+            height="30"
+            viewBox="0 0 30 30"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15.0007 4.17651C17.2856 4.17652 19.3928 4.22638 21.4564 4.323C24.9425 4.48622 27.7668 7.16194 28.157 10.5475C28.6251 14.607 28.6251 18.0771 28.157 22.1365C27.7668 25.5222 24.9425 28.1978 21.4564 28.3611C19.3928 28.4578 17.2856 28.5076 15.0007 28.5076C12.7155 28.5076 10.6077 28.4578 8.54383 28.3611C5.05793 28.1978 2.23356 25.5222 1.84321 22.1365C1.37518 18.0771 1.37517 14.607 1.84321 10.5475C2.23357 7.16196 5.0579 4.48622 8.54383 4.323C10.6077 4.22636 12.7154 4.17651 15.0007 4.17651ZM15.0007 6.31937C12.7478 6.31937 10.6736 6.36875 8.64428 6.46376C6.2081 6.57783 4.24256 8.45083 3.97247 10.7934C3.52329 14.6895 3.5233 17.9946 3.97247 21.8907C4.24256 24.2333 6.20807 26.1062 8.64428 26.2203C10.6735 26.3154 12.7478 26.3647 15.0007 26.3647C17.2535 26.3647 19.3279 26.3154 21.357 26.2203C23.793 26.106 25.7576 24.2339 26.0278 21.8917V21.8907C26.477 17.9945 26.477 14.6896 26.0278 10.7934C25.7578 8.45102 23.7932 6.57804 21.357 6.46376C19.3278 6.36875 17.2535 6.31938 15.0007 6.31937Z"
+              fill="currentColor"
+            />
+            <path
+              d="M14.9994 4.17651C17.2847 4.17651 19.3924 4.22636 21.4563 4.323C24.9421 4.48622 27.7653 7.16204 28.1558 10.5475C28.2092 11.0106 28.2569 11.4666 28.2981 11.9172C28.3255 12.217 28.2259 12.5151 28.0229 12.7375C27.82 12.9598 27.5329 13.0868 27.2319 13.0869H2.76798C2.46692 13.0869 2.17996 12.9598 1.97697 12.7375C1.77396 12.515 1.67326 12.2171 1.70074 11.9172C1.74202 11.4668 1.78963 11.0108 1.84304 10.5475C2.23341 7.16198 5.05777 4.48622 8.54365 4.323C10.6073 4.22638 12.7145 4.17652 14.9994 4.17651ZM14.9994 6.31937C12.7466 6.31938 10.6724 6.36875 8.64305 6.46376C6.20705 6.578 4.24237 8.45094 3.9723 10.7934C3.9665 10.8437 3.96225 10.894 3.9566 10.9441H26.0433C26.0377 10.894 26.0334 10.8437 26.0276 10.7934C25.7574 8.45079 23.7919 6.57783 21.3558 6.46376C19.3265 6.36875 17.2523 6.31937 14.9994 6.31937Z"
+              fill="currentColor"
+            />
+            <path
+              d="M8.46094 8.0361V2.56386C8.46094 1.97213 8.94063 1.49243 9.53237 1.49243C10.1241 1.49243 10.6038 1.97213 10.6038 2.56386V8.0361C10.6036 8.62769 10.124 9.10753 9.53237 9.10753C8.94073 9.10753 8.4611 8.62769 8.46094 8.0361Z"
+              fill="currentColor"
+            />
+            <path
+              d="M19.3975 8.0361V2.56386C19.3975 1.97213 19.8772 1.49243 20.4689 1.49243C21.0606 1.49243 21.5403 1.97213 21.5403 2.56386V8.0361C21.5402 8.62769 21.0605 9.10753 20.4689 9.10753C19.8773 9.10753 19.3976 8.62769 19.3975 8.0361Z"
+              fill="currentColor"
+            />
+          </svg>
+        </span>
+      )
+    }
+  </div>
+
+  <p id={`${name}-error`} data-error class="hidden text-sm text-red-600">
+    {errorMessage}
+  </p>
+</div>
+
+<style>
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  input[type="date"] {
+  }
+</style>

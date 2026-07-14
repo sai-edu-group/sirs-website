@@ -1,0 +1,48 @@
+---
+import Button from "./Button.astro";
+interface Props {
+  eyebrowText?: string;
+  title: string;
+  subtitle?: string;
+  ctaText?: string;
+}
+const {
+  eyebrowText = "",
+  title = "",
+  subtitle = "",
+  ctaText = "",
+} = Astro.props;
+---
+
+<div class="relative flex w-full flex-col items-start gap-10">
+  <!-- Text Content -->
+  <div class="space-y-2.5 md:space-y-1">
+    <!-- Eyebrow text -->
+    {
+      eyebrowText && (
+        <p class="animatedText text-n-600 text-sm font-normal md:text-base lg:text-xl">
+          {eyebrowText}
+        </p>
+      )
+    }
+    <div class="relative flex flex-col gap-2.5 md:gap-1.5 lg:gap-4">
+      <!-- Section title -->
+      <p
+        class="animatedText text-n-800 text-4xl leading-[112%] font-medium md:text-5xl lg:leading-tight"
+      >
+        {title}
+      </p>
+      <!-- Section subtitle -->
+      {
+        subtitle && (
+          <p class="animatedText font-secondary text-n-600 text-base leading-normal font-medium md:text-xl lg:text-2xl">
+            {subtitle}
+          </p>
+        )
+      }
+    </div>
+  </div>
+
+  <!-- Cta Button -->
+  {ctaText && <Button text={ctaText} variant="solid" size="large" />}
+</div>
