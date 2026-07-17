@@ -1,0 +1,948 @@
+---
+// ============================================================
+// HOME — 8-8-8 DESIGN PREVIEW
+// Full home-page design proposal built on the existing design
+// system. Media placeholders are labelled with the exact asset
+// (drone shot / photo) that should replace them.
+// Once approved, split each <section> into src/sections/home/*.
+// ============================================================
+import Layout from "@/layouts/Layout.astro";
+import Button from "@/components/ui/Button.astro";
+import SectionHeader from "@/components/ui/SectionHeader.astro";
+import IconsCard from "@/components/ui/IconsCard.astro";
+
+// ---- 02 · The 8-8-8 band -----------------------------------
+const eights = [
+  {
+    hours: "8 hours",
+    title: "to Learn",
+    accent: "orange",
+    points: [
+      "CBSE curriculum, Classes IV–XII",
+      "Smart classrooms, labs & library",
+      "The 'Joy of Learning' philosophy",
+      "Progress parents can see — continuous assessment",
+    ],
+  },
+  {
+    hours: "8 hours",
+    title: "to Explore",
+    accent: "violet",
+    points: [
+      "40+ arenas — sport, arts, adventure",
+      "8-lane 400m stadium & turf football ground",
+      "Horse riding, boating lake, rock climbing",
+      "Student-run SAI TV & Radio Orange 99.9",
+    ],
+  },
+  {
+    hours: "8 hours",
+    title: "to Belong",
+    accent: "slate",
+    points: [
+      "AC hostels with caring house parents",
+      "Nutritionist-supervised meals",
+      "Phone-free, 24×7 pastoral care",
+      "Yoga, temple & quiet evenings",
+    ],
+  },
+];
+
+// ---- 03 · Trust strip --------------------------------------
+const trustItems = [
+  "Odisha's No.1 School — 6 years in a row · EWISR",
+  "49-acre green campus between Bhubaneswar & Cuttack",
+  "Fully residential · CBSE · Classes IV–XII",
+  "Phone-free policy · 24×7 pastoral care",
+  "Inaugurated in 2018 by the Hon'ble CM of Odisha",
+];
+
+// ---- 04 · Academic outcomes --------------------------------
+const results = [
+  { stat: "97.2%", label: "Highest score, CBSE Class X 2025" },
+  { stat: "17", label: "JEE Advanced qualifiers, 2025" },
+  { stat: "AIR 934", label: "Best All India Rank, JEE 2025" },
+  { stat: "54", label: "Students with 90+ percentile, JEE Main" },
+];
+
+// ---- 05 · Second classroom (bento) -------------------------
+const arenas = [
+  {
+    title: "A stadium of their own",
+    copy: "8-lane 400m track & Odisha's finest turf football ground — home of the SAI Football League.",
+    photo: "Drone shot — stadium & turf",
+    size: "large",
+    accent: "violet",
+  },
+  {
+    title: "Horse riding",
+    copy: "Stables and a sand arena on campus.",
+    photo: "Photo — student on horseback",
+    size: "small",
+    accent: "orange",
+  },
+  {
+    title: "Two floors of rock",
+    copy: "A climbing wall up the school building itself.",
+    photo: "Photo — climbing wall, low angle",
+    size: "small",
+    accent: "slate",
+  },
+  {
+    title: "A lake for boating",
+    copy: "Calm water, life jackets, loud laughter.",
+    photo: "Photo — boating on the lake",
+    size: "small",
+    accent: "slate",
+  },
+  {
+    title: "Swimming pool",
+    copy: "Coached training, all levels.",
+    photo: "Photo — swim training",
+    size: "small",
+    accent: "orange",
+  },
+  {
+    title: "Music rooms",
+    copy: "Drums, piano, tabla, guitar & more.",
+    photo: "Photo — music class",
+    size: "small",
+    accent: "violet",
+  },
+  {
+    title: "Indoor sports arena",
+    copy: "Basketball, badminton, yoga & rainy-day energy.",
+    photo: "Photo — indoor arena",
+    size: "wide",
+    accent: "orange",
+  },
+];
+
+// ---- 06 · Flagship events marquee --------------------------
+const events = [
+  "SAI Olympics",
+  "SAI Football League",
+  "SAI Kaleidoscope",
+  "SAIMUN",
+  "SAI TED",
+  "SAI Champions Trophy",
+  "Founder's Day",
+  "SAI Unwind",
+];
+
+// ---- 08 · Second home --------------------------------------
+const homeCards = [
+  {
+    title: "Arjuna Boys' Hostel",
+    copy: "Air-conditioned rooms, recreational lounges and house masters who know every child by name.",
+    photo: "Photo — hostel room / lounge",
+  },
+  {
+    title: "Sushila Devi Girls' Hostel",
+    copy: "Safe, warm and watched over — with wardens, tight security and space to be yourself.",
+    photo: "Photo — girls' hostel common area",
+  },
+  {
+    title: "Meals made with care",
+    copy: "Nutritionist-supervised menus from our own cafeteria — because growing minds need growing bodies.",
+    photo: "Photo — cafeteria mealtime",
+  },
+  {
+    title: "Always looked after",
+    copy: "On-campus infirmary, the serene SAI Temple, and evening yoga to end the day quietly.",
+    photo: "Photo — yoga at dusk",
+  },
+];
+
+const houses = [
+  { name: "Dhvaja", classes: "bg-orange-100 text-orange-700" },
+  { name: "Srivatsa", classes: "bg-violet-100 text-violet-600" },
+  { name: "Vajra", classes: "bg-n-100 text-n-700" },
+  { name: "Chakra", classes: "bg-orange-50 text-orange-600" },
+];
+
+// ---- 10 · Beyond school ------------------------------------
+const beyond = [
+  {
+    title: "Global Immersion",
+    copy: "School partnerships, virtual classrooms and annual visits abroad — global leaders, grounded in Indian values.",
+  },
+  {
+    title: "SAI Prashikshan",
+    copy: "Real internships for Classes IX–XII across 22 organisations — fintech, media, NGOs, hospitality and more.",
+  },
+  {
+    title: "Career Connect",
+    copy: "Psychometric assessments, career fairs and a dedicated counsellor — so choices become outcomes.",
+  },
+];
+
+// ---- 11 · Voices (sample copy — replace with real quotes) --
+const voices = [
+  {
+    name: "Parent of a Class VII student",
+    description:
+      "we sent our son 1,400 km from home. Within a month, SIRS felt closer than next door. He calls it his second home — and honestly, so do we.",
+    date: "Sample copy — replace with a real parent voice",
+  },
+  {
+    name: "Class X student",
+    description:
+      "on weekdays I solve equations. On weekends I host a radio show. Where else does that happen?",
+    date: "Sample copy — replace with a real student voice",
+  },
+];
+
+const awards = [
+  "EWISR — No.1 School in Odisha, 6 years in a row",
+  "BW Top Education Brand of India 2024",
+  "British Council — RIDS Recognition",
+  "Leading Residential School of India — BusinessWorld",
+];
+
+// ---- 12 · Admissions ---------------------------------------
+const admissionSteps = [
+  {
+    step: "01",
+    title: "Enquire",
+    copy: "Tell us about your child. We'll call you back the same day.",
+  },
+  {
+    step: "02",
+    title: "Visit",
+    copy: "Walk the 49 acres. Meet the house parents. Stay for lunch.",
+  },
+  {
+    step: "03",
+    title: "Join the family",
+    copy: "A friendly interaction, and a hostel bed with their name on it.",
+  },
+];
+
+// Accent class maps used by the 8-8-8 cards & bento tiles
+const eightAccents: Record<string, { bar: string; chip: string; ring: string }> = {
+  orange: {
+    bar: "bg-orange-400",
+    chip: "bg-orange-50 text-orange-600",
+    ring: "hover:border-orange-300",
+  },
+  violet: {
+    bar: "bg-violet-500",
+    chip: "bg-violet-100 text-violet-600",
+    ring: "hover:border-violet-300",
+  },
+  slate: {
+    bar: "bg-n-400",
+    chip: "bg-n-100 text-n-700",
+    ring: "hover:border-n-400",
+  },
+};
+
+const tileAccents: Record<string, string> = {
+  orange: "from-orange-100 via-orange-50 to-n-50",
+  violet: "from-violet-100 via-violet-50 to-n-50",
+  slate: "from-n-200 via-n-100 to-n-50",
+};
+---
+
+<Layout
+  meta={{ title: "Home — 8-8-8 Design Preview", noIndex: true }}
+>
+  <!-- ======================================================
+       01 · HERO — the drone film + the 8-8-8 promise
+       Replace the gradient with the drone loop of the campus.
+       ====================================================== -->
+  <section
+    class="relative flex min-h-[92vh] w-full flex-col justify-end overflow-hidden bg-gradient-to-b from-violet-950 via-violet-900 to-violet-700 pt-28 md:pt-40"
+  >
+    <!-- Media placeholder note -->
+    <div
+      class="font-secondary absolute top-24 right-4 z-10 rounded-lg bg-violet-950/70 px-3 py-1.5 text-xs font-medium tracking-wide text-violet-200 md:top-28 md:right-8"
+    >
+      Video — drone loop of the 49-acre campus
+    </div>
+
+    <!-- Oversized 8·8·8 watermark -->
+    <p
+      aria-hidden="true"
+      class="pointer-events-none absolute -top-10 right-0 left-0 text-center text-[38vw] leading-none font-medium text-violet-800/40 select-none md:text-[24vw]"
+    >
+      8·8·8
+    </p>
+
+    <div
+      class="relative container mx-auto flex flex-col gap-8 px-4 pb-16 md:px-6 md:pb-24 2xl:px-0"
+    >
+      <div class="fade-in flex max-w-3xl flex-col gap-5">
+        <p
+          class="font-secondary text-sm font-medium tracking-[0.2em] text-orange-300 uppercase md:text-base"
+        >
+          SAI International Residential School
+        </p>
+        <h1
+          class="text-5xl leading-[105%] font-medium text-n-50 md:text-7xl"
+          style="color:#ffffff"
+        >
+          A day well spent.
+        </h1>
+        <p
+          class="font-secondary text-lg leading-normal font-light text-violet-100 md:text-2xl"
+        >
+          8 hours to learn. 8 hours to explore. 8 hours to belong.<br />
+          India's global gurukul — so much more than a school.
+        </p>
+      </div>
+
+      <!-- CTAs -->
+      <div class="fade-in flex flex-wrap items-center gap-4">
+        <Button
+          text="Book a Campus Visit"
+          variant="solid"
+          size="large"
+          rightArrow
+          onClick="window.location.href='/contact-us'"
+        />
+        <Button
+          text="Download Brochure"
+          variant="outline"
+          size="large"
+          extraClasses="!text-orange-200 !border-orange-200 hover:!text-violet-900"
+        />
+      </div>
+
+      <!-- Hero trust chips -->
+      <div
+        class="font-secondary fade-in flex flex-wrap gap-x-6 gap-y-2 text-sm text-violet-200 md:text-base"
+      >
+        <span>Est. 2018</span>
+        <span aria-hidden="true">·</span>
+        <span>CBSE · Classes IV–XII</span>
+        <span aria-hidden="true">·</span>
+        <span>Fully residential</span>
+        <span aria-hidden="true">·</span>
+        <span>Odisha's No.1 — 6 years running</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       02 · THE 8-8-8 BAND — the thesis of the whole page
+       ====================================================== -->
+  <section class="bg-n-50 w-full py-16 md:py-24">
+    <div class="container mx-auto flex flex-col gap-12 px-4 md:px-6 2xl:px-0">
+      <div class="max-w-3xl">
+        <SectionHeader
+          title="The 8-8-8 Advantage"
+          subtitle="One balanced day — study, sport, art and rest in equal measure. Repeated until it becomes character."
+        />
+      </div>
+
+      <!-- The 24-hour bar -->
+      <div class="fade-in flex flex-col gap-2">
+        <div
+          class="font-secondary flex h-12 w-full overflow-hidden rounded-full text-sm font-semibold md:h-14 md:text-lg"
+        >
+          <div
+            class="flex w-1/3 items-center justify-center bg-orange-400 text-orange-50"
+          >
+            8h Learn
+          </div>
+          <div
+            class="flex w-1/3 items-center justify-center bg-violet-500 text-violet-100"
+          >
+            8h Explore
+          </div>
+          <div
+            class="flex w-1/3 items-center justify-center bg-n-300 text-n-700"
+          >
+            8h Belong
+          </div>
+        </div>
+        <p class="font-secondary text-n-500 text-xs md:text-sm">
+          One full day at SIRS — 24 hours, perfectly balanced.
+        </p>
+      </div>
+
+      <!-- Three pillars -->
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+        {
+          eights.map((pillar, index) => (
+            <div
+              class={`card-anim card-bottom border-n-200 bg-n-50 flex h-full flex-col gap-5 rounded-3xl border-2 p-6 transition-colors duration-300 md:p-8 ${eightAccents[pillar.accent].ring}`}
+              style={`--delay: ${index * 0.15}s`}
+            >
+              <div class={`h-1.5 w-14 rounded-full ${eightAccents[pillar.accent].bar}`} />
+              <div class="flex flex-col gap-1">
+                <p class="text-n-500 font-secondary text-sm font-semibold tracking-[0.18em] uppercase">
+                  {pillar.hours}
+                </p>
+                <p class="text-n-800 text-3xl font-medium md:text-4xl">
+                  {pillar.title}
+                </p>
+              </div>
+              <ul class="font-secondary text-n-600 flex flex-col gap-2.5 text-sm leading-normal md:text-base">
+                {pillar.points.map((point) => (
+                  <li class="flex gap-2.5">
+                    <span
+                      class={`mt-[7px] size-1.5 shrink-0 rounded-full ${eightAccents[pillar.accent].bar}`}
+                    />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       03 · TRUST STRIP — the anti-anxiety row
+       ====================================================== -->
+  <section class="w-full bg-orange-50 py-6 md:py-8">
+    <div
+      class="font-secondary container mx-auto flex flex-wrap items-center justify-center gap-x-8 gap-y-3 px-4 text-center text-sm font-medium text-orange-700 md:px-6 md:text-base 2xl:px-0"
+    >
+      {
+        trustItems.map((item, index) => (
+          <>
+            {index !== 0 && (
+              <span aria-hidden="true" class="hidden text-orange-300 md:inline">
+                ◆
+              </span>
+            )}
+            <span>{item}</span>
+          </>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- ======================================================
+       04 · 8H LEARN — results first, philosophy second
+       ====================================================== -->
+  <section class="bg-n-50 w-full py-16 md:py-24">
+    <div class="container mx-auto flex flex-col gap-12 px-4 md:px-6 2xl:px-0">
+      <div
+        class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+      >
+        <div class="max-w-2xl">
+          <SectionHeader
+            title="Results that open doors"
+            subtitle="Class of 2025 — CBSE, JEE & NEET. The first 8 hours, hard at work."
+          />
+        </div>
+        <Button
+          text="All Results"
+          variant="soft"
+          size="small"
+          rightArrow
+          onClick="window.location.href='/sirs-experience'"
+        />
+      </div>
+
+      <!-- Big numbers -->
+      <div class="grid grid-cols-2 gap-4 md:gap-6 lg:grid-cols-4">
+        {
+          results.map((result, index) => (
+            <div
+              class="card-anim card-bottom border-n-200 bg-n-50 flex flex-col gap-3 rounded-3xl border-2 p-6 md:p-8"
+              style={`--delay: ${index * 0.12}s`}
+            >
+              <p class="text-4xl font-bold text-orange-500 md:text-6xl">
+                {result.stat}
+              </p>
+              <p class="font-secondary text-n-600 text-xs font-medium md:text-base">
+                {result.label}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Philosophy note -->
+      <div
+        class="fade-in flex flex-col gap-6 rounded-3xl bg-violet-50 p-6 md:flex-row md:items-center md:justify-between md:p-10"
+      >
+        <div class="flex max-w-3xl flex-col gap-2">
+          <p class="text-2xl font-medium text-violet-600 md:text-3xl">
+            The Joy of Learning
+          </p>
+          <p
+            class="font-secondary text-n-600 text-sm leading-normal md:text-base"
+          >
+            Marks are a by-product. Curiosity is the curriculum — smart
+            classrooms, hands-on labs and continuous assessment that shows
+            parents real progress, not just report cards.
+          </p>
+        </div>
+        <Button
+          text="Our Academics"
+          variant="outline"
+          size="medium"
+          rightArrow
+          onClick="window.location.href='/sirs-experience'"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       05 · 8H EXPLORE — "A Second Classroom" bento
+       ====================================================== -->
+  <section class="bg-n-100 w-full py-16 md:py-24">
+    <div class="container mx-auto flex flex-col gap-12 px-4 md:px-6 2xl:px-0">
+      <div class="max-w-3xl">
+        <SectionHeader
+          title="A second classroom, 49 acres wide"
+          subtitle="Where else can a Tuesday include horse riding, a radio show and two floors of rock climbing?"
+        />
+      </div>
+
+      <!-- Bento grid -->
+      <div
+        class="grid auto-rows-[190px] grid-cols-2 gap-4 md:auto-rows-[220px] md:grid-cols-4 md:gap-6"
+      >
+        {
+          arenas.map((arena, index) => (
+            <div
+              class={`card-anim card-bottom group relative flex flex-col justify-end overflow-hidden rounded-3xl bg-gradient-to-br p-5 md:p-7 ${tileAccents[arena.accent]} ${
+                arena.size === "large"
+                  ? "col-span-2 row-span-2"
+                  : arena.size === "wide"
+                    ? "col-span-2"
+                    : "col-span-1"
+              }`}
+              style={`--delay: ${index * 0.08}s`}
+            >
+              {/* Media placeholder label */}
+              <p class="font-secondary text-n-500 absolute top-4 left-5 truncate pr-5 text-[10px] font-semibold tracking-[0.14em] uppercase">
+                {arena.photo}
+              </p>
+
+              <div class="flex flex-col gap-1.5">
+                <p
+                  class={`leading-tight font-medium text-n-800 transition-colors duration-200 group-hover:text-orange-500 ${
+                    arena.size === "large"
+                      ? "text-3xl md:text-5xl"
+                      : "text-lg md:text-xl lg:text-2xl"
+                  }`}
+                >
+                  {arena.title}
+                </p>
+                <p
+                  class={`font-secondary text-n-600 text-xs leading-normal md:text-sm ${
+                    arena.size === "small" ? "hidden lg:block" : ""
+                  }`}
+                >
+                  {arena.copy}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+
+        <!-- "+ many more" tile -->
+        <div
+          class="card-anim card-bottom col-span-2 flex flex-col justify-center gap-2.5 overflow-hidden rounded-3xl bg-violet-600 p-5 md:col-span-1"
+          style="--delay: 0.6s"
+        >
+          <p class="text-3xl font-medium text-violet-100">40+</p>
+          <p class="font-secondary text-xs text-violet-200 md:text-sm">
+            arenas in all — sport, arts & adventure
+          </p>
+          <Button
+            text="Explore Campus"
+            variant="soft"
+            size="small"
+            rightArrow
+            extraClasses="!px-3 !text-xs md:!text-sm"
+            onClick="window.location.href='/campus/hostel-life'"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       06 · FLAGSHIP EVENTS — marquee reel
+       ====================================================== -->
+  <section
+    class="border-n-200 bg-n-50 w-full overflow-hidden border-y py-8 md:py-10"
+  >
+    <div class="marquee-mask relative">
+      <div class="marquee-track flex w-max items-center gap-10 md:gap-16">
+        {
+          [...events, ...events].map((eventName) => (
+            <span class="flex items-center gap-10 md:gap-16">
+              <span class="text-2xl font-medium whitespace-nowrap text-n-400 transition-colors duration-200 hover:text-orange-500 md:text-4xl">
+                {eventName}
+              </span>
+              <span aria-hidden="true" class="text-orange-300">
+                ✦
+              </span>
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       07 · STUDENT MEDIA — On air, every week
+       ====================================================== -->
+  <section class="w-full bg-violet-900 py-16 md:py-24">
+    <div class="container mx-auto flex flex-col gap-12 px-4 md:px-6 2xl:px-0">
+      <div class="flex max-w-3xl flex-col gap-3">
+        <p
+          class="font-secondary flex items-center gap-2.5 text-sm font-semibold tracking-[0.2em] text-orange-300 uppercase"
+        >
+          <span class="relative flex size-2.5">
+            <span
+              class="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75"
+            ></span>
+            <span class="relative inline-flex size-2.5 rounded-full bg-orange-400"
+            ></span>
+          </span>
+          On air, every week
+        </p>
+        <h2
+          class="text-3xl font-medium md:text-5xl lg:text-6xl"
+          style="color:#ffffff"
+        >
+          The kids run the newsroom
+        </h2>
+        <p
+          class="font-secondary text-base leading-normal font-light text-violet-200 md:text-xl"
+        >
+          Not a media club. A real radio station and a real TV channel —
+          scripted, anchored and produced by students.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <!-- Radio -->
+        <div
+          class="card-anim card-left flex flex-col gap-4 rounded-3xl bg-violet-800 p-6 md:p-10"
+        >
+          <p
+            class="font-secondary text-xs font-semibold tracking-[0.14em] text-violet-300 uppercase"
+          >
+            Photo — students in the radio studio
+          </p>
+          <p class="text-2xl font-medium text-orange-300 md:text-4xl">
+            Radio Orange 99.9
+          </p>
+          <p
+            class="font-secondary text-sm leading-normal font-light text-violet-200 md:text-base"
+          >
+            The in-house virtual radio station where students find their voice
+            — literally. Interviews, music, opinions, confidence.
+          </p>
+        </div>
+
+        <!-- TV -->
+        <div
+          class="card-anim card-right flex flex-col gap-4 rounded-3xl bg-violet-800 p-6 md:p-10"
+        >
+          <p
+            class="font-secondary text-xs font-semibold tracking-[0.14em] text-violet-300 uppercase"
+          >
+            Photo — SAI TV set with student anchors
+          </p>
+          <p class="text-2xl font-medium text-orange-300 md:text-4xl">SAI TV</p>
+          <p
+            class="font-secondary text-sm leading-normal font-light text-violet-200 md:text-base"
+          >
+            A student-led TV channel covering campus life — from SAI Olympics
+            highlights to interviews with visiting mentors.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       08 · 8H BELONG — the second home
+       ====================================================== -->
+  <section class="w-full bg-orange-50 py-16 md:py-24">
+    <div class="container mx-auto flex flex-col gap-12 px-4 md:px-6 2xl:px-0">
+      <div class="max-w-3xl">
+        <SectionHeader
+          title="When the books close, the caring begins"
+          subtitle="The third 8 is the one parents ask about most. It's the one we're proudest of."
+        />
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {
+          homeCards.map((card, index) => (
+            <div
+              class="card-anim card-bottom border-n-200 bg-n-50 flex flex-col gap-4 overflow-hidden rounded-3xl border-2 p-4"
+              style={`--delay: ${index * 0.12}s`}
+            >
+              {/* Media placeholder */}
+              <div class="bg-n-100 flex h-44 items-end rounded-xl p-4 md:h-56">
+                <p class="font-secondary text-n-500 text-[10px] font-semibold tracking-[0.14em] uppercase md:text-xs">
+                  {card.photo}
+                </p>
+              </div>
+              <div class="flex flex-col gap-1.5 px-2 pb-3">
+                <p class="text-xl font-semibold text-orange-500 md:text-2xl">
+                  {card.title}
+                </p>
+                <p class="font-secondary text-n-600 text-sm leading-normal md:text-base">
+                  {card.copy}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- House system -->
+      <div
+        class="fade-in bg-n-50 flex flex-col gap-5 rounded-3xl p-6 md:flex-row md:items-center md:justify-between md:p-10"
+      >
+        <div class="flex max-w-xl flex-col gap-2">
+          <p class="text-2xl font-medium text-n-800 md:text-3xl">
+            Four houses. One family.
+          </p>
+          <p
+            class="font-secondary text-n-600 text-sm leading-normal md:text-base"
+          >
+            Every child belongs to a house from day one — teamwork,
+            responsibility and pride, built in.
+          </p>
+        </div>
+        <div class="font-secondary flex flex-wrap gap-3">
+          {
+            houses.map((house) => (
+              <span
+                class={`rounded-full px-5 py-2.5 text-sm font-semibold md:text-base ${house.classes}`}
+              >
+                {house.name}
+              </span>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       09 · THE LEADER'S PROMISE
+       ====================================================== -->
+  <section class="bg-n-50 w-full py-16 md:py-24">
+    <div
+      class="container mx-auto flex flex-col items-center gap-10 px-4 md:px-6 lg:flex-row lg:gap-16 2xl:px-0"
+    >
+      <!-- Photo placeholder -->
+      <div
+        class="fade-in-left flex aspect-[4/5] w-full max-w-md items-end rounded-3xl bg-gradient-to-br from-violet-100 via-violet-50 to-orange-50 p-6"
+      >
+        <p
+          class="font-secondary text-n-500 text-[10px] font-semibold tracking-[0.14em] uppercase md:text-xs"
+        >
+          Photo — Dr. Silpi Sahoo with students on campus
+        </p>
+      </div>
+
+      <div class="fade-in flex flex-1 flex-col gap-6">
+        <blockquote
+          class="text-2xl leading-snug font-medium text-n-800 italic md:text-4xl md:leading-snug"
+        >
+          "Parents don't hand us marksheets to improve. They hand us their
+          children. That is a promise we keep every single day — and night."
+        </blockquote>
+        <div class="flex flex-col gap-0.5">
+          <p class="text-lg font-semibold text-orange-500 md:text-xl">
+            Dr. Silpi Sahoo
+          </p>
+          <p class="font-secondary text-n-500 text-sm md:text-base">
+            Chairperson, SAI International Education Group — carrying forward
+            the legacy of Founder Dr. Bijaya Kumar Sahoo
+          </p>
+        </div>
+        <Button
+          text="Her Message to Parents"
+          variant="soft"
+          size="medium"
+          rightArrow
+          onClick="window.location.href='/about'"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       10 · BEYOND SCHOOL — global + future readiness
+       ====================================================== -->
+  <section class="bg-n-100 w-full py-16 md:py-24">
+    <div class="container mx-auto flex flex-col gap-12 px-4 md:px-6 2xl:px-0">
+      <div class="max-w-3xl">
+        <SectionHeader
+          title="Ready for the world"
+          subtitle="From Bhubaneswar to Boston — the runway starts here."
+        />
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+        {
+          beyond.map((item, index) => (
+            <div
+              class="card-anim card-bottom border-n-200 bg-n-50 flex h-full flex-col gap-3 rounded-3xl border-2 p-6 md:p-8"
+              style={`--delay: ${index * 0.15}s`}
+            >
+              <p class="text-2xl font-medium text-violet-600 md:text-3xl">
+                {item.title}
+              </p>
+              <p class="font-secondary text-n-600 text-sm leading-normal md:text-base">
+                {item.copy}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       11 · VOICES + WALL OF FAME
+       ====================================================== -->
+  <section class="bg-n-50 w-full py-16 md:py-24">
+    <div class="container mx-auto flex flex-col gap-12 px-4 md:px-6 2xl:px-0">
+      <div class="max-w-3xl">
+        <SectionHeader
+          title="Don't take our word for it"
+          subtitle="Families from across India, and the juries that rank us."
+        />
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {
+          voices.map((voice, index) => (
+            <div
+              class="card-anim card-bottom"
+              style={`--delay: ${index * 0.15}s`}
+            >
+              <IconsCard
+                name={voice.name}
+                description={voice.description}
+                date={voice.date}
+              />
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Awards row -->
+      <div class="font-secondary fade-in flex flex-wrap gap-3">
+        {
+          awards.map((award) => (
+            <span class="border-n-200 text-n-600 rounded-full border-2 px-5 py-2.5 text-xs font-medium md:text-sm">
+              {award}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       12 · ADMISSIONS — the closing invitation
+       ====================================================== -->
+  <section class="w-full bg-violet-700 py-16 md:py-24">
+    <div class="container mx-auto flex flex-col gap-12 px-4 md:px-6 2xl:px-0">
+      <div class="flex max-w-3xl flex-col gap-3">
+        <h2
+          class="text-3xl font-medium md:text-5xl lg:text-6xl"
+          style="color:#ffffff"
+        >
+          Give them a second home
+        </h2>
+        <p
+          class="font-secondary text-base leading-normal font-light text-violet-200 md:text-xl"
+        >
+          Admissions open for Classes IV–XII. Three simple steps — and the
+          first one takes two minutes.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+        {
+          admissionSteps.map((step, index) => (
+            <div
+              class="card-anim card-bottom flex flex-col gap-3 rounded-3xl bg-violet-800 p-6 md:p-8"
+              style={`--delay: ${index * 0.15}s`}
+            >
+              <p class="text-4xl font-bold text-orange-300 md:text-5xl">
+                {step.step}
+              </p>
+              <p class="text-xl font-medium text-violet-50 md:text-2xl">
+                {step.title}
+              </p>
+              <p class="font-secondary text-sm leading-normal font-light text-violet-200 md:text-base">
+                {step.copy}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="flex flex-wrap gap-4">
+        <Button
+          text="Start an Enquiry"
+          variant="solid"
+          size="large"
+          rightArrow
+          onClick="window.location.href='/admissions'"
+        />
+        <Button
+          text="Talk to Admissions"
+          variant="outline"
+          size="large"
+          extraClasses="!text-violet-100 !border-violet-300 hover:!text-violet-900 hover:!bg-violet-100 hover:before:!bg-violet-100"
+          onClick="window.location.href='/contact-us'"
+        />
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Flagship events marquee */
+  .marquee-mask {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent
+    );
+  }
+
+  .marquee-track {
+    animation: marquee 32s linear infinite;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+  }
+</style>
