@@ -16,13 +16,15 @@ const __dirname = nodePath.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   output: "server",
   adapter: vercel(),
+  srcDir: "./apps/frontend/src",
+  publicDir: "./apps/frontend/public",
   site: "https://www.sairesidentialschool.com/",
   integrations: [astroIcon(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
     resolve: {
       alias: {
-        "@": nodePath.resolve(__dirname, "./src"),
+        "@": nodePath.resolve(__dirname, "./apps/frontend/src"),
       },
     },
   },
