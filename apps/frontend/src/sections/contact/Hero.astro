@@ -1,5 +1,47 @@
 ---
-import DummySection from "@/components/ui/DummySection.astro";
+// CONTACT HERO (Figma frame 7138:560)
+// Eyebrow: CONTACT / Title: Talk to us. Visit us. Join us.
+// Bg: /images/contact-hero.jpg with gradient fallback.
 ---
-<!-- TODO: Replace with real section content -->
-<DummySection name="Contact — Hero" />
+
+<section
+  data-section="Contact Hero"
+  class="relative overflow-hidden bg-gradient-to-br from-[#1a2456] via-[#2b3a7a] to-[#c9443a] pt-24 md:pt-36"
+>
+  <!-- Background photo (hidden if the asset is missing; gradient remains) -->
+  <img
+    src="/images/contact-hero.png"
+    alt=""
+    aria-hidden="true"
+    loading="eager"
+    fetchpriority="high"
+    onerror="this.remove()"
+    class="absolute inset-0 h-full w-full object-cover"
+  />
+  <!-- Legibility overlay -->
+  <div
+    class="absolute inset-0 bg-gradient-to-r from-[#141b3d]/90 via-[#141b3d]/60 to-[#141b3d]/20"
+  >
+  </div>
+
+  <div
+    class="relative container mx-auto flex flex-col gap-4 px-6 py-16 md:gap-6 md:py-24 lg:px-8 2xl:px-0"
+  >
+    <p
+      class="text-sm font-semibold tracking-[0.25em] text-orange-300 uppercase md:text-base"
+    >
+      Contact
+    </p>
+    <h1
+      class="max-w-3xl text-4xl leading-[112%] font-medium text-white md:text-6xl lg:text-7xl"
+    >
+      Talk to us. Visit us. Join us.
+    </h1>
+    <p
+      class="font-secondary max-w-2xl text-base leading-normal font-medium text-white/85 md:text-xl lg:text-2xl"
+    >
+      Admissions open for Classes IV-XII. Call, write or walk the 49 acres with
+      us.
+    </p>
+  </div>
+</section>

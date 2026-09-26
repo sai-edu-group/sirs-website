@@ -1,0 +1,95 @@
+---
+// COMPONENTS //
+import SectionHeader from "@/components/ui/SectionHeaderMain.astro";
+import SliderArrowButton from "@/components/ui/SliderArrowButton.astro";
+
+// DATA //
+import {
+  imageBasedSlider,
+  sectionHeaderContent,
+} from "@/data/home/results-image-slider";
+---
+
+<section data-section="Home Results">
+  <div
+    class="container mx-auto flex flex-col gap-9 px-6 py-8 md:gap-12 md:py-10 lg:gap-14 lg:px-6 lg:py-20 2xl:px-0"
+  >
+    <!-- Section Header with Lines -->
+    <SectionHeader {...sectionHeaderContent} />
+
+    <!-- Slider wrapper -->
+    <div class="flex flex-col items-center gap-6 md:gap-10" id="results-slider">
+      <!-- Viewport -->
+      <div
+        class="overflow-hidden rounded-xl"
+        id="data-embla-viewport"
+        data-embla-viewport
+      >
+        <!-- Container -->
+        <div class="flex h-auto!" data-embla-container>
+          {
+            imageBasedSlider.map(
+              (imageBasedSliderItem, imageBasedSliderItemIndex) => (
+                <div
+                  data-embla-slide
+                  class="max-h-[454px] w-full min-w-0 shrink-0 bg-gradient-to-br from-orange-100 via-amber-50 to-slate-200 lg:h-[55vh] lg:max-h-[69vh]"
+                >
+                  <a
+                    href={imageBasedSliderItem.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="block h-full w-full"
+                  >
+                    <img
+                      src={imageBasedSliderItem.src}
+                      alt={imageBasedSliderItem.alt}
+                      class="pointer-events-none block h-full w-full object-contain select-none"
+                      draggable="false"
+                      width={1200}
+                      height={800}
+                      loading="lazy"
+                      decoding="async"
+                      onerror="this.style.display='none'"
+                    />
+                  </a>
+                </div>
+              ),
+            )
+          }
+        </div>
+      </div>
+
+      <!-- Buttons wrapper -->
+      <div class="flex items-center justify-center gap-8 md:gap-12 lg:gap-20">
+        <!--  Prev button -->
+        <SliderArrowButton direction="prev" id="prevButton" data-embla-prev />
+
+        <!-- Dots -->
+        <div
+          id="emblaDots"
+          data-embla-dots
+          class="flex items-center gap-1 md:gap-2"
+        >
+        </div>
+
+        <!-- Next button -->
+        <SliderArrowButton direction="next" id="nextButton" data-embla-next />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Component-level init: scoped to this slider only -->
+<script>
+  import { initEmblaRoot } from "@/scripts/embla";
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const root = document.getElementById("results-slider");
+    if (!root) return;
+
+    initEmblaRoot(root, {
+      autoplay: true,
+      delay: 4000,
+    });
+  });
+</script>

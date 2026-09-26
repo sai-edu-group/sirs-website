@@ -1,5 +1,43 @@
 ---
-import DummySection from "@/components/ui/DummySection.astro";
+// GET IN TOUCH — adapted from SIS src/sections/contact/GetInTouch.astro
+// Figma (02): eyebrow "QUICK CONTACT OPTIONS", title "Get in Touch with Us".
+import SectionHeaderMain from "@/components/ui/SectionHeaderMain.astro";
+import GetInTouchCard from "@/components/ui/GetInTouchCard.astro";
+
+import { contactDetails } from "@/data/contact/quick-contact";
 ---
-<!-- TODO: Replace with real section content -->
-<DummySection name="Contact — Quick Contact" />
+
+<section data-section="Get In Touch">
+  <div class="container mx-auto px-6 py-16 lg:px-8 lg:py-24 2xl:px-0">
+    <!-- Section Header -->
+    <SectionHeaderMain
+      eyebrowText="Quick contact options"
+      title="Get in Touch with Us"
+      subtitle="Choose the easiest way to reach our admissions team, by email, phone, or a visit to the campus."
+    />
+
+    <!-- Get in touch cards wrapper -->
+    <div
+      class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:gap-6"
+    >
+      {
+        contactDetails.map((step, index) => (
+          <div
+            class={`${
+              index === contactDetails.length - 1
+                ? "sm:col-span-2 xl:col-span-1"
+                : ""
+            }`}
+          >
+            <GetInTouchCard
+              icon={step.icon}
+              title={step.title}
+              infoText={step.infoText}
+              type={step.type}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

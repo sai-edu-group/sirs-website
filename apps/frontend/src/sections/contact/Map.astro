@@ -1,5 +1,48 @@
 ---
-import DummySection from "@/components/ui/DummySection.astro";
+// CONTACT MAP — SIRS campus map with address card.
+import site from "@/data/meta/site.json";
+
+const mapsQuery = encodeURIComponent(site.full_address);
 ---
-<!-- TODO: Replace with real section content -->
-<DummySection name="Contact — Map" />
+
+<section data-section="Campus Map">
+  <div class="container mx-auto px-6 pb-16 lg:px-8 lg:pb-24 2xl:px-0">
+    <div
+      class="border-n-200 grid grid-cols-1 overflow-hidden rounded-3xl border lg:grid-cols-[1fr_1.6fr]"
+    >
+      <!-- Address card -->
+      <div class="bg-n-50 flex flex-col justify-center gap-4 p-8 md:p-12">
+        <p
+          class="text-sm font-semibold tracking-[0.25em] text-orange-500 uppercase"
+        >
+          Find us
+        </p>
+        <p class="text-n-800 text-2xl leading-tight font-medium md:text-3xl">
+          Walk the 49 acres with us
+        </p>
+        <p class="font-secondary text-n-600 text-base md:text-lg">
+          {site.full_address}
+        </p>
+        <a
+          href={site.google_map_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-secondary w-fit rounded-lg border border-orange-500 px-5 py-2.5 text-sm font-medium text-orange-500 transition hover:bg-orange-500 hover:text-white md:text-lg"
+        >
+          Get Directions
+        </a>
+      </div>
+
+      <!-- Embedded map -->
+      <div class="bg-n-100 min-h-[320px] lg:min-h-[420px]">
+        <iframe
+          title="SAI Residential School campus map"
+          src={`https://www.google.com/maps?q=${mapsQuery}&output=embed`}
+          class="h-full min-h-[320px] w-full border-0 lg:min-h-[420px]"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>

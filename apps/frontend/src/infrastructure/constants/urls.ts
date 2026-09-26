@@ -17,6 +17,7 @@ export const URLS = {
       FLAGSHIP_EVENT: (name: string) => `/sirs-experience/flagship-events/${name}`,
     },
     TEAM_MEMBER: (name: string) => `/about/team/${name}`,
+    ADVISORY_MEMBER: (name: string) => `/about/advisory/${name}`,
   },
 
   SIRS_EXPERIENCE: {
