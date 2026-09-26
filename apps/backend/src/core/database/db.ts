@@ -1,7 +1,7 @@
 import { Kysely, MysqlDialect } from "kysely";
 import { createPool, type PoolOptions } from "mysql2";
 
-import type { Database } from "./schema";
+import type { Database } from "./schema.js";
 
 type GlobalWithDatabase = typeof globalThis & {
   __sirsDatabase?: Kysely<Database>;
