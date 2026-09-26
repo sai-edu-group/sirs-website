@@ -1,0 +1,434 @@
+---
+// COMPONENTS //
+import Button from "@/components/ui/Button.astro";
+import SectionHeaderMain from "@/components/ui/SectionHeaderMain.astro";
+import Tooltip from "@/components/ui/Tooltip.astro";
+import PersonCard from "@/components/ui/PersonCard.astro";
+import SliderArrowButton from "@/components/ui/SliderArrowButton.astro";
+import Image from "astro/components/Image.astro";
+
+// CONSTANTS //
+import { URLS } from "@/infrastructure/constants/urls";
+
+// DATA //
+import { sectionHeaderDetails, teamMembers } from "@/data/about/members/team";
+---
+
+<section
+  class="bg-n-100 ns-slider relative w-full overflow-hidden"
+  id="key-personnel"
+  data-section="Key Personnel"
+>
+  <div id="team-data" data-members={JSON.stringify(teamMembers)} hidden></div>
+  <div
+    class="container mx-auto flex flex-col gap-8 px-6 py-20 lg:gap-15 lg:py-24 2xl:px-0"
+  >
+    <!-- Section Header -->
+    <SectionHeaderMain {...sectionHeaderDetails} />
+
+    <!-- Team Members Content -->
+    <div class="relative hidden w-full lg:flex">
+      {/* Left Content - Active Member Details */}
+      <div
+        class="flex flex-1 overflow-hidden rounded-4xl bg-cover bg-center pt-24 pr-20 pl-14 2xl:pr-30"
+        id="team-bg"
+        style={`background:  url('${teamMembers[0].bgImg}') center/cover no-repeat;`}
+      >
+        <div
+          class="team-image-container self-end lg:w-0 xl:w-[400px] 2xl:w-[500px]"
+        >
+          <Image
+            id="team-img"
+            src={teamMembers[0].img}
+            alt={teamMembers[0].name}
+            class="team-img-animate"
+            style={`--delay: 0.1s`}
+            width={500}
+            height={500}
+          />
+        </div>
+        <div class="flex flex-1 flex-col gap-30 pb-15">
+          <div class="team-content-container relative flex flex-col gap-7">
+            <!-- Quote -->
+            <p
+              id="team-quote"
+              class="text-n-700 team-quote-animate w-[90%] text-2xl leading-normal font-medium 2xl:text-3xl"
+            >
+              "{teamMembers[0].quote}"
+            </p>
+
+            <!-- Explore Button -->
+            <a
+              class="team-button-animate"
+              id="team-button"
+              data-team-urls={JSON.stringify(
+                teamMembers.map((member) =>
+                  URLS.ABOUT.TEAM_MEMBER(
+                    member.name.toLowerCase().replaceAll(" ", "-"),
+                  ),
+                ),
+              )}
+              href={URLS.ABOUT.TEAM_MEMBER(
+                teamMembers[0].name.toLowerCase().replaceAll(" ", "-"),
+              )}
+            >
+              <Button
+                text="Explore their Journey"
+                variant="outline"
+                rightArrow
+                size="large"
+              />
+            </a>
+
+            <!-- Appostrophe SVG -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="166"
+              height="148"
+              viewBox="0 0 166 148"
+              fill="none"
+              class="absolute -top-[50px] -left-[20px] xl:-left-[60px]"
+            >
+              <path
+                d="M41.2422 0L57.2236 11.539C53.4431 15.887 49.3188 22.5763 44.8509 31.6068C40.7267 40.3028 37.2899 49.835 34.5404 60.2034C31.7909 70.5718 30.7598 80.7729 31.4472 90.8068C33.853 90.1379 35.9151 89.6362 37.6335 89.3017C39.6956 88.6328 41.7578 88.2983 43.8199 88.2983C51.3809 88.2983 57.7391 90.8068 62.8944 95.8237C68.3934 100.506 71.1429 107.195 71.1429 115.892C71.1429 125.591 68.2215 133.451 62.3789 139.471C56.5362 145.157 49.147 148 40.2112 148C27.1511 148 17.1843 143.318 10.3106 133.953C3.43685 124.588 0 113.216 0 99.8373C0 90.4723 1.54658 79.9367 4.63975 68.2305C8.0766 56.1898 12.8882 44.1492 19.0745 32.1085C25.2609 19.7333 32.6501 9.03051 41.2422 0ZM136.099 0L152.081 11.539C148.3 15.887 144.176 22.5763 139.708 31.6068C135.584 40.3028 132.147 49.835 129.398 60.2034C126.648 70.5718 125.617 80.7729 126.304 90.8068C128.71 90.1379 130.772 89.6362 132.491 89.3017C134.553 88.6328 136.615 88.2983 138.677 88.2983C146.238 88.2983 152.596 90.8068 157.752 95.8237C163.251 100.506 166 107.195 166 115.892C166 125.591 163.079 133.451 157.236 139.471C151.393 145.157 144.004 148 135.068 148C122.008 148 112.041 143.318 105.168 133.953C98.294 124.588 94.8571 113.216 94.8571 99.8373C94.8571 90.4723 96.4037 79.9367 99.4969 68.2305C102.934 56.1898 107.745 44.1492 113.932 32.1085C120.118 19.7333 127.507 9.03051 136.099 0Z"
+                fill="#CC554D"
+                fill-opacity="0.08"></path>
+            </svg>
+          </div>
+
+          <!-- Name and Position -->
+          <div class="team-name-container flex flex-col">
+            <p
+              id="team-name"
+              class="team-name-animate text-4xl leading-[46px] font-bold text-orange-500"
+            >
+              {teamMembers[0].name}
+            </p>
+            <p
+              id="team-position"
+              class="font-secondary text-n-600 team-position-animate text-lg"
+            >
+              {teamMembers[0].position}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Content - Team Members List */}
+      <div
+        id="team-list"
+        class="bg-n-100 mr-10 flex w-[110px] flex-col gap-2.5 pt-15 pb-15 2xl:pt-24"
+      >
+        {
+          teamMembers.map((member, index) => (
+            <div
+              class="group relative flex cursor-pointer flex-col items-center gap-2"
+              data-index={index}
+            >
+              <div
+                class={`flex h-[75px] items-center justify-center overflow-hidden rounded-3xl bg-cover bg-center pt-2 2xl:h-[102px] ${member.isActive ? "" : "grayscale"} `}
+                style={`background-image: url('${member.bgImg}')`}
+              >
+                <Image
+                  src={member.img}
+                  alt={member.name}
+                  class="h-full w-full object-contain"
+                  width={75}
+                  height={75}
+                />
+              </div>
+              <Tooltip text={member.name} />
+              <div
+                class={`h-[4px] w-[75px] origin-left rounded-md bg-orange-100 ${member.isActive ? "" : "opacity-0"} overflow-hidden`}
+                data-underline
+              >
+                <div
+                  class="h-full w-full origin-left rounded-md bg-orange-500"
+                  data-fill
+                  style="transform: scaleX(0);"
+                />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Slider root: keep viewport + controls inside this wrapper -->
+    <div
+      data-embla-root
+      id={"team-slider"}
+      class="space-y-7 md:space-y-9 lg:hidden"
+    >
+      <!-- Viewport -->
+      <div class="overflow-hidden" data-embla-viewport>
+        <!-- Container -->
+        <div class="flex gap-5.5" data-embla-container>
+          <!-- Team Members Slides -->
+          {
+            teamMembers.map((teamMemberItem) => (
+              <div class="ns-slide cursor-pointer" data-embla-slide>
+                <PersonCard
+                  personName={teamMemberItem.name}
+                  designation={teamMemberItem.position}
+                  image={teamMemberItem.jpgImg}
+                  href={URLS.ABOUT.TEAM_MEMBER(
+                    teamMemberItem.name.toLowerCase().replaceAll(" ", "-"),
+                  )}
+                />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Controls + Dots -->
+      <div
+        class="relative flex items-center justify-center gap-8 md:gap-12 lg:gap-20"
+      >
+        <!-- Dots -->
+        <div class="flex items-center gap-1.5 md:gap-2" data-embla-dots></div>
+
+        <div class="absolute right-0 flex gap-4 md:gap-6">
+          <!--  Prev button -->
+          <SliderArrowButton direction="prev" id="prevButton" data-embla-prev />
+
+          <!-- Next button -->
+          <SliderArrowButton direction="next" data-embla-next />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import { trackReadMoreClick } from "@/scripts/analytics";
+
+    // Single event listener for ALL cards (event delegation)
+    document.addEventListener("click", (e) => {
+      const card = (e.target as HTMLElement).closest(".result-card");
+      if (card) {
+        const personName = card.getAttribute("data-person-name");
+        if (personName) {
+          trackReadMoreClick(personName);
+        }
+      }
+    });
+  </script>
+</section>
+
+<style>
+  /* Slider-level variables (like your tb-slider reference) */
+  .ns-slider {
+    --slides: 1; /* default: mobile shows 1 */
+    --gap: 22px; /* match the gap-5.5 above */
+    --peek: 0px; /* extra visible width to "peek" next slide */
+  }
+
+  @media (min-width: 640px) {
+    .ns-slider {
+      --slides: 2;
+      --peek: 0px;
+    }
+  }
+
+  /* Each slide width: ((100% - total gaps - peek) / slides) */
+  .ns-slide {
+    flex: 0 0
+      calc(
+        (100% - (var(--gap) * (var(--slides) - 1)) - var(--peek)) /
+          var(--slides)
+      );
+  }
+
+  /* Animation Keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.9) translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  /* Initial state - hidden */
+  .team-img-animate,
+  .team-quote-animate,
+  .team-button-animate,
+  .team-name-animate,
+  .team-position-animate {
+    opacity: 0;
+  }
+
+  /* Animation classes that will be added dynamically */
+  .team-img-animate.animate {
+    animation: fadeInScale 0.6s ease-out 0.1s forwards;
+  }
+
+  .team-quote-animate.animate {
+    animation: fadeInUp 0.6s ease-out 0.1s forwards;
+  }
+
+  .team-button-animate.animate {
+    animation: fadeInUp 0.6s ease-out 0.2s forwards;
+  }
+
+  .team-name-animate.animate {
+    animation: fadeInUp 0.6s ease-out 0.3s forwards;
+  }
+
+  .team-position-animate.animate {
+    animation: fadeInUp 0.6s ease-out 0.4s forwards;
+  }
+</style>
+
+<script is:inline>
+  const teamDataEl = document.getElementById("team-data");
+  const members = teamDataEl
+    ? JSON.parse(teamDataEl.dataset.members || "[]")
+    : [];
+  const bgEl = document.getElementById("team-bg");
+  const imgEl = document.getElementById("team-img");
+  const quoteEl = document.getElementById("team-quote");
+  const nameEl = document.getElementById("team-name");
+  const posEl = document.getElementById("team-position");
+  const listEl = document.getElementById("team-list");
+  const buttonEl = document.getElementById("team-button");
+  const AUTO_DURATION_MS = 5000;
+  const urls = JSON.parse(buttonEl.dataset.teamUrls);
+
+  let currentIndex = Math.max(
+    0,
+    members.findIndex((m) => m.isActive),
+  );
+  if (currentIndex === -1) currentIndex = 0;
+  let rafId = null;
+  let startTime = 0;
+
+  /** Trigger animations for all animated elements */
+  function triggerAnimations() {
+    const animatedElements = document.querySelectorAll(
+      ".team-img-animate, .team-quote-animate, .team-button-animate, .team-name-animate, .team-position-animate",
+    );
+
+    // Remove animate class first
+    animatedElements.forEach((el) => {
+      el.classList.remove("animate");
+    });
+
+    // Force reflow to restart animation
+    void document.body.offsetWidth;
+
+    // Add animate class back
+    animatedElements.forEach((el) => {
+      el.classList.add("animate");
+    });
+  }
+
+  /** Set the active member by index */
+  function setActiveMember(index, resetTimer = true) {
+    const member = members[index];
+    if (!member) return;
+    currentIndex = index;
+
+    // Update left side
+    bgEl.style.background = `linear-gradient(90deg, rgba(255, 255, 255, 0) -15.48%, rgba(255, 255, 255, 0.87) 45.67%, var(--color-n-100) 100%), url('${member.bgImg}') center/cover no-repeat`;
+    imgEl.setAttribute("src", member.img);
+    imgEl.setAttribute("alt", member.name);
+    buttonEl.setAttribute("href", urls[index]);
+
+    quoteEl.textContent = "“" + member.quote + "”";
+    nameEl.textContent = member.name;
+    posEl.textContent = member.position;
+
+    // Trigger enter animations
+    triggerAnimations();
+
+    // Update active styles on right list and reset progress bars
+    listEl.querySelectorAll("[data-index]").forEach((node, i) => {
+      const thumb = node.firstElementChild;
+      const underline = node.querySelector("[data-underline]");
+      const fill = node.querySelector("[data-fill]");
+      if (i === index) {
+        if (thumb) thumb.classList.remove("grayscale");
+        if (underline) {
+          underline.classList.remove("opacity-0");
+        }
+        if (fill) fill.style.transform = "scaleX(0)";
+      } else {
+        if (thumb) thumb.classList.add("grayscale");
+        if (underline) {
+          underline.classList.add("opacity-0");
+        }
+        if (fill) fill.style.transform = "scaleX(0)";
+      }
+    });
+
+    if (resetTimer) startTimer();
+  }
+
+  /** Start or restart the autoplay timer */
+  function startTimer() {
+    if (rafId) cancelAnimationFrame(rafId);
+    startTime = performance.now();
+    updateProgressBar(startTime);
+  }
+
+  /** Animation frame callback to update progress bar */
+  function updateProgressBar(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / AUTO_DURATION_MS, 1);
+    const activeFill = listEl.querySelector(
+      `[data-index="${currentIndex}"] [data-fill]`,
+    );
+    if (activeFill) {
+      activeFill.style.transform = `scaleX(${progress})`;
+    }
+    if (progress >= 1) {
+      const next = (currentIndex + 1) % members.length;
+      setActiveMember(next, false);
+      startTimer();
+      return;
+    }
+    rafId = requestAnimationFrame(updateProgressBar);
+  }
+
+  if (listEl && bgEl && imgEl && quoteEl && nameEl && posEl) {
+    // Click handlers
+    listEl.querySelectorAll("[data-index]").forEach((item) => {
+      item.addEventListener("click", () => {
+        const idx = Number(item.getAttribute("data-index"));
+        setActiveMember(idx, true);
+      });
+    });
+    // Initialize and start autoplay
+    setActiveMember(currentIndex, false);
+    startTimer();
+  }
+</script>
+
+<!-- Component-level init: scoped to this slider only -->
+<script>
+  import { initEmblaRoot } from "@/scripts/embla";
+  window.addEventListener("DOMContentLoaded", () => {
+    const root = document.getElementById("team-slider");
+    if (!root) return;
+    initEmblaRoot(root, {
+      align: "start",
+      dragFree: false,
+      slidesToScroll: "2",
+    });
+  });
+</script>

@@ -1,0 +1,55 @@
+---
+// Vision / Mission / Commitment — Figma frame 6843:14115 (02).
+// 3-col cards on cream bg.
+const cards = [
+  {
+    title: "Vision",
+    copy: "To nurture confident, compassionate leaders rooted in Indian values and ready for the world.",
+  },
+  {
+    title: "Mission",
+    copy: "8 hours of learning, 8 hours of exploring, 8 hours of belonging — every day, fully residential.",
+  },
+  {
+    title: "Commitment",
+    copy: "Safety, care and character first — phone-free campus, 24x7 pastoral care, CBSE IV-XII.",
+  },
+];
+---
+
+<section class="bg-orange-50">
+  <div
+    class="container mx-auto flex flex-col gap-10 px-6 py-16 md:gap-14 md:py-24 2xl:px-0"
+  >
+    <div class="flex flex-col items-center gap-3 text-center">
+      <p
+        class="text-sm font-semibold tracking-[0.22em] text-orange-600 md:text-base"
+      >
+        Vision, Mission and Commitment
+      </p>
+      <h2
+        class="text-n-800 max-w-3xl text-3xl leading-[112%] font-medium md:text-5xl"
+      >
+        What guides life at SIRS
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
+      {
+        cards.map((card) => (
+          <div class="bg-n-50 border-n-200 flex h-full flex-col gap-4 rounded-3xl border-2 p-7 md:p-9">
+            <div class="bg-orange-500/10 flex size-12 items-center justify-center rounded-2xl">
+              <span class="size-2.5 rounded-full bg-orange-500" />
+            </div>
+            <h3 class="text-n-800 text-2xl font-medium md:text-3xl">
+              {card.title}
+            </h3>
+            <p class="font-secondary text-n-600 text-base leading-7 font-light md:text-lg">
+              {card.copy}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

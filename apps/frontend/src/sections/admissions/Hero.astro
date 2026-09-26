@@ -1,0 +1,72 @@
+---
+// ADMISSIONS HERO (Figma frame 7053:73)
+// Eyebrow: ADMISSIONS / Title: Give them a second home.
+// Bg: /images/admission-hero.jpg with gradient fallback.
+// Includes a 3-step mini strip: 01 Enquire / 02 Visit / 03 Join the family.
+
+const miniSteps = [
+  { number: "01", label: "Enquire" },
+  { number: "02", label: "Visit" },
+  { number: "03", label: "Join the family" },
+];
+---
+
+<section
+  data-section="Admissions Hero"
+  class="relative overflow-hidden bg-gradient-to-br from-[#1a2456] via-[#2b3a7a] to-[#c9443a] pt-24 md:pt-36"
+>
+  <!-- Background photo (hidden if the asset is missing; gradient remains) -->
+  <img
+    src="/images/admission-hero.png"
+    alt=""
+    aria-hidden="true"
+    loading="eager"
+    fetchpriority="high"
+    onerror="this.remove()"
+    class="absolute inset-0 h-full w-full object-cover"
+  />
+  <!-- Legibility overlay -->
+  <div
+    class="absolute inset-0 bg-gradient-to-r from-[#141b3d]/90 via-[#141b3d]/60 to-[#141b3d]/20"
+  >
+  </div>
+
+  <div
+    class="relative container mx-auto flex flex-col gap-4 px-6 py-16 md:gap-6 md:py-24 lg:px-8 2xl:px-0"
+  >
+    <p
+      class="text-sm font-semibold tracking-[0.25em] text-orange-300 uppercase md:text-base"
+    >
+      Admissions
+    </p>
+    <h1
+      class="max-w-3xl text-4xl leading-[112%] font-medium text-white md:text-6xl lg:text-7xl"
+    >
+      Give them a second home
+    </h1>
+    <p
+      class="font-secondary max-w-2xl text-base leading-normal font-medium text-white/85 md:text-xl lg:text-2xl"
+    >
+      Admissions open for Classes IV-XII. Three simple steps, and the first one
+      takes two minutes.
+    </p>
+
+    <!-- Mini steps strip -->
+    <ol
+      class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-stretch sm:gap-4 md:mt-6"
+    >
+      {
+        miniSteps.map((step) => (
+          <li class="flex flex-1 items-center gap-4 rounded-2xl border border-white/20 bg-white/10 px-5 py-4 backdrop-blur-sm">
+            <span class="text-2xl font-semibold text-orange-300 md:text-3xl">
+              {step.number}
+            </span>
+            <span class="font-secondary text-base font-medium text-white md:text-lg">
+              {step.label}
+            </span>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

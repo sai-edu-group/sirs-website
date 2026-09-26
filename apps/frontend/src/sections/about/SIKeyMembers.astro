@@ -1,0 +1,147 @@
+---
+// COMPONENTS //
+import PersonCard from "@/components/ui/PersonCard.astro";
+import SectionHeaderMain from "@/components/ui/SectionHeaderMain.astro";
+import SliderArrowButton from "@/components/ui/SliderArrowButton.astro";
+
+// CONSTANTS //
+import { URLS } from "@/infrastructure/constants/urls";
+
+// DATA //
+import {
+  advisoryBoard,
+  sectionHeaderDetails,
+} from "@/data/about/members/advisory";
+---
+
+<section
+  class="bg-n-50 ns-slider relative w-full overflow-hidden"
+  id="advisory-board"
+  data-section="Advisory Board"
+>
+  <div
+    class="container mx-auto flex flex-col gap-10 px-6 py-14 md:gap-14 md:py-20 lg:gap-20 lg:py-24 2xl:px-0"
+  >
+    <!-- Section Header -->
+    <SectionHeaderMain {...sectionHeaderDetails} />
+
+    <!-- Advisory Board Members Wrapper -->
+    <div
+      class="mx-auto hidden grid-cols-1 gap-8 md:grid-cols-2 lg:grid xl:grid-cols-3 2xl:grid-cols-4 2xl:gap-y-14"
+    >
+      {
+        advisoryBoard.map((advisoryMemberItem) => (
+          <div class="card-anim card-bottom">
+            <PersonCard
+              personName={advisoryMemberItem.name}
+              designation={advisoryMemberItem.position}
+              image={advisoryMemberItem.jpgImg}
+              href={URLS.ABOUT.ADVISORY_MEMBER(
+                advisoryMemberItem.name.toLowerCase().replaceAll(" ", "-"),
+              )}
+            />
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Advisory Board Slider for Mobile and Tablet -->
+    <!-- Slider root: keep viewport + controls inside this wrapper -->
+    <div
+      data-embla-root
+      id={"advisory-board-slider"}
+      class="space-y-7 md:space-y-9 lg:hidden"
+    >
+      <!-- Viewport -->
+      <div class="overflow-hidden" data-embla-viewport>
+        <!-- Container -->
+        <div class="flex gap-5.5" data-embla-container>
+          <!-- Board Members Slides -->
+          {
+            advisoryBoard.map((advisoryMemberItem) => (
+              <div class="ns-slide cursor-pointer" data-embla-slide>
+                <PersonCard
+                  personName={advisoryMemberItem.name}
+                  designation={advisoryMemberItem.position}
+                  image={advisoryMemberItem.jpgImg}
+                  href={URLS.ABOUT.ADVISORY_MEMBER(
+                    advisoryMemberItem.name.toLowerCase().replaceAll(" ", "-"),
+                  )}
+                />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Controls + Dots -->
+      <div
+        class="relative flex items-center justify-center gap-8 md:gap-12 lg:gap-20"
+      >
+        <!-- Dots -->
+        <div class="flex items-center gap-1.5 md:gap-2" data-embla-dots></div>
+
+        <div class="absolute right-0 flex gap-4 md:gap-6">
+          <!--  Prev button -->
+          <SliderArrowButton direction="prev" id="prevButton" data-embla-prev />
+
+          <!-- Next button -->
+          <SliderArrowButton direction="next" data-embla-next />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  import { trackReadMoreClick } from "@/scripts/analytics";
+
+  // Single event listener for ALL cards (event delegation)
+  document.addEventListener("click", (e) => {
+    const card = (e.target as HTMLElement).closest(".result-card");
+    if (card) {
+      const personName = card.getAttribute("data-person-name");
+      if (personName) {
+        trackReadMoreClick(personName);
+      }
+    }
+  });
+</script>
+
+<style>
+  /* Slider-level variables (like your tb-slider reference) */
+  .ns-slider {
+    --slides: 1; /* default: mobile shows 1 */
+    --gap: 22px; /* match the gap-5.5 above */
+    --peek: 0px; /* extra visible width to “peek” next slide */
+  }
+
+  @media (min-width: 640px) {
+    .ns-slider {
+      --slides: 2;
+      --peek: 0px;
+    }
+  }
+
+  /* Each slide width: ((100% - total gaps - peek) / slides) */
+  .ns-slide {
+    flex: 0 0
+      calc(
+        (100% - (var(--gap) * (var(--slides) - 1)) - var(--peek)) /
+          var(--slides)
+      );
+  }
+</style>
+
+<!-- Component-level init: scoped to this slider only -->
+<script>
+  import { initEmblaRoot } from "@/scripts/embla";
+  window.addEventListener("DOMContentLoaded", () => {
+    const root = document.getElementById("advisory-board-slider");
+    if (!root) return;
+    initEmblaRoot(root, {
+      align: "start",
+      dragFree: false,
+      slidesToScroll: "2",
+    });
+  });
+</script>

@@ -29,13 +29,16 @@ npm run preview
 
 ```
 sai-residential-school/
-├── public/              # Static assets (images, fonts, favicon)
-├── src/
-│   ├── assets/          # Processed assets (optimised images)
-│   ├── components/      # Reusable Astro/UI components
-│   ├── layouts/         # Page layout wrappers
-│   ├── pages/           # File-based routing (each file = a route)
-│   └── styles/          # Global CSS (Tailwind entry point)
+├── apps/
+│   ├── backend/
+│   └── frontend/
+│       ├── public/      # Static assets (images, fonts, favicon)
+│       └── src/
+│           ├── assets/      # Processed assets (optimised images)
+│           ├── components/  # Reusable Astro/UI components
+│           ├── layouts/     # Page layout wrappers
+│           ├── pages/       # File-based routing (each file = a route)
+│           └── styles/      # Global CSS (Tailwind entry point)
 ├── astro.config.mjs
 ├── tailwind.config.mjs
 └── tsconfig.json

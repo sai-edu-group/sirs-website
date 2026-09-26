@@ -1,0 +1,48 @@
+---
+// Full-bleed About hero — Figma frame 6843:14115 (01).
+// Bg photo with gradient fallback + white wash overlay, centered text.
+const heroImg = "/images/about-hero.jpg";
+---
+
+<section class="relative overflow-hidden rounded-b-3xl bg-orange-50">
+  <!-- Gradient fallback (always rendered underneath) -->
+  <div
+    class="absolute inset-0 bg-gradient-to-b from-orange-100 via-amber-50 to-orange-50"
+    aria-hidden="true"
+  >
+  </div>
+  <!-- Photo (removed gracefully if the asset is missing) -->
+  <img
+    src={heroImg}
+    alt=""
+    aria-hidden="true"
+    class="absolute inset-0 h-full w-full object-cover"
+    loading="eager"
+    onerror="this.remove()"
+  />
+  <!-- White wash overlay -->
+  <div class="absolute inset-0 bg-white/70" aria-hidden="true"></div>
+
+  <div
+    class="relative container mx-auto flex flex-col items-center gap-5 px-6 py-24 text-center md:gap-6 md:py-32 lg:py-40"
+  >
+    <p
+      class="text-sm font-semibold tracking-[0.22em] text-orange-600 md:text-base"
+    >
+      ABOUT SIRS
+    </p>
+    <h1
+      class="text-n-800 max-w-4xl text-4xl leading-[112%] font-medium md:text-6xl"
+    >
+      Education rooted in values. Designed for the future.
+    </h1>
+    <p
+      class="font-secondary text-n-600 max-w-3xl text-base leading-relaxed font-light md:text-xl md:leading-8"
+    >
+      SAI International Residential School is a CBSE-affiliated boarding school
+      where character is built alongside curriculum, nurturing leadership,
+      integrity and global citizenship through the blend of Indian values and
+      contemporary learning.
+    </p>
+  </div>
+</section>

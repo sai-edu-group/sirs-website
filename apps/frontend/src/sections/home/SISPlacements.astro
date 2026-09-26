@@ -1,0 +1,68 @@
+---
+import PlacementsBand from "@/components/ui/PlacementsBand.astro";
+import SectionHeaderMain from "@/components/ui/SectionHeaderMain.astro";
+
+const placementsDetails = {
+  band1: [
+    { src: "/images/placements/iit-bombay.png", alt: "IIT Bombay" },
+    { src: "/images/placements/aiims.png", alt: "AIIMS" },
+    { src: "/images/placements/jipm.png", alt: "JIPM" },
+    { src: "/images/placements/nalsar.png", alt: "NALSAR" },
+    { src: "/images/placements/india-1.png", alt: "India institution" },
+    { src: "/images/placements/india-2.png", alt: "India institution" },
+    { src: "/images/placements/mit.png", alt: "MIT" },
+  ],
+  band2: [
+    { src: "/images/placements/british.png", alt: "British institution" },
+    { src: "/images/placements/gerodia.png", alt: "Gerodia" },
+    { src: "/images/placements/harvad.png", alt: "Harvard" },
+    { src: "/images/placements/global.png", alt: "Global institution" },
+    { src: "/images/placements/nus.png", alt: "NUS" },
+    { src: "/images/placements/new-york.png", alt: "New York institution" },
+  ],
+  band3: [
+    { src: "/images/placements/moribus.png", alt: "Moribus" },
+    { src: "/images/placements/harvad-2.png", alt: "Harvard" },
+    { src: "/images/placements/houston.png", alt: "Houston" },
+    { src: "/images/placements/pennsyl.png", alt: "Pennsylvania" },
+    { src: "/images/placements/umass.png", alt: "UMass" },
+    { src: "/images/placements/nyu.png", alt: "NYU" },
+  ],
+};
+---
+
+<section class="bg-n-100" data-section="Placements & Pathways">
+  <div
+    class="container mx-auto flex flex-col gap-11 px-6 py-12 md:gap-16 md:px-0 md:py-16 lg:gap-14 lg:px-6 2xl:px-0"
+  >
+    <!-- Section Header with lines -->
+    <SectionHeaderMain
+      eyebrowText="Placements & Pathways"
+      title="From SAI to the World’s Best Institutions"
+      subtitle="Our graduates continue their journeys at top universities and leading global companies across India and the world."
+    />
+
+    <!-- Placements band wrapper -->
+    <div class="flex flex-col gap-7">
+      <PlacementsBand
+        kicker="Prestigious institutions in"
+        title="India"
+        logos={placementsDetails.band1}
+        speedSec={10}
+      />
+      <PlacementsBand
+        kicker="Ivy League & Renowned Institutes"
+        title="Globally"
+        logos={placementsDetails.band2}
+        direction="rtl"
+        speedSec={10}
+      />
+      <PlacementsBand
+        kicker="Working with Industry"
+        title="Leaders"
+        logos={placementsDetails.band3}
+        speedSec={10}
+      />
+    </div>
+  </div>
+</section>
