@@ -1,0 +1,329 @@
+---
+import CommonHeader from "@/components/ui/CommonHeader.astro";
+
+// DATA //
+import { testimonials, sectionHeaderContent } from "@/data/home/testimonials";
+---
+
+<section data-section="Home Testimonials">
+  <div
+    class="container mx-auto flex flex-col gap-12 px-6 py-12 md:gap-20 md:px-4 lg:px-8 lg:py-20 2xl:px-0"
+  >
+    <!-- Header with Lines -->
+    <CommonHeader {...sectionHeaderContent} />
+
+    <div class="flex flex-col gap-10 overflow-hidden" id="testimonial-slider">
+      <!-- Embla slider -->
+      <div class="" id="data-embla-viewport" data-embla-viewport>
+        <div
+          class="flex items-start transition-all duration-75"
+          data-embla-container
+        >
+          {
+            testimonials.map((testimonialsItem) => (
+              <div class="w-full shrink-0" data-embla-slide>
+                <div class="border-n-200 flex w-full flex-col items-center justify-between overflow-hidden rounded-xl border-2 xl:flex-row">
+                  {/* Image wrapper  */}
+                  <div
+                    class="relative w-full cursor-pointer bg-gradient-to-br from-slate-700 via-slate-500 to-orange-200 xl:w-[40%]"
+                    data-video-trigger
+                    data-video-url={testimonialsItem.videoUrl}
+                    aria-label={`Play testimonial from ${testimonialsItem.parentName}`}
+                  >
+                    <img
+                      src={testimonialsItem.thumbnail}
+                      alt={testimonialsItem.parentName}
+                      class="h-[250px] w-full object-cover md:h-[370px] xl:h-[450px]"
+                      loading="lazy"
+                      decoding="async"
+                      onerror="this.style.display='none'"
+                    />
+
+                    {/* Play Button */}
+                    <button
+                      type="button"
+                      class="text-n-50 absolute top-1/2 left-1/2 flex size-12 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/40 backdrop-blur transition hover:scale-105 md:size-16"
+                      aria-label="Play video"
+                    >
+                      <svg
+                        class="mx-auto size-8 md:size-9/12"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="76"
+                        height="76"
+                        viewBox="0 0 76 76"
+                        fill="none"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M35.1118 3.05433C28.3624 3.45228 22.6224 5.01798 17.9999 7.72195C13.6265 10.2802 10.28 13.6267 7.72177 18.0001C3.95864 24.4332 2.35679 33.2522 3.20354 42.8745C3.69607 48.4706 5.31164 53.8788 7.72177 57.999C10.2764 62.3663 13.6312 65.7217 17.9958 68.2747C24.4321 72.0396 33.3361 73.6544 42.9118 72.7932C48.5361 72.2874 53.8769 70.6883 58.0029 68.2747C63.8309 64.8656 67.9983 59.8805 70.459 53.3745C72.874 46.9894 73.6336 38.7355 72.5288 30.8853C71.044 20.3347 66.109 12.466 58.0029 7.72435C52.6484 4.5922 45.5866 2.93815 37.7743 2.98638C36.8462 2.99215 35.6481 3.02268 35.1118 3.05433ZM33.0493 22.942C31.755 23.0631 30.4301 23.5831 29.3368 24.3991C27.9088 25.4651 26.8881 27.0889 26.516 28.887C26.3845 29.5221 26.3763 30.0612 26.3763 37.9995C26.3763 45.9379 26.3845 46.4769 26.516 47.112C26.787 48.4215 27.4572 49.7355 28.3687 50.7446C29.1054 51.5601 30.3397 52.3459 31.4907 52.7323C32.8768 53.1976 34.567 53.2092 35.9743 52.7629C37.1011 52.4056 41.5063 49.9447 44.7118 47.8819C49.7676 44.6283 52.375 42.0841 53.2369 39.5634C53.4521 38.934 53.4767 38.7735 53.4767 37.9995C53.4767 37.2256 53.4521 37.065 53.2369 36.4357C52.4833 34.2317 50.4383 32.0612 46.7118 29.6283C43.5063 27.5655 39.1011 25.1047 37.9743 24.7474C36.567 24.3011 34.8768 24.2895 33.0493 22.942Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <div class="font-secondary relative flex flex-col gap-5 px-4 py-6 md:gap-8 md:px-16 md:py-12 xl:w-[58%] xl:p-10 2xl:pr-24">
+                    <p class="text-n-600 text-sm leading-normal font-normal md:text-xl lg:text-2xl">
+                      &ldquo;{testimonialsItem.message}&rdquo;
+                    </p>
+                    {/* Name wrapper */}
+                    <div>
+                      <p class="leading-normal font-semibold text-orange-500 md:text-3xl lg:text-4xl">
+                        {testimonialsItem.parentName}
+                      </p>
+                      <p class="text-n-500 text-sm leading-normal font-normal md:text-lg lg:text-xl">
+                        {testimonialsItem.designation}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Buttons wrapper -->
+      <div class="flex items-center justify-center gap-8 md:gap-12 lg:gap-20">
+        <!--  Prev button -->
+        <button
+          type="button"
+          id="prevButton"
+          class="bg-n-100 border-n-200 hover:bg-n-200 hidden size-11 cursor-pointer items-center justify-center rounded-full border p-1 md:size-14"
+          data-prev
+          aria-label="Previous"
+          data-embla-prev
+        >
+          <span class="inline-flex">
+            <svg
+              class="size-5 md:size-7"
+              xmlns="http://www.w3.org/2000/svg"
+              width="29"
+              height="29"
+              viewBox="0 0 29 29"
+              fill="none"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M10.7964 5.9684C11.1229 6.08513 11.3018 6.26134 11.4283 6.59064C11.508 6.79812 11.4864 7.12836 11.3787 7.34849C11.2662 7.57834 11.1138 7.71283 10.7461 7.90664C9.79415 8.40832 8.96949 8.96597 8.07436 9.71332C6.87991 10.7106 5.79432 11.8731 4.9112 13.1006L4.63927 13.4786L15.4848 13.4928C24.0302 13.5038 26.3516 13.5142 26.4303 13.5417C26.5724 13.5911 26.7876 13.7508 26.8948 13.8862C27.1716 14.236 27.1689 14.7713 26.8885 15.1269C26.7998 15.2395 26.5857 15.3923 26.4284 15.4554C26.3451 15.4888 24.7043 15.4967 15.4853 15.5086L4.64033 15.5226L4.87057 15.8446C5.88409 17.2621 7.18564 18.6147 8.58018 19.6997C9.2043 20.1853 9.95493 20.671 10.6752 21.0552C10.889 21.1693 11.1168 21.3136 11.1813 21.3758C11.353 21.5416 11.4541 21.7671 11.4704 22.0207C11.4868 22.2765 11.4462 22.432 11.3067 22.6477C11.1844 22.8371 11.0225 22.9577 10.7819 23.0388C10.4501 23.1506 10.2573 23.1093 9.68736 22.8041C8.20714 22.0117 6.90643 21.0347 5.53082 19.6819C4.05552 18.2311 2.97198 16.802 2.12251 15.1866C1.76731 14.5111 1.78623 14.3826 2.39896 13.3106C3.20897 11.8936 4.19992 10.6306 5.53115 9.31868C6.89671 7.97298 8.18353 7.00608 9.68436 6.19803C10.2552 5.8907 10.4606 5.84828 10.7964 5.9684Z"
+                fill="#45556C"></path>
+            </svg>
+          </span>
+        </button>
+
+        <!-- Dots -->
+        <div class="flex items-center gap-1.5 md:gap-2" data-embla-dots></div>
+
+        <!-- Next button -->
+        <button
+          type="button"
+          class="bg-n-100 border-n-200 hover:bg-n-200 hidden size-11 cursor-pointer items-center justify-center rounded-full border p-1 md:size-14"
+          id="nextButton"
+          data-embla-next
+          aria-label="Next"
+        >
+          <span class="inline-flex rotate-180">
+            <svg
+              class="size-5 md:size-7"
+              xmlns="http://www.w3.org/2000/svg"
+              width="29"
+              height="29"
+              viewBox="0 0 29 29"
+              fill="none"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M10.7964 5.9684C11.1229 6.08513 11.3018 6.26134 11.4283 6.59064C11.508 6.79812 11.4864 7.12836 11.3787 7.34849C11.2662 7.57834 11.1138 7.71283 10.7461 7.90664C9.79415 8.40832 8.96949 8.96597 8.07436 9.71332C6.87991 10.7106 5.79432 11.8731 4.9112 13.1006L4.63927 13.4786L15.4848 13.4928C24.0302 13.5038 26.3516 13.5142 26.4303 13.5417C26.5724 13.5911 26.7876 13.7508 26.8948 13.8862C27.1716 14.236 27.1689 14.7713 26.8885 15.1269C26.7998 15.2395 26.5857 15.3923 26.4284 15.4554C26.3451 15.4888 24.7043 15.4967 15.4853 15.5086L4.64033 15.5226L4.87057 15.8446C5.88409 17.2621 7.18564 18.6147 8.58018 19.6997C9.2043 20.1853 9.95493 20.671 10.6752 21.0552C10.889 21.1693 11.1168 21.3136 11.1813 21.3758C11.353 21.5416 11.4541 21.7671 11.4704 22.0207C11.4868 22.2765 11.4462 22.432 11.3067 22.6477C11.1844 22.8371 11.0225 22.9577 10.7819 23.0388C10.4501 23.1506 10.2573 23.1093 9.68736 22.8041C8.20714 22.0117 6.90643 21.0347 5.53082 19.6819C4.05552 18.2311 2.97198 16.802 2.12251 15.1866C1.76731 14.5111 1.78623 14.3826 2.39896 13.3106C3.20897 11.8936 4.19992 10.6306 5.53115 9.31868C6.89671 7.97298 8.18353 7.00608 9.68436 6.19803C10.2552 5.8907 10.4606 5.84828 10.7964 5.9684Z"
+                fill="#45556C"></path>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+    <!-- Video Modal -->
+    <div
+      id="testimonial-modal"
+      class="testimonial-modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="testimonial-modal__backdrop" data-modal-close></div>
+      <div class="testimonial-modal__dialog" role="document">
+        <button
+          type="button"
+          class="testimonial-modal__close cursor-pointer"
+          aria-label="Close video"
+          data-modal-close
+        >
+          ✕
+        </button>
+        <div class="testimonial-modal__frame">
+          <iframe
+            id="testimonial-iframe"
+            src=""
+            title="Testimonial video"
+            frameborder="0"
+            referrerpolicy="strict-origin-when-cross-origin"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Component-level init: scoped to this slider only -->
+<script>
+  import { initEmblaRoot } from "@/scripts/embla";
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const root = document.getElementById("testimonial-slider");
+    if (!root) return;
+
+    /** Init the slider */
+    initEmblaRoot(root);
+
+    const modal = document.getElementById("testimonial-modal");
+    const iframe = document.getElementById(
+      "testimonial-iframe",
+    ) as HTMLIFrameElement | null;
+    const closeTargets = document.querySelectorAll("[data-modal-close]");
+    const triggers = document.querySelectorAll("[data-video-trigger]");
+
+    const html = document.documentElement;
+
+    /** Get the embed URL for the video */
+    const getEmbedUrl = (url: string) => {
+      try {
+        // Parse the URL
+        const parsed = new URL(url);
+
+        // youtube.com/watch?v=...
+        if (parsed.hostname.includes("youtube")) {
+          const videoId = parsed.searchParams.get("v");
+          const list = parsed.searchParams.get("list");
+          let finalUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+          if (list) finalUrl += `&list=${list}`;
+          return finalUrl;
+        }
+
+        return url;
+      } catch (err) {
+        return url;
+      }
+    };
+
+    /** Open the modal and set the video */
+    const openModal = (url: string) => {
+      if (!modal || !iframe) return;
+      iframe.src = getEmbedUrl(url);
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      html.classList.add("overflow-hidden");
+      modal.setAttribute("tabindex", "-1");
+      (modal as HTMLElement).focus();
+    };
+
+    /** Close the modal and reset the video */
+    const closeModal = () => {
+      if (!modal || !iframe) return;
+      iframe.removeAttribute("src");
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      html.classList.remove("overflow-hidden");
+    };
+
+    /** Close the modal and reset the video */
+    triggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const url = trigger.getAttribute("data-video-url") || "";
+        openModal(url);
+      });
+    });
+
+    /** Close the modal when the close button is clicked */
+    closeTargets.forEach((closeTarget) => {
+      closeTarget.addEventListener("click", closeModal);
+    });
+
+    /** Close the modal when the escape key is pressed */
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeModal();
+      }
+    });
+  });
+</script>
+
+<style>
+  .testimonial-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease;
+  }
+
+  .testimonial-modal.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .testimonial-modal__backdrop {
+    position: absolute;
+    inset: 0;
+  }
+
+  .testimonial-modal__dialog {
+    position: relative;
+    background: #0f172a;
+    border-radius: 1rem;
+    width: min(900px, 100%);
+    aspect-ratio: 16 / 9;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .testimonial-modal__close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: rgba(15, 23, 42, 0.6);
+    color: white;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+  }
+
+  .testimonial-modal__frame {
+    width: 100%;
+    height: 100%;
+  }
+
+  .testimonial-modal__frame iframe {
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .testimonial-modal {
+      padding: 1rem;
+    }
+  }
+</style>

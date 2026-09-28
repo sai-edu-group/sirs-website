@@ -1,0 +1,16 @@
+export enum Tables {
+  AWARDS = "sis_awards",
+  CBSE_RESULTS = "result_cbse_sis",
+  CAREER_RESULTS = "result_career_sis",
+  SCHOOLS = "master_school",
+  CLASSES = "master_class",
+  PRESS_RELEASES = "web_sis_pressrelease",
+  STUDENT_COUNCIL = "web_sis_scouncil",
+  GLOBAL_SAIONEERS = "web_global_saioneers",
+  GALLERY = "sis_web_gallery",
+  BLOGS = "sis_blog",
+  BLOG_CATEGORY = "blog_category",
+  YEAR = "sis_web_year",
+  SESSION = "master_session",
+  EXAMS = "master_careerexam",
+}

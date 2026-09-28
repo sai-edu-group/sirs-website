@@ -1,0 +1,39 @@
+---
+// ADMISSION OVERVIEW (Figma 02)
+// Title: Admission Overview + fact cards.
+import SectionHeaderMain from "@/components/ui/SectionHeaderMain.astro";
+
+const facts = [
+  { value: "IV-XII", label: "Classes" },
+  { value: "CBSE", label: "Curriculum" },
+  { value: "100%", label: "Fully residential" },
+  { value: "2018", label: "Established" },
+];
+---
+
+<section data-section="Admission Overview">
+  <div class="container mx-auto px-6 py-16 lg:px-8 lg:py-24 2xl:px-0">
+    <SectionHeaderMain
+      eyebrowText="Admissions at SIRS"
+      title="Admission Overview"
+      subtitle="A fully residential CBSE school for Classes IV-XII, where every child lives, learns and grows on one 49-acre campus."
+    />
+
+    <div
+      class="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6"
+    >
+      {
+        facts.map((fact) => (
+          <div class="border-n-200 bg-n-50 flex flex-col items-center gap-1 rounded-3xl border px-4 py-8 text-center md:py-10">
+            <p class="text-3xl font-semibold text-orange-500 md:text-5xl">
+              {fact.value}
+            </p>
+            <p class="font-secondary text-n-600 text-sm font-medium md:text-lg">
+              {fact.label}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

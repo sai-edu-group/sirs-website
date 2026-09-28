@@ -1,0 +1,77 @@
+---
+import CommonHeader from "@/components/ui/CommonHeader.astro";
+import StatsCard from "@/components/ui/StatsCard.astro";
+
+// DATA //
+import { sectionHeaderDetails, statsCard } from "@/data/home/stats";
+---
+
+<!-- Stats Card Component -->
+<section class="bg-n-50 relative z-1 overflow-hidden" data-section="Home Stats">
+  <!-- Background Vector -->
+  <div
+    class="text-n-100 absolute top-1/2 z-2 w-full origin-center -translate-y-1/2 scale-480 -rotate-50 sm:scale-280 sm:-rotate-45 md:scale-250 lg:scale-none lg:rotate-none"
+  >
+    <svg
+      class="path h-full w-full"
+      xmlns="http://www.w3.org/2000/svg"
+      width="1920"
+      height="970"
+      viewBox="0 0 1920 970"
+      fill="none"
+    >
+      <path
+        d="M2037.99 182.884C1962.08 170.483 1789.52 139.764 1739.71 265.434C1689.89 391.103 1578.74 559.769 1365.75 524.971C1152.76 490.174 1019.63 397.312 824.477 513.542C629.321 629.772 599.863 853.439 264.939 787.358C-3.00131 734.494 -6.5198 521.681 -64.3179 516.025"
+        stroke="currentColor"
+        stroke-width="340"
+        stroke-linecap="round"></path>
+    </svg>
+  </div>
+
+  <!-- Container wrapper -->
+  <div
+    class="relative z-4 container mx-auto flex w-full flex-col items-center gap-12 px-6 py-16 md:gap-20 md:py-20 2xl:px-0"
+  >
+    <!-- Header with Lines -->
+    <div class="self-start">
+      <CommonHeader {...sectionHeaderDetails} />
+    </div>
+
+    <!-- Stats Cards Grid -->
+    <div
+      class="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-8 md:gap-x-6 xl:grid-cols-3 2xl:gap-x-10 2xl:gap-y-8"
+    >
+      {
+        statsCard.map((statsCardItem, statsCardIndex) => (
+          <div
+            class="card-anim card-bottom"
+            style={`--delay: ${statsCardIndex * 0.1}s`}
+          >
+            <StatsCard
+              img={statsCardItem.img}
+              title={statsCardItem.title}
+              statsCount={statsCardItem.statsCount}
+              subTitle={statsCardItem.subTitle}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+<style>
+  path {
+    stroke-dasharray: 2460;
+    stroke-dashoffset: 2460;
+    animation: draw 2.5s linear forwards;
+  }
+
+  @keyframes draw {
+    from {
+      stroke-dashoffset: -2460;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+</style>

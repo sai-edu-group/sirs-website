@@ -1,0 +1,66 @@
+---
+// Figma 08b — Campus Life Strip (node 6973:67): photo row + bottom-right arrows.
+// No header, no captions — plain rounded photos per Figma.
+// Arrows use the common SliderArrowButton (same as Results slider).
+import SliderArrowButton from "@/components/ui/SliderArrowButton.astro";
+
+const photos = [
+  { src: "/images/strip-stadium.png", alt: "Stadium and turf" },
+  { src: "/images/strip-horse.png", alt: "Horse riding" },
+  { src: "/images/strip-gym.png", alt: "Outdoor gym" },
+  { src: "/images/strip-chairperson.png", alt: "Students with the Chairperson" },
+  { src: "/images/strip-cafeteria.png", alt: "Cafeteria" },
+];
+---
+
+<section data-section="Home Campus Life Strip">
+  <div
+    class="container mx-auto flex flex-col gap-6 px-6 py-12 md:py-16 lg:py-20 2xl:px-0"
+  >
+    <div
+      id="campus-life-strip"
+      data-strip-viewport
+      class="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] md:gap-6 [&::-webkit-scrollbar]:hidden"
+    >
+      {
+        photos.map((photo) => (
+          <figure class="relative aspect-[4/3] w-[82%] shrink-0 snap-start overflow-hidden rounded-2xl bg-slate-100 md:w-[42%] lg:w-[31%]">
+            <img
+              src={photo.src}
+              alt={photo.alt}
+              class="absolute inset-0 h-full w-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        ))
+      }
+    </div>
+
+    <div class="flex justify-end gap-3">
+      <SliderArrowButton direction="prev" data-strip-prev />
+      <SliderArrowButton direction="next" data-strip-next />
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const viewport = document.querySelector("[data-strip-viewport]");
+    if (!viewport) return;
+    const prev = document.querySelector("[data-strip-prev]");
+    const next = document.querySelector("[data-strip-next]");
+    const step = () => {
+      const first = viewport.querySelector("figure");
+      if (!first) return 320;
+      const gap = 24;
+      return (first as HTMLElement).offsetWidth + gap;
+    };
+    prev?.addEventListener("click", () => {
+      viewport.scrollBy({ left: -step(), behavior: "smooth" });
+    });
+    next?.addEventListener("click", () => {
+      viewport.scrollBy({ left: step(), behavior: "smooth" });
+    });
+  });
+</script>

@@ -1,0 +1,619 @@
+---
+// ADMISSION FORM — adapted from SIS src/sections/admission/Form.astro
+// Step-wise form with progress tracker (FormStepsCard).
+import Input from "@/components/ui/Input.astro";
+import StepCard from "@/components/ui/FormStepsCard.astro";
+import Select from "@/components/ui/Select.astro";
+import Textarea from "@/components/ui/Textarea.astro";
+import Button from "@/components/ui/Button.astro";
+import SectionHeader from "@/components/ui/SectionHeader.astro";
+
+// DATA //
+import { grades } from "@/data/admissions/form";
+
+const STEP_TITLES = ["About Student", "About Parent", "Boarding Preference"];
+---
+
+<section
+  id="admission-section"
+  class="bg-n-100 mx-auto w-full space-y-6"
+  data-section="Admission Form"
+>
+  <div
+    class="container mx-auto flex flex-col gap-16 px-6 py-12 md:py-24 lg:px-8 2xl:px-6"
+  >
+    <!-- Section Header -->
+    <SectionHeader
+      title="Now what are you waiting for? Let's Begin Your SIRS Journey"
+      subtitle="A few details from you, and we'll be in touch with care, clarity, and guidance."
+    />
+
+    <!-- ONE form for all steps -->
+    <form id="admission-form">
+      <!-- STEP 1 -->
+      <StepCard id="step-1" step={1} total={3} title={STEP_TITLES[0]}>
+        <div class="flex flex-col gap-14 md:gap-24">
+          <div
+            class="grid grid-cols-1 gap-x-20 gap-y-6 sm:grid-cols-2 md:gap-y-9"
+          >
+            <!-- Student First Name Input -->
+            <div data-field>
+              <Input
+                label="Student's First Name"
+                name="firstName"
+                required
+                placeholder="Enter Student's First Name"
+                errorMessage="Student's First name is required and should not contain numbers."
+              />
+            </div>
+
+            <!-- Student Last Name Input -->
+            <div data-field>
+              <Input
+                label="Student's Last Name"
+                name="lastName"
+                required
+                placeholder="Enter Student's Last Name"
+                errorMessage="Student's Last name is required and should not contain numbers."
+              />
+            </div>
+
+            <!-- DOB Input -->
+            <div data-field>
+              <Input
+                label="Student's Date of Birth"
+                name="dob"
+                type="date"
+                required
+                errorMessage="Date of birth is required."
+              />
+            </div>
+
+            <!-- Class Select -->
+            <Select
+              label="Select Class"
+              name="className"
+              required
+              placeholder="Select Class"
+              options={grades}
+              errorMessage="Please select the class for admission."
+            />
+
+            <!-- Current School Input -->
+            <div data-field>
+              <Input
+                label="Current School"
+                name="currentSchool"
+                required
+                placeholder="Enter current school"
+                errorMessage="Current school is required."
+              />
+            </div>
+
+            <!-- City Input -->
+            <div data-field>
+              <Input
+                label="City"
+                name="city"
+                required
+                placeholder="Enter City"
+                errorMessage="City is required and should not contain numbers."
+              />
+            </div>
+
+            <div class="flex flex-wrap items-end justify-between gap-8">
+              <p class="text-n-500 text-base font-normal md:text-xl">
+                We welcome learners from all backgrounds and cities.
+              </p>
+              <!-- Button: Continue to next step -->
+              <Button
+                id="next-1"
+                type="button"
+                text="Continue to Parent Info"
+                variant="solid"
+                size="medium"
+              />
+            </div>
+          </div>
+        </div>
+      </StepCard>
+
+      <!-- STEP 2 -->
+      <StepCard
+        id="step-2"
+        step={2}
+        total={3}
+        title={STEP_TITLES[1]}
+        class={"hidden"}
+      >
+        <div class="flex flex-col gap-14 md:gap-24">
+          <div
+            class="grid grid-cols-1 gap-x-20 gap-y-6 sm:grid-cols-2 md:gap-y-9"
+          >
+            <!-- Parent/Guardian Input -->
+            <div data-field>
+              <Input
+                label="Parent / Guardian's Full Name"
+                name="parentName"
+                required
+                placeholder="Enter parent / guardian name"
+                errorMessage="Parent/Guardian name is required and should not contain numbers."
+              />
+            </div>
+
+            <!-- Phone Input -->
+            <div data-field>
+              <Input
+                label="Phone Number"
+                name="mobileNo"
+                type="tel"
+                required
+                placeholder="Enter phone number"
+                errorMessage="Enter a valid 10-digit number."
+              />
+            </div>
+
+            <!-- Email Input -->
+            <div data-field>
+              <Input
+                label="Email ID"
+                name="emailId"
+                type="email"
+                required
+                placeholder="Enter email address"
+                errorMessage="Enter a valid email address."
+              />
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-8">
+            <p
+              class="text-n-500 text-base font-medium md:text-xl xl:flex xl:flex-1"
+            >
+              This is how we'll get in touch with you. We don't spam, promise.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <!-- Back button -->
+              <Button
+                id="back-2"
+                type="button"
+                text="Back to Child Details"
+                variant="ghost"
+                size="medium"
+                extraClasses="border border-n-300 bg-white text-n-800 hover:bg-n-100"
+              />
+              <!-- Continue button -->
+              <Button
+                id="next-2"
+                type="submit"
+                text="Continue to Preferences"
+                variant="solid"
+                size="medium"
+              />
+            </div>
+          </div>
+        </div>
+      </StepCard>
+
+      <!-- STEP 3 -->
+      <StepCard
+        id="step-3"
+        step={3}
+        total={3}
+        title={STEP_TITLES[2]}
+        class={"hidden"}
+      >
+        <!-- Fields wrapper -->
+        <div class="flex flex-col gap-14 md:gap-24">
+          <div
+            class="grid grid-cols-1 gap-x-20 gap-y-6 sm:grid-cols-2 md:gap-y-9"
+          >
+            <!-- Hostel Required Select -->
+            <Select
+              label="Hostel Required"
+              name="hostel"
+              placeholder="Select"
+              required
+              options={[
+                { label: "Yes", value: "Yes" },
+                { label: "No", value: "No" },
+              ]}
+              errorMessage="Please select an option."
+            />
+
+            <!-- Message textarea -->
+            <Textarea
+              label="Message"
+              name="message"
+              placeholder="Any specific concerns, requests, or child interests?"
+              errorMessage="Message is required."
+              required
+              rows={2}
+            />
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-8">
+            <p
+              class="text-n-500 flex text-base font-medium md:text-xl xl:flex-1"
+            >
+              SIRS is fully residential — let us know about your child's needs
+              so we can guide you better.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <!-- Back button -->
+              <Button
+                id="back-3"
+                type="button"
+                text="Back to Parent Info"
+                variant="ghost"
+                size="medium"
+                extraClasses="border border-n-300 bg-n-50 text-n-800 hover:bg-n-100"
+              />
+              <!-- Submit button -->
+              <Button
+                id="submit"
+                type="submit"
+                text="Submit Inquiry"
+                variant="solid"
+                size="medium"
+                extraClasses="bg-[#C9443A]/80 hover:bg-orange-500 text-n-50"
+              />
+            </div>
+          </div>
+        </div>
+      </StepCard>
+
+      <!-- THANK YOU -->
+      <article
+        id="thank-you"
+        class="border-n-200 slide-parent stagger bg-n-50 flex flex-col items-center gap-8 rounded-3xl border px-6 py-8 text-center md:gap-10 md:py-12 lg:gap-12 lg:py-24"
+      >
+        <!-- Success icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="96"
+          height="96"
+          viewBox="0 0 96 96"
+          fill="none"
+          class="floating-icon h-12 md:h-24 lg:h-28"
+          aria-hidden="true"
+        >
+          <circle cx="48" cy="48" r="44" stroke="#CC554D" stroke-width="6" />
+          <path
+            d="M32 49.5 43.5 61 64 38"
+            stroke="#CC554D"
+            stroke-width="6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+
+        <div class="flex flex-col items-center gap-2">
+          <!-- Success panel title -->
+          <p
+            class="text-n-700 font-secondary text-sm font-light md:text-lg lg:text-2xl"
+          >
+            We're excited to begin this journey with you.
+          </p>
+          <p
+            class="text-n-700 lg::w-[65%] w-[90%] text-center text-2xl leading-tight font-normal md:w-[75%] md:text-4xl lg:text-5xl lg:leading-[56px]"
+          >
+            At SIRS, your child is not just admitted, but truly welcomed.
+          </p>
+        </div>
+
+        <!-- Success panel message -->
+        <p
+          class="text-n-600 font-secondary text-sm font-medium md:text-lg lg:text-2xl"
+        >
+          Our admissions team will be in touch with you shortly.
+        </p>
+      </article>
+
+      <!-- SUBMITTING SCREEN -->
+      <article
+        id="submitting"
+        class="bg-n-50 flex hidden flex-col items-center gap-6 py-16 text-center"
+      >
+        <div class="loader"></div>
+        <p class="text-n-700 text-xl font-medium md:text-2xl">
+          Submitting your form, please wait…
+        </p>
+      </article>
+    </form>
+  </div>
+</section>
+
+<style>
+  /* Parent slide animation */
+  .slide-parent {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideParent 0.45s ease-out forwards;
+  }
+
+  @keyframes slideParent {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Stagger children */
+  .stagger > * {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideChild 0.5s ease-out forwards;
+    &:nth-child(1) {
+      opacity: 1;
+      animation: float 6s ease-in-out infinite;
+      will-change: transform;
+    }
+  }
+
+  .stagger > *:nth-child(2) {
+    animation-delay: 0.3s;
+  }
+  .stagger > *:nth-child(3) {
+    animation-delay: 0.45s;
+  }
+  .stagger > *:nth-child(4) {
+    animation-delay: 0.6s;
+  }
+
+  @keyframes slideChild {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Loader animation */
+  .loader {
+    width: 48px;
+    height: 48px;
+    border: 4px solid #e0e0e0;
+    border-top-color: #c9443a;
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-16px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<script>
+  // ENUMS //
+  import { EVENTS } from "@/enums/analytics.enum";
+
+  // SCRIPTS //
+  import { trackEvent, trackFormCompletionEvent } from "@/scripts/analytics";
+  import { getDeviceType } from "@/scripts/device";
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const steps = [
+      document.getElementById("step-1"),
+      document.getElementById("step-2"),
+      document.getElementById("step-3"),
+    ];
+    const thankYou = document.getElementById("thank-you");
+
+    // Timing tracking
+    const formStartTime = Date.now();
+    let stepStartTime = Date.now();
+
+    const showStep = (idx: number) => {
+      steps.forEach((el, i) => el?.classList.toggle("hidden", i !== idx));
+      thankYou?.classList.add("hidden");
+
+      // Update step start time when switching steps
+      stepStartTime = Date.now();
+
+      // Track Step View
+      const stepTitles = ["Student Info", "Parent Info", "Message"];
+      trackEvent(`admission_form_step_${idx + 1}_viewed`, {
+        step_number: idx + 1,
+        step_title: stepTitles[idx],
+        device_type: getDeviceType(),
+        page_path: window.location.pathname,
+      });
+    };
+
+    // Initially show step 1
+    showStep(0);
+
+    // Validation
+    const validateStep = (stepEl: HTMLElement | null) => {
+      if (!stepEl) return false;
+      const fields = stepEl.querySelectorAll("input, select, textarea");
+      let valid = true;
+
+      fields.forEach((el) => {
+        const field = el as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+        const errorText = field
+          .closest("[data-field]")
+          ?.querySelector("[data-error]");
+        let fieldValid = true;
+        const value = field.value.trim();
+
+        if (field.hasAttribute("required") && !value) fieldValid = false;
+
+        if (field.type === "email" && value !== "") {
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailPattern.test(value)) fieldValid = false;
+        }
+
+        // NAME VALIDATION: should NOT contain digits
+        if (
+          (field.name === "firstName" ||
+            field.name === "lastName" ||
+            field.name === "parentName" ||
+            field.name === "city") &&
+          value !== ""
+        ) {
+          const hasDigits = /\d/.test(value);
+          if (hasDigits) fieldValid = false;
+        }
+
+        // PHONE VALIDATION: should contain ONLY digits, 10 long
+        if (field.name === "mobileNo" && value !== "") {
+          const notNumbers = /\D/.test(value);
+          if (notNumbers || value.length !== 10) fieldValid = false;
+        }
+
+        if (!fieldValid) {
+          valid = false;
+          field.classList.add("border-red-500", "focus:ring-red-500");
+          errorText?.classList.remove("hidden");
+        } else {
+          field.classList.remove("border-red-500", "focus:ring-red-500");
+          errorText?.classList.add("hidden");
+        }
+      });
+
+      return valid;
+    };
+
+    // Step navigation
+    document.getElementById("next-1")?.addEventListener("click", () => {
+      if (validateStep(steps[0])) {
+        const duration = (Date.now() - stepStartTime) / 1000; // in seconds
+
+        showStep(1);
+
+        trackEvent(EVENTS.ADMISSION_FORM_NEXT_CLICKED, {
+          device_type: getDeviceType(),
+          from_step: 1,
+          to_step: 2,
+          time_spent_on_step: duration,
+        });
+      }
+    });
+
+    document.getElementById("next-2")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (validateStep(steps[1])) {
+        const duration = (Date.now() - stepStartTime) / 1000; // in seconds
+        showStep(2);
+
+        trackEvent(EVENTS.ADMISSION_FORM_NEXT_CLICKED, {
+          device_type: getDeviceType(),
+          from_step: 2,
+          to_step: 3,
+          time_spent_on_step: duration,
+        });
+      }
+    });
+
+    document
+      .getElementById("back-2")
+      ?.addEventListener("click", () => showStep(0));
+    document
+      .getElementById("back-3")
+      ?.addEventListener("click", () => showStep(1));
+
+    // Submit handler
+    document.getElementById("submit")?.addEventListener("click", async (e) => {
+      e.preventDefault();
+      if (!validateStep(steps[2])) return;
+
+      const totalDuration = (Date.now() - formStartTime) / 1000;
+
+      // In hh:mm:ss format
+      const formatDuration = (seconds: number) => {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        return `${hours}:${minutes}:${remainingSeconds}`;
+      };
+
+      const formEl = document.querySelector(
+        "form#admission-form",
+      ) as HTMLFormElement | null;
+      if (!formEl) return;
+      const formData = new FormData(formEl);
+      const formObj = Object.fromEntries(formData.entries());
+
+      const submitting = document.getElementById("submitting");
+
+      // Hide steps, reset visibility
+      steps.forEach((el) => el?.classList.add("hidden"));
+      thankYou?.classList.add("hidden");
+
+      // Remove old animation classes to re-trigger
+      submitting?.classList.remove("slide-parent");
+      submitting?.offsetHeight; // force reflow
+      submitting?.classList.add("slide-parent");
+
+      // Show submitting screen
+      submitting?.classList.remove("hidden");
+
+      try {
+        // NOTE: no admission API is wired up in SIRS yet — simulate a
+        // successful submission so the form works standalone.
+        await new Promise((resolve) => setTimeout(resolve, 1200));
+
+        // Track Form Completion
+        trackFormCompletionEvent(
+          {
+            ...formObj,
+            time_taken_for_submission: totalDuration,
+            submission_time: formatDuration(totalDuration),
+          },
+          EVENTS.ADMISSION_FORM_COMPLETED,
+        );
+
+        // Hide loader & show thank you with stagger animation
+        submitting?.classList.add("hidden");
+
+        thankYou?.classList.remove("slide-parent");
+        thankYou?.offsetHeight;
+        thankYou?.classList.add("slide-parent");
+
+        thankYou?.classList.remove("hidden");
+      } catch (err) {
+        submitting?.classList.add("hidden");
+        console.error("Failed to submit enquiry:", err);
+        alert(
+          "Something went wrong while submitting your enquiry. Please try again.",
+        );
+      }
+    });
+  });
+</script>
+
+<script>
+  import { EVENTS } from "@/enums/analytics.enum";
+  import {
+    setupFormStartTracking,
+    setupInViewTracking,
+    trackFormViewEvent,
+  } from "@/scripts/analytics";
+
+  const form = document.querySelector(
+    "form#admission-form",
+  ) as HTMLFormElement | null;
+
+  if (form) {
+    setupFormStartTracking(form, EVENTS.ADMISSION_FORM_STARTED);
+    // Track when form comes into view
+    setupInViewTracking("admission-form", () => {
+      trackFormViewEvent("admission-form", EVENTS.ADMISSION_FORM_VIEWED);
+    });
+  }
+</script>

@@ -1,0 +1,57 @@
+---
+export const prerender = true;
+
+// TYPES //
+import type { MemberData } from "@/types/member";
+
+// COMPONENTS //
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
+
+// CONSTANTS //
+import { URLS } from "@/infrastructure/constants/urls";
+
+// OTHERS //
+import Layout from "@/layouts/Layout.astro";
+
+// SECTIONS //
+import MemberConsumption from "@/sections/member-consumption/MemberConsumption.astro";
+
+// DATA //
+import { teamMembers } from "@/data/about/members/team";
+
+export async function getStaticPaths() {
+  return teamMembers.map((member: MemberData) => ({
+    params: {
+      name: member.name.toLowerCase().replaceAll(" ", "-"),
+    },
+    props: { member },
+  }));
+}
+
+const { member } = Astro.props as { member: MemberData };
+
+const breadcrumbItems = [
+  { label: "Key Personnel", href: `${URLS.ABOUT.ROOT}#key-personnel` },
+  { label: member.name, href: `#` },
+];
+
+const sectionHeaderDetails = {
+  title: member.name,
+  subtitle: member.position,
+};
+---
+
+<Layout meta={{ title: member.name }}>
+  <!-- Breadcrumbs Section -->
+  <div class="bg-n-50 relative w-full overflow-hidden">
+    <div
+      class="container mx-auto px-6 pt-30 pb-5 md:pt-40 md:pb-8 lg:pb-9 2xl:px-0"
+    >
+      <Breadcrumbs items={breadcrumbItems} />
+    </div>
+  </div>
+  <MemberConsumption
+    sectionHeaderDetails={sectionHeaderDetails}
+    memberContent={member}
+  />
+</Layout>

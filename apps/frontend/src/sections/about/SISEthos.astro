@@ -1,0 +1,206 @@
+---
+// SISEthos — adapted from SIS src/sections/home/Ethos.astro.
+// SIRS has no saibaba.png / guru-shishya.png assets, so backdrop imagery is
+// replaced with gradient blobs. Copy + layout preserved.
+import { URLS } from "@/infrastructure/constants/urls";
+
+// Section Data
+const ethosDetails = {
+  left: {
+    title: "Ethos of SAI",
+    description:
+      "The ethos of SAI International School is the holistic development of the body, mind and soul of the children. To achieve the highest level of health, well-being, and purpose in life, the school follows the basic principle of focusing on creating a balance in the six main areas that make up a person’s life: Physical, Social, Emotional, Spiritual, Intellectual, and Purposeful.",
+  },
+  right: {
+    title: "Guru Shishya Parampara",
+    description:
+      "SAI International has incorporated the timeless values of the Guru Shishya Parampara. Our deep rooted belief is enshrined in the fact that a Guru is believed to be the one who indoctrinates the Shishya to attain the ultimate truth or satya and mokshya – the salvation.",
+  },
+};
+---
+
+<section class="relative z-10 overflow-hidden bg-white" id="ethos">
+  <div
+    id="guru-shishya"
+    class="container mx-auto flex flex-col items-center justify-between gap-16 px-6 py-24 md:gap-20 md:pt-44 md:pb-50 lg:flex-row lg:gap-0 lg:px-8 lg:pt-48 lg:pb-24 xl:px-6 2xl:px-0"
+  >
+    <!-- Left side Sai Baba -->
+    <div class="relative flex w-full flex-col gap-5 md:gap-6 lg:w-[42%]">
+      <!-- Backdrop placeholder (SIS saibaba.png not present in SIRS) -->
+      <div
+        aria-hidden="true"
+        class="absolute -top-[10%] -right-[10%] -z-1 w-[300px] rounded-full bg-gradient-to-br from-orange-100 via-amber-50 to-transparent blur-2xl sm:w-[400px] md:-top-[30%] md:-right-[5%] md:w-[450px] lg:-left-[32%] lg:w-[420px] xl:-left-[28%] 2xl:-left-[23%]"
+        style="height: 300px;"
+      >
+      </div>
+
+      <!-- Header wrapper -->
+      <div class="space-y-3 md:space-y-4">
+        <!-- Logo -->
+        <div class="text-orange-500">
+          <svg
+            class="size-11 md:size-14"
+            width="56"
+            height="56"
+            viewBox="0 0 56 56"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <linearGradient
+                id="shine-anim-ethos"
+                x1="-200%"
+                y1="0"
+                x2="200%"
+                y2="0"
+                gradientUnits="userSpaceOnUse"
+                gradientTransform="rotate(146 28 28)"
+              >
+                <stop offset="0%" stop-color="#CC554D"></stop>
+                <stop offset="40%" stop-color="#FFBFBB"></stop>
+                <stop offset="80%" stop-color="#CC554D"></stop>
+                <animate
+                  attributeName="x1"
+                  values="-200%;200%;200%"
+                  dur="5s"
+                  repeatCount="indefinite"
+                  calcMode="linear"></animate>
+              </linearGradient>
+            </defs>
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M28.0034 0C43.4622 0 56 12.5378 56 28.0034C56 43.4622 43.4622 56 28.0034 56C12.5378 56 0 43.4622 0 28.0034C0 12.5378 12.5378 0 28.0034 0ZM15.1877 23.9167C19.5861 19.9724 24.0591 23.056 20.1825 27.6103C17.8105 30.389 16.0077 30.0162 16.0077 30.0162L16.7668 37.2814C16.7668 37.2814 20.4333 37.8507 24.1133 33.5065C24.1133 33.5065 26.6751 39.5585 22.7849 43.0352C18.9016 46.5119 12.0702 42.4659 10.0845 35.7362C8.09198 28.9996 8.18686 27.4544 8.18686 27.4544L6.91952 26.5666C6.02493 35.6887 10.3623 49.704 18.617 51.7168C23.3678 52.8757 28.2474 50.3072 30.023 47.6505C32.9304 43.286 31.5411 37.8507 29.7722 35.3838C29.7722 35.3838 34.767 35.8311 37.0713 30.328C39.3755 24.8317 40.7377 22.2089 43.8688 24.8927C46.9931 27.5764 45.3191 45.78 34.6993 36.9357C34.6993 36.9357 33.5607 42.2423 37.2 44.4584C40.8326 46.6678 46.7423 43.2521 48.4502 38.9553C50.1581 34.6586 51.3847 27.0749 48.701 21.0364C46.0172 15.0047 40.2972 13.961 37.1323 16.7736C33.9741 19.5861 32.8016 22.873 32.2391 23.9438C31.6699 25.0214 29.6774 30.1111 26.4514 28.8438C28.1864 19.1456 19.8301 12.7547 12.5785 18.5899L15.1877 23.9167ZM27.5764 5.15745C29.1623 5.15745 30.45 6.59421 30.45 8.36306C30.45 10.1387 29.1623 11.5755 27.5764 11.5755C25.9838 11.5755 24.6961 10.1387 24.6961 8.36306C24.6961 6.59421 25.9838 5.15745 27.5764 5.15745ZM18.9965 9.45419C18.9965 9.45419 26.9258 17.5462 36.2512 8.4105C36.2512 8.4105 39.5653 9.42708 40.4192 11.4128C40.4192 11.4128 36.4274 17.2005 30.023 17.8308C23.6185 18.4543 20.4807 14.8624 18.9965 9.45419Z"
+              fill="url(#shine-anim-ethos)"></path>
+          </svg>
+        </div>
+
+        <!-- Title -->
+        <p class="text-n-800 text-3xl font-medium md:text-5xl lg:text-6xl">
+          {ethosDetails.left.title}
+        </p>
+      </div>
+
+      <!-- Description -->
+      <p
+        class="font-secondary text-n-600 text-base leading-6 font-light md:text-xl md:leading-8"
+      >
+        {ethosDetails.left.description}
+      </p>
+
+      <!-- Read More text -->
+      <a
+        href={URLS.ABOUT.ETHOS}
+        class="font-secondary text-n-600 relative w-fit cursor-pointer text-lg font-medium after:absolute after:bottom-0 after:left-0 after:h-[1.5px] after:w-0 after:bg-current after:transition-[width] after:duration-300 hover:text-orange-500 hover:after:w-full"
+      >
+        Read More
+      </a>
+    </div>
+
+    {/* Desktop Vertical Divider */}
+    <div class="hidden text-orange-500 lg:block">
+      <svg
+        width="6"
+        height="222"
+        viewBox="0 0 6 222"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1.61198 0.588587C0.841365 0.857538 0.45084 1.65663 0.739713 2.37384C1.30793 3.78406 2.13296 7.28294 2.54829 13.0113C2.96101 18.7041 2.96374 26.5225 1.93993 36.5276C1.8619 37.2901 2.46248 37.9674 3.28181 38.0401C4.10104 38.1127 4.82875 37.5536 4.907 36.7912C5.94449 26.6527 5.94682 18.6832 5.52215 12.8253C5.10007 7.00337 4.25029 3.18769 3.5302 1.4004C3.24123 0.683225 2.38259 0.319806 1.61198 0.588587ZM1.93799 101.888C1.86769 102.652 2.47628 103.324 3.29636 103.389C4.11625 103.454 4.83769 102.888 4.90797 102.125C6.46202 85.2509 5.56111 72.1581 4.90021 67.6472C4.789 66.8882 4.03719 66.3562 3.22165 66.4597C2.40619 66.5633 1.83552 67.2629 1.94672 68.0219C2.57415 72.3043 3.47585 85.1902 1.93799 101.888ZM1.29567 131.851C0.856933 136.139 0.384703 148.102 1.94089 162.102C2.0258 162.864 2.75819 163.417 3.57676 163.338C4.39536 163.26 4.99071 162.578 4.90603 161.816C3.3703 147.999 3.8426 136.221 4.26274 132.115C4.34078 131.352 3.73927 130.675 2.91989 130.602C2.10078 130.53 1.37384 131.089 1.29567 131.851ZM0.00424163 220.009C-0.0573146 220.773 0.558375 221.439 1.37911 221.496C2.19985 221.553 2.91552 220.98 2.97714 220.216C3.75268 210.593 3.91599 203.751 3.80186 199.098C3.74481 196.772 3.61828 194.981 3.4613 193.656C3.30902 192.371 3.11726 191.423 2.88593 190.849C2.59696 190.132 1.73832 189.768 0.967717 190.037C0.197039 190.306 -0.193558 191.106 0.0954479 191.823C0.1862 192.049 0.348545 192.699 0.498108 193.96C0.643078 195.184 0.766493 196.891 0.822177 199.161C0.933508 203.7 0.774709 210.448 0.00424163 220.009Z"
+          fill="currentColor"></path>
+        <path
+          d="M4.06749 51.6473C5.13478 51.6473 6 50.842 6 49.8487C6 48.8554 5.13478 48.0502 4.06749 48.0502C3.00019 48.0502 2.13497 48.8554 2.13497 49.8487C2.13497 50.842 3.00019 51.6473 4.06749 51.6473Z"
+          fill="currentColor"></path>
+        <path
+          d="M4.06749 117.595C5.13478 117.595 6 116.789 6 115.796C6 114.803 5.13478 113.997 4.06749 113.997C3.00019 113.997 2.13497 114.803 2.13497 115.796C2.13497 116.789 3.00019 117.595 4.06749 117.595Z"
+          fill="currentColor"></path>
+        <path
+          d="M2.77911 176.348C3.84641 176.348 4.71163 175.542 4.71163 174.549C4.71163 173.556 3.84641 172.751 2.77911 172.751C1.71181 172.751 0.846598 173.556 0.846598 174.549C0.846598 175.542 1.71181 176.348 2.77911 176.348Z"
+          fill="currentColor"></path>
+      </svg>
+    </div>
+
+    {/* Horizontal Divider */}
+    <div class="block text-orange-500 lg:hidden">
+      <svg
+        width="222"
+        height="6"
+        viewBox="0 0 222 6"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M221.411 1.61198C221.142 0.841365 220.343 0.45084 219.626 0.739713C218.216 1.30793 214.717 2.13296 208.989 2.54829C203.296 2.96101 195.477 2.96374 185.472 1.93993C184.71 1.8619 184.033 2.46248 183.96 3.28181C183.887 4.10104 184.446 4.82875 185.209 4.907C195.347 5.94449 203.317 5.94682 209.175 5.52215C214.997 5.10007 218.812 4.25029 220.6 3.5302C221.317 3.24123 221.68 2.38259 221.411 1.61198ZM120.112 1.93799C119.348 1.86769 118.676 2.47628 118.611 3.29636C118.546 4.11625 119.112 4.83769 119.875 4.90797C136.749 6.46202 149.842 5.56111 154.353 4.90021C155.112 4.789 155.644 4.03719 155.54 3.22165C155.437 2.40619 154.737 1.83552 153.978 1.94672C149.696 2.57415 136.81 3.47585 120.112 1.93799ZM90.1487 1.29567C85.8613 0.856933 73.8982 0.384703 59.8978 1.94089C59.136 2.0258 58.5827 2.75819 58.6615 3.57676C58.7405 4.39536 59.4221 4.99071 60.184 4.90603C74.0007 3.3703 85.7788 3.8426 89.885 4.26274C90.6476 4.34078 91.3249 3.73927 91.3975 2.91989C91.4699 2.10078 90.911 1.37384 90.1487 1.29567ZM1.99121 0.00424163C1.22736 -0.0573146 0.561295 0.558375 0.503952 1.37911C0.446671 2.19985 1.01968 2.91552 1.78352 2.97714C11.4073 3.75268 18.2489 3.91599 22.9023 3.80186C25.2283 3.74481 27.0192 3.61828 28.3438 3.4613C29.6286 3.30902 30.5771 3.11726 31.1513 2.88593C31.8685 2.59696 32.2319 1.73832 31.9631 0.967717C31.6941 0.197039 30.8942 -0.193558 30.1769 0.0954479C29.9514 0.1862 29.3015 0.348545 28.0395 0.498108C26.8162 0.643078 25.1093 0.766493 22.8391 0.822177C18.2997 0.933508 11.5521 0.774709 1.99121 0.00424163Z"
+          fill="currentColor"></path>
+        <path
+          d="M170.353 4.06749C170.353 5.13478 171.158 6 172.151 6C173.145 6 173.95 5.13478 173.95 4.06749C173.95 3.00019 173.145 2.13497 172.151 2.13497C171.158 2.13497 170.353 3.00019 170.353 4.06749Z"
+          fill="currentColor"></path>
+        <path
+          d="M104.405 4.06749C104.405 5.13478 105.211 6 106.204 6C107.197 6 108.003 5.13478 108.003 4.06749C108.003 3.00019 107.197 2.13497 106.204 2.13497C105.211 2.13497 104.405 3.00019 104.405 4.06749Z"
+          fill="currentColor"></path>
+        <path
+          d="M45.6524 2.77911C45.6524 3.84641 46.4576 4.71163 47.4509 4.71163C48.4442 4.71163 49.2495 3.84641 49.2495 2.77911C49.2495 1.71181 48.4442 0.846598 47.4509 0.846598C46.4576 0.846598 45.6524 1.71181 45.6524 2.77911Z"
+          fill="currentColor"></path>
+      </svg>
+    </div>
+
+    <!-- Right Side Guru Shishya Parampara -->
+    <div class="relative flex flex-col gap-5 md:gap-6 lg:w-[42%]">
+      <!-- Backdrop placeholder (SIS guru-shishya.png not present in SIRS) -->
+      <div
+        aria-hidden="true"
+        class="absolute -top-[10%] right-0 -z-1 w-[300px] rounded-full bg-gradient-to-bl from-orange-100 via-amber-50 to-transparent blur-2xl sm:w-[400px] md:-top-[30%] md:w-[600px] lg:-right-[10%] lg:w-[450px] xl:right-0 xl:w-[600px]"
+        style="height: 300px;"
+      >
+      </div>
+
+      <!-- Header wrapper -->
+      <div class="space-y-3 md:space-y-4">
+        <!-- Guru mark (simplified lamp of knowledge) -->
+        <div class="text-orange-500">
+          <svg
+            class="size-11 md:size-16"
+            width="64"
+            height="58"
+            viewBox="0 0 64 58"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M32 3C32 3 20 18 20 32a12 12 0 0 0 24 0C44 18 32 3 32 3Z"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linejoin="round"></path>
+            <path
+              d="M14 50h36M20 44h24"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"></path>
+            <circle cx="32" cy="32" r="4" fill="currentColor"></circle>
+          </svg>
+        </div>
+
+        <!-- Title -->
+        <p class="text-n-800 text-3xl font-medium md:text-5xl lg:text-6xl">
+          {ethosDetails.right.title}
+        </p>
+      </div>
+
+      <!-- Description -->
+      <p
+        class="font-secondary text-n-600 text-base leading-6 font-light md:text-xl md:leading-8"
+      >
+        {ethosDetails.right.description}
+      </p>
+
+      <!-- Read More text -->
+      <a
+        href={URLS.ABOUT.GURU_SHISHYA}
+        class="font-secondary text-n-600 relative w-fit cursor-pointer text-lg font-medium after:absolute after:bottom-0 after:left-0 after:h-[1.5px] after:w-0 after:bg-current after:transition-[width] after:duration-300 hover:text-orange-500 hover:after:w-full"
+      >
+        Read More
+      </a>
+    </div>
+  </div>
+</section>
