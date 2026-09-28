@@ -10,6 +10,16 @@ import Layout from "@/layouts/Layout.astro";
 import Button from "@/components/ui/Button.astro";
 import SectionHeader from "@/components/ui/SectionHeader.astro";
 import IconsCard from "@/components/ui/IconsCard.astro";
+import CinematicHero from "@/components/ui/CinematicHero.astro";
+
+// ---- 01 · Hero slideshow -----------------------------------
+// Order tells a story: architecture, then life, then sport, then land.
+const heroSlides = [
+  { slug: "campus-facade", alt: "The main academic block at SAI International Residential School" },
+  { slug: "horse-riding", alt: "A student riding in the campus sand arena" },
+  { slug: "stadium", alt: "The 400m stadium and turf football ground from the air" },
+  { slug: "campus-misty", alt: "The 49-acre campus at first light" },
+];
 
 // ---- 02 · The 8-8-8 band -----------------------------------
 const eights = [
@@ -249,26 +259,26 @@ const tileAccents: Record<string, string> = {
   meta={{ title: "Home — 8-8-8 Design Preview", noIndex: true }}
 >
   <!-- ======================================================
-       01 · HERO — the drone film + the 8-8-8 promise
-       Replace the gradient with the drone loop of the campus.
+       01 · HERO — Ken Burns crossfade over the 8-8-8 promise
+       Stills only, no video. See CinematicHero.astro.
        ====================================================== -->
   <section
-    class="relative flex min-h-[92vh] w-full flex-col justify-end overflow-hidden bg-gradient-to-b from-violet-950 via-violet-900 to-violet-700 pt-28 md:pt-40"
+    class="relative flex min-h-[92vh] w-full flex-col justify-end overflow-hidden bg-violet-950 pt-28 md:pt-40"
   >
-    <!-- Media placeholder note -->
-    <div
-      class="font-secondary absolute top-24 right-4 z-10 rounded-lg bg-violet-950/70 px-3 py-1.5 text-xs font-medium tracking-wide text-violet-200 md:top-28 md:right-8"
-    >
-      Video — drone loop of the 49-acre campus
-    </div>
+    <!-- Drifting photo stack -->
+    <CinematicHero slides={heroSlides} interval={6000} fade={1600} />
 
-    <!-- Oversized 8·8·8 watermark -->
-    <p
+    <!-- Scrim: keeps the headline legible over every frame -->
+    <div
       aria-hidden="true"
-      class="pointer-events-none absolute -top-10 right-0 left-0 text-center text-[38vw] leading-none font-medium text-violet-800/40 select-none md:text-[24vw]"
+      class="pointer-events-none absolute inset-0 bg-violet-950/45"
     >
-      8·8·8
-    </p>
+    </div>
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 bg-gradient-to-t from-violet-950 via-violet-950/45 to-transparent"
+    >
+    </div>
 
     <div
       class="relative container mx-auto flex flex-col gap-8 px-4 pb-16 md:px-6 md:pb-24 2xl:px-0"

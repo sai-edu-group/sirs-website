@@ -1,0 +1,339 @@
+---
+// ============================================================
+// CINEMATIC HERO — Ken Burns crossfade slideshow
+//
+// A video-free way to make a hero feel like motion footage:
+// each still slowly drifts and scales while crossfading into
+// the next. Only `opacity` and `transform` animate, so every
+// frame stays on the compositor — no layout, no repaint.
+//
+// Performance notes:
+//  - Slide 0 ships real srcset + fetchpriority=high (it is the LCP).
+//  - Slides 1..n ship with `data-srcset` only; JS promotes them
+//    just before they are needed, so they never compete with
+//    the first paint. Without JS you simply get slide 0.
+//  - Playback pauses when the tab is hidden or the hero scrolls
+//    out of view, and never starts on reduced-motion or Save-Data.
+// ============================================================
+
+interface Slide {
+  slug: string;
+  alt: string;
+}
+
+interface Props {
+  slides: Slide[];
+  /** How long each slide holds, in ms (excludes the crossfade). */
+  interval?: number;
+  /** Crossfade duration, in ms. */
+  fade?: number;
+}
+
+const { slides, interval = 6000, fade = 1600 } = Astro.props as Props;
+
+const BASE = "/images/hero";
+const land = (slug: string, ext: string) =>
+  [1280, 1920, 2560].map((w) => `${BASE}/${slug}-l-${w}.${ext} ${w}w`).join(", ");
+const port = (slug: string, ext: string) =>
+  [640, 900, 1200].map((w) => `${BASE}/${slug}-p-${w}.${ext} ${w}w`).join(", ");
+
+const MOBILE = "(max-width: 767px)";
+---
+
+<div
+  class="hero-stage"
+  data-hero-stage
+  data-interval={interval}
+  data-fade={fade}
+  style={`--fade:${fade}ms; --hold:${interval + fade}ms;`}
+  aria-hidden="true"
+>
+  {
+    slides.map((slide, i) => (
+      <picture class="hero-slide" data-slide data-kb={i % 4}>
+        {/* Mobile gets its own portrait crop, not a squeezed landscape one */}
+        <source
+          media={MOBILE}
+          type="image/webp"
+          srcset={i === 0 ? port(slide.slug, "webp") : undefined}
+          data-srcset={i === 0 ? undefined : port(slide.slug, "webp")}
+          sizes="100vw"
+        />
+        <source
+          media={MOBILE}
+          type="image/jpeg"
+          srcset={i === 0 ? port(slide.slug, "jpg") : undefined}
+          data-srcset={i === 0 ? undefined : port(slide.slug, "jpg")}
+          sizes="100vw"
+        />
+        <source
+          type="image/webp"
+          srcset={i === 0 ? land(slide.slug, "webp") : undefined}
+          data-srcset={i === 0 ? undefined : land(slide.slug, "webp")}
+          sizes="100vw"
+        />
+        <img
+          src={i === 0 ? `${BASE}/${slide.slug}-l-1280.jpg` : undefined}
+          data-src={i === 0 ? undefined : `${BASE}/${slide.slug}-l-1280.jpg`}
+          srcset={i === 0 ? land(slide.slug, "jpg") : undefined}
+          data-srcset={i === 0 ? undefined : land(slide.slug, "jpg")}
+          sizes="100vw"
+          alt={slide.alt}
+          width="1920"
+          height="1080"
+          decoding="async"
+          fetchpriority={i === 0 ? "high" : "low"}
+        />
+      </picture>
+    ))
+  }
+</div>
+
+<style>
+  .hero-stage {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    /* Deep violet base so there is never a white flash before paint */
+    background-color: var(--color-violet-950);
+  }
+
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    display: block;
+    opacity: 0;
+    transition: opacity var(--fade) cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hero-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Nudged above centre: horizons and faces sit high in these frames */
+    object-position: center 42%;
+    transform: scale(1.04);
+  }
+
+  /* Without JS the first frame is simply the hero image. Once the
+     script takes over it adds .is-enhanced, and `.is-active` alone
+     decides what is visible — otherwise slide 0 could never fade out. */
+  .hero-stage:not(.is-enhanced) .hero-slide:first-child {
+    opacity: 1;
+  }
+
+  .hero-slide.is-active {
+    opacity: 1;
+  }
+
+  /* Only the two slides mid-transition get their own layer. */
+  .hero-slide.is-live {
+    will-change: opacity;
+  }
+  .hero-slide.is-live img {
+    will-change: transform;
+  }
+
+  /* --- The drift. Alternating in/out reads far more like film
+         than four identical zooms. --- */
+  .hero-slide.is-active img {
+    animation-duration: var(--hold);
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
+  .hero-slide.is-active[data-kb="0"] img {
+    animation-name: kb-0;
+  }
+  .hero-slide.is-active[data-kb="1"] img {
+    animation-name: kb-1;
+  }
+  .hero-slide.is-active[data-kb="2"] img {
+    animation-name: kb-2;
+  }
+  .hero-slide.is-active[data-kb="3"] img {
+    animation-name: kb-3;
+  }
+
+  @keyframes kb-0 {
+    from {
+      transform: scale(1.04) translate3d(0, 0, 0);
+    }
+    to {
+      transform: scale(1.16) translate3d(-1.6%, -1%, 0);
+    }
+  }
+  @keyframes kb-1 {
+    from {
+      transform: scale(1.17) translate3d(1.2%, 0.6%, 0);
+    }
+    to {
+      transform: scale(1.04) translate3d(0, 0, 0);
+    }
+  }
+  @keyframes kb-2 {
+    from {
+      transform: scale(1.05) translate3d(1.4%, -0.6%, 0);
+    }
+    to {
+      transform: scale(1.18) translate3d(-0.8%, 0.8%, 0);
+    }
+  }
+  @keyframes kb-3 {
+    from {
+      transform: scale(1.18) translate3d(-1.2%, 0.8%, 0);
+    }
+    to {
+      transform: scale(1.05) translate3d(0.6%, -0.6%, 0);
+    }
+  }
+
+  /* Paused rather than stopped, so resuming picks up mid-drift. */
+  .hero-stage.is-paused .hero-slide img {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-slide {
+      transition: none;
+    }
+    .hero-slide.is-active img,
+    .hero-slide img {
+      animation: none !important;
+      transform: scale(1.04);
+    }
+  }
+</style>
+
+<script>
+  type Stage = HTMLElement & { dataset: DOMStringMap };
+
+  function initHero(stage: Stage) {
+    const slides = Array.from(
+      stage.querySelectorAll<HTMLElement>("[data-slide]"),
+    );
+    if (slides.length < 2) return;
+
+    const interval = Number(stage.dataset.interval ?? 6000);
+    const fade = Number(stage.dataset.fade ?? 1600);
+
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const conn = (navigator as any).connection;
+    const thrifty =
+      !!conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType ?? ""));
+
+    // From here the script owns visibility, so retire the no-JS fallback.
+    stage.classList.add("is-enhanced");
+
+    // Respect the user's device and preferences: stay on one frame.
+    if (reduced || thrifty) {
+      slides[0].classList.add("is-active");
+      return;
+    }
+
+    let index = 0;
+    let timer: number | undefined;
+    let visible = true;
+    let focused = !document.hidden;
+
+    slides[0].classList.add("is-active", "is-live");
+
+    /** Promote data-srcset -> srcset so the browser starts fetching. */
+    function load(slide: HTMLElement): Promise<void> {
+      const img = slide.querySelector("img")!;
+      if (!img.dataset.src && !img.dataset.srcset) {
+        return img.decode().catch(() => {});
+      }
+      slide.querySelectorAll("source").forEach((s) => {
+        if (s.dataset.srcset) {
+          s.srcset = s.dataset.srcset;
+          delete s.dataset.srcset;
+        }
+      });
+      if (img.dataset.srcset) {
+        img.srcset = img.dataset.srcset;
+        delete img.dataset.srcset;
+      }
+      if (img.dataset.src) {
+        img.src = img.dataset.src;
+        delete img.dataset.src;
+      }
+      // decode() resolves once the bitmap is ready — prevents a half-painted fade
+      return img.decode().catch(() => {});
+    }
+
+    function schedule() {
+      window.clearTimeout(timer);
+      if (!visible || !focused) return;
+      timer = window.setTimeout(advance, interval);
+    }
+
+    async function advance() {
+      const current = slides[index];
+      const nextIndex = (index + 1) % slides.length;
+      const next = slides[nextIndex];
+
+      await load(next);
+      if (!visible || !focused) return;
+
+      // Restart the drift from its first keyframe.
+      next.classList.remove("is-active");
+      void next.offsetWidth;
+      next.classList.add("is-live", "is-active");
+      current.classList.remove("is-active");
+
+      window.setTimeout(() => {
+        current.classList.remove("is-live");
+        current.querySelector("img")!.getAnimations().forEach((a) => a.cancel());
+      }, fade);
+
+      index = nextIndex;
+
+      // Warm the following slide during the quiet stretch.
+      window.setTimeout(
+        () => load(slides[(index + 1) % slides.length]),
+        Math.max(0, interval - 2000),
+      );
+
+      schedule();
+    }
+
+    function setPaused(paused: boolean) {
+      stage.classList.toggle("is-paused", paused);
+      if (paused) window.clearTimeout(timer);
+      else schedule();
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      focused = !document.hidden;
+      setPaused(!focused || !visible);
+    });
+
+    // Stop burning frames once the hero is scrolled past.
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(
+        ([entry]) => {
+          visible = entry.isIntersecting;
+          setPaused(!visible || !focused);
+        },
+        { threshold: 0.05 },
+      ).observe(stage);
+    }
+
+    load(slides[1]);
+    schedule();
+  }
+
+  function boot() {
+    document
+      .querySelectorAll<HTMLElement>("[data-hero-stage]")
+      .forEach((el) => initHero(el as Stage));
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+</script>
