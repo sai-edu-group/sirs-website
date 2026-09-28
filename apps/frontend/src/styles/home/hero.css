@@ -1,0 +1,42 @@
+.hero-video {
+  opacity: 0;
+  transition: opacity 700ms ease;
+}
+.hero-video-stage:not(.is-enhanced) .hero-video:first-child {
+  opacity: 1;
+}
+.hero-video.is-active {
+  opacity: 1;
+}
+
+.mini-rath-drift {
+  animation: mini-rath-drift 85s linear infinite;
+}
+@keyframes mini-rath-drift {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-15vw);
+  }
+}
+
+.warli-rotate {
+  animation: warli-rotate 280s linear infinite;
+}
+@keyframes warli-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-video {
+    transition: none;
+  }
+  .mini-rath-drift,
+  .warli-rotate {
+    animation: none;
+  }
+}

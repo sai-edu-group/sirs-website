@@ -15,9 +15,9 @@ import { sectionHeaderDetails, statsCard } from "@/data/home/stats";
     <svg
       class="path h-full w-full"
       xmlns="http://www.w3.org/2000/svg"
-      width="1920"
-      height="970"
-      viewBox="0 0 1920 970"
+      width="2475"
+      height="1000"
+      viewBox="-250 -15 2475 1000"
       fill="none"
     >
       <path
@@ -59,10 +59,31 @@ import { sectionHeaderDetails, statsCard } from "@/data/home/stats";
     </div>
   </div>
 </section>
+<script>
+  const statsSection = document.querySelector('[data-section="Home Stats"]');
+  if (statsSection) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          statsSection.classList.add("in-view");
+          observer.disconnect();
+        }
+      },
+      // Fires once the section's midpoint crosses the viewport's midpoint,
+      // instead of as soon as a sliver of the section appears — otherwise
+      // most of the draw animation finishes before it's even in view.
+      { rootMargin: "-50% 0px -50% 0px" },
+    );
+    observer.observe(statsSection);
+  }
+</script>
 <style>
   path {
     stroke-dasharray: 2460;
     stroke-dashoffset: 2460;
+  }
+
+  section.in-view path {
     animation: draw 2.5s linear forwards;
   }
 
@@ -71,6 +92,13 @@ import { sectionHeaderDetails, statsCard } from "@/data/home/stats";
       stroke-dashoffset: -2460;
     }
     to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    section.in-view path {
+      animation: none;
       stroke-dashoffset: 0;
     }
   }

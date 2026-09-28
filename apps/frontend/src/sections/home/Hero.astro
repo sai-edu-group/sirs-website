@@ -1,5 +1,109 @@
 ---
-import DummySection from "@/components/ui/DummySection.astro";
+import { eyebrowText, heroSlides } from "@/data/home/hero";
+import "@/styles/home/hero.css";
+
+const INTERVAL = 5000;
 ---
-<!-- TODO: Replace with real section content -->
-<DummySection name="Home — Hero" />
+
+<section
+  class="bg-orange-500 relative flex items-center overflow-hidden pt-[140px] pb-12 lg:pb-0 lg:min-h-[calc(100vh-var(--qe-form-half,90px))] lg:pt-[max(110px,calc(110px-var(--qe-form-half,90px)))]"
+  data-hero
+  data-interval={INTERVAL}
+>
+  <img
+    src="/images/vectors/rath-wheel.png"
+    alt=""
+    aria-hidden="true"
+    class="pointer-events-none absolute -top-[290px] -right-[290px] w-[420px] max-w-none opacity-20 select-none md:-top-[200px] md:-right-[200px] md:w-[520px]"
+    width="520"
+    height="520"
+    loading="eager"
+  />
+  <img
+    src="/images/vectors/warli-painting.png"
+    alt=""
+    aria-hidden="true"
+    class="warli-rotate pointer-events-none absolute -bottom-[1070px] left-[-503px] w-[1520px] max-w-none opacity-[0.12] select-none"
+    width="950"
+    height="1352"
+    loading="lazy"
+  />
+  <img
+    src="/images/vectors/mini-rath.png"
+    alt=""
+    aria-hidden="true"
+    class="mini-rath-drift pointer-events-none absolute right-6 bottom-0 z-50 w-[90px] max-w-none opacity-100 select-none sm:w-[140px]"
+    width="220"
+    height="180"
+    loading="lazy"
+  />
+
+  <div
+    class="relative z-10 mx-auto grid w-full max-w-[1480px] grid-cols-1 items-center gap-8 px-4 md:px-6 lg:grid-cols-[0.90fr_2.6fr] lg:gap-0"
+  >
+    <div class="relative z-20 order-2 lg:order-1 lg:min-w-0" data-hero-textcol>
+      <p class="font-secondary mb-4 text-lg text-white/75 italic md:text-xl">
+        {eyebrowText}
+      </p>
+
+      <h1
+        data-hero-headline
+        data-slides={JSON.stringify(heroSlides.map((slide) => slide.headline))}
+        class="max-w-xl text-[34px] leading-[1.15] font-bold text-white transition-all duration-500 ease-out md:text-[48px] lg:max-w-none lg:w-[600px] lg:text-[52px] xl:w-[660px] xl:text-[60px]"
+      >
+        {heroSlides[0].headline}
+      </h1>
+
+      <div class="mt-10 flex items-center gap-2" data-hero-dots>
+        {
+          heroSlides.map((slide, slideIndex) => (
+            <button
+              type="button"
+              class="hero-dot h-1.5 w-9 cursor-pointer rounded-full transition-colors duration-500 ease-out"
+              class:list={[slideIndex === 0 ? "bg-white" : "bg-white/35"]}
+              data-dot-index={slideIndex}
+              aria-label={`Show headline ${slideIndex + 1}`}
+              aria-current={slideIndex === 0 ? "true" : "false"}
+            />
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="relative z-10 order-1 lg:order-2 lg:-ml-8">
+      <div
+        class="hero-video-stage relative aspect-[16/10] w-full overflow-hidden rounded-[28px] shadow-2xl"
+        data-hero-video-stage
+      >
+        {
+          heroSlides.map((slide, slideIndex) => (
+            <video
+              class="hero-video absolute inset-0 h-full w-full object-cover"
+              data-hero-video
+              poster={slideIndex === 0 ? "/images/activities.jpg" : undefined}
+              autoplay={slideIndex === 0}
+              muted
+              loop
+              playsinline
+              preload={slideIndex === 0 ? "auto" : "none"}
+            >
+              <source
+                data-src={slide.video}
+                type="video/mp4"
+                src={slideIndex === 0 ? slide.video : undefined}
+              />
+            </video>
+          ))
+        }
+        <div
+          class="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/60 via-black/15 to-transparent"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import "@/scripts/home/hero";
+</script>

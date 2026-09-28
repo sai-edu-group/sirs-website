@@ -14,17 +14,15 @@ const photos = [
 ---
 
 <section data-section="Home Campus Life Strip">
-  <div
-    class="container mx-auto flex flex-col gap-6 px-6 py-12 md:py-16 lg:py-20 2xl:px-0"
-  >
+  <div class="flex flex-col gap-6 py-12 md:py-16 lg:py-20">
     <div
       id="campus-life-strip"
       data-strip-viewport
-      class="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] md:gap-6 [&::-webkit-scrollbar]:hidden"
+      class="flex gap-4 overflow-x-auto px-6 [scrollbar-width:none] md:gap-6 [&::-webkit-scrollbar]:hidden"
     >
       {
         photos.map((photo) => (
-          <figure class="relative aspect-[4/3] w-[82%] shrink-0 snap-start overflow-hidden rounded-2xl bg-slate-100 md:w-[42%] lg:w-[31%]">
+          <figure class="relative aspect-[4/3] w-[82%] shrink-0 overflow-hidden rounded-2xl bg-n-100 md:w-[42%] lg:w-[31%]">
             <img
               src={photo.src}
               alt={photo.alt}
@@ -37,7 +35,7 @@ const photos = [
       }
     </div>
 
-    <div class="flex justify-end gap-3">
+    <div class="flex justify-end gap-3 px-6">
       <SliderArrowButton direction="prev" data-strip-prev />
       <SliderArrowButton direction="next" data-strip-next />
     </div>
@@ -45,22 +43,49 @@ const photos = [
 </section>
 
 <script>
-  window.addEventListener("DOMContentLoaded", () => {
-    const viewport = document.querySelector("[data-strip-viewport]");
-    if (!viewport) return;
+  function initStrip(viewport: HTMLElement) {
     const prev = document.querySelector("[data-strip-prev]");
     const next = document.querySelector("[data-strip-next]");
+    const INTERVAL = 3000;
+    let timer: number | undefined;
+
     const step = () => {
       const first = viewport.querySelector("figure");
       if (!first) return 320;
       const gap = 24;
       return (first as HTMLElement).offsetWidth + gap;
     };
+
+    const atEnd = () => viewport.scrollLeft + viewport.clientWidth >= viewport.scrollWidth - 4;
+
+    function advance() {
+      if (atEnd()) {
+        viewport.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        viewport.scrollBy({ left: step(), behavior: "smooth" });
+      }
+    }
+
+    function schedule() {
+      window.clearInterval(timer);
+      timer = window.setInterval(advance, INTERVAL);
+    }
+
     prev?.addEventListener("click", () => {
       viewport.scrollBy({ left: -step(), behavior: "smooth" });
+      schedule();
     });
     next?.addEventListener("click", () => {
-      viewport.scrollBy({ left: step(), behavior: "smooth" });
+      advance();
+      schedule();
     });
-  });
+
+    viewport.addEventListener("mouseenter", () => window.clearInterval(timer));
+    viewport.addEventListener("mouseleave", schedule);
+
+    schedule();
+  }
+
+  const viewport = document.querySelector<HTMLElement>("[data-strip-viewport]");
+  if (viewport) initStrip(viewport);
 </script>

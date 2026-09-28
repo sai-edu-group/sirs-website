@@ -1,6 +1,8 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 
+import Hero from "@/sections/home/Hero.astro";
+import QuickEnquiryForm from "@/sections/home/QuickEnquiryForm.astro";
 import SISStats from "@/sections/home/SISStats.astro";
 import CampusTour from "@/sections/home/CampusTour.astro";
 import SISResults from "@/sections/home/SISResults.astro";
@@ -11,6 +13,8 @@ import SISPlacements from "@/sections/home/SISPlacements.astro";
 ---
 
 <Layout meta={{ title: "Home" }}>
+  <Hero />
+  <QuickEnquiryForm />
   <SISStats />
   <CampusTour />
   <SISResults />
