@@ -60,22 +60,7 @@ import { sectionHeaderDetails, statsCard } from "@/data/home/stats";
   </div>
 </section>
 <script>
-  const statsSection = document.querySelector('[data-section="Home Stats"]');
-  if (statsSection) {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          statsSection.classList.add("in-view");
-          observer.disconnect();
-        }
-      },
-      // Fires once the section's midpoint crosses the viewport's midpoint,
-      // instead of as soon as a sliver of the section appears — otherwise
-      // most of the draw animation finishes before it's even in view.
-      { rootMargin: "-50% 0px -50% 0px" },
-    );
-    observer.observe(statsSection);
-  }
+  import "@/scripts/home/sis-stats";
 </script>
 <style>
   path {

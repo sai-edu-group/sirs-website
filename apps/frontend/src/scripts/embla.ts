@@ -86,5 +86,20 @@ export const initEmblaRoot = (
   });
 
   setSelectedDot();
+
+  // embla-carousel-autoplay silently no-ops if document.visibilityState
+  // isn't "visible" at the exact moment it initializes (a known timing
+  // edge case during initial page load). Re-kick it a frame later so a
+  // late/inconsistent visibility read at init time can't permanently
+  // prevent autoplay from ever starting.
+  if (options.autoplay) {
+    const autoplay = embla.plugins().autoplay;
+    if (autoplay) {
+      requestAnimationFrame(() => {
+        if (!autoplay.isPlaying()) autoplay.play();
+      });
+    }
+  }
+
   return embla;
 };

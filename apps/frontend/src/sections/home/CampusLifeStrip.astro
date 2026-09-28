@@ -1,9 +1,9 @@
 ---
-// Figma 08b — Campus Life Strip (node 6973:67): photo row + bottom-right arrows.
-// No header, no captions — plain rounded photos per Figma.
-// Arrows use the common SliderArrowButton (same as Results slider).
+// COMPONENTS //
 import SliderArrowButton from "@/components/ui/SliderArrowButton.astro";
 
+
+// Slider Photos
 const photos = [
   { src: "/images/strip-stadium.png", alt: "Stadium and turf" },
   { src: "/images/strip-horse.png", alt: "Horse riding" },
@@ -43,49 +43,5 @@ const photos = [
 </section>
 
 <script>
-  function initStrip(viewport: HTMLElement) {
-    const prev = document.querySelector("[data-strip-prev]");
-    const next = document.querySelector("[data-strip-next]");
-    const INTERVAL = 3000;
-    let timer: number | undefined;
-
-    const step = () => {
-      const first = viewport.querySelector("figure");
-      if (!first) return 320;
-      const gap = 24;
-      return (first as HTMLElement).offsetWidth + gap;
-    };
-
-    const atEnd = () => viewport.scrollLeft + viewport.clientWidth >= viewport.scrollWidth - 4;
-
-    function advance() {
-      if (atEnd()) {
-        viewport.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        viewport.scrollBy({ left: step(), behavior: "smooth" });
-      }
-    }
-
-    function schedule() {
-      window.clearInterval(timer);
-      timer = window.setInterval(advance, INTERVAL);
-    }
-
-    prev?.addEventListener("click", () => {
-      viewport.scrollBy({ left: -step(), behavior: "smooth" });
-      schedule();
-    });
-    next?.addEventListener("click", () => {
-      advance();
-      schedule();
-    });
-
-    viewport.addEventListener("mouseenter", () => window.clearInterval(timer));
-    viewport.addEventListener("mouseleave", schedule);
-
-    schedule();
-  }
-
-  const viewport = document.querySelector<HTMLElement>("[data-strip-viewport]");
-  if (viewport) initStrip(viewport);
+  import "@/scripts/home/campus-life-strip";
 </script>
