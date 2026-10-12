@@ -1,0 +1,91 @@
+---
+export const prerender = true;
+
+// COMPONENTS //
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
+
+// OTHERS //
+import Layout from "@/layouts/Layout.astro";
+
+// SECTIONS //
+import LearningAndBeyondConsumption from "@/sections/about/learning-and-beyond/LearningAndBeyondConsumption.astro";
+
+// DATA //
+import { amenitiesDetails } from "@/data/about/amenities";
+import { curriculumDetails } from "@/data/about/curriculum";
+import { flagshipContent } from "@/data/about/flagship";
+import { saiSevaContent } from "@/data/about/learning-and-beyond/sai-seva";
+
+/**
+ * Generate static paths for all team and advisory board member pages
+ * @returns Array of static paths with member data
+ */
+export async function getStaticPaths() {
+  const typeMap = {
+    amenities: amenitiesDetails.amenitiesCards,
+    curriculum: curriculumDetails.curriculumContent,
+    "flagship-events": flagshipContent,
+    "sai-seva": saiSevaContent,
+  };
+
+  const paths: Array<any> = [];
+
+  Object.entries(typeMap).forEach(([type, list]) => {
+    list.forEach((detail: any) => {
+      paths.push({
+        params: {
+          type,
+          name: detail.title.toLowerCase().replaceAll(" ", "-"),
+        },
+        props: {
+          type,
+          detail,
+        },
+      });
+    });
+  });
+
+  return paths;
+}
+
+const { type, detail } = Astro.props;
+
+// Prepare breadcrumb items based on type
+const breadcrumbMap: Record<string, string> = {
+  amenities: "Amenities",
+  curriculum: "Curriculum",
+  "flagship-events": "Flagship Events",
+  "sai-seva": "Sai Seva",
+};
+
+const breadcrumbItems = [
+  {
+    label: breadcrumbMap[type] || "Details",
+    href: `/about/learning-and-beyond#${type}`,
+  },
+  { label: detail.title, href: "#" },
+];
+
+// Prepare section header details
+const sectionHeaderDetails = {
+  title: detail.title,
+  subtitle: detail.description,
+};
+---
+
+<Layout>
+  <!-- Breadcrumbs Section -->
+  <div class="bg-n-50 relative w-full overflow-hidden">
+    <div
+      class="container mx-auto px-6 pt-30 pb-5 md:pt-40 md:pb-8 lg:pb-9 2xl:px-0"
+    >
+      <Breadcrumbs items={breadcrumbItems} />
+    </div>
+  </div>
+
+  <!-- LearningAndBeyondConsumption -->
+  <LearningAndBeyondConsumption
+    sectionHeaderDetails={sectionHeaderDetails}
+    learningAndBeyondDetails={detail}
+  />
+</Layout>

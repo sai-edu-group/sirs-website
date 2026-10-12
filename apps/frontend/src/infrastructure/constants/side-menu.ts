@@ -31,7 +31,6 @@ export const menu: MenuItemData[] = [
   {
     title: "ABOUT US",
     submenu: [
-      { title: "The Perfect Master", href: URLS.ABOUT.PERFECT_MASTER },
       { title: "Vision, Mission & Values", href: URLS.ABOUT.VISION_MISSION_VALUES },
       { title: "Our Founder", href: URLS.ABOUT.FOUNDER },
       { title: "Key Personnel", href: URLS.ABOUT.KEY_PERSONNEL },

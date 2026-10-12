@@ -22,21 +22,11 @@
   }
 }
 
-.warli-rotate {
-  animation: warli-rotate 280s linear infinite;
-}
-@keyframes warli-rotate {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .hero-video {
     transition: none;
   }
-  .mini-rath-drift,
-  .warli-rotate {
+  .mini-rath-drift {
     animation: none;
   }
 }

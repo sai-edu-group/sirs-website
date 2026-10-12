@@ -1,0 +1,59 @@
+---
+// COMPONENTS //
+import Article from "@/components/ui/Article.astro";
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
+
+// CONSTANTS //
+import { URLS } from "@/infrastructure/constants/urls";
+
+// OTHERS //
+import Layout from "@/layouts/Layout.astro";
+
+// META //
+import radioOrangeMeta from "@/data/meta/media/radio-orange/radio-orange.json";
+
+// DATA //
+import { radioOrangeContent, sectionHeaderContent } from "@/data/media/radio";
+import Image from "astro/components/Image.astro";
+
+// Prepare breadcrumb items
+const breadcrumbItems = [
+  { label: "Media", href: URLS.MEDIA.ROOT },
+  { label: "Radio Orange", href: `#` },
+];
+---
+
+<Layout meta={radioOrangeMeta}>
+  <section class="bg-n-50 relative w-full overflow-hidden">
+    <div
+      class="container mx-auto flex flex-col gap-5 px-6 pt-34 pb-30 md:gap-8 md:px-8 md:pt-40 md:pb-40 lg:gap-9 2xl:px-0"
+    >
+      <Breadcrumbs items={breadcrumbItems} />
+      <!-- Radio Orange Section -->
+      <Article
+        title={sectionHeaderContent?.title}
+        subtitle={sectionHeaderContent?.subtitle}
+      >
+        <!--  Radio Orange Content -->
+        <div class="flex flex-col gap-10 md:gap-14 lg:gap-20">
+          <!-- Radio Orange Image and Details -->
+          {
+            radioOrangeContent.landscapeImg && (
+              <Image
+                src={radioOrangeContent.landscapeImg}
+                alt="Radio Orange Image"
+                class="card-anim card-bottom h-[257px] w-full rounded-3xl object-cover md:h-[524px] lg:h-[600px]"
+                style={`--delay: 0.1s`}
+                width={1200}
+                height={600}
+              />
+            )
+          }
+
+          <!--  SAI TV Description -->
+          <div set:html={radioOrangeContent.content} />
+        </div>
+      </Article>
+    </div>
+  </section>
+</Layout>

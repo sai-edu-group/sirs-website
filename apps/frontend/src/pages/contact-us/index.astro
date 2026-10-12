@@ -1,13 +1,24 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 
-import Hero from "@/sections/contact/Hero.astro";
+// COMPONENTS //
+import PageHero from "@/components/ui/PageHero.astro";
 import QuickContact from "@/sections/contact/QuickContact.astro";
 import Form from "@/sections/contact/Form.astro";
 ---
 
 <Layout meta={{ title: "Contact" }}>
-  <Hero />
+  <PageHero
+    dataSection="Contact Hero"
+    eyebrow="Contact"
+    title="Talk to us. Visit us. Join us."
+    highlight="Join us."
+    description="Admissions open for Classes IV-XII. Call, write or walk the 49 acres with us."
+    image="/images/contact-hero.webp"
+    imageAlt="A smiling mother with her arm around her son"
+    archShape="wide"
+    frame="line"
+  />
   <QuickContact />
   <Form />
 </Layout>

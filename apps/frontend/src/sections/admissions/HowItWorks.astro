@@ -1,0 +1,32 @@
+---
+// COMPONENTS //
+import SectionHeader from "@/components/ui/SectionHeader.astro";
+import AdmissionStepsCard from "@/components/ui/AdmissionStepsCard.astro";
+
+// DATA //
+import {
+  admissionSteps,
+  sectionHeaderContent,
+} from "@/data/admissions/how-it-works";
+---
+
+<section id="how-to-apply" data-section="How It Works">
+  <div class="container mx-auto px-6 py-16 lg:px-8 lg:py-24 2xl:px-0">
+    <SectionHeader {...sectionHeaderContent} />
+
+    <div
+      class="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-8 xl:grid-cols-3"
+    >
+      {
+        admissionSteps.map((step) => (
+          <AdmissionStepsCard
+            icon={step.icon}
+            number={step.number}
+            title={step.title}
+            description={step.description}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>

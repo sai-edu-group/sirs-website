@@ -1,0 +1,187 @@
+---
+import Meta from "@/components/layout/Meta.astro";
+import Header from "@/components/layout/Header.astro";
+import Footer from "@/components/layout/Footer.astro";
+import SocialStickyBar from "@/components/ui/SocialStickyBar.astro";
+import SideMenu from "@/components/layout/SideMenu.astro";
+
+import "@/styles/global.css";
+
+interface Props {
+  meta?: {
+    title?: string;
+    description?: string;
+    noIndex?: boolean;
+    /** JSON-LD structured data rendered in <head> */
+    schema?: Record<string, unknown>;
+  };
+}
+
+const { meta = {} } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <!-- Metadata -->
+    <Meta
+      title={meta.title}
+      description={meta.description}
+      noIndex={meta.noIndex}
+      schema={meta.schema}
+    />
+
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
+
+    <link
+      rel="preconnect"
+      href="https://googleads.g.doubleclick.net"
+      crossorigin
+    />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+    <script
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=G-S13GRK6RM9`}></script>
+
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-S13GRK6RM9");
+    </script>
+  </head>
+  <body>
+    <main>
+      <div>
+        <Header />
+      </div>
+      <SideMenu />
+      <slot />
+      <!-- Footer -->
+      <Footer client:visible />
+    </main>
+    <SocialStickyBar />
+
+    <script is:inline>
+      (function () {
+        const fontLink = document.createElement("link");
+        fontLink.rel = "stylesheet";
+        fontLink.href =
+          "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap";
+
+        requestAnimationFrame(() => {
+          document.head.appendChild(fontLink);
+        });
+      })();
+    </script>
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+            }
+          });
+        },
+        // reveal when 20% visible
+      );
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document
+          .querySelectorAll(
+            ".fade-in, .scale-in, .card-anim, .fade-in-down, .article-root > *",
+          )
+          .forEach((el) => {
+            observer.observe(el);
+          });
+      });
+    </script>
+    <script>
+      import { animate, stagger } from "motion";
+
+      const containers = Array.from(document.querySelectorAll(".animatedText"));
+      const once = new WeakSet();
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting || once.has(entry.target)) return;
+            once.add(entry.target);
+
+            const el = entry.target;
+            const children = el.querySelectorAll("span");
+
+            if (children.length > 0) {
+              // Animate child spans
+              animate(
+                children,
+                { opacity: [0, 1], y: [20, 0] },
+                { duration: 0.6, delay: stagger(0.08), easing: "ease-out" },
+              );
+            } else {
+              // Animate the container itself if it has no spans
+              animate(
+                el,
+                { opacity: [0, 1], y: [20, 0] },
+                { duration: 0.6, easing: "ease-out" },
+              );
+            }
+          });
+        },
+        { threshold: 0.3 },
+      );
+
+      containers.forEach((el) => io.observe(el));
+    </script>
+
+    <!-- Tracking Code by SAI -->
+    <script
+      type="text/javascript"
+      src="https://web-in21.mxradon.com/t/Tracker.js"></script>
+    <script type="text/javascript">
+      pidTracker("57648");
+    </script>
+
+    <script is:inline>
+      function setProspectParameters(leadId, orgCode, trackingDomain) {
+        let expiryDate = new Date();
+        expiryDate.setTime(expiryDate.getTime() + 365 * 24 * 60 * 60 * 1000);
+
+        document.cookie =
+          "ORG" +
+          orgCode +
+          "=" +
+          leadId +
+          ";expires=" +
+          expiryDate.toUTCString() +
+          ";Domain=" +
+          trackingDomain +
+          ";path=/;";
+
+        window.MXCProspectId = leadId;
+        window.leadsquared = window.leadsquared || {};
+        window.leadsquared.tracker = window.leadsquared.tracker || {};
+        window.leadsquared.tracker.pids = window.leadsquared.tracker.pids || {};
+
+        window.leadsquared.tracker.pids[orgCode] = leadId;
+      }
+    </script>
+    <script is:inline>
+      (function waitForMXC() {
+        if (window.MXCProspectId) {
+          setProspectParameters(
+            window.MXCProspectId,
+            77318,
+            ".saiinternational.edu.in",
+          );
+        } else {
+          setTimeout(waitForMXC, 300);
+        }
+      })();
+    </script>
+  </body>
+</html>

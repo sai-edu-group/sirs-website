@@ -1,0 +1,366 @@
+---
+import Input from "@/components/ui/Input.astro";
+import StepCard from "@/components/ui/FormStepsCard.astro";
+import Select from "@/components/ui/Select.astro";
+import Textarea from "@/components/ui/Textarea.astro";
+import Button from "@/components/ui/Button.astro";
+import SectionHeaderMain from "@/components/ui/SectionHeaderMain.astro";
+import Image from "astro/components/Image.astro";
+---
+
+<section
+  class="bg-n-100 mx-auto w-full space-y-6"
+  id="contact-form"
+  data-section="Contact Us"
+>
+  <div
+    class="container mx-auto flex flex-col gap-16 px-6 py-12 md:py-24 lg:px-8 2xl:px-0"
+  >
+    <!-- Section Header -->
+    <SectionHeaderMain
+      title="Got a Question? Just Ask."
+      subtitle="Fill in your details, and one of our team members will reach out shortly."
+    />
+
+    <!-- ONE form for all steps -->
+    <form id="contact-form">
+      <!-- STEP 1 -->
+      <StepCard id="step-1" total={3}>
+        <div class="flex flex-col gap-14 md:gap-20">
+          <div
+            class="grid grid-cols-1 gap-x-20 gap-y-6 sm:grid-cols-2 md:gap-y-9"
+          >
+            <!-- Name Input -->
+            <div data-field>
+              <Input
+                label="Full Name"
+                name="fullName"
+                required
+                placeholder="Enter full name"
+                errorMessage="Full name cannot be empty and should not contain numbers."
+              />
+            </div>
+
+            <!-- Phone number -->
+            <div data-field>
+              <Input
+                label="Phone Number"
+                name="phoneNumber"
+                type="number"
+                required
+                placeholder="Enter phone number"
+                errorMessage="Phone number is required and must contain 10 digits."
+              />
+            </div>
+
+            <!-- Email Input -->
+            <div data-field>
+              <Input
+                label="Email Address"
+                name="email"
+                type="email"
+                required
+                placeholder="Enter email address"
+                errorMessage="A valid Email is required."
+              />
+            </div>
+
+            <!-- Reason for contact -->
+            <Select
+              label="Reason for contact"
+              name="reason"
+              placeholder="Select reason"
+              required
+              options={[
+                {
+                  label: "Want to understand school processes",
+                  value: "Want to understand school processes",
+                },
+                {
+                  label: "Understand school processes",
+                  value: "Understand school processes",
+                },
+              ]}
+              errorMessage="Please select the reason"
+            />
+
+            <!-- Message textarea -->
+            <div class="sm:col-span-2" data-field>
+              <Textarea
+                label="Message"
+                name="message"
+                placeholder="Any specific concerns, requests, or child interests?"
+                errorMessage="Message is required."
+              />
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-end justify-between gap-8 self-end">
+            <!-- Button: Continue to next step -->
+            <Button
+              id="next-1"
+              type="submit"
+              text="Send Message"
+              variant="solid"
+              size="large"
+            />
+          </div>
+        </div>
+      </StepCard>
+
+      <!-- THANK YOU -->
+      <article
+        id="thank-you"
+        class="border-n-200 bg-n-50 slide-parent stagger flex flex-col items-center gap-6 rounded-3xl border px-6 py-8 text-center md:gap-8 md:py-12 lg:gap-10 lg:py-24"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="231"
+          height="134"
+          viewBox="0 0 231 134"
+          fill="none"
+          class="floating-icon h-12 -rotate-10 md:h-24 lg:h-32"
+        >
+          <path
+            d="M103.562 73.5863C98.0365 72.1321 78.2597 58.4628 62.5545 73.5863C46.8494 88.7098 19.22 121.865 4.969 114.012"
+            class="draw-svg"
+            stroke="#CC554D"
+            stroke-width="8"
+            stroke-linecap="round"
+            stroke-dasharray="28 28"></path>
+          <path
+            d="M213.215 37.2109C214.625 37.802 217.655 39.4954 218.671 40.2592C221.586 42.4497 223.357 44.903 224.311 48.0697C224.742 49.4981 224.973 51.2576 224.909 52.6175C224.617 58.8535 220.359 65.5009 210.33 75.383C204.12 81.5018 194.206 90.0236 182.688 99.1443C173.467 106.446 167.223 110.275 161.741 111.99C155.579 113.918 150.089 113.411 144.906 110.437C141.195 108.308 138.508 105.73 135.51 101.424L134.579 100.087L132.967 100.485C129.206 101.415 128.524 101.559 127.449 101.659C125.559 101.835 123.659 101.497 121.805 100.658C117.214 98.5787 114.504 93.5806 115.276 88.6189C115.53 86.991 115.796 86.4065 119.414 79.5347L122.763 73.178L122.329 71.4377C121.021 66.1745 120.374 62.5503 119.898 57.8161C119.187 50.736 119.5 45.9112 120.943 41.7341C121.436 40.307 123.01 37.2474 123.776 36.2266C127.531 31.2241 132.887 28.5636 140.901 27.721C147.429 27.0346 154.975 27.3991 172.413 29.2418C192.332 31.3467 205.245 33.8687 213.215 37.2109ZM212.267 45.26C211.219 44.6875 209.983 44.0705 209.519 43.8879C201.038 40.5484 185.795 37.9865 161.251 35.7767C155.737 35.2801 153.214 35.12 149.67 35.0421C143.22 34.9002 139.635 35.2641 136.141 36.4138C133.389 37.3195 131.7 38.4619 130.087 40.5086C129.237 41.5871 128.172 43.8087 127.774 45.3334C126.878 48.7691 126.905 54.0117 127.855 60.5114C128.137 62.4468 128.775 65.8418 128.865 65.8888C128.9 65.9052 129.442 65.7561 130.071 65.5561C130.701 65.3555 133.441 64.5477 136.159 63.7619C149.834 59.8078 164.076 56.2685 178.09 53.3412C184.698 51.9609 192.046 50.5819 192.7 50.5993C193.268 50.6144 193.46 50.6751 194.239 51.0852C195.022 51.4981 195.176 51.6181 195.523 52.094C196.578 53.5425 196.497 55.5789 195.334 56.8641C194.482 57.8057 194.269 57.8767 189.586 58.7825C169.991 62.5727 154.272 66.3866 134.603 72.1222L130.607 73.2866L130.604 73.6583C130.598 74.5164 130.546 74.6289 126.632 82.1829C122.772 89.6335 122.76 89.6574 122.731 90.211C122.691 90.9825 123.068 92.0719 123.587 92.6837C123.921 93.0775 124.194 93.2804 124.855 93.63C126.15 94.3138 126.299 94.3013 131.226 93.0872C133.559 92.5123 135.701 92.0157 135.986 91.984C137.002 91.871 138.257 92.3133 138.998 93.0441C139.19 93.2327 139.711 93.971 140.157 94.6853C141.907 97.4877 143.749 99.8705 145.374 101.436C147.246 103.241 150.016 104.776 152.293 105.273C154.623 105.781 156.459 105.638 159.409 104.718C164.771 103.046 170.397 99.3606 182.249 89.7598C197.501 77.4042 206.555 69.0923 211.985 62.4603C214.011 59.987 214.561 59.1785 215.756 56.9146C217.018 54.5261 217.238 53.8657 217.297 52.2923C217.347 50.9592 216.841 49.2979 216.071 48.2637C215.122 46.9889 214.427 46.4404 212.267 45.26Z"
+            fill="#CC554D"></path>
+          <path
+            d="M213.215 37.2109C214.625 37.802 217.655 39.4954 218.671 40.2592C221.586 42.4497 223.357 44.903 224.311 48.0697C224.742 49.4981 224.973 51.2576 224.909 52.6175C224.617 58.8535 220.359 65.5009 210.33 75.383C204.12 81.5018 194.206 90.0236 182.688 99.1443C173.467 106.446 167.223 110.275 161.741 111.99C155.579 113.918 150.089 113.411 144.906 110.437C141.195 108.308 138.508 105.73 135.51 101.424L134.579 100.087L132.967 100.485C129.206 101.415 128.524 101.559 127.449 101.659C125.559 101.835 123.659 101.497 121.805 100.658C117.214 98.5787 114.504 93.5806 115.276 88.6189C115.53 86.991 115.796 86.4065 119.414 79.5347L122.763 73.178L122.329 71.4377C121.021 66.1745 120.374 62.5503 119.898 57.8161C119.187 50.736 119.5 45.9112 120.943 41.7341C121.436 40.307 123.01 37.2474 123.776 36.2266C127.531 31.2241 132.887 28.5636 140.901 27.721C147.429 27.0346 154.975 27.3991 172.413 29.2418C192.332 31.3467 205.245 33.8687 213.215 37.2109ZM212.267 45.26C211.219 44.6875 209.983 44.0705 209.519 43.8879C201.038 40.5484 185.795 37.9865 161.251 35.7767C155.737 35.2801 153.214 35.12 149.67 35.0421C143.22 34.9002 139.635 35.2641 136.141 36.4138C133.389 37.3195 131.7 38.4619 130.087 40.5086C129.237 41.5871 128.172 43.8087 127.774 45.3334C126.878 48.7691 126.905 54.0117 127.855 60.5114C128.137 62.4468 128.775 65.8418 128.865 65.8888C128.9 65.9052 129.442 65.7561 130.071 65.5561C130.701 65.3555 133.441 64.5477 136.159 63.7619C149.834 59.8078 164.076 56.2685 178.09 53.3412C184.698 51.9609 192.046 50.5819 192.7 50.5993C193.268 50.6144 193.46 50.6751 194.239 51.0852C195.022 51.4981 195.176 51.6181 195.523 52.094C196.578 53.5425 196.497 55.5789 195.334 56.8641C194.482 57.8057 194.269 57.8767 189.586 58.7825C169.991 62.5727 154.272 66.3866 134.603 72.1222L130.607 73.2866L130.604 73.6583C130.598 74.5164 130.546 74.6289 126.632 82.1829C122.772 89.6335 122.76 89.6574 122.731 90.211C122.691 90.9825 123.068 92.0719 123.587 92.6837C123.921 93.0775 124.194 93.2804 124.855 93.63C126.15 94.3138 126.299 94.3013 131.226 93.0872C133.559 92.5123 135.701 92.0157 135.986 91.984C137.002 91.871 138.257 92.3133 138.998 93.0441C139.19 93.2327 139.711 93.971 140.157 94.6853C141.907 97.4877 143.749 99.8705 145.374 101.436C147.246 103.241 150.016 104.776 152.293 105.273C154.623 105.781 156.459 105.638 159.409 104.718C164.771 103.046 170.397 99.3606 182.249 89.7598C197.501 77.4042 206.555 69.0923 211.985 62.4603C214.011 59.987 214.561 59.1785 215.756 56.9146C217.018 54.5261 217.238 53.8657 217.297 52.2923C217.347 50.9592 216.841 49.2979 216.071 48.2637C215.122 46.9889 214.427 46.4404 212.267 45.26Z"
+            stroke="#F1F5F9"></path>
+        </svg>
+        <div class="flex flex-col items-center gap-2">
+          <!-- Success panel title -->
+          <p
+            class="text-n-700 w-full text-center text-2xl leading-tight font-normal md:text-4xl lg:text-5xl"
+          >
+            Thank you for reaching out.
+          </p>
+        </div>
+
+        <!-- Success panel message -->
+        <p
+          class="text-n-600 font-secondary text-sm font-medium md:text-lg lg:text-2xl"
+        >
+          We’ve received your message and our team will be in touch with you
+          shortly.
+        </p>
+        <!-- Download brochure button -->
+        <Button
+          text="Back to Home"
+          variant="outline"
+          size="large"
+          onClick="window.location='/'"
+        />
+      </article>
+    </form>
+  </div>
+</section>
+
+<style>
+  .draw-svg {
+    stroke-dasharray: 24;
+    stroke-dashoffset: 15;
+    animation: draw 1s ease-in-out forwards alternate infinite;
+  }
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Parent slide animation */
+  .slide-parent {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideParent 0.45s ease-out forwards;
+  }
+
+  @keyframes slideParent {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Stagger children */
+  .stagger > * {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideChild 0.5s ease-out forwards;
+    &:nth-child(1) {
+      opacity: 1;
+      animation: float 6s ease-in-out infinite;
+      will-change: transform;
+    }
+  }
+
+  .stagger > *:nth-child(2) {
+    animation-delay: 0.3s;
+  }
+  .stagger > *:nth-child(3) {
+    animation-delay: 0.45s;
+  }
+  .stagger > *:nth-child(4) {
+    animation-delay: 0.6s;
+  }
+
+  @keyframes slideChild {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-16px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+</style>
+<script>
+  import { EVENTS } from "@/enums/analytics.enum";
+  import {
+    setupFormStartTracking,
+    setupInViewTracking,
+    trackFormViewEvent,
+  } from "@/scripts/analytics";
+
+  const form = document.querySelector(
+    "form#contact-form",
+  ) as HTMLFormElement | null;
+
+  if (form) {
+    setupFormStartTracking(form, EVENTS.ENQUIRY_FORM_STARTED);
+    // Track when form comes into view
+    setupInViewTracking("contact-form", () => {
+      trackFormViewEvent("contact-form", EVENTS.ENQUIRY_FORM_VIEWED);
+    });
+  }
+</script>
+
+<script>
+  // ENUMS //
+  import { EVENTS } from "@/enums/analytics.enum";
+
+  // SCRIPTS //
+  import { trackEvent } from "@/scripts/analytics";
+
+  // SERVICES //
+  import { contactEnquiryRequest } from "@/services/api/form.api.service";
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const step1 = document.getElementById("step-1");
+    const thankYou = document.getElementById("thank-you");
+    const next1 = document.getElementById("next-1");
+
+    // ✅ Ensure initial state
+    step1?.classList.remove("hidden");
+    thankYou?.classList.add("hidden");
+
+    // ✅ Validation function (same as admission form)
+    const validateStep = (stepEl: HTMLElement) => {
+      if (!stepEl) return false;
+      const fields = stepEl.querySelectorAll("input, select, textarea");
+      let valid = true;
+
+      fields.forEach((el) => {
+        const errorText = el
+          .closest("[data-field]")
+          ?.querySelector("[data-error]");
+        let fieldValid = true;
+        const value = el.value.trim();
+
+        // Required check
+        if (el.hasAttribute("required") && !value) fieldValid = false;
+
+        // Email check
+        if (el.type === "email" && value !== "") {
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailPattern.test(value)) fieldValid = false;
+        }
+
+        // ❌ NAME VALIDATION: should NOT contain digits
+        if (el.name === "fullName" && value !== "") {
+          const hasDigits = /\d/.test(value);
+          if (hasDigits) fieldValid = false;
+        }
+
+        // ❌ PHONE VALIDATION: should contain ONLY digits
+        if (el.name === "phoneNumber" && value !== "") {
+          const notNumbers = /\D/.test(value);
+          if (notNumbers || el.value.length !== 10) fieldValid = false;
+        }
+
+        // Style updates
+        if (!fieldValid) {
+          valid = false;
+          el.classList.add("border-red-500", "focus:ring-red-500");
+          errorText?.classList.remove("hidden");
+        } else {
+          el.classList.remove("border-red-500", "focus:ring-red-500");
+          errorText?.classList.add("hidden");
+        }
+      });
+
+      return valid;
+    };
+
+    // ✅ Submit handler (Send Message)
+    next1?.addEventListener("click", async (e) => {
+      e.preventDefault();
+
+      const btn = next1 as HTMLButtonElement;
+      const originalText = btn.innerText;
+
+      // Validate step
+      if (!validateStep(step1)) return;
+
+      // Collect form data
+      const form = document.querySelector("form");
+      if (!form) return;
+
+      // Disable button during request
+      btn.disabled = true;
+      btn.innerText = "Sending...";
+
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await contactEnquiryRequest(payload);
+
+        if (response.status === false) {
+          alert("Something went wrong while submitting your enquiry. Please try again.");
+          btn.disabled = false;
+          btn.innerText = originalText;
+          return;
+        }
+
+        // Track enquiry submitted event
+        trackEvent(EVENTS.ENQUIRY_FORM_COMPLETED, payload);
+
+        // Show thank you screen
+        step1?.classList.add("hidden");
+        thankYou?.classList.remove("hidden");
+      } catch (err) {
+        console.error("❌ Failed to submit enquiry:", err);
+        alert("Something went wrong while submitting your enquiry. Please try again.");
+        btn.disabled = false;
+        btn.innerText = originalText;
+      }
+    });
+  });
+</script>

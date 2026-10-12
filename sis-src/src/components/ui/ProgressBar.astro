@@ -1,0 +1,12 @@
+---
+const { value = 80 } = Astro.props; // value: 0-100
+---
+
+<div class="bg-n-100 h-1 w-full overflow-hidden rounded-xs">
+  <div
+    class="h-full rounded-xs"
+    data-progress-bar
+    style={`width: ${value}%; background: linear-gradient(90deg, #FBBEB8 0%, #F05B40 100%);`}
+  >
+  </div>
+</div>

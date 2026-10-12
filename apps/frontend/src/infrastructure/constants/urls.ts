@@ -5,9 +5,8 @@ export const URLS = {
     ROOT: "/about",
     ETHOS: "/about#ethos",
     GURU_SHISHYA: "/about#guru-shishya",
-    PERFECT_MASTER: "/about#the-perfect-master",
     VISION_MISSION_VALUES: "/about#vision-mission-values",
-    FOUNDER: "/about#founder",
+    FOUNDER: "/about#our-founder",
     KEY_PERSONNEL: "/about#key-personnel",
     ADVISORY_BOARD: "/about#advisory-board",
     AFFILIATIONS: "/about#our-affiliations",
@@ -56,7 +55,7 @@ export const URLS = {
     ROOT: "/media",
     BLOGS: {
       ROOT: "/media/blogs",
-      DETAIL: (slug: string) => `/media/blogs/${slug}`,
+      DETAIL: (id: string, title: string) => `/media/blogs/${id}/${title}`,
     },
     ALBUMS: {
       ROOT: "/media/albums",

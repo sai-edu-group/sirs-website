@@ -1,0 +1,47 @@
+---
+// Renders tags only — Layout.astro owns the <head> element
+
+// DATA //
+import site from "@/data/meta/site.json";
+
+interface Props {
+  title?: string;
+  description?: string;
+  noIndex?: boolean;
+  /** JSON-LD structured data rendered as application/ld+json */
+  schema?: Record<string, unknown>;
+}
+
+// PROPS //
+const { title, description, noIndex = false, schema } = Astro.props;
+
+const metaTitle = title ? `${title} | ${site.siteName}` : site.defaultTitle;
+const metaDesc = description || site.defaultDescription;
+
+// "/admissions" and "/admissions/" share one canonical URL
+const canonicalPath =
+  Astro.url.pathname !== "/" ? Astro.url.pathname.replace(/\/+$/, "") : "/";
+const canonical = new URL(canonicalPath, site.siteUrl).href;
+---
+
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<title>{metaTitle}</title>
+<meta name="description" content={metaDesc} />
+<meta name="viewport" content="width=device-width" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonical} />
+
+<!-- REFERRER POLICY -->
+<meta name="referrer" content="no-referrer-when-downgrade" />
+<!--  -->
+{noIndex && <meta name="robots" content="noindex" />}
+
+<!-- STRUCTURED DATA -->
+{
+  schema && (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  )
+}

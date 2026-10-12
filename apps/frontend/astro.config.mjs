@@ -19,6 +19,9 @@ export default defineConfig({
   srcDir: "./src",
   publicDir: "./public",
   site: "https://www.sairesidentialschool.com/",
+  // The dev toolbar's audits re-fetch every image on each DOM change, which
+  // floods the Network tab while developing (never ships to production).
+  devToolbar: { enabled: false },
   integrations: [astroIcon(), sitemap()],
   vite: {
     plugins: [tailwindcss()],

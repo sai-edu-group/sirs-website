@@ -1,5 +1,6 @@
 ---
-const YOUTUBE_VIDEO_ID = "xKe6hNtTYv0";
+const CAMPUS_TOUR_URL =
+  "https://campusview.360space.in/Sai-International-Residential-School/";
 ---
 
 <section data-section="Home Campus Tour">
@@ -19,26 +20,27 @@ const YOUTUBE_VIDEO_ID = "xKe6hNtTYv0";
           data-campus-image
         />
 
-        <!-- YouTube player, preloaded and hidden so playback starts with
-             no visible loading — the click only triggers a fade + play. -->
+        <!-- 360 campus tour: starts loading quietly after the page has loaded,
+             and fades in over a light grey backdrop once it is ready -->
         <div
-          class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 ease-out"
-          data-campus-video-wrap
+          class="bg-n-100 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 ease-out"
+          data-campus-tour-wrap
         >
           <iframe
-            class="h-full w-full"
-            src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?enablejsapi=1&playsinline=1&rel=0&cc_load_policy=0&controls=0&modestbranding=1&iv_load_policy=3&disablekb=1`}
-            title="Campus tour video"
+            class="h-full w-full opacity-0 transition-opacity duration-500 ease-out data-[loaded]:opacity-100"
+            data-src={CAMPUS_TOUR_URL}
+            title="360 degree virtual campus tour"
             frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="fullscreen; accelerometer; gyroscope; xr-spatial-tracking"
             allowfullscreen
-            data-campus-video
+            data-campus-tour
           ></iframe>
         </div>
 
         <!-- Distance pills, top-left, tilted + stacked — hidden on mobile -->
         <div
-          class="absolute top-5 -left-2 hidden -rotate-3 flex-col items-start gap-1.5 md:top-8 md:-left-4 md:flex md:gap-2"
+          class="pointer-events-none absolute top-5 -left-2 hidden -rotate-3 flex-col items-start gap-1.5 transition-opacity duration-500 ease-out md:top-8 md:-left-4 md:flex md:gap-2"
+          data-campus-pills
         >
           <span
             class="font-secondary bg-orange-500 -rotate-2 rounded-md px-4 py-2 text-sm font-medium text-white shadow-lg md:px-6 md:text-base"
@@ -61,7 +63,7 @@ const YOUTUBE_VIDEO_ID = "xKe6hNtTYv0";
         <button
           type="button"
           class="bg-orange-500 hover:bg-orange-600 absolute top-1/2 left-1/2 flex size-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full shadow-xl transition duration-300 ease-out md:size-24"
-          aria-label="Play campus tour video"
+          aria-label="Start the 360 degree campus tour"
           data-campus-play
         >
           <svg
@@ -124,7 +126,7 @@ const YOUTUBE_VIDEO_ID = "xKe6hNtTYv0";
     <!-- Overlapping white card, bottom-left -->
     <div class="relative z-10 px-2 md:px-8 lg:px-0">
       <div
-        class="-mt-8 w-full rounded-3xl bg-white p-6 shadow-[0_20px_60px] shadow-n-900/12 transition-[margin-top] duration-700 ease-out lg:-mt-24 lg:w-[46%] lg:p-9"
+        class="-mt-8 w-full rounded-3xl bg-white p-6 shadow-[0_20px_60px] shadow-n-900/12 transition-opacity duration-500 ease-out lg:-mt-24 lg:w-[46%] lg:p-9"
         data-campus-card
       >
         <h2

@@ -1,0 +1,78 @@
+---
+// DATA //
+import {
+  sectionHeaderContent,
+  visionMissionCards,
+  type VisionMissionTone,
+} from "@/data/about/vision-mission";
+
+// Colour treatment per card: placeholder block + label colour
+const tones: Record<VisionMissionTone, { block: string; label: string }> = {
+  orange: { block: "bg-orange-500", label: "text-orange-500" },
+  violet: { block: "bg-violet-100", label: "text-violet-500" },
+  slate: { block: "bg-n-200", label: "text-n-500" },
+};
+---
+
+<section
+  class="bg-n-100"
+  id="vision-mission-values"
+  data-section="Vision Mission Commitment"
+>
+  <div class="container mx-auto px-6 py-16 lg:px-8 lg:py-24 2xl:px-0">
+    <!-- Section header -->
+    <div class="space-y-2 lg:space-y-4">
+      <h2
+        class="text-3xl font-medium text-orange-500 md:text-5xl lg:text-6xl lg:leading-[64px]"
+      >
+        {sectionHeaderContent.title}
+      </h2>
+      <p class="font-secondary text-n-600 text-base md:text-lg lg:text-xl">
+        {sectionHeaderContent.subtitle}
+      </p>
+    </div>
+
+    <!-- Cards -->
+    <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3 lg:mt-14 lg:gap-8">
+      {
+        visionMissionCards.map((card) => (
+          <article class="border-n-200 bg-n-50 flex flex-col gap-5 rounded-3xl border p-4 md:p-5 lg:p-8">
+            {card.image ? (
+              <div class="aspect-[7/4] w-full overflow-hidden rounded-2xl">
+                <img
+                  src={card.image}
+                  alt={card.imageAlt ?? ""}
+                  class="size-full object-cover object-right"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            ) : (
+              <div
+                class:list={["aspect-[7/4] w-full rounded-2xl", tones[card.tone].block]}
+                aria-hidden="true"
+              />
+            )}
+
+            <div class="space-y-3 px-1 pb-2">
+              <p
+                class:list={[
+                  "font-secondary text-xs font-semibold tracking-[0.15em] uppercase md:text-sm",
+                  tones[card.tone].label,
+                ]}
+              >
+                {card.label}
+              </p>
+              <h3 class="text-n-900 text-xl leading-snug font-semibold md:text-2xl">
+                {card.heading}
+              </h3>
+              <p class="font-secondary text-n-600 text-sm leading-relaxed md:text-base">
+                {card.description}
+              </p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

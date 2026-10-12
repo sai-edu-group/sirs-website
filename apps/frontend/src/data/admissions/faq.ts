@@ -16,11 +16,14 @@ export const faqDetails: FaqDetail[] = [
   },
   {
     question: "What is the admission process?",
-    answer: "Admission takes three simple steps:",
+    answer: "Admission is a simple six-step journey:",
     pointers: [
-      "Enquire — share a few quick details so we can guide you better.",
-      "Visit — walk the 49-acre campus with our admissions team, in person or online.",
-      "Join the family — complete the application, interaction and enrolment formalities.",
+      "Fill in a quick inquiry form.",
+      "Get a personal call from our admissions counsellor.",
+      "Visit the 49-acre campus, or take a virtual tour.",
+      "Submit the application and documents.",
+      "Go through a short assessment and interaction.",
+      "Receive your offer of admission.",
     ],
   },
   {

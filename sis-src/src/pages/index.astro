@@ -1,0 +1,43 @@
+---
+// LAYOUT //
+import Layout from "@/layouts/Layout.astro";
+
+// SECTIONS //
+import Awards from "@/sections/home/Awards.astro";
+import BookATour from "@/sections/home/BookATour.astro";
+import Founder from "@/sections/home/Founder.astro";
+import News from "@/sections/home/News.astro";
+import Testimonial from "@/sections/home/Testimonial.astro";
+import Partners from "@/sections/home/Partners.astro";
+import OurCampuses from "@/sections/home/OurCampuses.astro";
+import Learning360 from "@/sections/home/Learning360.astro";
+import Ethos from "@/sections/home/Ethos.astro";
+import Stats from "@/sections/home/Stats.astro";
+import Results from "@/sections/home/Results.astro";
+import Placements from "@/sections/home/Placements.astro";
+import Hero from "@/sections/home/Hero.astro";
+import NewsLetter from "@/sections/home/NewsLetter.astro";
+
+// DATA //
+// Home has no own title/description: Meta falls back to site.json defaults
+import homeSchema from "@/data/meta/home-schema.json";
+---
+
+<Layout meta={{ schema: homeSchema }}>
+  <Hero />
+  <Stats />
+  <Learning360 />
+  <BookATour />
+  <Results />
+  <Placements />
+  <Awards />
+  <OurCampuses />
+  <Ethos />
+  <Founder />
+  <Testimonial client:idle />
+  <div class="bg-n-100">
+    <News />
+  </div>
+  <NewsLetter client:visible />
+  <Partners client:visible />
+</Layout>

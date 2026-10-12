@@ -1,0 +1,45 @@
+{
+  "@context": "https://schema.org",
+  "@type": "School",
+  "@id": "https://www.saiinternational.edu.in/#school",
+  "name": "SAI International School",
+  "url": "https://www.saiinternational.edu.in/",
+  "logo": "https://www.saiinternational.edu.in/images/sai-brand-logo.png?dpl=dpl_qxtBQf2Y9uVDnLeNY8xdngZhxzfg",
+  "image": "https://www.saiinternational.edu.in/images/assessment.jpg",
+  "description": "SAI International School is the best CBSE school in Bhubaneswar, offering quality education and all-round growth. Enquire today!",
+  "telephone": "+91-9917480913",
+  "email": "admissions@saiinternational.edu.in",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Plot -5A, Infocity, Chandrasekharpur",
+    "addressLocality": "Bhubaneswar",
+    "addressRegion": "Odisha",
+    "postalCode": "751024",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 20.34468591272391,
+    "longitude": 85.81497265264194
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opens": "07:30",
+      "closes": "16:00"
+    }
+  ],
+  "sameAs": [
+    "https://www.facebook.com/saiinternationalschool",
+    "https://www.youtube.com/@saiinternationalschool"
+  ],
+  "hasMap": "https://maps.app.goo.gl/HHN25EnhGCn6T4xw8"
+}

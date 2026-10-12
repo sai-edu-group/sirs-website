@@ -1,0 +1,42 @@
+---
+// COMPONENTS //
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
+import ArticleConsumption from "@/components/ui/ArticleConsumption.astro";
+
+// OTHERS //
+import Layout from "@/layouts/Layout.astro";
+
+// DATA //
+import { ethosDetails } from "@/data/about/ethos";
+
+// CONSTANTS //
+import { URLS } from "@/infrastructure/constants/urls";
+
+
+// Prepare breadcrumb items
+const breadcrumbItems = [
+  { label: "About", href: URLS.ABOUT },
+  { label: ethosDetails.sectionHeaderContent.title, href: `#` },
+];
+
+// Prepare section header details
+const sectionHeaderDetails = {
+  title: ethosDetails.sectionHeaderContent.title,
+  subtitle: ethosDetails.sectionHeaderContent.subtitle,
+};
+---
+
+<Layout>
+  <!-- Breadcrumbs Section -->
+  <div class="bg-n-50 relative w-full overflow-hidden">
+    <div
+      class="container mx-auto px-6 pt-30 pb-5 md:pt-40 md:pb-8 lg:pb-9 2xl:px-0"
+    >
+      <Breadcrumbs items={breadcrumbItems} />
+    </div>
+  </div>
+  <ArticleConsumption
+    sectionHeaderDetails={sectionHeaderDetails}
+    articleDetail={ethosDetails.ethosContent}
+  />
+</Layout>

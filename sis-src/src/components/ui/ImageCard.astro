@@ -1,0 +1,105 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  image: string;
+  categoryText?: string;
+  caption?: string;
+  uploadedBy?: string;
+  classes?: string;
+  index?: number; // NEW
+  readMoreUrl?: string;
+  showExpandButton?: boolean;
+}
+
+const {
+  image = "/images/default/news-article-image.png",
+  categoryText = "",
+  caption = "",
+  uploadedBy = "",
+  classes = "",
+  index = 0,
+  readMoreUrl = "",
+  showExpandButton = true,
+} = Astro.props as Props;
+---
+
+<div
+  class={`cursor-pointer group relative flex w-full max-w-xl overflow-hidden rounded-2xl border-2 border-n-200 bg-cover bg-center ${classes}`}
+>
+  {
+    categoryText && (
+      <div class="font-secondary text-n-600 bg-n-50 absolute top-5 right-5 rounded-lg px-2.5 py-2 text-xs font-medium shadow lg:text-base">
+        {categoryText}
+      </div>
+    )
+  }
+
+  <Image
+    src={image}
+    alt={caption}
+    class="w-full object-cover"
+    width="1200"
+    height="800"
+  />
+
+  <div
+    class="absolute bottom-0 left-0 flex w-full flex-col gap-2 p-4"
+    style={`background-image: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.61) 36%, rgba(255,255,255,1) 100%)`}
+  >
+    {
+      caption && (
+        <p class="text-2xl leading-tight font-medium sm:text-4xl">{caption}</p>
+      )
+    }
+
+    <div class="flex justify-between">
+      {
+        uploadedBy && (
+          <p class="font-secondary text-n-600 text-sm sm:text-base">
+            {uploadedBy}
+          </p>
+        )
+      }
+
+      {
+        readMoreUrl !== "" && (
+          <a
+            class="flex items-center gap-2 hover:cursor-pointer"
+            aria-label="Expand image"
+            href={readMoreUrl}
+          >
+            <Icon name="read-more" />
+            <p class="font-secondary text-n-500 text-xs sm:text-sm">
+              Read More
+            </p>
+          </a>
+        )
+      }
+      {
+        showExpandButton && readMoreUrl === "" && (
+          <button
+            class="flex items-center gap-2 hover:cursor-pointer"
+            aria-label="Expand image"
+          >
+            <Icon name="expand" />
+            <p class="font-secondary text-n-500 text-xs sm:text-sm">
+              Click to Expand
+            </p>
+          </button>
+        )
+      }
+    </div>
+  </div>
+
+  {
+    showExpandButton && readMoreUrl === "" && (
+      <div
+        class="absolute inset-0 z-10 h-full w-full cursor-pointer"
+        data-lightbox-index={index}
+        data-lightbox-src={image}
+      />
+    )
+  }
+</div>

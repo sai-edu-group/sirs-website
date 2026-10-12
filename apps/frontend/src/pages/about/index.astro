@@ -1,17 +1,35 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 
-import Hero from "@/sections/about/Hero.astro";
-import Vision from "@/sections/about/Vision.astro";
-import SISEthos from "@/sections/about/SISEthos.astro";
+// COMPONENTS //
+import PageHero from "@/components/ui/PageHero.astro";
+
+// SECTIONS //
+import VisionMission from "@/sections/about/VisionMission.astro";
+import Ethos from "@/sections/about/Ethos.astro";
+import Founder from "@/sections/about/Founder.astro";
+import LearningAndBeyond from "@/sections/about/LearningAndBeyond.astro";
 import SISTeam from "@/sections/about/SISTeam.astro";
 import SIKeyMembers from "@/sections/about/SIKeyMembers.astro";
 ---
 
 <Layout meta={{ title: "About" }}>
-  <Hero />
-  <Vision />
-  <SISEthos />
+  <PageHero
+    dataSection="About Hero"
+    eyebrow="About SIRS"
+    title="Education rooted in values. Designed for the future."
+    highlight="for the future."
+    description="A CBSE boarding school where character is built alongside curriculum, blending Indian values with contemporary learning."
+    image="/images/about-hero.webp"
+    imageAlt="A group of SIRS students in uniform talking together"
+    titleSize="compact"
+    archShape="wide"
+    frame="line"
+  />
+  <VisionMission />
+  <Ethos />
+  <Founder />
+  <LearningAndBeyond />
   <SISTeam />
   <SIKeyMembers />
 </Layout>

@@ -33,12 +33,16 @@ const {
 <div class="flex flex-col gap-9">
   <!-- Header Container -->
   <div class="flex flex-col gap-9">
-    <SectionHeaderMain
-      title={title}
-      subtitle={subtitle}
-      eyebrowText={eyebrowText}
-      ctaText={ctaText}
-    />
+    {
+      (title || subtitle || eyebrowText || ctaText) && (
+        <SectionHeaderMain
+          title={title}
+          subtitle={subtitle}
+          eyebrowText={eyebrowText}
+          ctaText={ctaText}
+        />
+      )
+    }
 
     <!-- Meta Strip -->
     {metaStripDetails && <MetaStrip {...metaStripDetails} />}

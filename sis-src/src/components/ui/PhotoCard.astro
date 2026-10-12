@@ -1,0 +1,54 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  image: string;
+  classes?: string;
+  index?: number;
+  showExpandButton?: boolean;
+}
+
+const {
+  image = "/images/default/news-article-image.png",
+  classes = "",
+  index = 0,
+  showExpandButton = true,
+} = Astro.props as Props;
+---
+
+<div
+  data-lightbox-index={index}
+  data-lightbox-src={image}
+  class={`group relative cursor-pointer flex w-full max-w-xl overflow-hidden rounded-2xl border-2 border-n-200 bg-cover bg-center ${classes}`}
+>
+  <!-- IMAGE -->
+  <Image
+    src={image}
+    alt="Album Image"
+    class="w-full object-cover transition-transform duration-300 group-hover:scale-105"
+    width="1200"
+    height="800"
+  />
+
+  <!-- GRADIENT OVERLAY -->
+  <div
+    class="absolute inset-0 bg-linear-to-b from-black/0 to-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+  >
+  </div>
+
+  <!-- BOTTOM BUTTON -->
+  {
+    showExpandButton && (
+      <div class="absolute right-0 bottom-0 z-1 hidden p-4 text-right transition-opacity duration-300 group-hover:block">
+        <button
+          class="flex items-center gap-2 hover:cursor-pointer"
+          aria-label="Expand image"
+        >
+          <Icon name="expand" class="fill-n-50" />
+          <p class="font-secondary text-n-50 text-xs sm:text-sm">Expand</p>
+        </button>
+      </div>
+    )
+  }
+</div>

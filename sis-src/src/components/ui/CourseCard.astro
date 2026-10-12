@@ -1,0 +1,64 @@
+---
+// COMPONENTS //
+import Image from "astro/components/Image.astro";
+
+// OTHERS //
+import Button from "./Button.astro";
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  ctaText?: string;
+  onCtaClick: string;
+  image?: string;
+  classes?: string;
+}
+const {
+  title = "",
+  subtitle = "",
+  ctaText = "",
+  onCtaClick = "",
+  image = "/results/career/student.png",
+  classes = "",
+} = Astro.props as Props;
+---
+
+<div
+  class={`bg-n-50 border-n-200 flex flex-col gap-4 rounded-2xl border-2 p-5 ${classes}`}
+>
+  <!-- Course Image -->
+  <Image
+    src=`/images/${image}`
+    alt={title}
+    class="h-[210px] w-full rounded-[21px] object-cover"
+    loading="lazy"
+    decoding="async"
+    width={400}
+    height={210}
+  />
+
+  <!-- Course Details -->
+  <div class="flex flex-1 flex-col justify-between gap-7">
+    <!-- Course Name and Description -->
+    <div class="flex flex-col gap-2">
+      <p class="text-n-800 text-3xl leading-tight font-semibold">{title}</p>
+      {
+        subtitle && (
+          <p class="text-n-500 font-secondary text-base">{subtitle}</p>
+        )
+      }
+    </div>
+
+    <!-- Call to Action Button -->
+    {
+      ctaText && (
+        <Button
+          text={ctaText}
+          size="small"
+          extraClasses="w-full"
+          onClick={onCtaClick}
+        />
+      )
+    }
+  </div>
+</div>

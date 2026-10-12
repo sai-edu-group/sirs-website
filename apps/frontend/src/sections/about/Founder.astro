@@ -1,5 +1,134 @@
 ---
-import DummySection from "@/components/ui/DummySection.astro";
+import Rath from "@/components/vectors/Rath.astro";
+import { URLS } from "@/infrastructure/constants/urls";
+import Image from "astro/components/Image.astro";
+import BijayaSirImage from "@/assets/images/bijaya-sir.png";
 ---
-<!-- TODO: Replace with real section content -->
-<DummySection name="About — Founder" />
+
+<section
+  class="bg-n-100 relative w-full overflow-hidden"
+  id="our-founder"
+  data-section="Our Founder"
+>
+  <!-- Container -->
+  <div
+    class="container mx-auto px-6 pt-12 pb-40 md:pt-20 md:pb-48 lg:pt-20 2xl:px-0"
+  >
+    <div class="flex flex-col gap-6 md:gap-11 lg:gap-20 2xl:gap-20">
+      <!-- Header row -->
+      <div
+        class="flex flex-col items-start justify-between gap-14 md:gap-24 lg:flex-row"
+      >
+        <!-- Title -->
+        <div class="relative">
+          <p class="text-n-800 text-lg leading-none font-medium md:text-4xl">
+            Our
+          </p>
+          <p class="text-n-800 text-5xl leading-none font-medium md:text-8xl">
+            Founder
+          </p>
+          <Image
+            src={"/icons/double-lines.svg"}
+            alt=""
+            class="absolute -bottom-3 left-2 h-[19px] w-[130px] md:-bottom-5 md:h-[34px] md:w-[232px]"
+            width={232}
+            height={34}
+          />
+        </div>
+
+        <!-- Founder Name -->
+        <div class="relative z-1 gap-1 lg:w-474/1536 lg:min-w-[474px]">
+          <p class="text-n-900 text-2xl leading-none font-medium md:mb-0">
+            Late
+          </p>
+          <div
+            class="text-3xl leading-[105%] font-semibold text-orange-500 md:text-6xl 2xl:text-6xl"
+          >
+            <p class="">Dr. Bijaya</p>
+            <p>Kumar Sahoo</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content row -->
+      <div class="relative flex flex-col gap-10 overflow-visible">
+        <!-- Left text -->
+        <div
+          class="font-secondary relative z-2 flex w-full flex-col gap-8 md:gap-10 xl:w-1/2"
+        >
+          <div class="flex flex-col gap-5 md:gap-12">
+            <p
+              class="text-n-600 text-xl leading-[28px] font-medium md:text-3xl md:leading-[43px] 2xl:text-3xl 2xl:leading-[43px]"
+            >
+              “Education is not just the filling of a mind, but the shaping of a
+              soul.
+              <span class="text-orange-500">
+                At SAI, we don't just teach we transform.</span
+              >”
+            </p>
+
+            <div
+              class="text-n-600 flex flex-col gap-4 text-base leading-[28px] font-light md:w-530/768 md:gap-7 md:text-xl md:leading-8 xl:w-full"
+            >
+              <p>
+                Dr. Bijaya Kumar Sahoo believed that every child carries within
+                them a limitless light — and that a school’s true duty is to
+                help that light shine.
+              </p>
+              <p>
+                A pioneer in 21st-century education, he founded SAI
+                International School with a dream to blend global excellence
+                with Indian values. His vision gave rise to one of India’s
+                finest schools — where curiosity is celebrated, creativity is
+                nurtured, and character is shaped with care.
+              </p>
+            </div>
+          </div>
+
+          <a
+            id="read-more-about-our-founder"
+            href={`${URLS.ABOUT.ROOT}/founder/late-dr.-bijaya-kumar-sahoo`}
+            class="relative w-1/2 min-w-[170px] text-lg leading-[24px] font-medium text-orange-500 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-current after:transition-[width] after:duration-300 hover:after:w-full md:w-fit md:text-xl"
+          >
+            Read More About Our Founder
+          </a>
+          <p class="text-orange-500">| <a class="relative w-1/2 min-w-[170px] text-lg leading-[24px] font-medium text-orange-500 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-current after:transition-[width] after:duration-300 hover:after:w-full md:w-fit md:text-xl" href="https://bijayaksahoo.com" target="_blank" >Website</a> | <a class="relative w-1/2 min-w-[170px] text-lg leading-[24px] font-medium text-orange-500 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-current after:transition-[width] after:duration-300 hover:after:w-full md:w-fit md:text-xl" href="https://en.wikipedia.org/wiki/Bijaya_Kumar_Sahoo" target="_blank" >Wikipedia</a> | <a class="relative w-1/2 min-w-[170px] text-lg leading-[24px] font-medium text-orange-500 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-current after:transition-[width] after:duration-300 hover:after:w-full md:w-fit md:text-xl" href="https://bijayaksahoo.com/ctbook/" target="_blank" >A Journey of Purpose</a> |</p>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- Rath Image -->
+
+  <Rath
+    classes="animate-rath-drive absolute bottom-0 z-0 w-[162px] h-[106px] md:w-[330px] md:h-[218px] lg:w-[420px] lg:h-[280px] xl:w-[504px] xl:h-[333px]"
+  />
+
+  <!-- <img
+    src="/images/rath.png"
+    alt=""
+    class="animate-rath-drive absolute bottom-0 z-0 w-[96px] md:w-[300px] lg:w-[400px] 2xl:w-[500px]"
+  /> -->
+
+  <!-- Right image cluster (positioned as per design) -->
+  <Image
+    src={BijayaSirImage}
+    alt="Founder portrait"
+    class="absolute right-0 bottom-0 z-0 h-auto w-1/2 w-[260px] md:w-[468px] lg:w-[44%] lg:min-w-[500px]"
+    width={600}
+    height={800}
+  />
+
+  <script>
+    import {
+      setupClickTracking,
+      trackReadMoreClick,
+    } from "@/scripts/analytics";
+
+    // Track Read More About Our Founder button click
+    setupClickTracking("read-more-about-our-founder", () => {
+      trackReadMoreClick("Our Founder");
+    });
+  </script>
+</section>

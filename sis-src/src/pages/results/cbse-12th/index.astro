@@ -1,0 +1,57 @@
+---
+// COMPONENTS //
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
+
+// OTHERS //
+import Layout from "@/layouts/Layout.astro";
+
+// META //
+import cbse12thMeta from "@/data/meta/results/cbse-12th/cbse-12th.json";
+
+// COMPONENTS //
+import CourseCard from "@/components/ui/CourseCard.astro";
+import SectionHeaderMain from "@/components/ui/SectionHeaderMain.astro";
+
+// DATA //
+import {
+  cbseClasses,
+  cbseTwelthBreadcrumbItems,
+  cbseTwelthSectionHeader,
+} from "@/data/results/cbse-12th";
+import { URLS } from "@/infrastructure/constants/urls";
+---
+
+<Layout meta={cbse12thMeta}>
+  <section class="bg-n-50 relative w-full overflow-hidden">
+    <div
+      class="container m-auto flex flex-col gap-9 px-5 pt-32 pb-14 md:gap-14 lg:gap-16 lg:pt-40"
+    >
+      <!-- Breadcrumbs Section -->
+      <Breadcrumbs items={cbseTwelthBreadcrumbItems} />
+
+      <div class="flex flex-col gap-8 md:gap-12 lg:gap-14">
+        <!-- Section Header -->
+        <SectionHeaderMain
+          title={cbseTwelthSectionHeader.title}
+          subtitle={cbseTwelthSectionHeader.subtitle}
+        />
+
+        <!-- Courses -->
+        <div
+          class="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3"
+        >
+          {
+            cbseClasses.map((course) => (
+              <CourseCard
+                title={`${course.name} Results`}
+                image={`results/12th/course-${course.id}.jpg`}
+                onCtaClick={`window.location.href = "${URLS.RESULTS.CBSE_12.STREAM(course.id.toString())}?year=${course.years[0]}"`}
+                ctaText="Show Results"
+              />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
