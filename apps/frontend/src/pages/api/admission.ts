@@ -1,3 +1,6 @@
+// This route runs on demand (it reads server-only secrets)
+export const prerender = false;
+
 // MODULES //
 import axios from "axios";
 

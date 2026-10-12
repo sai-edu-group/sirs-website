@@ -32,7 +32,23 @@ function initHero(hero: HeroEl) {
   if (videos.length > 1) {
     videoStage?.classList.add("is-enhanced");
     videos[0]?.classList.add("is-active");
-    loadVideo(videos[1]);
+
+    // Fetch the second clip only once the first is playable (or after a
+    // short wait), so the two never fight over bandwidth at page load.
+    // crossfadeVideo() loads a clip on demand anyway if it is needed sooner.
+    const warmNextVideo = () => loadVideo(videos[1]);
+    const startWarmUp = () => {
+      if (videos[0].readyState >= 4) {
+        warmNextVideo();
+      } else {
+        videos[0].addEventListener("canplaythrough", warmNextVideo, {
+          once: true,
+        });
+        window.setTimeout(warmNextVideo, 6000);
+      }
+    };
+    if (document.readyState === "complete") startWarmUp();
+    else window.addEventListener("load", startWarmUp, { once: true });
   }
 
   function setActiveDot(activeIndex: number) {

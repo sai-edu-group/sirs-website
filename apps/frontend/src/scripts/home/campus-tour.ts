@@ -10,10 +10,11 @@ function initCampusTour(section: Element) {
   const card = section.querySelector<HTMLElement>("[data-campus-card]");
   const pills = section.querySelector<HTMLElement>("[data-campus-pills]");
 
-  // The 360 viewer is heavy, so it is never loaded with the page. It starts
-  // loading (hidden) once the page has loaded and the browser is idle, so
-  // it is usually ready by the time the play button is clicked. Clicking
-  // play before that simply starts the load straight away.
+  // The 360 viewer is heavy (its own player script plus panorama tiles), so
+  // it is not loaded with the page. It starts loading, hidden, once this
+  // section is within about 600px of the viewport (or the play button
+  // is hovered), so it is normally ready by the time play is clicked.
+  // Clicking play first simply starts the load straight away.
   const loadTour = () => {
     if (!tour || tour.getAttribute("src") || !tour.dataset.src) return;
     tour.src = tour.dataset.src;
@@ -29,18 +30,20 @@ function initCampusTour(section: Element) {
   }).connection;
 
   if (!connection?.saveData) {
-    const preload = () => {
-      if ("requestIdleCallback" in window) {
-        window.requestIdleCallback(loadTour, { timeout: 4000 });
-      } else {
-        setTimeout(loadTour, 2000);
-      }
-    };
+    playBtn?.addEventListener("pointerenter", loadTour, { once: true });
+    playBtn?.addEventListener("focus", loadTour, { once: true });
 
-    if (document.readyState === "complete") {
-      preload();
-    } else {
-      window.addEventListener("load", preload, { once: true });
+    if ("IntersectionObserver" in window) {
+      const nearView = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            nearView.disconnect();
+            loadTour();
+          }
+        },
+        { rootMargin: "600px 0px" },
+      );
+      nearView.observe(section);
     }
   }
 

@@ -14,7 +14,9 @@ const __dirname = nodePath.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server",
+  // Pages are built ahead of time and served from the CDN; only routes that
+  // set `prerender = false` (the API route and blog detail) run on demand.
+  output: "static",
   adapter: vercel(),
   srcDir: "./src",
   publicDir: "./public",
