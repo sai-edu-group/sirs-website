@@ -1,0 +1,35 @@
+Page,Section,UI Done ?,Data Development,API Development
+Home,Hero,Yes,Yes,Yes
+Home,Stats,No,No,No
+Home,CampusTour,Yes,Yes,Yes
+Home,SISResults,No,No,No
+Home,CampusLifeStrip,Yes,Yes,Yes
+Home,SISTestimonials,No,No,No
+Home,LeaderPromise,Yes,Yes,Yes
+Home,SISPlacements,No,Yes,No
+Home,SISStats,No,No,No
+Home,Testimonials,No,No,No
+Home,WhySAI,No,No,No
+About,Hero,Yes,Yes,Yes
+About,Vision,Yes,Yes,Yes
+About,SISEthos,No,No,No
+About,Leadership,No,Yes,No
+About,FinalCTA,No,No,Yes
+Admissions,Hero,Yes,Yes,Yes
+Admissions,Overview,Yes,Yes,Yes
+Admissions,Process,No,Yes,No
+Admissions,Form,No,No,Yes
+Contact-us,Hero,Yes,Yes,Yes
+Contact-us,Form,No,No,No
+Contact-us,Map,No,Yes,No
+Awards Listing,Awards,Yes,Yes,Yes
+Albums Listing,Albums,Yes,No,Yes
+Blogs Listing,News,Yes,Yes,No
+Blog Consumption,Blog Consumption,Yes,No,-
+Vision & Mission Consumption,Vision & Mission,Yes,Yes,No
+Sirs-experience,Hero,No,No,No
+Sirs-experience,Academics,No,Yes,No
+Sirs-experience,Arts,No,No,Yes
+Sirs-experience,Boarding,No,Yes,No
+Sirs-experience,Digital,No,No,Yes
+Sirs-experience,Sports,No,Yes,No

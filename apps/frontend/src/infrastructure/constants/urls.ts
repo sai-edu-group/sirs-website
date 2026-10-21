@@ -14,7 +14,8 @@ export const URLS = {
       CURRICULUM: (name: string) => `/sirs-experience/curriculum/${name}`,
       AMENITY: (name: string) => `/sirs-experience/amenities/${name}`,
       SAI_SEVA: (name: string) => `/sirs-experience/sai-seva/${name}`,
-      FLAGSHIP_EVENT: (name: string) => `/sirs-experience/flagship-events/${name}`,
+      FLAGSHIP_EVENT: (name: string) =>
+        `/sirs-experience/flagship-events/${name}`,
     },
     TEAM_MEMBER: (name: string) => `/about/team/${name}`,
     ADVISORY_MEMBER: (name: string) => `/about/advisory/${name}`,
@@ -39,6 +40,11 @@ export const URLS = {
     ROOT: "/results",
   },
 
+  NEWS: {
+    ROOT: "/news",
+    ITEM: (id: string, title: string) => `/news/${id}/${title}`,
+  },
+
   MEDIA: {
     ROOT: "/media",
     BLOGS: {
@@ -47,6 +53,12 @@ export const URLS = {
     },
     ALBUMS: {
       ROOT: "/media/albums",
+    },
+
+    NEWS: {
+      ROOT: "/media/news-and-blogs",
+      ITEM: (id: string, title: string) =>
+        `/media/news-and-blogs/${id}/${title}`,
     },
   },
 
