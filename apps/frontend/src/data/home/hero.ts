@@ -1,20 +1,36 @@
-export const eyebrowText = "SAI International Residential School";
+export const eyebrowText = "At SIRS, we're all about";
+
+/** Hero clips, stored in /public/videos/home-hero */
+const heroVideos = {
+  campusAerial: "/videos/home-hero/campus-aerial.mp4",
+  practicalLearning: "/videos/home-hero/practical-learning.mp4",
+  sportsFacilities: "/videos/home-hero/sports-facilities.mp4",
+  studentActivities: "/videos/home-hero/student-activities.mp4",
+  scienceLab: "/videos/home-hero/science-lab.mp4",
+};
 
 export const heroSlides = [
   {
-    headline: "A Day Well Spent at SIRS",
-    video: "/videos/hero-1.mp4",
+    headline:
+      "Discovering their brightest future in a home that celebrates who they are.",
+    video: heroVideos.campusAerial,
   },
   {
-    headline: "Where Learning Meets Adventure",
-    video: "/videos/hero-2.mp4",
+    headline:
+      "Growing into confident, global-minded leaders rooted in Indian values.",
+    video: heroVideos.practicalLearning,
   },
   {
-    headline: "Where Character is Built",
-    video: "/videos/hero-3.mp4",
+    headline: "Balancing academics, sports and the arts in one holistic day.",
+    video: heroVideos.sportsFacilities,
   },
   {
-    headline: "Where Dreams Take Flight",
-    video: "/videos/hero-4.mp4",
+    headline: "Building lifelong friendships in a home away from home.",
+    video: heroVideos.studentActivities,
+  },
+  {
+    headline:
+      "Belonging to a community that never lets you feel far from family.",
+    video: heroVideos.scienceLab,
   },
 ];
