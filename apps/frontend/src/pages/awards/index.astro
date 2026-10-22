@@ -1,8 +1,129 @@
 ---
+export const prerender = false; // Render on Server
+
+// ENUMS //
+import { IMAGE_TYPES } from "@/enums/image.enum";
+
+// COMPONENTS //
+import FilterBar from "@/components/ui/FilterBar.astro";
+import SectionHeaderMain from "@/components/ui/SectionHeaderMain.astro";
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
+import AwardsCard from "@/components/ui/AwardsCard.astro";
+import EmptyState from "@/components/ui/EmptyState.astro";
+
+// API SERVICES //
+import { fetchAwardsRequest } from "@/services/api/awards.api.service";
+import { fetchSessionsRequest } from "@/services/api/sessions.api.service";
+
+// CONSTANTS //
+import { URLS } from "@/infrastructure/constants/urls";
+
+// UTILS //
+import { generateImagePath } from "@/utils/image.utils";
+import type { YearOptionData } from "@/utils/year.utils";
+
+// OTHERS //
 import Layout from "@/layouts/Layout.astro";
-import DummySection from "@/components/ui/DummySection.astro";
+
+// DATA //
+import awardsMeta from "@/data/meta/awards/awards.json";
+import {
+  awardsBreadcrumbItems,
+  awardsSectionHeader,
+} from "@/data/awards";
+
+// META //
+
+const allAwardSessions = await fetchSessionsRequest("awards");
+const requestedSessionName = Astro.url.searchParams.get("session") ?? "";
+const fallbackSessionName = allAwardSessions[0]?.sessionName ?? "";
+const hasRequestedSession = allAwardSessions.some(
+  (sessionItem) => sessionItem.sessionName === requestedSessionName,
+);
+const selectedSessionName = hasRequestedSession
+  ? requestedSessionName
+  : fallbackSessionName;
+
+// If streamId is missing or invalid — go back or redirect
+if (!selectedSessionName) {
+  return new Response(null, {
+    status: 302,
+    headers: {
+      Location: Astro.request.headers.get("referer") || URLS.HOME,
+    },
+  });
+}
+
+const awardItems = await fetchAwardsRequest(selectedSessionName);
+const awardYearOptions: Array<number | YearOptionData> = allAwardSessions.map(
+  (sessionItem) => ({
+    value: sessionItem.sessionName,
+    label: sessionItem.sessionName,
+  }),
+);
 ---
 
-<Layout meta={{ title: "Awards" }}>
-  <DummySection name="Awards" />
+<Layout meta={awardsMeta}>
+  <section class="bg-n-50 relative w-full overflow-hidden">
+    <div
+      class="container m-auto flex flex-col gap-10 px-5 pt-32 pb-14 md:gap-14 lg:gap-16 lg:pt-40"
+    >
+      <!-- Breadcrumbs -->
+      <Breadcrumbs items={awardsBreadcrumbItems} />
+
+      <!-- Body of the Results -->
+      <div class="flex flex-col gap-8 md:gap-12 lg:gap-14">
+        <!-- Section Header -->
+        <SectionHeaderMain
+          title={awardsSectionHeader.title}
+          subtitle={awardsSectionHeader.subtitle}
+        />
+
+        <!-- Filter & Students -->
+        <div class="flex flex-col gap-7 md:gap-8 lg:gap-11">
+          <!-- Years Filters -->
+          <FilterBar
+            showSearch={false}
+            years={awardYearOptions}
+            shouldIncludeCurrentYear={false}
+            queryParamName="session"
+          />
+
+          <!-- Results -->
+          <div class="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:gap-8">
+            {
+              awardItems && awardItems.length > 0 ? (
+                awardItems.map((awardItem) => {
+                  const displayYear =
+                    awardItem.sessionName &&
+                    awardItem.sessionName.trim().length > 0
+                      ? awardItem.sessionName
+                      : selectedSessionName;
+
+                  return (
+                    <AwardsCard
+                      title={awardItem.awardName}
+                      subTitle={awardItem.awardDesc}
+                      img={generateImagePath(
+                        awardItem.thumbnailImg,
+                        IMAGE_TYPES.AWARDS,
+                      )}
+                      year={displayYear}
+                    />
+                  );
+                })
+              ) : (
+                <div class="col-span-full">
+                  <EmptyState
+                    title="No Awards Found"
+                    description="We couldn't find any awards for the selected year. Please check back later."
+                  />
+                </div>
+              )
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>

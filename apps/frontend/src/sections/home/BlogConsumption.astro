@@ -1,0 +1,52 @@
+---
+// TYPES //
+import type { BlogData } from "@/types/blog";
+
+// COMPONENTS //
+import Article from "@/components/ui/Article.astro";
+import Image from "astro/components/Image.astro";
+
+interface Props {
+  sectionHeaderDetails?: {
+    title: string;
+    subtitle?: string;
+    eyebrowText?: string;
+  };
+  blogContent: BlogData;
+}
+const { sectionHeaderDetails, blogContent } = Astro.props as Props;
+---
+
+<section class="bg-n-50 relative w-full overflow-hidden">
+  <div
+    class="container mx-auto flex flex-col gap-5 px-6 pb-30 md:gap-8 md:pb-40 lg:gap-9 2xl:px-0"
+  >
+    <!-- Article Section -->
+    <Article
+      title={sectionHeaderDetails?.title}
+      subtitle={sectionHeaderDetails?.subtitle}
+      eyebrowText={sectionHeaderDetails?.eyebrowText}
+    >
+      <!-- Blog Consumption Content -->
+      <div class="flex flex-col gap-10 md:gap-14 lg:gap-20">
+        <!-- Blog Image and Details -->
+        <Image
+          src={blogContent.landscapeImg}
+          alt="Blog Consumption Image"
+          class="card-anim card-bottom h-[257px] w-full rounded-3xl object-cover md:h-[524px] lg:h-[600px]"
+          style={`--delay: 0.1s`}
+          width={1200}
+          height={600}
+        />
+
+        <!-- Blog Quote and Description -->
+        <div class="flex flex-col">
+          <h3 class="">
+            "{blogContent.quote}"
+          </h3>
+          <div set:html={blogContent.content} />
+        </div>
+      </div>
+    </Article>
+  </div>
+</section>

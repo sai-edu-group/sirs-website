@@ -47,6 +47,7 @@ export const URLS = {
     },
     ALBUMS: {
       ROOT: "/media/albums",
+      ITEM: (id: string) => `/media/albums/${id}`,
     },
   },
 

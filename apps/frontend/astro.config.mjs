@@ -4,7 +4,6 @@ import nodePath from "path";
 
 // OTHERS //
 import { defineConfig, passthroughImageService } from "astro/config";
-import astroIcon from "astro-icon";
 import tailwindcss from "@tailwindcss/vite";
 import { fileURLToPath } from "url";
 import sitemap from "@astrojs/sitemap";
@@ -19,7 +18,7 @@ export default defineConfig({
   srcDir: "./src",
   publicDir: "./public",
   site: "https://www.sairesidentialschool.com/",
-  integrations: [astroIcon(), sitemap()],
+  integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
     resolve: {

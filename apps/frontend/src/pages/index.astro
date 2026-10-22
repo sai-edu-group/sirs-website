@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 
+import Hero from "@/sections/home/Hero.astro";
 import SISStats from "@/sections/home/SISStats.astro";
 import CampusTour from "@/sections/home/CampusTour.astro";
 import SISResults from "@/sections/home/SISResults.astro";
@@ -8,9 +9,14 @@ import CampusLifeStrip from "@/sections/home/CampusLifeStrip.astro";
 import SISTestimonials from "@/sections/home/SISTestimonials.astro";
 import LeaderPromise from "@/sections/home/LeaderPromise.astro";
 import SISPlacements from "@/sections/home/SISPlacements.astro";
+import Awards from "@/sections/home/Awards.astro";
+import NewsLetter from "@/sections/home/NewsLetter.astro";
+import News from "@/sections/home/News.astro";
+import Results from "@/sections/home/Results.astro";
 ---
 
 <Layout meta={{ title: "Home" }}>
+  <Hero />
   <SISStats />
   <CampusTour />
   <SISResults />
@@ -18,4 +24,10 @@ import SISPlacements from "@/sections/home/SISPlacements.astro";
   <SISTestimonials />
   <LeaderPromise />
   <SISPlacements />
+  <Results />
+  <Awards />
+  <div class="bg-n-100">
+    <News />
+  </div>
+  <NewsLetter />
 </Layout>
