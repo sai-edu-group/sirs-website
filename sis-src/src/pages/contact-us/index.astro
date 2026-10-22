@@ -1,0 +1,13 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import contactUsMeta from "@/data/meta/contact-us/contact-us.json";
+import Form from "../../sections/contact-us/Form.astro";
+import GetInTouch from "../../sections/contact/GetInTouch.astro";
+import HeroSection from "../../sections/contact-us/HeroSection.astro";
+---
+
+<Layout meta={contactUsMeta}>
+  <HeroSection />
+  <GetInTouch />
+  <Form />
+</Layout>

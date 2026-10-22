@@ -1,0 +1,52 @@
+---
+// TYPES //
+
+// COMPONENTS //
+import Article from "@/components/ui/Article.astro";
+import Image from "astro/components/Image.astro";
+
+interface Props {
+  sectionHeaderDetails?: {
+    title: string;
+    subtitle?: string;
+    eyebrowText?: string;
+  };
+  articleDetail: any;
+}
+const { sectionHeaderDetails, articleDetail } = Astro.props as Props;
+---
+
+<section class="bg-n-50 relative w-full overflow-hidden">
+  <div
+    class="container mx-auto flex flex-col gap-5 px-6 pb-30 md:gap-8 md:pb-40 lg:gap-9 2xl:px-0"
+  >
+    <!-- Article Section -->
+    <Article
+      title={sectionHeaderDetails?.title}
+      subtitle={sectionHeaderDetails?.subtitle}
+      eyebrowText={sectionHeaderDetails?.eyebrowText}
+    >
+      <!--  Article Consumption Content -->
+      <div class="flex flex-col gap-10 md:gap-14 lg:gap-20">
+        <!-- Article Image and Details -->
+        {
+          articleDetail.landscapeImg && (
+            <Image
+              src={articleDetail.landscapeImg}
+              alt=" Affiliations Consumption Image"
+              class="card-anim card-bottom h-[257px] w-full rounded-3xl object-cover md:h-[524px] lg:h-[600px]"
+              style={`--delay: 0.1s`}
+              width={1920}
+              height={600}
+              loading="lazy"
+              decoding="async"
+            />
+          )
+        }
+
+        <!--  Article Description -->
+        <div set:html={articleDetail.content} />
+      </div>
+    </Article>
+  </div>
+</section>

@@ -1,0 +1,15 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import admissionsMeta from "@/data/meta/admissions/admissions.json";
+import HowItWorks from "@/sections/admission/HowItWorks.astro";
+import FaqSection from "@/sections/admission/FaqSection.astro";
+import Form from "@/sections/admission/Form.astro";
+import HeroSection from "@/sections/admission/HeroSection.astro";
+---
+
+<Layout meta={admissionsMeta}>
+  <HeroSection />
+  <HowItWorks />
+  <Form />
+  <FaqSection />
+</Layout>

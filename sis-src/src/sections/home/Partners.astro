@@ -1,0 +1,55 @@
+---
+import SectionHeaderMain from "@/components/ui/SectionHeaderMain.astro";
+import Image from "astro/components/Image.astro";
+
+const partnersImages = [
+  "/images/partners/access-usa-hd.png",
+  "/images/partners/leader-hd.png",
+  "/images/partners/sat-hd.png",
+  "/images/partners/univariety-hd.png",
+  "/images/partners/icai-hd.png",
+  "/images/partners/ids-hd.png",
+  "/images/partners/microsoft-hd.png",
+  "/images/partners/roundsq-hd.png",
+  "/images/partners/showcase-sis-hd.png",
+  "/images/partners/google-1-hd.png",
+  "/images/partners/cambrdige-hd.png",
+  "/images/partners/cbse-sis-hd.png",
+  "/images/partners/adobe-hd.png",
+  "/images/partners/bridgeu-sis-hd.png",
+  "/images/partners/QS-I.png",
+  "/images/partners/kindness-hd.png",
+];
+---
+
+<section data-section="Our Partners">
+  <div
+    class="container mx-auto flex flex-col gap-12 px-8 py-16 md:gap-20 md:px-4 md:py-20 lg:px-8 2xl:px-0"
+  >
+    <!-- Header with lines -->
+    <SectionHeaderMain
+      eyebrowText="Our Accreditations and Learning Partners"
+      title="Trusted by the World’s Leading Institutions"
+    />
+
+    <!-- Partners card wrapper -->
+    <div
+      class="flex flex-wrap justify-center gap-7 md:gap-5 lg:gap-x-5 lg:gap-y-7"
+    >
+      {
+        partnersImages.map((partner) => (
+          // Partner image
+          <div class="flex w-28 items-center justify-center md:w-32 lg:w-[170px]">
+            <Image
+              src={partner}
+              alt=""
+              class="w-full object-contain"
+              width={170}
+              height={100}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

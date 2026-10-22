@@ -1,0 +1,67 @@
+---
+// COMPONENTS //
+import SectionHeader from "@/components/ui/SectionHeader.astro";
+import GetInTouchCard from "@/components/ui/GetInTouchCard.astro";
+
+const contactDetails: {
+  icon: string;
+  title: string;
+  type: "email" | "phone" | "location";
+  infoText: string[];
+}[] = [
+  {
+    icon: "mail",
+    title: "Talk to Admissions",
+    type: "email",
+    infoText: [
+      "info@saiinternational.edu.in",
+      "admissions@saiinternational.edu.in",
+    ],
+  },
+  {
+    icon: "footer-phone",
+    title: "Connect by Phone",
+    type: "phone",
+    infoText: ["+91 6747100200", "+91 9338169966"],
+  },
+  {
+    icon: "campus",
+    title: "Visit Our Campus",
+    type: "location",
+    infoText: [
+      "Plot -5A, Infocity, Chandrasekharpur, Bhubaneswar, Odisha 751024",
+    ],
+  },
+];
+---
+
+<section data-section="Get In Touch">
+  <div class="container mx-auto px-6 py-16 lg:px-6 lg:py-24">
+    <!-- Section Header -->
+    <SectionHeader title="Get in touch with us" />
+
+    <!-- Get in touch cards wrapper -->
+    <div
+      class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:gap-6"
+    >
+      {
+        contactDetails.map((step, index) => (
+          <div
+            class={`${
+              index === contactDetails.length - 1
+                ? "sm:col-span-2 xl:col-span-1"
+                : ""
+            }`}
+          >
+            <GetInTouchCard
+              icon={step.icon}
+              title={step.title}
+              infoText={step.infoText}
+              type={step.type}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

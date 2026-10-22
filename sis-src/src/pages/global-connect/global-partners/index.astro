@@ -1,0 +1,32 @@
+---
+// COMPONENTS //
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
+
+// CONSTANTS //
+import { URLS } from "@/infrastructure/constants/urls";
+
+// OTHERS //
+import Layout from "@/layouts/Layout.astro";
+
+// META //
+import globalConnectMeta from "@/data/meta/global-connect/global-connect.json";
+
+// SECTIONS //
+import GlobalPartners from "@/sections/global-connect/global-partners/GlobalPartners.astro";
+
+// Prepare breadcrumb items based on personType
+const breadcrumbItems = [
+  { label: "Global Connect", href: URLS.GLOBAL_CONNECT.ROOT },
+  { label: "Global Partners", href: "#" },
+];
+---
+
+<Layout meta={globalConnectMeta}>
+  <!-- Breadcrumbs Section -->
+  <div class="bg-n-100 relative w-full overflow-hidden">
+    <div class="container mx-auto px-6 pt-30 md:pt-40 2xl:px-0">
+      <Breadcrumbs items={breadcrumbItems} />
+    </div>
+  </div>
+  <GlobalPartners />
+</Layout>

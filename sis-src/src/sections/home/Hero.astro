@@ -1,0 +1,446 @@
+---
+import CommonHeader from "@/components/ui/CommonHeader.astro";
+import CustomSelect from "@/components/ui/CustomSelect.astro";
+import Image from "astro/components/Image.astro";
+
+// IMAGES //
+import ChildrenImage from "@/assets/images/home-hero-image.png";
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  formTitle?: string;
+  buttonText?: string;
+  brochureText?: string;
+  backgroundImage?: string;
+  childrenImage?: string;
+  decorativeLines?: string;
+  childVectors?: string;
+  arrowIcon?: string;
+}
+
+const {
+  title = "Shaping Learners who Inspire the world!",
+  formTitle = "Get the SAI Experience in Your Hands",
+  buttonText = "Get Brochure",
+  brochureText = "Our counsellors will reach out to you.",
+} = Astro.props as Props;
+
+const grades = [
+  "Play Group",
+  "Nursery",
+  "KG I",
+  "KG II",
+  "Class I",
+  "Class II",
+  "Class III",
+  "Class IV",
+  "Class V",
+  "Class VI",
+  "Class VII",
+  "Class VIII",
+  "Class IX",
+  "Class XI - Science",
+  "Class XI - Commerce",
+  "Class XI - Humanities",
+  "Class XI - Cambridge (A Level)",
+];
+---
+
+<section
+  class="bg-n-50 relative w-full overflow-hidden bg-[url('/images/school-background.webp')] bg-cover bg-center pt-24 md:pt-36"
+  data-name="hero-section"
+  data-section="Home Hero"
+>
+  <!-- Main Content -->
+  <div
+    class="relative z-10 container mx-auto mb-15 px-4 pt-10 md:mb-30 md:px-6 lg:pb-[91px] xl:mb-0 2xl:px-0 2xl:pt-32"
+  >
+    <div class="flex flex-col lg:flex-row lg:items-center lg:gap-0">
+      <!-- Left Content -->
+      <div class="flex flex-col gap-11 md:gap-16 lg:gap-24">
+        <!-- Hero Text -->
+        <div class="w-full md:w-[90%] xl:w-[60%]">
+          <CommonHeader title={title} />
+        </div>
+
+        <!-- Form Card -->
+        <div
+          class="border-n-100 fade-in-up rounded-lg border bg-white p-3.5 delay-100 md:px-6 md:py-5 lg:w-[55%]"
+        >
+          <div class="space-y-3.5">
+            <h2 class="text-n-800 text-xl md:text-3xl">
+              {formTitle}
+            </h2>
+
+            <form
+              class="flex flex-col gap-3.5 md:flex-row md:flex-wrap md:justify-between"
+              data-hero-form
+              novalidate
+            >
+              <!-- Student Name Input -->
+              <div class="space-y-1 md:w-[58%]">
+                <input
+                  type="text"
+                  name="studentName"
+                  placeholder="Student's Name"
+                  class="border-n-500 text-n-500 placeholder-n-500 h-[50px] w-full rounded-lg border px-3 text-base font-medium focus:border-transparent focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                  required
+                />
+                <p
+                  id="studentName-error"
+                  data-error
+                  class="hidden text-sm text-red-600"
+                >
+                  Please enter the student name.
+                </p>
+
+                <p
+                  id="studentName-number-error"
+                  data-error
+                  class="hidden text-sm text-red-600"
+                >
+                  Name cannot contain numbers.
+                </p>
+              </div>
+
+              <!-- Grade Select -->
+              <div class="md:w-[39%]">
+                <CustomSelect
+                  options={grades}
+                  label="Select Grade"
+                  name="grade"
+                  placeholder="Select Grade "
+                />
+                <p
+                  id="grade-error"
+                  data-error
+                  class="hidden text-sm text-red-600"
+                >
+                  Please select a grade.
+                </p>
+              </div>
+
+              <!-- Phone Number Input -->
+              <div class="space-y-1 md:w-[58%]">
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone Number"
+                  class="border-n-500 text-n-500 placeholder-n-500 h-[50px] w-full rounded-lg border px-3 text-base font-medium focus:border-transparent focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                  required
+                />
+                <p
+                  id="phone-error"
+                  data-error
+                  class="hidden text-sm text-red-600"
+                >
+                  Please enter a valid 10-digit phone number.
+                </p>
+              </div>
+
+              <!-- Submit Button -->
+              <button
+                type="submit"
+                class="fade-in font-secondary h-[50px] w-full cursor-pointer rounded-lg border border-transparent bg-orange-500 text-lg text-orange-50 transition-all duration-300 hover:border-orange-500 hover:bg-transparent hover:text-orange-500 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:outline-none md:w-[39%]"
+              >
+                {buttonText}
+              </button>
+
+              <div
+                id="hero-loader"
+                class="mt-2 flex hidden w-full items-center gap-3 text-orange-600 md:w-[39%]"
+              >
+                <div class="spinner"></div>
+                <span class="text-base font-medium">Submitting...</span>
+              </div>
+
+              <!-- Success Message -->
+              <p
+                id="hero-success"
+                class="mt-2 hidden w-full rounded-lg border border-green-200 bg-green-50 px-3 py-2 text-sm font-medium text-green-700 md:text-base"
+              >
+                Form submitted successfully! You will receive the brochure on
+                your phone shortly.
+              </p>
+            </form>
+
+            <!-- Brochure Text -->
+            <p class="text-n-700 font-secondary text-sm md:text-base">
+              {brochureText}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Content - Children Image -->
+    </div>
+  </div>
+  <div
+    class="relative flex items-center justify-center lg:absolute lg:right-0 lg:bottom-0 lg:w-[55%] lg:justify-end"
+  >
+    <div class="relative">
+      <!-- Main children image -->
+      <div class="fade-in relative w-screen lg:w-full">
+        <Image
+          src={ChildrenImage}
+          alt="Children learning"
+          class="h-full w-full object-cover lg:max-h-[680px]"
+          width={800}
+          height={600}
+          priority
+          fetchpriority="high"
+        />
+      </div>
+
+      <!-- Decorative child vectors -->
+      <div
+        class="absolute -top-[31px] left-[47%] h-[100px] w-[75%] -translate-x-1/2 md:h-[220px]"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="absolute bottom-0 left-0 size-9 sm:size-14 md:size-20"
+          width="83"
+          height="72"
+          viewBox="0 0 83 72"
+          fill="none"
+        >
+          <path
+            class="svg-draw"
+            d="M23.6702 14.1136L46.8444 44.9498M48.3894 2.43994L81.4953 33.7167C76.3455 34.9648 63.6181 39.091 53.0242 49.1347L50.5964 48.3638M48.3894 2.43994C48.3894 2.43994 34.7056 2.43994 23.4495 14.3339C8.97119 16.096 4.1745 27.1089 3.58595 32.3951L25.2152 63.2313C25.2152 63.2313 26.9808 48.474 46.6237 44.7296C46.6237 44.7296 58.7626 30.1925 74.8741 30.1925L48.3894 2.43994ZM4.68949 34.3774C3.27696 35.0823 2.62956 36.58 2.48242 37.2408L26.5394 70.2796L48.1686 52.2184V49.9057M6.23443 31.9546L12.1935 40.5447M14.4006 42.7473L16.6076 46.2714M48.1686 47.5929V49.9057M48.1686 47.5929C34.3966 49.7074 28.5258 59.7806 27.4222 64.7731M48.1686 47.5929C51.9207 43.1143 61.8524 33.5404 75.0948 31.9546M48.1686 47.5929L50.5964 48.3638M48.1686 49.9057C39.3404 50.5224 32.3514 59.6337 30.0707 64.3326M50.5964 48.3638C53.4656 45.1701 61.1462 37.9016 72.4463 34.3774M32.7192 11.4705C33.6756 10.149 36.8685 7.28563 41.9889 6.40459M44.4166 5.52356C44.858 5.15646 46.0057 4.46632 47.0651 4.64253"
+            stroke="#CC554D"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="59"
+          height="82"
+          viewBox="0 0 59 82"
+          fill="none"
+          class="absolute -top-[10%] left-[60%] size-9 -translate-x-1/2 sm:size-14 md:size-20"
+        >
+          <path
+            class="svg-draw"
+            d="M3.75458 68.2457C3.16744 67.7631 2.57663 67.2255 1.98633 66.6276C2.18575 66.2698 2.40154 65.8447 2.62514 65.3593M3.75458 68.2457C8.04135 71.7699 12.1322 72.3717 14.3997 72.2473M3.75458 68.2457C3.24153 69.0617 3.11511 70.6067 4.22603 71.9982M14.3997 72.2473C14.8289 72.2238 15.1927 72.1742 15.4802 72.1135C15.6813 71.5813 15.8954 71.055 16.1212 70.5347M14.3997 72.2473C13.901 73.2575 13.2053 73.9968 12.239 74.3787M12.239 74.3787C11.0134 74.863 9.35257 74.7722 7.1062 73.9294C5.72654 73.4118 4.80706 72.726 4.22603 71.9982M12.239 74.3787C11.8879 75.4609 10.9172 77.1038 9.32247 77.4248M4.22603 71.9982C3.89337 73.5519 3.5777 74.3098 4.23493 75.1216M9.32247 77.4248C8.64688 77.5608 7.8593 77.4595 6.95939 76.978C5.48081 76.1868 4.65713 75.643 4.23493 75.1216M9.32247 77.4248C8.92659 78.6992 7.563 80.9892 5.27564 79.9537C2.98827 78.9182 3.62876 76.3008 4.23493 75.1216M2.62514 65.3593C4.42243 61.4575 5.38341 53.0979 3.73081 45.036C1.40807 33.705 8.08057 15.7958 26.7228 21.7564C47.8051 28.4972 39.0525 45.4052 35.0973 49.2216C31.3261 52.8604 20.7473 59.8739 16.1212 70.5347M2.62514 65.3593C3.62119 65.308 5.61121 65.5446 8.22489 66.453M16.1212 70.5347C14.6844 69.5459 13.2706 68.741 11.9696 68.0788M11.9696 68.0788C13.6076 61.7014 18.1327 50.8361 22.955 44.9317M11.9696 68.0788C10.6115 67.3875 9.37351 66.8522 8.22489 66.453M22.955 44.9317C24.6096 42.9059 26.2991 41.4641 27.9189 40.9879C35.5234 38.7525 28.4242 49.0509 22.955 44.9317ZM22.955 44.9317C22.7234 44.7572 22.4948 44.5569 22.2702 44.3288C21.3903 43.4344 20.7788 42.4646 20.3839 41.4637M20.3839 41.4637C18.2986 36.1787 22.251 30.0253 24.5979 29.5164C27.3036 28.9297 30.1104 34.535 20.3839 41.4637ZM20.3839 41.4637C20.0761 41.683 19.7557 41.9036 19.4224 42.1254C18.6521 42.5343 17.3963 42.8187 16.0975 42.7137M16.0975 42.7137C13.6586 42.5165 11.0683 40.9461 11.2581 36.2487C11.3127 34.8974 12.8254 32.1612 15.1851 35.2231C16.3215 36.6976 16.5341 39.3596 16.0975 42.7137ZM16.0975 42.7137C15.2499 49.2266 11.955 58.349 8.22489 66.453M32.8364 28.8851C34.2849 30.0601 36.958 33.3054 36.0631 36.8874M35.2601 39.9969L33.8362 43.0903M11.6251 13.6182L8.19635 7.10068M28.1973 10.7845L28.7688 2M51.0552 30.0538L57.0559 28.9202M43.0552 16.4519L49.0555 10.5011"
+            stroke="#CC554D"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="65"
+          height="54"
+          viewBox="0 0 65 54"
+          fill="none"
+          class="absolute right-0 bottom-0 size-9 sm:size-14 md:size-20"
+        >
+          <path
+            class="svg-draw"
+            d="M12.0778 13.547L26.741 35.4953L48.8605 34.4404M12.0778 13.547L4.58685 2.33425L40.5217 6.49499L62.5684 33.7866L48.8605 34.4404M12.0778 13.547C10.355 14.1965 6.632 16.6191 3.47968 21.5289M48.8605 34.4404C49.647 38.1453 47.7339 43.2353 45.8205 46.951M3.47968 21.5289C2.81477 22.5645 2.17524 23.7107 1.58524 24.9743C6.1616 32.305 21.021 47.6429 43.8478 50.3495C44.4165 49.4925 45.1185 48.3142 45.8205 46.951M3.47968 21.5289C8.72059 29.4542 24.526 45.6342 45.8205 46.951M37.1302 16.6798C45.2142 21.0244 60.274 32.1645 55.8404 41.9681M55.8404 41.9681L52.935 43.2789M55.8404 41.9681L49.9214 48.8022M55.8404 41.9681L50.6222 51.6672M55.8404 41.9681L52.7186 51.7038M11.5296 5.89172L19.5982 7.06991M22.2743 7.14904L25.2604 7.71984M37.3191 14.349C37.7006 14.418 38.4066 15.2359 38.1144 16.0486C37.6626 17.3051 36.4681 16.8934 35.9708 16.5948C35.081 16.0605 35.1351 13.9543 37.3191 14.349Z"
+            stroke="#CC554D"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .svg-draw {
+    stroke-dasharray: 250;
+    stroke-dashoffset: 250;
+    animation: drawLine 4s 1s ease forwards;
+  }
+
+  @keyframes drawLine {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s 1.5s ease forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .spinner {
+    width: 18px;
+    height: 18px;
+    border: 3px solid #f2c4c0;
+    border-top-color: #cc554d;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Custom select styling */
+  select {
+    background-image: none;
+  }
+
+  /* Form focus states */
+  input:focus,
+  select:focus {
+    border-color: var(--color-orange-500);
+  }
+
+  /* Smooth transitions */
+  button {
+    transition: all 0.2s ease;
+  }
+
+  button:hover {
+    transform: translateY(-1px);
+  }
+</style>
+
+<script>
+  import { EVENTS } from "@/enums/analytics.enum";
+  import { trackFormCompletionEvent } from "@/scripts/analytics";
+  import { admissionEnquiryRequest } from "@/services/api/form.api.service";
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("[data-hero-form]") as HTMLFormElement;
+    const loader = document.getElementById("hero-loader");
+
+    if (!form) return;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const prospectId = window.MXCProspectId || "";
+
+      // Hide all previous errors
+      form
+        .querySelectorAll("[data-error]")
+        .forEach((p) => p.classList.add("hidden"));
+
+      // Hide previous success message
+      const successMessage = document.getElementById("hero-success");
+      successMessage?.classList.add("hidden");
+
+      const studentName =
+        form.querySelector('input[name="studentName"]')?.value.trim() || "";
+      const grade =
+        form.querySelector('input[name="grade"]')?.value.trim() || "";
+      const phone =
+        form.querySelector('input[name="phone"]')?.value.trim() || "";
+
+      let hasError = false;
+
+      // Student Name Validation
+      if (!studentName) {
+        form.querySelector("#studentName-error")?.classList.remove("hidden");
+        hasError = true;
+      } else if (/\d/.test(studentName)) {
+        form
+          .querySelector("#studentName-number-error")
+          ?.classList.remove("hidden");
+        hasError = true;
+      }
+
+      // Grade Validation
+      if (!grade) {
+        form.querySelector("#grade-error")?.classList.remove("hidden");
+        hasError = true;
+      }
+
+      // Phone Validation (10-digit)
+      if (!/^[0-9]{10}$/.test(phone)) {
+        form.querySelector("#phone-error")?.classList.remove("hidden");
+        hasError = true;
+      }
+
+      if (hasError) return;
+
+      // Example placeholder for API call:
+      // await admissionEnquiryRequest({ studentName, grade, phone });
+
+      // Track form completion
+      trackFormCompletionEvent(
+        {
+          student_name: studentName,
+          grade: grade,
+          phone: phone,
+        },
+        EVENTS.INTEREST_FORM_COMPLETED,
+      );
+      // 🔥 Show loader & disable button
+      loader?.classList.remove("hidden");
+
+      try {
+        const leadSquaredPayload = [
+          { Attribute: "FirstName", Value: studentName },
+          { Attribute: "Phone", Value: phone },
+          { Attribute: "mx_Grade", Value: grade },
+          {
+            Attribute: "mx_Hostel_Facility",
+            Value: "No",
+          },
+          { Attribute: "mx_Source_V2", Value: "SIS Website Home Page" },
+          {
+            Attribute: "ProspectID",
+            Value: prospectId,
+          },
+        ];
+
+        const response = await admissionEnquiryRequest(leadSquaredPayload);
+
+        // Check LSQ errors
+        if (response.ExceptionMessage || response.Status !== "Success") {
+          alert(
+            "Something went wrong submitting your enquiry. Please try again.",
+          );
+          return;
+        }
+
+        // ✅ Show success message in form
+        successMessage?.classList.remove("hidden");
+
+        // Reset fields
+        form.reset();
+
+        // Reset custom dropdown label
+        const gradeLabel = document.querySelector("[data-grade-label]");
+        if (gradeLabel) gradeLabel.textContent = "Select Class";
+      } catch (err) {
+        console.error(err);
+        alert("Something went wrong. Please try again.");
+      } finally {
+        // Hide loader & enable button again
+        loader?.classList.add("hidden");
+      }
+    });
+  });
+</script>
+
+<script>
+  import { setupFormStartTracking } from "@/scripts/analytics";
+
+  const form = document.querySelector(
+    "[data-hero-form]",
+  ) as HTMLFormElement | null;
+
+  if (form) {
+    setupFormStartTracking(form);
+  }
+</script>

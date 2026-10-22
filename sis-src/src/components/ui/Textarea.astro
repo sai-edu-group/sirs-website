@@ -1,0 +1,69 @@
+---
+interface Props {
+  label: string;
+  name: string;
+  required?: boolean;
+  value?: string;
+  placeholder?: string;
+  errorMessage?: string;
+  helpText?: string;
+  rows?: number;
+  maxLength?: number;
+  resize?: "none" | "vertical" | "both";
+}
+
+const {
+  label,
+  name,
+  required = false,
+  value = "",
+  placeholder = "Enter text",
+  errorMessage = "Error message",
+  helpText,
+  rows = 1,
+  maxLength,
+  resize = "vertical", // tailwind: resize-none | resize-y | resize
+} = Astro.props;
+
+const resizeClass =
+  resize === "none" ? "resize-none" : resize === "both" ? "resize" : "resize-y";
+---
+
+<div class="flex w-full flex-col gap-2 md:gap-4" data-field>
+  <!-- Label -->
+  <label
+    for={name}
+    class="text-n-600 text-base font-normal md:text-lg lg:text-xl"
+  >
+    {label}{required && <span class="text-red-500">*</span>}
+  </label>
+
+  <!-- Field -->
+  <div class="relative">
+    <textarea
+      id={name}
+      name={name}
+      placeholder={placeholder}
+      value={value}
+      required={required}
+      rows={rows}
+      {...maxLength ? { maxlength: maxLength } : {}}
+      aria-describedby={`${name}-error ${helpText ? `${name}-hint` : ""}`}
+      class={`text-n-700 focus:border-n-950 placeholder:text-n-400 font-secondary border-n-600  w-full border-b bg-transparent px-0 pb-1 md:pb-3.5 text-sm font-medium focus:ring-0 focus:outline-none md:text-lg lg:text-2xl ${resizeClass} overflow-y-auto `}
+      >{value}</textarea
+    >
+  </div>
+
+  {
+    helpText && (
+      <p id={`${name}-hint`} class="text-n-500 text-sm">
+        {helpText}
+      </p>
+    )
+  }
+
+  <!-- Error (inside the component) -->
+  <p id={`${name}-error`} data-error class="hidden text-sm text-red-600">
+    {errorMessage}
+  </p>
+</div>

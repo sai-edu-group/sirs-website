@@ -1,0 +1,31 @@
+---
+// COMPONENTS //
+import Hero from "@/components/ui/Hero.astro";
+
+// OTHERS //
+import Layout from "@/layouts/Layout.astro";
+
+// DATA //
+import learningBeyondMeta from "@/data/meta/about/learning-and-beyond/learning-and-beyond.json";
+
+// SECTIONS //
+import Curriculum from "@/sections/about/Curriculum.astro";
+import Amenities from "@/sections/about/Amenities.astro";
+import SaiSeva from "@/sections/about/SaiSeva.astro";
+import Flagship from "@/sections/about/Flagship.astro";
+
+const heroSectionDetails = {
+  title: "Learning & Beyond",
+  subtitle:
+    "Nurturing excellence through enriched learning, world-class facilities, and meaningful student experiences.",
+  imageName: "learning-and-beyond-hero",
+};
+---
+
+<Layout meta={learningBeyondMeta}>
+  <Hero {...heroSectionDetails} />
+  <Curriculum />
+  <Amenities />
+  <SaiSeva />
+  <Flagship />
+</Layout>

@@ -1,0 +1,99 @@
+---
+export const prerender = false; // Render on Server
+
+// COMPONENTS //
+import SectionHeaderMain from "@/components/ui/SectionHeaderMain.astro";
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
+import ResultsCard from "@/components/ui/ResultsCard.astro";
+import EmptyState from "@/components/ui/EmptyState.astro";
+import FilterBar from "@/components/ui/FilterBar.astro";
+
+// API SERVICES //
+import { fetchResultsRequest } from "@/services/api/results.api.service";
+
+// UTILS //
+import { generateImagePath } from "@/utils/image.utils";
+
+// OTHERS //
+import Layout from "@/layouts/Layout.astro";
+
+// DATA //
+import { cbseClasses } from "@/data/results/cbse-12th";
+import { IMAGE_TYPES } from "@/enums/image.enum";
+
+const { streamId } = Astro.params;
+
+// We find the class details (Name: "Science", Years: [2024, 2023]) from local config.
+const classItem = cbseClasses.find((item) => item.id.toString() === streamId);
+
+// Safety: If someone types a random ID (e.g. /99), redirect home.
+if (!classItem) {
+  return Astro.redirect("/");
+}
+
+const urlYear = Astro.url.searchParams.get("year");
+// Default to the first available year in the config if URL param is missing
+const currentYear = urlYear ? Number(urlYear) : classItem.years[0];
+
+// We use the ID and Year to get real student data
+const results = await fetchResultsRequest(currentYear, streamId ?? "11");
+
+const breadcrumbItems = [
+  { label: "12th Results", href: "/results/cbse-12th" },
+  { label: classItem.name, href: "#" },
+];
+
+const pageMeta = {
+  title: `${classItem.name} - ${currentYear}`,
+  description: `Celebrating our students hard work`,
+};
+---
+
+<Layout meta={pageMeta}>
+  <section class="bg-n-50 relative w-full overflow-hidden">
+    <div
+      class="container m-auto flex flex-col gap-10 px-5 pt-32 pb-14 md:gap-14 lg:gap-16 lg:pt-40"
+    >
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <div class="flex flex-col gap-8 md:gap-12 lg:gap-14">
+        <SectionHeaderMain
+          title={classItem.name}
+          subtitle="Celebrating our students hard work and achievements"
+        />
+
+        <div class="flex flex-col gap-7 md:gap-8 lg:gap-11">
+          <FilterBar
+            showSearch={false}
+            years={classItem.years}
+            shouldIncludeCurrentYear={false}
+          />
+
+          <!-- Show the Results OR show Empty State -->
+          {
+            results && results.length > 0 ? (
+              <div class="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+                {results.map((student) => (
+                  <ResultsCard
+                    key={student.studentName}
+                    studentName={student.studentName}
+                    score={student.percentage}
+                    image={generateImagePath(
+                      student.studentProfilePic,
+                      IMAGE_TYPES.RESULT,
+                    )}
+                  />
+                ))}
+              </div>
+            ) : (
+              <EmptyState
+                title="No Results Found"
+                description="We couldn't find any results for the selected year. Please check back later."
+              />
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

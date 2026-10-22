@@ -1,0 +1,56 @@
+---
+// COMPONENTS //
+import Image from "astro/components/Image.astro";
+
+import NotFoundImage from "@/assets/images/404-image.png";
+import Layout from "@/layouts/Layout.astro";
+import Button from "@/components/ui/Button.astro";
+---
+
+<Layout>
+  <div
+    class="bg-n-50 relative flex w-full flex-col items-center justify-center overflow-hidden bg-[url('/images/school-background.png')] bg-cover bg-center px-6 pt-30 pb-20 md:py-24 md:pt-36"
+  >
+    <div class="container mx-auto flex flex-col gap-10 items-center">
+      <div class="flex flex-col gap-3 lg:gap-6">
+        <Image
+          src={NotFoundImage}
+          alt="404 Not Found"
+          class="mx-auto h-[230px] lg:h-[372px] w-auto object-contain"
+          loading="lazy"
+          decoding="async"
+          width={400}
+          height={300}
+        />
+        <div class="flex flex-col items-center gap-2 lg:gap-5 text-center">
+          <p class="text-n-800 text-2xl md:text-4xl xl:text-6xl leading-tight font-bold">
+            Oops, this page is missing!
+          </p>
+          <p
+            class="text-n-600 font-secondary w-[90%] md:w-[65%] text-sm lg:text-xl leading-normal font-semibold"
+          >
+            The link may have changed or the page may no longer be available.
+            Let us help you find your way.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-4 md:flex-row items-center md:gap-6">
+        <Button
+          text="Go to Homepage"
+          size="large"
+          variant="solid"
+          extraClasses="lg:!w-[300px]"
+          onClick={"window.location.href='/'"}
+        />
+        <Button
+          text="Explore Admissions"
+          size="large"
+          extraClasses="lg:!w-[300px]"
+          variant="outline"
+          onClick={"window.location.href='/admissions'"}
+        />
+      </div>
+    </div>
+  </div>
+</Layout>

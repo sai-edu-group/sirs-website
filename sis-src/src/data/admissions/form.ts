@@ -1,0 +1,22 @@
+export const grades = [
+  { label: "Play Group", value: "Play Group" },
+  { label: "Nursery", value: "Nursery" },
+  { label: "KG I", value: "KG I" },
+  { label: "KG II", value: "KG II" },
+  { label: "Class I", value: "Class I" },
+  { label: "Class II", value: "Class II" },
+  { label: "Class III", value: "Class III" },
+  { label: "Class IV", value: "Class IV" },
+  { label: "Class V", value: "Class V" },
+  { label: "Class VI", value: "Class VI" },
+  { label: "Class VII", value: "Class VII" },
+  { label: "Class VIII", value: "Class VIII" },
+  { label: "Class IX", value: "Class IX" },
+  { label: "Class XI - Science", value: "Class XI-Science" },
+  { label: "Class XI - Commerce", value: "Class XI-Commerce" },
+  { label: "Class XI - Humanities", value: "Class XI-Humanities" },
+  {
+    label: "Class XI - Cambridge (A Level)",
+    value: "Class XI-Cambridge (A-Level)",
+  },
+];

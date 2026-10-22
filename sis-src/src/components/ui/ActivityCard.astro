@@ -1,0 +1,132 @@
+---
+// COMPONENTS //
+import Image from "astro/components/Image.astro";
+import { Icon } from "astro-icon/components";
+
+// OTHERS //
+import Button from "./Button.astro";
+
+interface Props {
+  title: string;
+  subTitle?: string;
+  activityFor?: string;
+  ctaText?: string;
+  onCtaClick?: string;
+  date?: string;
+  image?: string;
+  description?: string;
+}
+const {
+  title = "",
+  subTitle = "",
+  activityFor = "",
+  ctaText = "",
+  onCtaClick,
+  date = "",
+  image = "/images/news-article-image.png",
+  description = "",
+} = Astro.props as Props;
+---
+
+<div
+  class="bg-n-50 border-n-200 group flex h-full flex-col gap-4 overflow-hidden rounded-2xl border-2 p-4 xl:flex-row xl:gap-5 xl:p-5"
+>
+  <!-- Activity image -->
+  <div
+    class="relative overflow-hidden rounded-tl-xl rounded-tr-xl xl:rounded-tr-none xl:rounded-bl-xl"
+  >
+    <Image
+      src={image}
+      alt=""
+      class="h-48 w-full object-cover md:h-[207px] lg:h-[250px] xl:h-full xl:w-[345px]"
+      loading="lazy"
+      decoding="async"
+      width="400"
+      height="300"
+    />
+    <!-- Overlay animation -->
+    <span
+      class="pointer-events-none absolute inset-0 before:absolute before:inset-0 before:-translate-x-[150%] before:bg-[linear-gradient(128deg,rgba(255,255,255,0)_-3.31%,rgba(255,255,255,0.56)_31.94%,rgba(255,255,255,0.78)_49.57%,rgba(255,255,255,0.26)_63.89%,rgba(255,255,255,0)_111.26%)] before:opacity-0 before:transition-all before:duration-[500ms] before:ease-in group-hover:before:translate-x-[150%] group-hover:before:opacity-100"
+    ></span>
+
+    <!-- Activity Date -->
+    {
+      date !== "" && (
+        <div class="font-secondary text-n-600 bg-n-50 absolute top-3 left-3 rounded-lg px-2.5 py-2 text-xs font-medium shadow xl:text-base">
+          <div class="flex items-center gap-2">
+            {/* Calendar Icon */}
+            <span class="text-orange-500">
+              <Icon name="calendar" class="size-4 md:size-5" />
+            </span>
+
+            {/* Date */}
+            <span class="font-secondary text-n-600 text-sm font-normal md:text-base">
+              {date}
+            </span>
+          </div>
+        </div>
+      )
+    }
+  </div>
+
+  <div class="relative flex flex-col justify-between gap-6 xl:flex-1">
+    <div class="flex flex-col gap-2 xl:gap-4">
+      <!-- Activity title -->
+      <p
+        class="text-n-800 text-2xl leading-tight font-medium transition-colors duration-200 hover:text-orange-500 md:text-3xl"
+      >
+        {title}
+      </p>
+
+      <!-- Activity subTitle -->
+      {
+        subTitle !== "" && (
+          <p class="text-n-600 font-secondary leading-tight font-medium md:text-xl">
+            {subTitle}
+          </p>
+        )
+      }
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <!-- Age group wrapper -->
+      {
+        activityFor !== "" && (
+          <div class="font-secondary space-y-1.5">
+            <div class="text-n-500 flex items-center gap-1.5">
+              {/* Age Group Icon */}
+              <span>
+                <Icon
+                  name="age-group"
+                  class="size-[15px] md:size-4 lg:size-5"
+                />
+              </span>
+              <span class="text-sm font-medium sm:text-base">Age Group</span>
+            </div>
+
+            {/* Age */}
+            <p class="text-n-600 text-base font-semibold sm:text-lg">
+              {activityFor}
+            </p>
+          </div>
+        )
+      }
+
+      {/* Activity Description */}
+      {
+        description && (
+          <p class="font-secondary text-n-500 text-xs leading-tight md:text-sm">
+            {description}
+          </p>
+        )
+      }
+
+      <!-- Button  -->
+      {
+        ctaText !== "" && (
+          <Button text={ctaText} mode="block" onClick={onCtaClick} />
+        )
+      }
+    </div>
+  </div>
+</div>

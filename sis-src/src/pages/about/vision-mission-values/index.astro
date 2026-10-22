@@ -1,0 +1,231 @@
+---
+// COMPONENTS //
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
+import Button from "@/components/ui/Button.astro";
+import SectionHeaderMain from "@/components/ui/SectionHeaderMain.astro";
+import VisionMissionCard from "@/components/ui/VisionMissionCard.astro";
+
+// OTHERS //
+import Layout from "@/layouts/Layout.astro";
+
+// DATA //
+import visionMeta from "@/data/meta/about/vision-mission-values/vision-mission-values.json";
+import {
+  sectionHeaderContent,
+  visionMissionBreadcrumbItems,
+} from "@/data/about/vision-mission-values";
+import Image from "astro/components/Image.astro";
+---
+
+<Layout meta={visionMeta}>
+  <section class="bg-n-50 relative w-full overflow-hidden">
+    <div
+      class="container m-auto flex flex-col gap-10 px-5 pt-32 pb-14 md:gap-14 lg:gap-16 lg:pt-40"
+    >
+      <!-- Breadcrumbs -->
+      <Breadcrumbs items={visionMissionBreadcrumbItems} />
+
+      <!-- Body of the Vision Mission Values -->
+      <div class="flex flex-col gap-8 md:gap-12 lg:gap-14">
+        <!-- Section Header -->
+        <SectionHeaderMain
+          title={sectionHeaderContent.title}
+          subtitle={sectionHeaderContent.subtitle}
+          eyebrowText={sectionHeaderContent.eyebrowText}
+        />
+
+        <!-- Desktop Cards -->
+        <div class="hidden flex-col gap-8 xl:flex">
+          <!-- Vision -->
+          <div
+            class="group flex w-full cursor-pointer justify-end rounded-3xl bg-[url('/images/vision-mission-values/vision.jpg')] bg-cover bg-center py-25 pr-20"
+          >
+            <div class="flex w-[40%] flex-col gap-20">
+              <!-- Title -->
+              <div class="relative">
+                <p
+                  class="text-n-800 text-lg leading-none font-medium md:text-4xl"
+                >
+                  Our
+                </p>
+                <p
+                  class="text-n-800 font-regular text-5xl leading-none md:text-7xl"
+                >
+                  Vision
+                </p>
+                <Image
+                  src={"/icons/double-lines.svg"}
+                  alt=""
+                  class="absolute -bottom-3 left-4 h-[18px] w-[120px] md:-bottom-5"
+                  width={120}
+                  height={18}
+                />
+              </div>
+
+              <div class="flex flex-col gap-6">
+                <p
+                  class="font-secondary text-n-600 text-3xl leading-normal font-medium"
+                >
+                  “To make SAI International School a <span
+                    class="text-orange-500">global K–12 education hub.</span
+                  >”
+                </p>
+                <p class="font-secondary text-n-600 text-2xl leading-normal">
+                  “Fostering innovation and excellence to inspire lifelong
+                  learners.”
+                </p>
+              </div>
+            </div>
+            <!-- Overlay animation -->
+            <span
+              class="pointer-events-none absolute inset-0 before:absolute before:inset-0 before:-translate-x-[150%] before:bg-[linear-gradient(128deg,rgba(255,255,255,0)_-3.31%,rgba(255,255,255,0.56)_31.94%,rgba(255,255,255,0.78)_49.57%,rgba(255,255,255,0.26)_63.89%,rgba(255,255,255,0)_111.26%)] before:opacity-0 before:transition-all before:duration-[500ms] before:ease-in group-hover:before:translate-x-[150%] group-hover:before:opacity-100"
+            ></span>
+          </div>
+
+          <!-- Mission -->
+          <div
+            class="group relative flex w-full cursor-pointer justify-start rounded-3xl bg-[url('/images/vision-mission-values/mission.jpg')] bg-cover bg-center py-25 pl-20"
+          >
+            <div class="flex w-[40%] flex-col gap-16">
+              <!-- Title -->
+              <div class="relative">
+                <p
+                  class="text-n-800 text-lg leading-none font-medium md:text-4xl"
+                >
+                  Our
+                </p>
+                <p
+                  class="text-n-800 font-regular text-5xl leading-none md:text-7xl"
+                >
+                  Mission
+                </p>
+                <Image
+                  src={"/icons/double-lines.svg"}
+                  alt=""
+                  class="absolute -bottom-3 left-4 h-[18px] w-[120px] md:-bottom-5"
+                  width={120}
+                  height={18}
+                />
+              </div>
+
+              <!-- Description -->
+              <p
+                class="font-secondary text-n-600 text-xl leading-normal font-medium"
+              >
+                <span class="text-orange-500"
+                  >Empowering every learner to grow with intellect, empathy, and
+                  purpose.</span
+                >
+                We nurture holistic development, inspire creativity and leadership,
+                and foster resilience and happiness for lifelong learning.
+              </p>
+            </div>
+            <!-- Overlay animation -->
+            <span
+              class="pointer-events-none absolute inset-0 before:absolute before:inset-0 before:-translate-x-[150%] before:bg-[linear-gradient(128deg,rgba(255,255,255,0)_-3.31%,rgba(255,255,255,0.56)_31.94%,rgba(255,255,255,0.78)_49.57%,rgba(255,255,255,0.26)_63.89%,rgba(255,255,255,0)_111.26%)] before:opacity-0 before:transition-all before:duration-[500ms] before:ease-in group-hover:before:translate-x-[150%] group-hover:before:opacity-100"
+            ></span>
+          </div>
+
+          <!-- Values -->
+          <div
+            class="group flex w-full cursor-pointer justify-end rounded-3xl bg-[url('/images/vision-mission-values/values.jpg')] bg-cover bg-center py-25 pr-20"
+          >
+            <div class="flex w-[40%] flex-col gap-20">
+              <!-- Title -->
+              <div class="relative">
+                <p
+                  class="text-n-800 text-lg leading-none font-medium md:text-4xl"
+                >
+                  Our
+                </p>
+                <p
+                  class="text-n-800 font-regular text-5xl leading-none md:text-7xl"
+                >
+                  Values
+                </p>
+                <Image
+                  src={"/icons/double-lines.svg"}
+                  alt=""
+                  class="absolute -bottom-3 left-4 h-[18px] w-[120px] md:-bottom-5"
+                  width={120}
+                  height={18}
+                />
+              </div>
+
+              <p
+                class="font-secondary text-n-600 text-xl leading-normal font-medium"
+              >
+                “Inculcating happiness and a spirit of learning through the
+                Guru–Shishya tradition, harmonizing integrity, humility, and <span
+                  class="font-semibold">global best practices.</span
+                >”
+              </p>
+            </div>
+            <!-- Overlay animation -->
+            <span
+              class="pointer-events-none absolute inset-0 before:absolute before:inset-0 before:-translate-x-[150%] before:bg-[linear-gradient(128deg,rgba(255,255,255,0)_-3.31%,rgba(255,255,255,0.56)_31.94%,rgba(255,255,255,0.78)_49.57%,rgba(255,255,255,0.26)_63.89%,rgba(255,255,255,0)_111.26%)] before:opacity-0 before:transition-all before:duration-[500ms] before:ease-in group-hover:before:translate-x-[150%] group-hover:before:opacity-100"
+            ></span>
+          </div>
+        </div>
+
+        <!-- Mobile & Tablet Cards -->
+        <div class="flex flex-col gap-5 xl:hidden">
+          <!-- Vision -->
+          <VisionMissionCard
+            img="/images/vision-mission-values/vision-mobile.jpg"
+            title="Our Vision"
+          >
+            <div class="flex flex-col gap-2 md:gap-3.5">
+              <p
+                class="font-secondary text-n-600 text-sm leading-normal font-medium md:text-base"
+              >
+                “To make SAI International School a <span
+                  class="text-orange-500">global K–12 education hub.</span
+                >”
+              </p>
+              <p
+                class="font-secondary text-n-600 text-xs leading-normal md:text-sm"
+              >
+                “Fostering innovation and excellence to inspire lifelong
+                learners.”
+              </p>
+            </div>
+          </VisionMissionCard>
+
+          <!-- Mission -->
+          <VisionMissionCard
+            img="/images/vision-mission-values/mission-mobile.jpg"
+            title="Our Mission"
+          >
+            <!-- Description -->
+            <p
+              class="font-secondary text-n-600 text-sm leading-normal font-medium"
+            >
+              <span class="text-orange-500"
+                >Empowering every learner to grow with intellect, empathy, and
+                purpose.</span
+              >
+              We nurture holistic development, inspire creativity and leadership,
+              and foster resilience and happiness for lifelong learning.
+            </p>
+          </VisionMissionCard>
+
+          <!-- Values -->
+          <VisionMissionCard
+            img="/images/vision-mission-values/values-mobile.jpg"
+            title="Our Values"
+          >
+            <p
+              class="font-secondary text-n-600 text-sm leading-normal font-medium"
+            >
+              “Inculcating happiness and a spirit of learning through the
+              Guru–Shishya tradition, harmonizing integrity, humility, and <span
+                class="font-semibold">global best practices.</span
+              >”
+            </p>
+          </VisionMissionCard>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

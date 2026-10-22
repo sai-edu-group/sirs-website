@@ -1,0 +1,151 @@
+---
+import Image from "astro/components/Image.astro";
+
+interface Logo {
+  src: string;
+  alt?: string;
+}
+
+interface Props {
+  title: string;
+  kicker?: string;
+  logos: Logo[];
+  direction?: "ltr" | "rtl";
+  speedSec?: number;
+  delay?: number;
+}
+
+const {
+  title,
+  kicker,
+  logos = [],
+  direction = "ltr",
+  speedSec = 2,
+  delay = 0,
+} = Astro.props as Props;
+---
+
+<div
+  class={`bg-n-50 overflow-hidden rounded-2xl border-b-8 border-orange-500 md:border-b-0 py-5  md:py-8  lg:py-10 ${direction == "ltr" ? "md:border-l-10 lg:border-l-12" : "md:border-r-10 lg:border-r-12"}`}
+>
+  <div
+    class={`flex flex-col gap-3 md:flex-row md:gap-14  md:items-center md:justify-between ${direction == "rtl" ? "md:flex-row-reverse" : ""}`}
+  >
+    <!-- Heading -->
+    <div
+      class={` px-5 ${direction == "rtl" ? "md:text-right md:pr-11 lg:pr-9 md:pl-0" : "md:pl-11 lg:pl-9 md:pr-0"} `}
+    >
+      {
+        kicker && (
+          <p class="font-secondary text-sm font-medium text-slate-600 lg:text-xl">
+            {kicker}
+          </p>
+        )
+      }
+      <p
+        class="font-secondary text-3xl font-bold text-orange-500 md:text-4xl lg:text-6xl"
+      >
+        {title}
+      </p>
+    </div>
+
+    <!-- Marquee (duplicate list for seamless loop) -->
+    <div class="group w-full overflow-hidden">
+      <div
+        class="flex items-center gap-6 whitespace-nowrap will-change-transform md:gap-14"
+        style={`--pb-speed: ${speedSec}; --pb-delay: ${delay}; transform:translateX(0);
+        --pb-start:${direction === "rtl" ? "0" : "-50%"};
+        --pb-end:${direction === "rtl" ? "-50%" : "0"}
+        `}
+      >
+        <!-- GROUP 1 -->
+        <ul
+          class="flex min-w-max items-center gap-6 whitespace-nowrap md:gap-14"
+        >
+          {
+            logos.map((logo) => (
+              <li>
+                <Image
+                  class="h-20 w-full object-contain lg:h-[100px] lg:w-full"
+                  src={logo.src}
+                  alt={logo.alt ?? ""}
+                  loading="lazy"
+                  decoding="async"
+                  width={100}
+                  height={100}
+                />
+              </li>
+            ))
+          }
+        </ul>
+        <ul
+          class="flex min-w-max items-center gap-6 whitespace-nowrap md:gap-14"
+        >
+          {
+            logos.map((logo) => (
+              <li>
+                <Image
+                  class="h-20 w-full object-contain lg:h-[100px] lg:w-full"
+                  src={logo.src}
+                  alt={logo.alt ?? ""}
+                  loading="lazy"
+                  decoding="async"
+                  width={100}
+                  height={100}
+                />
+              </li>
+            ))
+          }
+        </ul>
+        <ul
+          class="flex min-w-max items-center gap-6 whitespace-nowrap md:gap-14"
+        >
+          {
+            logos.map((logo) => (
+              <li>
+                <Image
+                  class="h-20 w-full object-contain lg:h-[100px] lg:w-full"
+                  src={logo.src}
+                  alt={logo.alt ?? ""}
+                  loading="lazy"
+                  decoding="async"
+                  width={100}
+                  height={100}
+                />
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* One shared keyframe: -50% -> 0 (LTR).
+       For RTL we set initial transform to 0 and use animation-direction: reverse. */
+    @keyframes pb-marquee {
+      0% {
+        transform: translateX(var(--pb-start));
+      }
+      100% {
+        transform: translateX(var(--pb-end));
+      }
+    }
+    /* Root animation settings use CSS variables set on the element.
+       On mobile we reduce the duration multiplier (faster). */
+    .group > div {
+      animation: pb-marquee calc(var(--pb-speed) * 1s) linear infinite;
+      animation-direction: alternate;
+      animation-delay: calc(var(--pb-delay) * 1s);
+    }
+    @media (max-width: 767px) {
+      .group > div {
+        animation-duration: calc(var(--pb-speed) * 1s * 0.5);
+      }
+    }
+    /* Pause on hover (nice UX) */
+    .group:hover > div {
+      animation-play-state: paused;
+    }
+  </style>
+</div>

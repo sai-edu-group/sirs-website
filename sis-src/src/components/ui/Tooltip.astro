@@ -1,0 +1,16 @@
+---
+interface Props {
+  text: string;
+  class?: string;
+}
+const { text, class: className = "" } = Astro.props as Props;
+---
+
+<div
+  class={`pointer-events-none absolute top-1/2 -translate-y-1/2 z-20 right-[110%] rounded-md bg-n-900 px-2 py-1.5 opacity-0 shadow transition duration-200 ease-out group-hover:opacity-100 ${className}`}
+  role="tooltip"
+>
+  <span class="text-n-50 text-xs leading-normal font-medium text-nowrap">
+    {text}
+  </span>
+</div>

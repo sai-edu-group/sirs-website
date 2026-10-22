@@ -1,0 +1,32 @@
+---
+// COMPONENTS //
+import Hero from "@/components/ui/Hero.astro";
+
+// OTHERS //
+import Layout from "@/layouts/Layout.astro";
+
+// SECTIONS //
+import Team from "@/sections/about/Team.astro";
+import AdvisoryBoard from "@/sections/about/AdvisoryBoard.astro";
+import Ethos from "@/sections/home/Ethos.astro";
+import Founder from "@/sections/home/Founder.astro";
+
+// DATA //
+import aboutMeta from "@/data/meta/about/about.json";
+import LearningAndBeyond from "@/sections/about/LearningAndBeyond.astro";
+
+const heroSectionDetails = {
+  title: "Nurturing Global Citizens with Indian Values",
+  subtitle: "We inspire curious minds to lead with compassion and confidence.",
+  imageName: "about-us",
+};
+---
+
+<Layout meta={aboutMeta}>
+  <Hero {...heroSectionDetails} />
+  <Ethos />
+  <Founder />
+  <LearningAndBeyond />
+  <Team />
+  <AdvisoryBoard />
+</Layout>

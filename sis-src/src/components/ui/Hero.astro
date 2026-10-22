@@ -1,0 +1,53 @@
+---
+// COMPONENTS //
+import Image from "astro/components/Image.astro";
+
+// OTHERS //
+import SectionHeaderMain from "./SectionHeaderMain.astro";
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  ctaText?: string;
+  variant?: "plain" | "withBg";
+  imageName?: string;
+}
+
+const {
+  title = "",
+  subtitle = "",
+  ctaText = "",
+  variant = "plain",
+  imageName = "contact-hero",
+} = Astro.props as Props;
+---
+
+<div
+  class=`bg-n-50 relative w-full overflow-hidden bg-[url('/images/school-background.png')] bg-cover bg-center pt-24 md:pt-36 ${variant === 'withBg' ? 'pb-8' : 'pb-0'}`
+>
+  <!-- Main Content -->
+  <div
+    class="container mx-auto flex flex-col items-center gap-10 px-4 pt-10 md:px-6 xl:flex-row xl:gap-6 2xl:px-0"
+  >
+    <!-- Left Content -->
+    <!-- Hero Text -->
+    <div class="flex flex-1 lg:py-12">
+      <SectionHeaderMain title={title} subtitle={subtitle} ctaText={ctaText} />
+    </div>
+
+    <!-- Right Content - Image -->
+    <div
+      class=`w-full lg:w-4/5 xl:w-1/2 ${variant === "plain" ? "xl:self-end" : ""} fade-in `
+    >
+      <Image
+        src=`/images/${imageName}.png`
+        alt=""
+        class="h-full w-full object-contain"
+        loading="lazy"
+        decoding="async"
+        width={600}
+        height={400}
+      />
+    </div>
+  </div>
+</div>

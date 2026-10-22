@@ -1,0 +1,154 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  totalPages: number;
+}
+
+const { totalPages = 30 } = Astro.props;
+
+const perPageOptions = [10];
+const defaultPerPage = perPageOptions[0];
+---
+
+<div
+  class="text-n-600 font-secondary flex items-center gap-5 text-lg font-normal select-none"
+>
+  <!-- Show per page -->
+  <span>Show</span>
+  <div
+    id="per-page"
+    class="border-n-400 relative flex cursor-pointer items-center gap-3 rounded-lg border px-4 py-3"
+  >
+    <span id="selected-value" class="text-xl font-medium">{defaultPerPage}</span
+    >
+    <!-- Down Arrow icon -->
+    <Icon name="down-arrow" class="text-n-600 h-4 w-4" />
+
+    <!-- Dropdown -->
+    <ul
+      id="dropdown"
+      class="border-n-200 absolute top-full left-0 z-10 mt-2 hidden w-full rounded-lg border bg-white shadow"
+    >
+      {
+        perPageOptions.map((opt) => (
+          <li
+            class="hover:bg-n-100 text-n-600 cursor-pointer px-4 py-2 text-base"
+            data-value={opt}
+          >
+            {opt}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <!-- Text -->
+  <span>items per page</span>
+
+  <!-- Pagination -->
+  <div
+    id="pagination"
+    class="border-n-200 text-n-600 flex items-center gap-6 rounded-xl border-2 px-4 py-3 text-lg font-medium"
+    data-total-pages={totalPages}
+  >
+    <!-- Prev -->
+    <a id="prevBtn" class="rotate-90 transition-opacity">
+      <Icon name="down-arrow" class="text-n-600 h-4 w-4" />
+    </a>
+
+    <!-- Page numbers -->
+    <div id="pageNumbers" class="flex items-center gap-4"></div>
+
+    <!-- Next -->
+    <a id="nextBtn" class="-rotate-90 transition-opacity">
+      <Icon name="down-arrow" class="text-n-600 h-4 w-4" />
+    </a>
+  </div>
+</div>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const pagination = document.getElementById("pagination");
+    const totalPages = +pagination.dataset.totalPages;
+    const pageNumbers = document.getElementById("pageNumbers");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const perPage = document.getElementById("per-page");
+    const dropdown = document.getElementById("dropdown");
+    const selectedValue = document.getElementById("selected-value");
+
+    const params = new URLSearchParams(window.location.search);
+    const currentPage = +params.get("page") || 1;
+    const perPageParam = +params.get("perPage") || 10;
+    selectedValue.textContent = perPageParam;
+
+    // Toggle dropdown visibility
+    perPage.addEventListener("click", (e) => {
+      dropdown.classList.toggle("hidden");
+      e.stopPropagation();
+    });
+
+    // Select perPage option
+    dropdown.querySelectorAll("li").forEach((item) =>
+      item.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const value = item.dataset.value;
+        selectedValue.textContent = value;
+        dropdown.classList.add("hidden");
+        params.set("perPage", value);
+        params.set("page", "1"); // Reset to first page
+        window.location.href = `${window.location.pathname}?${params}`;
+      })
+    );
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!perPage.contains(e.target)) dropdown.classList.add("hidden");
+    });
+
+    // Render pagination
+    function renderPagination() {
+      pageNumbers.innerHTML = "";
+      const effectivePages = Math.min(totalPages, perPageParam);
+      const maxVisible = 5;
+
+      let start = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+      let end = Math.min(effectivePages, start + maxVisible - 1);
+      if (end - start < maxVisible - 1)
+        start = Math.max(1, end - maxVisible + 1);
+
+      for (let i = start; i <= end; i++) {
+        const link = document.createElement("a");
+        link.textContent = i;
+        const linkParams = new URLSearchParams(params);
+        linkParams.set("page", i);
+        link.href = `${window.location.pathname}?${linkParams}`;
+        link.className = `font-normal text-n-500 transition-colors ${
+          i === currentPage
+            ? "text-orange-500 font-semibold"
+            : "hover:text-orange-500"
+        }`;
+        pageNumbers.appendChild(link);
+      }
+
+      // Update Prev/Next
+      const updateButton = (btn, newPage) => {
+        if (newPage < 1 || newPage > effectivePages) {
+          btn.classList.add("pointer-events-none", "opacity-30");
+          btn.removeAttribute("href");
+        } else {
+          const newParams = new URLSearchParams(params);
+          newParams.set("page", newPage);
+          btn.href = `${window.location.pathname}?${newParams}`;
+          btn.classList.remove("pointer-events-none", "opacity-30");
+        }
+      };
+
+      updateButton(prevBtn, currentPage - 1);
+      updateButton(nextBtn, currentPage + 1);
+    }
+
+    renderPagination();
+  });
+</script>

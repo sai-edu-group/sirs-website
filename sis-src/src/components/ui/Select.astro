@@ -1,0 +1,112 @@
+---
+interface Option {
+  label: string;
+  value: string;
+}
+interface Props {
+  label: string;
+  name: string;
+  required?: boolean;
+  value?: string;
+  placeholder?: string;
+  options: Option[];
+  errorMessage?: string;
+  hintText?: string;
+}
+
+const {
+  label,
+  name,
+  required = false,
+  value = "",
+  options = [],
+  placeholder = "",
+  errorMessage = "Error message",
+  hintText,
+} = Astro.props;
+---
+
+<div class="flex w-full flex-col gap-2 md:gap-3.5" data-field>
+  <!-- Select label -->
+  <label
+    for={name}
+    class="text-n-600 text-base font-normal md:text-lg lg:text-xl"
+  >
+    {label}{required && <span class="text-red-500">*</span>}
+  </label>
+
+  <!-- Dropdown -->
+  <div class="relative space-y-1" id="modal" data-dropdown>
+    <button
+      data-button
+      type="button"
+      class="border-n-600 text-n-700 focus:border-n-600 font-secondary relative w-full cursor-pointer appearance-none border-b bg-transparent px-0 pb-1 text-left text-sm font-medium focus:outline-none md:pb-3.5 md:text-xl lg:text-2xl"
+    >
+      <span data-label>{placeholder || label}</span>
+      <!-- custom arrow -->
+      <span
+        data-arrow
+        class="pointer-events-none absolute top-1/2 right-0 z-10 -translate-y-1/2 transition-transform duration-200"
+        aria-hidden="true"
+      >
+        <svg
+          class="size-3 md:size-6"
+          width="30"
+          height="30"
+          viewBox="0 0 30 30"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M2.80773 7.9836C2.63025 8.02524 2.38659 8.17701 2.25222 8.32965C2.07636 8.52942 1.998 8.75088 1.99683 9.0513L1.99587 9.29754L2.30271 9.9063C3.11463 11.517 4.13166 13.1911 5.04408 14.4185C6.96072 16.997 9.12897 18.8881 12.27 20.7208C13.0699 21.1875 13.458 21.3515 14.0806 21.4858C14.4934 21.5749 15.4434 21.5824 15.8539 21.4998C16.476 21.3747 16.942 21.1819 17.715 20.7301C20.8813 18.8793 23.0052 17.0287 24.9469 14.4288C25.8644 13.2005 26.9463 11.4154 27.7424 9.81657L28.0006 9.29808L28.0015 9.05157C28.0031 8.60952 27.7981 8.26854 27.4148 8.07606C27.0879 7.91187 26.7509 7.91796 26.4214 8.09409C26.1964 8.2143 26.0717 8.37756 25.7865 8.92557C24.8733 10.6799 24.0567 12.0268 23.2494 13.1101C21.4934 15.4663 19.5472 17.1683 16.725 18.8156C15.8497 19.3266 15.6458 19.3951 15 19.3951C14.3542 19.3951 14.1503 19.3266 13.275 18.8156C11.4242 17.7352 10.0883 16.7344 8.76435 15.4362C7.09875 13.803 5.7321 11.8526 4.24608 8.98821C4.08432 8.67645 3.90429 8.36859 3.846 8.30406C3.59319 8.02422 3.17922 7.89645 2.80773 7.9836Z"
+            fill="currentColor"></path>
+        </svg>
+      </span>
+    </button>
+
+    <!-- Dropdown Menu -->
+    <ul
+      data-menu
+      class="border-n-300 absolute z-10 mt-1 hidden max-h-[200px] w-full cursor-pointer overflow-y-auto rounded-lg border bg-white shadow-lg transition-all duration-200"
+    >
+      {
+        options.map((option: Option) => (
+          <li
+            class="text-n-700 font-secondary cursor-pointer px-4 py-2 hover:bg-orange-100 hover:text-orange-700"
+            data-value={option.value}
+            data-option
+          >
+            {option.label}
+          </li>
+        ))
+      }
+    </ul>
+
+    <input
+      type="hidden"
+      data-input
+      name={name}
+      placeholder={placeholder}
+      required
+    />
+  </div>
+
+  {
+    hintText && (
+      <p id={`${name}-hint`} class="text-n-500 text-sm">
+        {hintText}
+      </p>
+    )
+  }
+
+  <!-- Error message  -->
+  <p id={`${name}-error`} data-error class="hidden text-sm text-red-600">
+    {errorMessage}
+  </p>
+</div>
+
+<script>
+  import "@/scripts/dropdown";
+</script>

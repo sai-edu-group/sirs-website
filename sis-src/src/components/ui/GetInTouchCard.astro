@@ -1,0 +1,131 @@
+---
+import Image from "astro/components/Image.astro";
+
+export interface Props {
+  icon: string; // e.g. "mail.svg"
+  title: string;
+  type: "email" | "phone" | "location";
+  infoText: string[];
+}
+
+const { icon, title, type, infoText = [] } = Astro.props;
+---
+
+<div
+  class="border-n-200 relative flex h-full flex-col gap-2 overflow-hidden rounded-3xl border px-4 py-6 md:gap-6 2xl:gap-9 2xl:px-8 2xl:py-9"
+>
+  <!-- Foreground icon -->
+  <div>
+    <Image
+      src={`/icons/${icon}.svg`}
+      alt=""
+      class="h-12 w-12 object-contain"
+      loading="lazy"
+      decoding="async"
+      aria-hidden="true"
+      width="48"
+      height="48"
+    />
+  </div>
+
+  <!-- Content -->
+  <div class="text-n-800 space-y-5 md:space-y-6 2xl:space-y-9">
+    <!-- Card title -->
+    <p class="text-xl font-semibold xl:text-2xl 2xl:text-4xl">{title}</p>
+
+    <!-- Email / Phone list -->
+    {
+      type !== "location" && (
+        <ul class="font-secondary space-y-1.5">
+          {infoText.map((value) => {
+            const href =
+              type === "email"
+                ? `mailto:${value}`
+                : `tel:${value.replace(/\s+/g, "")}`;
+            const baseLink =
+              "font-bold text-n-500 text-base xl:text-lg 2xl:text-xl underline break-words";
+            const linkClass = baseLink;
+
+            return (
+              <li>
+                <a
+                  href={href}
+                  class={`${linkClass} data-track-contact`}
+                  data-contact-type={type}
+                  data-contact-value={value}
+                >
+                  {value}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      )
+    }
+
+    <!-- Location -->
+    {
+      type === "location" && (
+        <div class="space-y-1">
+          <a
+            href={`https://www.google.com/maps?q=SAI International School ${infoText[0]}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-secondary text-n-500 text-base font-semibold underline xl:text-lg 2xl:text-xl"
+          >
+            {infoText[0]}
+          </a>
+        </div>
+      )
+    }
+  </div>
+
+  <!-- Backdrop icon -->
+  <Image
+    src={`/icons/${icon}.svg`}
+    alt=""
+    aria-hidden="true"
+    class={`pointer-events-none select-none absolute -right-12 md:-right-20 -bottom-12 w-[200px] md:w-[230px] 2xl:w-[300px] object-contain opacity-[0.1]`}
+    width="300"
+    height="300"
+    loading="lazy"
+    decoding="async"
+  />
+</div>
+
+<script>
+  // ENUMS //
+  import { EVENTS } from "@/enums/analytics.enum";
+
+  // SCRIPTS //
+  import { trackEvent } from "@/scripts/analytics";
+  import { getDeviceType } from "@/scripts/device";
+
+  // Get the contact Links
+  const contactLinks = document.querySelectorAll("a.data-track-contact");
+
+  // Add Analytics to them
+  contactLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const target = e.currentTarget as HTMLAnchorElement;
+      const type = target.dataset.contactType;
+      const value = target.dataset.contactValue;
+
+      if (type === "phone") {
+        trackEvent(EVENTS.PHONE_CLICK, {
+          page_path: window.location.pathname,
+          device_type: getDeviceType(),
+          section: "how to reach us",
+          contacted_number: value,
+        });
+      } else if (type === "email") {
+        trackEvent(EVENTS.EMAIL_CLICK, {
+          page_path: window.location.pathname,
+          device_type: getDeviceType(),
+          section: "how to reach us",
+          contacted_email: value,
+        });
+      }
+    });
+  });
+</script>
