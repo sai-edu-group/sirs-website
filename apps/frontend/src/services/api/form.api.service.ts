@@ -2,29 +2,28 @@
 import axios from "axios";
 import type { AxiosRequestConfig } from "axios";
 
-/** LeadSquared Lead Capture API Call (proxied through /api/admission) */
-export const admissionEnquiryRequest = async (leadData: any) => {
+//  Get default API URL from environment variables  //
+const API_URL = import.meta.env.PUBLIC_API_URL;
+
+/** Newsletter Subscription Request */
+export const subscribeNewsLetterRequest = async (data: { email: string }) => {
   try {
     const config: AxiosRequestConfig = {
       method: "post",
-      url: `/api/admission`,
+      url: `${API_URL}newsletter/subscribe`,
       headers: {
         "Content-Type": "application/json",
       },
-      data: JSON.stringify(leadData), // must be array of { Attribute, Value }
+      data,
     };
 
     const response = await axios.request(config);
-
     return response.data;
   } catch (error: any) {
-    console.error("LeadSquared API Error:", error.response?.data || error);
+    console.error("Newsletter API error:", error);
     return { status: false, message: error.message };
   }
 };
-
-//  Get default API URL from environment variables  //
-const API_URL = import.meta.env.PUBLIC_API_URL;
 
 /** Contact Enquiry Request */
 export const contactEnquiryRequest = async (data: any) => {

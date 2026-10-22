@@ -4,7 +4,6 @@ import Image from "astro/components/Image.astro";
 
 // OTHERS //
 import IconButton from "./IconButton.astro";
-import { Icon } from "astro-icon/components";
 
 interface Props {
   img: string;
@@ -68,7 +67,14 @@ const formattedDate = new Date(date).toLocaleDateString("en-GB", {
         date && (
           <div class="mb-4 flex items-center gap-2">
             <span class="text-orange-500">
-              <Icon name="calendar" class="color-orange-500 size-4 lg:size-5" />
+              <svg
+                class="color-orange-500 size-4 lg:size-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-5M12.5 15a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+              </svg>
             </span>
             <span class="font-secondary text-n-600 text-sm font-normal md:text-base">
               {formattedDate}
@@ -82,7 +88,14 @@ const formattedDate = new Date(date).toLocaleDateString("en-GB", {
           topText && (
             <div class="flex items-center gap-3">
               <span class="text-orange-500">
-                <Icon name="users" class="size-4 lg:size-5" />
+                <svg
+                  class="size-4 lg:size-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1c0 .555.455 1 1 1h3v-1a6 6 0 0112 0v1c0 .555.455 1 1 1h3v-1a6 6 0 0112 0v1c0 .555.455 1 1 1h3" stroke="currentColor" />
+                </svg>
               </span>
               <p class="text-n-600 font-secondary text-sm leading-normal font-normal lg:text-base">
                 {topText}

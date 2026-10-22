@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-import { Icon } from "astro-icon/components";
 
 interface Props {
   image: string;
@@ -38,17 +37,24 @@ const {
   </div>
 
   <!-- BOTTOM BUTTON -->
-  {
-    showExpandButton && (
-      <div class="absolute right-0 bottom-0 z-1 hidden p-4 text-right transition-opacity duration-300 group-hover:block">
-        <button
-          class="flex items-center gap-2 hover:cursor-pointer"
-          aria-label="Expand image"
-        >
-          <Icon name="expand" class="fill-n-50" />
-          <p class="font-secondary text-n-50 text-xs sm:text-sm">Expand</p>
-        </button>
-      </div>
-    )
-  }
+{
+      showExpandButton && (
+        <div class="absolute right-0 bottom-0 z-1 hidden p-4 text-right transition-opacity duration-300 group-hover:block">
+          <button
+            class="flex items-center gap-2 hover:cursor-pointer"
+            aria-label="Expand image"
+          >
+            <svg
+              class="size-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 4l-5 5M4 4l10 10" />
+            </svg>
+            <p class="font-secondary text-n-50 text-xs sm:text-sm">Expand</p>
+          </button>
+        </div>
+      )
+    }
 </div>
