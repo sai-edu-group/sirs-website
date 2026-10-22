@@ -1,28 +1,12 @@
 ---
-import CustomSelect from "@/components/ui/CustomSelect.astro";
-
 // DATA //
 import { eyebrowText, heroSlides } from "@/data/home/hero";
 
-const grades = [
-  "Play Group",
-  "Nursery",
-  "KG I",
-  "KG II",
-  "Class I",
-  "Class II",
-  "Class III",
-  "Class IV",
-  "Class V",
-  "Class VI",
-  "Class VII",
-  "Class VIII",
-  "Class IX",
-  "Class XI - Science",
-  "Class XI - Commerce",
-  "Class XI - Humanities",
-  "Class XI - Cambridge (A Level)",
-];
+// COMPONENTS //
+import HeroWheel from "@/components/ui/HeroWheel.astro";
+
+// STYLES //
+import "@/styles/home/hero.css";
 
 const INTERVAL = 5000;
 ---
@@ -32,6 +16,7 @@ const INTERVAL = 5000;
   data-hero
   data-interval={INTERVAL}
 >
+  <HeroWheel />
   <img
     src="/images/vectors/mini-rath.png"
     alt=""
@@ -45,7 +30,6 @@ const INTERVAL = 5000;
   <div
     class="relative z-10 mx-auto grid w-full max-w-[1480px] grid-cols-1 items-center gap-8 px-4 md:px-6 lg:grid-cols-[0.90fr_2.6fr] lg:gap-0"
   >
-    <!-- Left Column: Hero Text & Dots -->
     <div class="relative z-20 order-2 lg:order-1 lg:min-w-0 lg:self-start" data-hero-textcol>
       <p class="font-secondary mb-4 text-lg text-white/75 italic md:text-xl">
         {eyebrowText}
@@ -75,8 +59,7 @@ const INTERVAL = 5000;
       </div>
     </div>
 
-    <!-- Right Column: Video Stage + Quick Enquiry Form Card -->
-    <div class="relative z-10 order-1 lg:order-2 lg:-ml-8 lg:grid lg:grid-cols-1 lg:gap-0 lg:grid-rows-[auto_1fr]">
+    <div class="relative z-10 order-1 lg:order-2 lg:-ml-8">
       <div
         class="hero-video-stage relative aspect-[16/10] max-h-[calc(100svh-140px-3rem)] min-h-56 w-full overflow-hidden rounded-[28px] shadow-2xl lg:aspect-auto lg:h-[calc(var(--hero-h)-var(--hero-top)-2rem)] lg:max-h-none"
         data-hero-video-stage
@@ -106,130 +89,10 @@ const INTERVAL = 5000;
         >
         </div>
       </div>
-
-      <!-- Quick Enquiry Form Card (Right Side) -->
-      <div class="relative z-20 lg:absolute lg:bottom-0 lg:left-full lg:ml-4 lg:w-[55%] lg:max-w-[55%] xl:max-w-[55%] lg:ml-6">
-        <div class="fade-in-up rounded-lg border border-n-100 bg-white p-4 md:px-6 md:py-5 lg:w-full xl:max-w-[55%]">
-          <div class="space-y-3.5">
-            <h2 class="text-n-800 text-xl md:text-2xl">
-              Get the SAI Experience in Your Hands
-            </h2>
-
-            <form
-              class="flex flex-col gap-3.5 md:flex-row md:flex-wrap md:justify-between"
-              data-hero-form
-              novalidate
-            >
-              <!-- Student Name Input -->
-              <div class="space-y-1 md:w-[58%]">
-                <input
-                  type="text"
-                  name="studentName"
-                  placeholder="Student's Name"
-                  class="border-n-500 text-n-500 placeholder-n-500 h-[50px] w-full rounded-lg border px-3 text-base font-medium focus:border-transparent focus:ring-2 focus:ring-orange-500 focus:outline-none"
-                  required
-                />
-                <p
-                  id="studentName-error"
-                  data-error
-                  class="hidden text-sm text-red-600"
-                >
-                  Please enter the student name.
-                </p>
-                <p
-                  id="studentName-number-error"
-                  data-error
-                  class="hidden text-sm text-red-600"
-                >
-                  Name cannot contain numbers.
-                </p>
-              </div>
-
-              <!-- Grade Select -->
-              <div class="md:w-[39%]">
-                <CustomSelect
-                  options={grades}
-                  label="Select Grade"
-                  name="grade"
-                  placeholder="Select Grade"
-                />
-                <p
-                  id="grade-error"
-                  data-error
-                  class="hidden text-sm text-red-600"
-                >
-                  Please select a grade.
-                </p>
-              </div>
-
-              <!-- Phone Number Input -->
-              <div class="space-y-1 md:w-[58%]">
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone Number"
-                  class="border-n-500 text-n-500 placeholder-n-500 h-[50px] w-full rounded-lg border px-3 text-base font-medium focus:border-transparent focus:ring-2 focus:ring-orange-500 focus:outline-none"
-                  required
-                />
-                <p
-                  id="phone-error"
-                  data-error
-                  class="hidden text-sm text-red-600"
-                >
-                  Please enter a valid 10-digit phone number.
-                </p>
-              </div>
-
-              <!-- Submit Button -->
-              <button
-                type="submit"
-                class="fade-in font-secondary h-[50px] w-full cursor-pointer rounded-lg border border-transparent bg-orange-500 text-lg text-orange-50 transition-all duration-300 hover:border-orange-500 hover:bg-transparent hover:text-orange-500 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:outline-none md:w-[39%]"
-              >
-                Get Brochure
-              </button>
-
-              <div
-                id="hero-loader"
-                class="mt-2 flex hidden w-full items-center gap-3 text-orange-600 md:w-[39%]"
-              >
-                <div class="spinner"></div>
-                <span class="text-base font-medium">Submitting...</span>
-              </div>
-
-              <!-- Success Message -->
-              <p
-                id="hero-success"
-                class="mt-2 hidden w-full rounded-lg border border-green-200 bg-green-50 px-3 py-2 text-sm font-medium text-green-700 md:text-base"
-              >
-                Form submitted successfully! You will receive the brochure on
-                your phone shortly.
-              </p>
-            </form>
-
-            <!-- Brochure Text -->
-            <p class="text-n-700 font-secondary text-sm md:text-base">
-              Our counsellors will reach out to you.
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
 
-<style>
-  .spinner {
-    width: 18px;
-    height: 18px;
-    border: 3px solid #f2c4c0
-    border-top-color: #cc554d;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-</style>
+<script>
+  import "@/scripts/home/hero";
+</script>
