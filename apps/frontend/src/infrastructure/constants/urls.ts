@@ -59,6 +59,7 @@ export const URLS = {
     },
     ALBUMS: {
       ROOT: "/media/albums",
+      ITEM: (id: string) => `/media/albums/${id}`,
     },
     RADIO_ORANGE: "/media/radio-orange",
     SAI_TV: "/media/sai-tv",

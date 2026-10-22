@@ -1,0 +1,152 @@
+---
+// COMPONENTS //
+import Button from "@/components/ui/Button.astro";
+import Image from "astro/components/Image.astro";
+import NewsLetterImage from "@/assets/images/news-letter.png";
+---
+
+<!-- News letter -->
+<section class="bg-n-100" data-section="Newsletter">
+  <div
+    class="container mx-auto flex flex-col items-center gap-14 px-6 py-16 md:py-20 lg:flex-row lg:gap-20 lg:px-8 lg:py-28 2xl:px-0"
+  >
+    <div class="h-52 md:h-[430px] lg:h-auto lg:w-[40%] 2xl:w-[46%]">
+      <Image
+        src={NewsLetterImage}
+        alt=""
+        class="h-full w-full object-cover"
+        width={600}
+        height={430}
+      />
+    </div>
+    <div class="flex flex-1 flex-col gap-8 md:gap-11">
+      <div class="space-y-2 md:space-y-2.5">
+        <!-- Eyebrow text -->
+        <p class="text-n-600 text-base font-light md:text-2xl">
+          News & Updates
+        </p>
+        <div class="space-y-1 md:space-y-3">
+          <!-- Title text -->
+          <p class="text-n-800 text-3xl leading-[120%] font-medium md:text-6xl">
+            Don't Miss a Moment at SAI International
+          </p>
+
+          <!-- Subtitle text -->
+          <p
+            class="text-n-500 font-secondary text-sm font-normal md:text-xl md:leading-[140%] lg:leading-[150%]"
+          >
+            Receive updates on events, achievements, and important announcements
+            directly in your inbox.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-7 md:gap-8">
+        <div class="max-w-[400px] space-y-1">
+          <p class="text-n-500 font-xs md:font-base">Email:</p>
+          <input
+            type="text"
+            name="emailId"
+            placeholder="Enter your Email ID"
+            class="border-n-500 bg-n-50 text-n-500 placeholder-n-500 h-[50px] w-full rounded-lg border px-3 text-base font-medium focus:border-transparent focus:ring-2 focus:ring-orange-500 focus:outline-none"
+            required
+          />
+          <p id="email-error" data-error class="hidden text-sm text-red-600">
+            Enter a valid Email ID
+          </p>
+        </div>
+
+        <!-- Cta button -->
+        <a href="/" class="w-fit" data-subscribe-newsletter-button>
+          <Button text="Subscribe to Newsletter" />
+        </a>
+        <!-- Success/Error Message -->
+        <div
+          id="newsletter-message"
+          class="hidden rounded-lg px-4 py-3 text-sm font-medium"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { subscribeNewsLetterRequest } from "@/services/api/form.api.service.ts";
+
+  function showMessage(message, isSuccess = true) {
+    const messageEl = document.querySelector("#newsletter-message");
+    messageEl.textContent = message;
+    messageEl.classList.remove(
+      "hidden",
+      "bg-red-100",
+      "text-red-700",
+      "bg-green-100",
+      "text-green-700",
+    );
+
+    if (isSuccess) {
+      messageEl.classList.add("bg-green-100", "text-green-700");
+    } else {
+      messageEl.classList.add("bg-red-100", "text-red-700");
+    }
+
+    // Auto-hide after 4 seconds
+    setTimeout(() => {
+      messageEl.classList.add("hidden");
+    }, 4000);
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const subscribeNewsletterButton = document.querySelector(
+      "[data-subscribe-newsletter-button]",
+    );
+    if (subscribeNewsletterButton) {
+      subscribeNewsletterButton.addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        // Initialize button for Disable Effect
+        const btn = subscribeNewsletterButton.querySelector("button") as HTMLButtonElement;
+        const originalText = btn.innerText;
+
+        // Hide all previous errors
+        document
+          .querySelectorAll("[data-error]")
+          .forEach((p) => p.classList.add("hidden"));
+
+        const emailInput = document.querySelector('input[name="emailId"]') as HTMLInputElement;
+        const email = emailInput.value;
+
+        if (!email) {
+          document.querySelector("#email-error").classList.remove("hidden");
+          return;
+        }
+
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(email)) {
+          document.querySelector("#email-error").classList.remove("hidden");
+          return;
+        }
+
+        // Disable button during request
+        btn.disabled = true;
+        btn.innerText = "Subscribing...";
+
+        try {
+          await subscribeNewsLetterRequest({ email });
+          emailInput.value = "";
+          document.querySelector("#email-error").classList.add("hidden");
+          showMessage(
+            "Thank you for subscribing! You have been added to our newsletter.",
+            true,
+          );
+        } catch (err) {
+          showMessage("Something went wrong. Please try again later.", false);
+        } finally {
+          btn.disabled = false;
+          btn.innerText = originalText;
+        }
+      });
+    }
+  });
+</script>

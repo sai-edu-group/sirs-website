@@ -1,6 +1,6 @@
 // @ts-check
 // MODULES //
-import nodePath from "path";
+import path from "path";
 
 // OTHERS //
 import { defineConfig, passthroughImageService } from "astro/config";
@@ -10,12 +10,10 @@ import { fileURLToPath } from "url";
 import sitemap from "@astrojs/sitemap";
 import vercel from "@astrojs/vercel";
 
-const __dirname = nodePath.dirname(fileURLToPath(import.meta.url));
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
-  // Pages are built ahead of time and served from the CDN; only routes that
-  // set `prerender = false` (the API route and blog detail) run on demand.
   output: "static",
   adapter: vercel(),
   srcDir: "./src",
@@ -29,7 +27,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
     resolve: {
       alias: {
-        "@": nodePath.resolve(__dirname, "./src"),
+        "@": path.resolve(__dirname, "./src"),
       },
     },
   },
