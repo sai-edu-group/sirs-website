@@ -1,5 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
 import { buildFinalYearOptions } from "@/utils/year.utils";
 
 const currentYear = new Date().getFullYear();
@@ -58,10 +57,14 @@ const dropdownYears = finalYears.slice(2);
                 Previous Years
               </span>
               {/* Down Arrow icon */}
-              <Icon
-                name="down-arrow"
+              <svg
                 class="size-4 transition-transform group-open:rotate-180"
-              />
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
             </summary>
 
             {/* Year Dropdown List */}
@@ -94,10 +97,14 @@ const dropdownYears = finalYears.slice(2);
     {
       showSearch && (
         <div class="relative min-w-[250px] flex-1">
-          <Icon
-            name="search"
+          <svg
             class="text-n-600 absolute top-1/2 left-0 size-4 -translate-y-1/2 md:size-5"
-          />
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
           {/* Search Input */}
           <input
             id="search-input"
@@ -129,11 +136,15 @@ const dropdownYears = finalYears.slice(2);
             </span>
 
             {/* Down Arrow Icon */}
-            <Icon
-              name="down-arrow"
+            <svg
               class="text-n-600 h-4 w-4 transition-transform duration-200"
               id="sort-arrow"
-            />
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
           </div>
 
           {/* Sort By Dropdown List  */}

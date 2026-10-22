@@ -1,6 +1,4 @@
 ---
-import { Image } from "astro:assets";
-import { Icon } from "astro-icon/components";
 
 interface Props {
   image: string;
@@ -70,7 +68,14 @@ const {
             aria-label="Expand image"
             href={readMoreUrl}
           >
-            <Icon name="read-more" />
+            <svg
+              class="size-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
             <p class="font-secondary text-n-500 text-xs sm:text-sm">
               Read More
             </p>
@@ -83,7 +88,14 @@ const {
             class="flex items-center gap-2 hover:cursor-pointer"
             aria-label="Expand image"
           >
-            <Icon name="expand" />
+            <svg
+              class="size-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 4l-5 5M4 4l10 10" />
+            </svg>
             <p class="font-secondary text-n-500 text-xs sm:text-sm">
               Click to Expand
             </p>
