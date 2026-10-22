@@ -1,5 +1,160 @@
 ---
-import DummySection from "@/components/ui/DummySection.astro";
+// DATA //
+import { saioneers, sectionHeaderContent } from "@/data/home/saioneers";
+
+// STYLES //
+import "@/styles/home/saioneers.css";
+
+const first = saioneers[0];
 ---
-<!-- TODO: Replace with real section content -->
-<DummySection name="Home — Global Saioners" />
+
+<section
+  class="relative overflow-hidden"
+  id="saioneers"
+  data-section="Meet a SAIoneer"
+  data-saioneers={JSON.stringify(saioneers)}
+>
+  <div class="container mx-auto px-6 py-16 lg:px-8 lg:py-24 2xl:px-0">
+    <!-- Header -->
+    <div class="space-y-3 lg:space-y-4">
+      <p
+        class="font-secondary text-n-500 flex items-center gap-2 text-sm md:text-base lg:text-lg"
+      >
+        {sectionHeaderContent.eyebrow}
+        <span class="size-2 rounded-full bg-orange-500" aria-hidden="true"
+        ></span>
+      </p>
+      <h2
+        class="text-n-800 text-4xl leading-[112%] font-semibold md:text-5xl lg:text-6xl"
+      >
+        {sectionHeaderContent.title}
+      </h2>
+    </div>
+
+    <div
+      class="mt-10 grid grid-cols-1 items-start gap-10 lg:mt-14 lg:grid-cols-[minmax(0,0.45fr)_minmax(0,1fr)] lg:gap-14 xl:gap-20"
+    >
+      <!-- Student details -->
+      <div
+        class="saioneer-fade flex flex-col gap-6 lg:pt-2"
+        data-saioneer-fade
+      >
+        <div class="space-y-2">
+          <p
+            class="text-n-800 text-3xl leading-tight font-semibold md:text-4xl"
+            data-saioneer-name
+          >
+            {first.name}
+          </p>
+          <p
+            class="font-secondary text-n-500 flex items-center gap-2 text-sm md:text-base"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="size-4 shrink-0 text-orange-500 md:size-5"
+              aria-hidden="true"
+            >
+              <path d="M12 21s-7-5.6-7-11a7 7 0 1 1 14 0c0 5.4-7 11-7 11z"
+              ></path>
+              <circle cx="12" cy="10" r="2.5"></circle>
+            </svg>
+            <span data-saioneer-meta>From {first.from} · {first.grade}</span>
+          </p>
+        </div>
+
+        <blockquote
+          class="text-n-700 max-w-xl text-xl leading-relaxed font-medium italic md:text-2xl"
+        >
+          “<span data-saioneer-quote>{first.quote}</span>”
+        </blockquote>
+
+        <button
+          type="button"
+          class="font-secondary group flex w-fit cursor-pointer items-center gap-2.5 text-base font-semibold text-orange-500 transition-colors hover:text-orange-600 md:text-lg"
+          data-saioneer-shuffle
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="size-5 transition-transform duration-500 group-hover:rotate-180"
+            aria-hidden="true"
+          >
+            <path
+              d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22"
+            ></path>
+            <path d="m18 2 4 4-4 4"></path>
+            <path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2"></path>
+            <path d="M22 18h-5.9c-1.3 0-2.6-.7-3.3-1.8l-.5-.8"></path>
+            <path d="m18 14 4 4-4 4"></path>
+          </svg>
+          {sectionHeaderContent.shuffleLabel}
+        </button>
+      </div>
+
+      <!-- Talent cards -->
+      <div
+        class="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 md:mx-0 md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:px-0 md:pb-0 lg:gap-6"
+      >
+        {
+          first.talents.map((talent) => (
+            <figure
+              class="relative aspect-[9/17] w-[62%] shrink-0 snap-center overflow-hidden rounded-3xl md:w-auto"
+              data-saioneer-card
+            >
+              <!-- One slide per photo; the script slides a new one in over this -->
+              <div class="absolute inset-0 will-change-transform" data-slide>
+                <!-- Placeholder, shown when a talent has no photo yet -->
+                <div
+                  class:list={[
+                    "absolute inset-0",
+                    "data-[tone=orange]:bg-orange-500 data-[tone=violet]:bg-violet-100 data-[tone=slate]:bg-n-200",
+                    talent.image && "hidden",
+                  ]}
+                  data-tone={talent.tone}
+                  data-card-placeholder
+                />
+                <img
+                  src={talent.image ?? ""}
+                  alt={talent.imageAlt ?? ""}
+                  class:list={[
+                    "absolute inset-0 size-full object-cover",
+                    !talent.image && "hidden",
+                  ]}
+                  loading="lazy"
+                  decoding="async"
+                  data-card-img
+                />
+                <!-- Soft shade so the label stays readable on bright photos -->
+                <div
+                  class="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/45 to-transparent"
+                  aria-hidden="true"
+                />
+                <span
+                  class="font-secondary absolute bottom-4 left-4 rounded-full bg-white/20 px-4 py-2 text-[11px] font-semibold tracking-[0.12em] text-white uppercase backdrop-blur-md md:bottom-5 md:left-5 md:text-xs"
+                  data-card-label
+                >
+                  {talent.label}
+                </span>
+              </div>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import "@/scripts/home/saioneers";
+</script>

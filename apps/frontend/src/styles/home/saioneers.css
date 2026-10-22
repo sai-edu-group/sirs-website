@@ -1,0 +1,17 @@
+/* Fade used while swapping to another SAIoneer */
+.saioneer-fade {
+  transition:
+    opacity 300ms ease,
+    transform 300ms ease;
+}
+
+.saioneer-fade[data-swapping] {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .saioneer-fade {
+    transition: none;
+  }
+}

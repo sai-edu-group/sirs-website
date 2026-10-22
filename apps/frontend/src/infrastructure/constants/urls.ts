@@ -5,8 +5,14 @@ export const URLS = {
     ROOT: "/about",
     ETHOS: "/about#ethos",
     GURU_SHISHYA: "/about#guru-shishya",
+    VISION_MISSION_VALUES: "/about#vision-mission-values",
+    FOUNDER: "/about#our-founder",
+    KEY_PERSONNEL: "/about#key-personnel",
+    ADVISORY_BOARD: "/about#advisory-board",
+    AFFILIATIONS: "/about#our-affiliations",
     DETAIL: (slug: string) => `/about/${slug}`,
     LEARNING_360: {
+      ROOT: "/sirs-experience/learning-360",
       ITEM: (name: string) => `/sirs-experience/learning-360/${name}`,
     },
     LEARNING_AND_BEYOND: {
@@ -26,9 +32,15 @@ export const URLS = {
     GLOBAL_SAIONEERSS: "/sirs-experience/global-saIoneers",
   },
 
+  GLOBAL_CONNECT: "/global-connect",
+
+  STUDENT_LEADERS: "/student-leaders",
+
   ADMISSIONS: {
     ROOT: "/admissions",
     GUIDELINES: "/admissions/guidelines",
+    TRANSFER_CERTIFICATES: "/admissions/transfer-certificates",
+    EWS: "/admissions/ews-admissions",
   },
 
   CONTACT: "/contact-us",
@@ -43,12 +55,14 @@ export const URLS = {
     ROOT: "/media",
     BLOGS: {
       ROOT: "/media/blogs",
-      DETAIL: (slug: string) => `/media/blogs/${slug}`,
+      DETAIL: (id: string, title: string) => `/media/blogs/${id}/${title}`,
     },
     ALBUMS: {
       ROOT: "/media/albums",
       ITEM: (id: string) => `/media/albums/${id}`,
     },
+    RADIO_ORANGE: "/media/radio-orange",
+    SAI_TV: "/media/sai-tv",
   },
 
   CAMPUS: {

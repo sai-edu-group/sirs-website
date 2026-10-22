@@ -1,0 +1,220 @@
+---
+// PAGE HERO — shared hero for all sub pages.
+// Bright ivory canvas, the photo (optionally in a clean temple-niche arch), a slowly
+// turning Konark-style wheel, and an optional hairline that rises into an arch over the photo.
+// Height is 3/4 of the screen on desktop. Each page only passes text + image,
+// and optionally call-to-action buttons through the default slot.
+
+// COMPONENTS //
+import HeroWheel from "@/components/ui/HeroWheel.astro";
+
+// STYLES //
+import "@/styles/common/page-hero.css";
+
+interface Props {
+  /** Small label above the title, e.g. "Admissions" */
+  eyebrow?: string;
+  title: string;
+  /** Part of `title` rendered in the brand colour (keep it short — it never wraps) */
+  highlight?: string;
+  description?: string;
+  /** Path inside /public, e.g. "/images/admission-hero.webp" */
+  image: string;
+  imageAlt?: string;
+  /**
+   * "cutout" — transparent PNG of people, standing in the arch
+   * "cover"  — regular photo, cropped to fill the arch
+   */
+  imageFit?: "cutout" | "cover";
+  /**
+   * "arch"  — photo inside a temple-niche arch (good for regular photos)
+   * "none"  — no frame, the photo stands straight on the page (good for cut-outs)
+   * "line"  — a line runs along the base of the hero and rises into an arch
+   *           outline over the photo; nothing under the photo (good for cut-outs)
+   */
+  frame?: "arch" | "none" | "line";
+  /**
+   * Shape of the arch outline when `frame="line"`:
+   * "tall" — dome stands well above a portrait or square-ish photo
+   * "wide" — dome hugs a wide, panoramic photo
+   */
+  archShape?: "tall" | "wide";
+  /**
+   * "default" — big headline for short titles
+   * "compact" — one size smaller, for longer titles
+   */
+  titleSize?: "default" | "compact";
+  /** Extra classes for the <img>, to re-frame a particular photo */
+  imageClass?: string;
+  dataSection?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  highlight,
+  description,
+  image,
+  imageAlt = "",
+  imageFit = "cutout",
+  frame = "arch",
+  titleSize = "default",
+  archShape = "tall",
+  imageClass = "",
+  dataSection = "Page Hero",
+} = Astro.props;
+
+const [titleBefore, titleAfter] =
+  highlight && title.includes(highlight) ? title.split(highlight) : [title, ""];
+const hasHighlight = !!highlight && title.includes(highlight);
+
+const imageClasses =
+  frame === "arch"
+    ? imageFit === "cutout"
+      ? "absolute bottom-0 -left-[2%] w-[112%] max-w-none"
+      : "absolute inset-0 h-full w-full object-cover"
+    : imageFit === "cutout"
+      ? "block h-auto w-full"
+      : "block w-full rounded-t-3xl object-cover lg:h-[calc(75vh-10rem)]";
+---
+
+<section
+  data-section={dataSection}
+  class="from-orange-50 to-n-50 relative isolate min-h-[75vh] overflow-hidden bg-gradient-to-b"
+>
+  <!-- Background decoration -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
+    <div
+      class="bg-orange-100 absolute top-16 left-0 size-[480px] -translate-x-1/4 rounded-full opacity-50 blur-3xl"
+    >
+    </div>
+
+    <HeroWheel />
+  </div>
+
+  <div
+    class="relative container mx-auto flex flex-col gap-10 px-6 pt-28 md:pt-32 lg:flex-row lg:items-stretch lg:justify-start lg:gap-16 lg:px-8 lg:pt-40 2xl:px-0"
+  >
+    <!-- Text -->
+    <div class="flex flex-col justify-center gap-5 lg:w-xl lg:max-w-[52%] lg:gap-4">
+      {
+        eyebrow && (
+          <p
+            class="page-hero-rise font-secondary text-orange-500 flex items-center gap-3 text-sm font-semibold tracking-[0.25em] uppercase md:text-base"
+            style="--delay: 0.05s"
+          >
+            <svg
+              class="size-3"
+              viewBox="0 0 12 12"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M6 0 12 6 6 12 0 6Z" />
+            </svg>
+            {eyebrow}
+          </p>
+        )
+      }
+
+      <h1
+        class:list={[
+          "page-hero-rise text-n-800 leading-[112%] font-medium",
+          titleSize === "compact"
+            ? "text-3xl md:text-4xl xl:text-5xl 2xl:text-6xl"
+            : "text-4xl md:text-5xl xl:text-6xl 2xl:text-7xl",
+        ]}
+        style="--delay: 0.15s"
+      >
+        {titleBefore}{hasHighlight && <span class="text-orange-500 whitespace-nowrap">{highlight}</span>}{titleAfter}
+      </h1>
+
+      <!-- Ornamental divider -->
+      <div
+        class="page-hero-rise text-orange-500 flex items-center gap-3"
+        style="--delay: 0.25s"
+        aria-hidden="true"
+      >
+        <span class="bg-orange-300 h-px w-14"></span>
+        <svg class="size-4" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 0 10 6 16 8 10 10 8 16 6 10 0 8 6 6Z"></path>
+        </svg>
+        <span class="bg-orange-300 h-px w-14"></span>
+      </div>
+
+      {
+        description && (
+          <p
+            class="page-hero-rise font-secondary text-n-600 max-w-xl text-base leading-normal font-medium md:text-lg xl:text-xl"
+            style="--delay: 0.35s"
+          >
+            {description}
+          </p>
+        )
+      }
+
+      {
+        Astro.slots.has("default") && (
+          <div
+            class="page-hero-rise flex flex-wrap items-center gap-3 md:gap-4"
+            style="--delay: 0.45s"
+          >
+            <slot />
+          </div>
+        )
+      }
+    </div>
+
+    <!-- Photo -->
+    {
+      frame === "arch" ? (
+        <div
+          class="page-hero-pop relative mx-auto aspect-[6/5] w-72 shrink-0 sm:w-96 lg:mr-0 lg:ml-auto lg:h-[calc(75vh-10rem)] lg:w-auto lg:self-end"
+          style="--delay: 0.2s"
+        >
+          <div class="border-n-200 shadow-n-900/5 from-orange-50 to-n-50 absolute inset-0 overflow-hidden rounded-t-full border border-b-0 bg-gradient-to-b shadow-xl">
+            <img
+              src={image}
+              alt={imageAlt}
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              class:list={[imageClasses, imageClass]}
+            />
+          </div>
+        </div>
+      ) : (
+        <div
+          class="page-hero-pop relative -mx-6 shrink-0 md:mx-0 md:ml-auto md:mr-[calc((100vw-100%)/-2)] md:w-[60%] lg:flex lg:h-[calc(75vh-10rem)] lg:w-[48%] lg:max-w-[44rem] lg:items-end lg:self-end"
+          style="--delay: 0.2s"
+        >
+          {frame === "line" && (
+            <>
+              {/* Base line: runs in from the screen edge, then turns into the arch */}
+              <span
+                aria-hidden="true"
+                class="bg-orange-300 absolute right-full bottom-0 hidden h-0.5 w-screen md:block"
+              />
+              <span
+                aria-hidden="true"
+                class:list={[
+                  "border-orange-300 absolute inset-x-4 bottom-0 rounded-t-[50%_100%] border-2 border-b-0 md:inset-x-0 lg:max-h-full",
+                  archShape === "wide"
+                    ? "aspect-[2/1] lg:aspect-[15/8]"
+                    : "aspect-[3/2] lg:aspect-[5/4]",
+                ]}
+              />
+            </>
+          )}
+          <img
+            src={image}
+            alt={imageAlt}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class:list={["relative z-10", imageClasses, imageClass]}
+          />
+        </div>
+      )
+    }
+  </div>
+</section>

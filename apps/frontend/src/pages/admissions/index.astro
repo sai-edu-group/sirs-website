@@ -1,23 +1,25 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 
-import Hero from "@/sections/admissions/Hero.astro";
-import Overview from "@/sections/admissions/Overview.astro";
-import Process from "@/sections/admissions/Process.astro";
+// COMPONENTS //
+import PageHero from "@/components/ui/PageHero.astro";
+import HowItWorks from "@/sections/admissions/HowItWorks.astro";
 import Form from "@/sections/admissions/Form.astro";
 import FAQ from "@/sections/admissions/FAQ.astro";
-import AdmissionsOffice from "@/sections/common/AdmissionsOffice.astro";
-import ExploreCampuses from "@/sections/common/ExploreCampuses.astro";
-import Newsletter from "@/sections/common/Newsletter.astro";
 ---
 
 <Layout meta={{ title: "Admissions" }}>
-  <Hero />
-  <Overview />
-  <Process />
+  <PageHero
+    dataSection="Admissions Hero"
+    eyebrow="Admissions"
+    title="Give them a second home"
+    highlight="second home"
+    description="Admissions are open for Classes IV–XII. Share a few details and our counsellors will guide you through every step, warmly and clearly."
+    image="/images/admission-hero.webp"
+    imageAlt="A family meeting an admissions counsellor across a desk"
+    frame="line"
+  />
+  <HowItWorks />
   <Form />
   <FAQ />
-  <AdmissionsOffice />
-  <ExploreCampuses />
-  <Newsletter />
 </Layout>

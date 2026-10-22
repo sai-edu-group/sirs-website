@@ -1,0 +1,107 @@
+---
+export const prerender = false;
+
+// ENUMS //
+import { IMAGE_TYPES } from "@/enums/image.enum";
+
+// COMPONENTS //
+import Article from "@/components/ui/Article.astro";
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
+import PageHero from "@/components/ui/PageHero.astro";
+import Image from "astro/components/Image.astro";
+
+// API SERVICES //
+import { fetchBlogByIdRequest } from "@/services/api/news.api.service";
+
+// CONSTANTS //
+import { URLS } from "@/infrastructure/constants/urls";
+
+// UTILS //
+import { generateImagePath } from "@/utils/image.utils";
+
+// OTHERS //
+import Layout from "@/layouts/Layout.astro";
+
+const blogId = Astro.params.id;
+
+if (!blogId) {
+  throw new Error("Blog ID is missing from route");
+}
+
+// Find that one item dynamically (no static paths)
+const blogItem = await fetchBlogByIdRequest(blogId);
+
+// A blog that cannot be found is a real 404, not an empty page
+if (!blogItem) {
+  Astro.response.status = 404;
+}
+
+const breadcrumbItems = [
+  { label: "News & Blogs", href: URLS.MEDIA.BLOGS.ROOT },
+  { label: blogItem?.title ?? "Blog", href: "#" },
+];
+---
+
+<Layout meta={{ title: blogItem?.title ?? "Blog not found" }}>
+  <PageHero
+    dataSection="Blog Hero"
+    eyebrow="News & Blogs"
+    title={blogItem?.title ?? "We could not find this blog"}
+    image="/images/about-hero.webp"
+    imageAlt="SIRS students talking together on campus"
+    titleSize="compact"
+    archShape="wide"
+    frame="line"
+  />
+
+  <section class="bg-n-50 relative w-full overflow-hidden">
+    <div
+      class="container mx-auto flex flex-col gap-5 px-6 pt-10 pb-20 md:gap-8 md:px-8 md:pt-14 md:pb-28 lg:gap-9 2xl:px-0"
+    >
+      <Breadcrumbs items={breadcrumbItems} />
+
+      {
+        blogItem ? (
+          <Article
+            photos={blogItem.photos}
+            photo_path={blogItem.photo_path}
+            metaStripDetails={{
+              author: "",
+              date: blogItem.created_on
+                ? new Date(blogItem.created_on).toDateString()
+                : "",
+            }}
+          >
+            <!-- Blog Consumption Content -->
+            <div class="flex flex-col gap-10 md:gap-14 lg:gap-20">
+              {blogItem.photo_path && (
+                <Image
+                  src={generateImagePath(
+                    blogItem.banner,
+                    IMAGE_TYPES.BLOG,
+                    blogItem.photo_path,
+                  )}
+                  alt={blogItem.title}
+                  class="card-anim card-bottom h-[257px] w-full rounded-3xl object-cover md:h-[524px] lg:h-[600px]"
+                  style={`--delay: 0.1s`}
+                  width={1200}
+                  height={600}
+                />
+              )}
+
+              <!-- Blog Consumption Description -->
+              <div set:html={blogItem.details} />
+            </div>
+          </Article>
+        ) : (
+          <p class="font-secondary text-n-600 text-base md:text-xl">
+            This blog may have been moved or removed.{" "}
+            <a href={URLS.MEDIA.BLOGS.ROOT} class="text-orange-500 underline">
+              Back to News &amp; Blogs
+            </a>
+          </p>
+        )
+      }
+    </div>
+  </section>
+</Layout>

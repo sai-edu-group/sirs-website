@@ -23,7 +23,9 @@ const { number, icon = "", title, description } = Astro.props;
   </div>
   <!-- Text wrapper -->
   <div class="text-n-800 z-2 space-y-3 md:space-y-6">
-    <p class="w-[90%] text-xl font-medium lg:text-2xl 2xl:text-3xl">{title}</p>
+    <h3 class="w-[90%] text-xl font-medium lg:text-2xl 2xl:text-3xl">
+      {title}
+    </h3>
     <p class="font-secondary text-sm font-normal lg:text-base">{description}</p>
   </div>
 </div>
