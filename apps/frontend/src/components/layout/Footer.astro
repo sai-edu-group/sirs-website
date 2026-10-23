@@ -1,12 +1,12 @@
 ---
 // COMPONENTS //
-import { Image } from "astro/components/Image.astro";
+import { Image } from "astro:assets";
 
 // CONSTANTS //
 import { URLS } from "@/infrastructure/constants/urls";
 
 // IMAGES //
-import ChildImage from "@/assets/images/footer-image.png";
+import ChildImage from "@/public/images/footer-image.png";
 
 // DATA //
 import site from "@/data/meta/site.json";
@@ -218,7 +218,7 @@ import site from "@/data/meta/site.json";
 
         <!-- Footer child image -->
         <Image
-          src={ChildImage}
+          src={"/images/footer-image.png"}
           alt="School Group Photo"
           class="scale-in absolute right-1/2 -bottom-[50px] w-[323px] translate-x-1/2 sm:right-0 sm:-bottom-[28px] sm:w-[40%] sm:translate-x-0 lg:w-[400px] xl:w-[427px]"
           width={427}
