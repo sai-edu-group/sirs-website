@@ -1,0 +1,114 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/ui/PageHero.astro";
+import SISResults from "@/sections/home/SISResults.astro";
+import SISPlacements from "@/sections/home/SISPlacements.astro";
+import FinalCTA from "@/sections/common/FinalCTA.astro";
+
+const highlights = [
+  {
+    value: "44.6%",
+    label: "of students scored above 90%",
+    note: "Board examinations",
+  },
+  {
+    value: "335+",
+    label: "appearances in national & international exams",
+    note: "JEE · NEET · CLAT · SAT",
+  },
+  {
+    value: "20+",
+    label: "Ivy League and top global university offers",
+    note: "Graduating cohorts",
+  },
+];
+---
+
+<Layout meta={{ title: "Results" }}>
+  <PageHero
+    eyebrow="Results"
+    title="Results that open doors."
+    highlight="open doors."
+    description="A mark sheet is one measure of a school. At SIRS it sits beside university offers, competitive-exam clearances and the quieter confidence of a child who knows how to learn."
+    image="/images/stats-image-3.jpg"
+    imageAlt="SIRS students lifting a championship trophy"
+    imageFit="cover"
+    frame="arch"
+    titleSize="compact"
+    dataSection="Results Page Hero"
+  >
+    <a
+      href="/admissions"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600 md:px-8 md:py-4 md:text-base"
+    >
+      Begin Admission
+      <span aria-hidden="true">&rarr;</span>
+    </a>
+    <a
+      href="/sirs-experience/learning-360"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg border border-orange-500 px-6 py-3 text-sm font-semibold text-orange-500 transition-colors hover:bg-orange-500 hover:text-white md:px-8 md:py-4 md:text-base"
+    >
+      How Learning Works
+    </a>
+  </PageHero>
+
+  <!-- Highlights -->
+  <section class="bg-n-50" data-section="Results Highlights">
+    <div class="container mx-auto px-6 py-12 md:py-16 lg:py-20 2xl:px-0">
+      <div class="grid gap-4 md:grid-cols-3">
+        {
+          highlights.map((item, index) => (
+            <article
+              class="card-anim card-bottom border-n-200 rounded-3xl border bg-white p-6 md:p-8"
+              style={`--delay: ${index * 0.07}s`}
+            >
+              <p class="text-4xl leading-none font-semibold text-orange-500 md:text-5xl">
+                {item.value}
+              </p>
+              <p class="text-n-800 mt-4 text-base leading-snug font-medium md:text-lg">
+                {item.label}
+              </p>
+              <p class="font-secondary text-n-500 mt-2 text-xs font-semibold tracking-[0.12em] uppercase">
+                {item.note}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+
+      <div
+        class="border-n-200 mt-10 flex flex-col gap-6 border-t pt-8 md:flex-row md:items-center md:justify-between"
+      >
+        <p
+          class="text-n-700 max-w-2xl text-lg leading-relaxed font-medium italic md:text-xl"
+        >
+          &ldquo;We celebrate the rank. But what we really watch for is what a
+          child does with the result — and who they become after it.&rdquo;
+        </p>
+        <a
+          href="/awards"
+          class="font-secondary inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-orange-600 transition-colors hover:text-orange-700"
+        >
+          Awards &amp; achievements
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="bg-n-100">
+    <SISResults />
+  </div>
+
+  <SISPlacements />
+
+  <FinalCTA
+    eyebrow="Your child's turn"
+    title="The next result could have their name on it."
+    description="Admissions are open for the coming academic year. Visit the campus, meet the faculty and see how a SIRS year is built."
+    primaryLabel="Book a Campus Visit"
+    primaryHref="/contact-us"
+    secondaryLabel="Admission Guidelines"
+    secondaryHref="/admissions/guidelines"
+  />
+</Layout>

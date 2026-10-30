@@ -9,7 +9,7 @@ export const URLS = {
     FOUNDER: "/about#our-founder",
     KEY_PERSONNEL: "/about#key-personnel",
     ADVISORY_BOARD: "/about#advisory-board",
-    AFFILIATIONS: "/about#our-affiliations",
+    AFFILIATIONS: "/about/affiliations",
     DETAIL: (slug: string) => `/about/${slug}`,
     LEARNING_360: {
       ROOT: "/sirs-experience/learning-360",

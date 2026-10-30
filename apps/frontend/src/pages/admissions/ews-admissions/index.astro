@@ -1,0 +1,290 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/ui/PageHero.astro";
+import FaqItem from "@/components/ui/FaqItem.astro";
+import FinalCTA from "@/sections/common/FinalCTA.astro";
+
+const steps = [
+  {
+    index: "01",
+    title: "Check the notification",
+    text: "The state publishes EWS seat numbers and dates each admission cycle. Our office can confirm whether the window is open.",
+  },
+  {
+    index: "02",
+    title: "Submit the application",
+    text: "Complete the EWS application form with the documents listed below. Incomplete applications cannot be considered.",
+  },
+  {
+    index: "03",
+    title: "Verification",
+    text: "Documents are verified against the state's eligibility criteria. Original certificates are checked at this stage.",
+  },
+  {
+    index: "04",
+    title: "Selection & admission",
+    text: "Seats are allotted as per the state's rules for the cycle. Selected families complete the joining formalities with the office.",
+  },
+];
+
+const documents = [
+  "Income certificate issued by the competent authority",
+  "Residence proof for Odisha",
+  "Birth certificate of the child",
+  "Aadhaar card of the child and parent",
+  "Ration card or BPL card, if applicable",
+  "Previous school record, if the child has attended school",
+  "Four passport-size photographs",
+  "Caste certificate, if applicable under the notification",
+];
+
+const faqs = [
+  {
+    question: "Who is eligible for EWS admission?",
+    answer:
+      "Eligibility is defined by the Odisha Right of Children to Free and Compulsory Education Rules and the annual state notification. Broadly, it covers children from economically weaker sections whose family income falls within the notified limit, with age-appropriate grade placement.",
+  },
+  {
+    question: "How many EWS seats does SIRS offer?",
+    answer:
+      "The number of seats is notified by the state government for each admission cycle. Please contact the school office for the current cycle's figures.",
+  },
+  {
+    question: "Is there a fee for the application?",
+    answer:
+      "There is no application fee for EWS admissions. Do not make any payment to an agent or intermediary; all applications go through the school office.",
+  },
+  {
+    question: "Does EWS cover boarding?",
+    answer:
+      "The scope of support is defined in the state notification for the cycle. Our admissions team will explain exactly what is covered before you apply.",
+  },
+];
+---
+
+<Layout meta={{ title: "EWS Admissions" }}>
+  <PageHero
+    eyebrow="Admissions"
+    title="A fair chance, by rule and by choice."
+    highlight="by choice."
+    description="SIRS participates in the state's Economically Weaker Section admission process. Here is how eligibility, documents and selection work — in plain language."
+    image="/images/admission-hero.webp"
+    imageAlt="A family meeting the admissions team"
+    imageFit="cover"
+    frame="line"
+    archShape="wide"
+    titleSize="compact"
+    dataSection="EWS Admissions Page Hero"
+  >
+    <a
+      href="tel:+919337377701"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600 md:px-8 md:py-4 md:text-base"
+    >
+      Call the Admissions Office
+      <span aria-hidden="true">&rarr;</span>
+    </a>
+    <a
+      href="/admissions/guidelines"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg border border-orange-500 px-6 py-3 text-sm font-semibold text-orange-500 transition-colors hover:bg-orange-500 hover:text-white md:px-8 md:py-4 md:text-base"
+    >
+      General Guidelines
+    </a>
+  </PageHero>
+
+  <!-- Context -->
+  <section class="bg-n-50" data-section="EWS Context">
+    <div class="container mx-auto px-6 py-14 md:py-18 lg:py-20 2xl:px-0">
+      <div
+        class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:gap-14"
+      >
+        <div class="space-y-3">
+          <p
+            class="font-secondary flex items-center gap-3 text-xs font-semibold tracking-[0.25em] text-orange-500 uppercase md:text-sm"
+          >
+            <span class="size-1.5 rotate-45 bg-orange-500" aria-hidden="true"
+            ></span>
+            The framework
+          </p>
+          <h2
+            class="text-n-800 text-3xl leading-[1.12] font-medium md:text-4xl lg:text-5xl"
+          >
+            Set by the state. Honoured by the school.
+          </h2>
+          <p
+            class="font-secondary text-n-600 text-base leading-relaxed md:text-lg"
+          >
+            EWS admissions at SIRS follow the Odisha Right of Children to Free
+            and Compulsory Education Rules and the annual state notification.
+            Seat numbers, eligibility and timelines are set by the government,
+            not the school.
+          </p>
+        </div>
+
+        <aside
+          class="rounded-3xl border border-orange-200 bg-orange-50 p-6 md:p-7"
+        >
+          <p
+            class="font-secondary text-[11px] font-semibold tracking-[0.18em] text-orange-600 uppercase"
+          >
+            Before you begin
+          </p>
+          <p class="text-n-800 mt-2 text-lg leading-snug font-medium">
+            Always confirm the current cycle with the school office.
+          </p>
+          <p class="font-secondary text-n-600 mt-2 text-sm leading-relaxed">
+            Notifications change every year. A phone call takes two minutes and
+            can save a wasted journey with documents.
+          </p>
+          <a
+            href="tel:+919337377701"
+            class="font-secondary mt-4 inline-flex items-center gap-2 text-sm font-semibold text-orange-600"
+          >
+            +91 93373 77701
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="bg-n-100" data-section="EWS Process">
+    <div class="container mx-auto px-6 py-16 md:py-20 lg:py-24 2xl:px-0">
+      <div
+        class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+      >
+        <div>
+          <p
+            class="font-secondary flex items-center gap-3 text-xs font-semibold tracking-[0.25em] text-orange-500 uppercase md:text-sm"
+          >
+            <span class="size-1.5 rotate-45 bg-orange-500" aria-hidden="true"
+            ></span>
+            The process
+          </p>
+          <h2
+            class="text-n-800 mt-3 text-3xl leading-[1.12] font-medium md:text-4xl lg:text-5xl"
+          >
+            Four steps, in order.
+          </h2>
+        </div>
+        <p
+          class="font-secondary text-n-600 max-w-sm text-sm leading-relaxed md:text-base"
+        >
+          Keep originals and photocopies ready. Verification is done at the
+          school office during office hours.
+        </p>
+      </div>
+
+      <ol class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          steps.map((step, index) => (
+            <li
+              class="card-anim card-bottom rounded-3xl bg-white p-6"
+              style={`--delay: ${index * 0.06}s`}
+            >
+              <span class="font-secondary text-[11px] font-semibold tracking-[0.2em] text-orange-500/70">
+                {step.index}
+              </span>
+              <h3 class="text-n-800 mt-3 text-lg font-medium">{step.title}</h3>
+              <p class="font-secondary text-n-600 mt-2 text-sm leading-relaxed">
+                {step.text}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <!-- Documents -->
+      <div
+        class="mt-8 rounded-[28px] bg-violet-900 p-6 text-white md:p-8 lg:p-10"
+      >
+        <div class="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-14">
+          <div class="lg:w-[38%]">
+            <p
+              class="font-secondary text-[11px] font-semibold tracking-[0.18em] text-orange-300 uppercase"
+            >
+              Documents
+            </p>
+            <h3 class="mt-2 text-2xl leading-snug font-medium md:text-3xl">
+              What to bring to the office.
+            </h3>
+            <p
+              class="font-secondary mt-3 text-sm leading-relaxed text-white/60"
+            >
+              Bring originals for verification and one set of photocopies.
+              Applications with incomplete documents cannot proceed.
+            </p>
+          </div>
+          <ul class="grid flex-1 gap-2.5 sm:grid-cols-2">
+            {
+              documents.map((doc) => (
+                <li class="font-secondary flex items-start gap-2.5 text-sm leading-relaxed text-white/75">
+                  <svg
+                    class="mt-0.5 size-4 shrink-0 text-orange-300"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="m4 10 4 4 8-8" />
+                  </svg>
+                  {doc}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-n-50" data-section="EWS FAQ">
+    <div
+      class="container mx-auto grid gap-8 px-6 py-16 md:py-20 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16 2xl:px-0"
+    >
+      <div>
+        <p
+          class="font-secondary text-xs font-semibold tracking-[0.2em] text-orange-500 uppercase"
+        >
+          Common questions
+        </p>
+        <h2
+          class="text-n-800 mt-3 text-3xl leading-[1.12] font-medium md:text-4xl"
+        >
+          EWS admissions, answered.
+        </h2>
+        <p
+          class="font-secondary text-n-600 mt-4 max-w-sm text-sm leading-relaxed md:text-base"
+        >
+          For anything not covered here, contact the admissions office directly.
+          There is no agent or consultant involved in this process.
+        </p>
+      </div>
+      <div class="space-y-2 md:space-y-3">
+        {
+          faqs.map((faq, index) => (
+            <FaqItem
+              question={faq.question}
+              answer={faq.answer}
+              isOpen={index === 0}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA
+    eyebrow="Admissions office"
+    title="We will walk you through it."
+    description="If you are unsure whether your child qualifies, call us. The conversation is free, confidential and without obligation."
+    primaryLabel="Call Admissions"
+    primaryHref="/contact-us"
+    secondaryLabel="Read Admission Guidelines"
+    secondaryHref="/admissions/guidelines"
+  />
+</Layout>

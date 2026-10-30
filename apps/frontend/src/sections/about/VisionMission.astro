@@ -49,7 +49,10 @@ const tones: Record<VisionMissionTone, { block: string; label: string }> = {
               </div>
             ) : (
               <div
-                class:list={["aspect-[7/4] w-full rounded-2xl", tones[card.tone].block]}
+                class:list={[
+                  "aspect-[7/4] w-full rounded-2xl",
+                  tones[card.tone].block,
+                ]}
                 aria-hidden="true"
               />
             )}

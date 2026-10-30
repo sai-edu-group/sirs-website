@@ -1,0 +1,252 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/ui/PageHero.astro";
+import FaqItem from "@/components/ui/FaqItem.astro";
+import FinalCTA from "@/sections/common/FinalCTA.astro";
+
+const steps = [
+  {
+    index: "01",
+    title: "Write to the school office",
+    text: "Email admissions@sairesidentialschool.com with your child's name, class and admission number, and the date you need the certificate.",
+  },
+  {
+    index: "02",
+    title: "Complete clearance",
+    text: "The office confirms that library, laboratory, hostel and fee records are clear. Any dues are settled at this stage.",
+  },
+  {
+    index: "03",
+    title: "Collect the certificate",
+    text: "The transfer certificate is issued in 5–7 working days, signed and stamped. It can be collected in person or couriered on request.",
+  },
+];
+
+const details = [
+  "Student's full name, as on the school record",
+  "Class and admission number",
+  "Date of leaving and last day of attendance",
+  "Reason for transfer and the receiving school",
+  "A phone number we can reach you on",
+];
+
+const faqs = [
+  {
+    question: "How long does a transfer certificate take?",
+    answer:
+      "Once clearance is complete, the certificate is usually ready in 5–7 working days. Please apply at least two weeks before your child's last day to avoid a gap in records.",
+  },
+  {
+    question: "Can the certificate be couriered?",
+    answer:
+      "Yes. Share a courier address and contact number with the office. The certificate is sent by tracked courier at the family's cost.",
+  },
+  {
+    question: "What if my child is leaving mid-term?",
+    answer:
+      "Mid-term transfers are handled the same way. Fees are settled according to the school's fee policy for the term in which the child is withdrawn.",
+  },
+  {
+    question: "Do I need to return anything?",
+    answer:
+      "School property — library books, lab equipment, sports kit and hostel items — must be returned before clearance is issued.",
+  },
+];
+---
+
+<Layout meta={{ title: "Transfer Certificates" }}>
+  <PageHero
+    eyebrow="Admissions"
+    title="Leaving? Let's make the handover clean."
+    highlight="clean."
+    description="A transfer certificate should be the simplest part of moving schools. Here is exactly how to request one, what to send, and how long it takes."
+    image="/images/contact-hero.webp"
+    imageAlt="A parent and child at the school office"
+    imageFit="cover"
+    frame="line"
+    archShape="wide"
+    titleSize="compact"
+    dataSection="Transfer Certificates Page Hero"
+  >
+    <a
+      href="mailto:admissions@sairesidentialschool.com?subject=Transfer%20Certificate%20Request"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600 md:px-8 md:py-4 md:text-base"
+    >
+      Email a Request
+      <span aria-hidden="true">&rarr;</span>
+    </a>
+    <a
+      href="tel:+919337377701"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg border border-orange-500 px-6 py-3 text-sm font-semibold text-orange-500 transition-colors hover:bg-orange-500 hover:text-white md:px-8 md:py-4 md:text-base"
+    >
+      Call the Office
+    </a>
+  </PageHero>
+
+  <!-- Process -->
+  <section class="bg-n-50" data-section="Transfer Certificate Process">
+    <div class="container mx-auto px-6 py-16 md:py-20 lg:py-24 2xl:px-0">
+      <div
+        class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+      >
+        <div>
+          <p
+            class="font-secondary flex items-center gap-3 text-xs font-semibold tracking-[0.25em] text-orange-500 uppercase md:text-sm"
+          >
+            <span class="size-1.5 rotate-45 bg-orange-500" aria-hidden="true"
+            ></span>
+            The process
+          </p>
+          <h2
+            class="text-n-800 mt-3 text-3xl leading-[1.12] font-medium md:text-4xl lg:text-5xl"
+          >
+            Three steps, one signature.
+          </h2>
+        </div>
+        <p
+          class="font-secondary text-n-600 max-w-sm text-sm leading-relaxed md:text-base"
+        >
+          Please apply at least two weeks before your child's last day so the
+          receiving school has the certificate in time.
+        </p>
+      </div>
+
+      <ol class="mt-10 grid gap-4 md:grid-cols-3">
+        {
+          steps.map((step, index) => (
+            <li
+              class="card-anim card-bottom border-n-200 relative rounded-3xl border bg-white p-6 md:p-8"
+              style={`--delay: ${index * 0.07}s`}
+            >
+              <span class="font-secondary text-[11px] font-semibold tracking-[0.2em] text-orange-500/70">
+                {step.index}
+              </span>
+              <h3 class="text-n-800 mt-3 text-xl font-medium">{step.title}</h3>
+              <p class="font-secondary text-n-600 mt-2 text-sm leading-relaxed">
+                {step.text}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Details -->
+  <section class="bg-n-100" data-section="Transfer Certificate Details">
+    <div class="container mx-auto px-6 py-16 md:py-20 lg:py-24 2xl:px-0">
+      <div class="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+        <div class="rounded-3xl bg-white p-6 md:p-8">
+          <p
+            class="font-secondary text-xs font-semibold tracking-[0.2em] text-orange-500 uppercase"
+          >
+            Include in your email
+          </p>
+          <h2 class="text-n-800 mt-2 text-2xl font-medium md:text-3xl">
+            The details that speed it up.
+          </h2>
+          <ul class="mt-6 space-y-3">
+            {
+              details.map((detail) => (
+                <li class="font-secondary text-n-700 flex items-start gap-3 text-sm leading-relaxed">
+                  <span
+                    class="mt-2 size-1.5 shrink-0 rotate-45 bg-orange-500"
+                    aria-hidden="true"
+                  />
+                  {detail}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <div class="rounded-3xl bg-orange-500 p-6 text-white md:p-8">
+            <p
+              class="font-secondary text-[11px] font-semibold tracking-[0.18em] text-white/70 uppercase"
+            >
+              Timeline
+            </p>
+            <p class="mt-2 text-3xl leading-none font-semibold md:text-4xl">
+              5–7 days
+            </p>
+            <p
+              class="font-secondary mt-3 text-sm leading-relaxed text-white/80"
+            >
+              after all dues are cleared and school property is returned.
+            </p>
+          </div>
+          <div class="border-n-200 rounded-3xl border bg-white p-6 md:p-8">
+            <p
+              class="font-secondary text-n-500 text-[11px] font-semibold tracking-[0.18em] uppercase"
+            >
+              Whom to contact
+            </p>
+            <a
+              href="tel:+919337377701"
+              class="text-n-800 mt-2 block text-xl font-medium hover:text-orange-500"
+            >
+              +91 93373 77701
+            </a>
+            <a
+              href="mailto:admissions@sairesidentialschool.com"
+              class="font-secondary mt-1 block text-sm break-all text-orange-600 underline decoration-orange-200 underline-offset-4"
+            >
+              admissions@sairesidentialschool.com
+            </a>
+            <p class="font-secondary text-n-500 mt-3 text-xs">
+              Monday – Saturday · 9:00 am – 5:00 pm
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-n-50" data-section="Transfer Certificate FAQ">
+    <div
+      class="container mx-auto grid gap-8 px-6 py-16 md:py-20 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16 2xl:px-0"
+    >
+      <div>
+        <p
+          class="font-secondary text-xs font-semibold tracking-[0.2em] text-orange-500 uppercase"
+        >
+          Common questions
+        </p>
+        <h2
+          class="text-n-800 mt-3 text-3xl leading-[1.12] font-medium md:text-4xl"
+        >
+          Before you write to us.
+        </h2>
+        <p
+          class="font-secondary text-n-600 mt-4 max-w-sm text-sm leading-relaxed md:text-base"
+        >
+          If your question is not here, the school office will answer it on the
+          phone — usually the same day.
+        </p>
+      </div>
+      <div class="space-y-2 md:space-y-3">
+        {
+          faqs.map((faq, index) => (
+            <FaqItem
+              question={faq.question}
+              answer={faq.answer}
+              isOpen={index === 0}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA
+    eyebrow="Still with us?"
+    title="Thinking of joining instead?"
+    description="If you are looking at SIRS for the first time, admissions are open for Classes IV–XII. We would be glad to show you around."
+    primaryLabel="Explore Admissions"
+    primaryHref="/admissions"
+    secondaryLabel="Admission Guidelines"
+    secondaryHref="/admissions/guidelines"
+  />
+</Layout>

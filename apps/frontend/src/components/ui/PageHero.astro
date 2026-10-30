@@ -80,12 +80,12 @@ const imageClasses =
 
 <section
   data-section={dataSection}
-  class="from-orange-50 to-n-50 relative isolate min-h-[75vh] overflow-hidden bg-gradient-to-b"
+  class="to-n-50 relative isolate overflow-hidden bg-gradient-to-b from-orange-50 lg:min-h-[75vh]"
 >
   <!-- Background decoration -->
   <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
     <div
-      class="bg-orange-100 absolute top-16 left-0 size-[480px] -translate-x-1/4 rounded-full opacity-50 blur-3xl"
+      class="absolute top-16 left-0 size-[480px] -translate-x-1/4 rounded-full bg-orange-100 opacity-50 blur-3xl"
     >
     </div>
 
@@ -96,11 +96,13 @@ const imageClasses =
     class="relative container mx-auto flex flex-col gap-10 px-6 pt-28 md:pt-32 lg:flex-row lg:items-stretch lg:justify-start lg:gap-16 lg:px-8 lg:pt-40 2xl:px-0"
   >
     <!-- Text -->
-    <div class="flex flex-col justify-center gap-5 lg:w-xl lg:max-w-[52%] lg:gap-4">
+    <div
+      class="flex flex-col justify-center gap-5 lg:w-xl lg:max-w-[52%] lg:gap-4"
+    >
       {
         eyebrow && (
           <p
-            class="page-hero-rise font-secondary text-orange-500 flex items-center gap-3 text-sm font-semibold tracking-[0.25em] uppercase md:text-base"
+            class="page-hero-rise font-secondary flex items-center gap-3 text-sm font-semibold tracking-[0.25em] text-orange-500 uppercase md:text-base"
             style="--delay: 0.05s"
           >
             <svg
@@ -125,20 +127,24 @@ const imageClasses =
         ]}
         style="--delay: 0.15s"
       >
-        {titleBefore}{hasHighlight && <span class="text-orange-500 whitespace-nowrap">{highlight}</span>}{titleAfter}
+        {titleBefore}{
+          hasHighlight && (
+            <span class="whitespace-nowrap text-orange-500">{highlight}</span>
+          )
+        }{titleAfter}
       </h1>
 
       <!-- Ornamental divider -->
       <div
-        class="page-hero-rise text-orange-500 flex items-center gap-3"
+        class="page-hero-rise flex items-center gap-3 text-orange-500"
         style="--delay: 0.25s"
         aria-hidden="true"
       >
-        <span class="bg-orange-300 h-px w-14"></span>
+        <span class="h-px w-14 bg-orange-300"></span>
         <svg class="size-4" viewBox="0 0 16 16" fill="currentColor">
           <path d="M8 0 10 6 16 8 10 10 8 16 6 10 0 8 6 6Z"></path>
         </svg>
-        <span class="bg-orange-300 h-px w-14"></span>
+        <span class="h-px w-14 bg-orange-300"></span>
       </div>
 
       {
@@ -171,7 +177,7 @@ const imageClasses =
           class="page-hero-pop relative mx-auto aspect-[6/5] w-72 shrink-0 sm:w-96 lg:mr-0 lg:ml-auto lg:h-[calc(75vh-10rem)] lg:w-auto lg:self-end"
           style="--delay: 0.2s"
         >
-          <div class="border-n-200 shadow-n-900/5 from-orange-50 to-n-50 absolute inset-0 overflow-hidden rounded-t-full border border-b-0 bg-gradient-to-b shadow-xl">
+          <div class="border-n-200 shadow-n-900/5 to-n-50 absolute inset-0 overflow-hidden rounded-t-full border border-b-0 bg-gradient-to-b from-orange-50 shadow-xl">
             <img
               src={image}
               alt={imageAlt}
@@ -184,7 +190,7 @@ const imageClasses =
         </div>
       ) : (
         <div
-          class="page-hero-pop relative -mx-6 shrink-0 md:mx-0 md:ml-auto md:mr-[calc((100vw-100%)/-2)] md:w-[60%] lg:flex lg:h-[calc(75vh-10rem)] lg:w-[48%] lg:max-w-[44rem] lg:items-end lg:self-end"
+          class="page-hero-pop relative -mx-6 shrink-0 md:mx-0 md:mr-[calc((100vw-100%)/-2)] md:ml-auto md:w-[60%] lg:flex lg:h-[calc(75vh-10rem)] lg:w-[48%] lg:max-w-[44rem] lg:items-end lg:self-end"
           style="--delay: 0.2s"
         >
           {frame === "line" && (
@@ -192,12 +198,12 @@ const imageClasses =
               {/* Base line: runs in from the screen edge, then turns into the arch */}
               <span
                 aria-hidden="true"
-                class="bg-orange-300 absolute right-full bottom-0 hidden h-0.5 w-screen md:block"
+                class="absolute right-full bottom-0 hidden h-0.5 w-screen bg-orange-300 md:block"
               />
               <span
                 aria-hidden="true"
                 class:list={[
-                  "border-orange-300 absolute inset-x-4 bottom-0 rounded-t-[50%_100%] border-2 border-b-0 md:inset-x-0 lg:max-h-full",
+                  "absolute inset-x-4 bottom-0 rounded-t-[50%_100%] border-2 border-b-0 border-orange-300 md:inset-x-0 lg:max-h-full",
                   archShape === "wide"
                     ? "aspect-[2/1] lg:aspect-[15/8]"
                     : "aspect-[3/2] lg:aspect-[5/4]",

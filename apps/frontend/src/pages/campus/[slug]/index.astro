@@ -1,12 +1,372 @@
 ---
-// Placeholder route, rendered on demand until it has real content
 export const prerender = false;
-import Layout from "@/layouts/Layout.astro";
-import DummySection from "@/components/ui/DummySection.astro";
 
-const { slug } = Astro.params;
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/ui/PageHero.astro";
+import FinalCTA from "@/sections/common/FinalCTA.astro";
+
+const facilities: Record<
+  string,
+  {
+    eyebrow: string;
+    title: string;
+    highlight: string;
+    description: string;
+    image: string;
+    imageAlt: string;
+    features: { title: string; text: string }[];
+    gallery: { src: string; alt: string; label: string }[];
+  }
+> = {
+  "hostel-life": {
+    eyebrow: "Campus · Boarding",
+    title: "A boarding house that feels like home.",
+    highlight: "like home.",
+    description:
+      "Separate boarding houses for boys and girls, each with resident wardens, matrons and a daily rhythm that holds study, sport and rest together.",
+    image: "/images/strip-chairperson.webp",
+    imageAlt: "SIRS students with the Chairperson",
+    features: [
+      {
+        title: "Resident house parents",
+        text: "Wardens and matrons live on campus, so an adult is always nearby — at breakfast, at prep and after lights-out.",
+      },
+      {
+        title: "A protected prep hour",
+        text: "Every evening has supervised study time, with subject teachers available for questions that cannot wait until morning.",
+      },
+      {
+        title: "House spirit",
+        text: "Inter-house sport, culture and service give every boarder a team to belong to from the first week.",
+      },
+      {
+        title: "Weekends that explore",
+        text: "Fixtures, movie nights, city visits and festival celebrations keep the campus alive on Saturdays and Sundays.",
+      },
+    ],
+    gallery: [
+      {
+        src: "/images/strip-cafeteria.webp",
+        alt: "The SIRS dining hall",
+        label: "Dining hall",
+      },
+      {
+        src: "/images/strip-gym.webp",
+        alt: "Students at the outdoor fitness zone",
+        label: "Fitness zone",
+      },
+      {
+        src: "/images/strip-stadium.webp",
+        alt: "The SIRS campus and grounds",
+        label: "The campus",
+      },
+    ],
+  },
+  sports: {
+    eyebrow: "Campus · Sport",
+    title: "Ground to play on. Coaches to grow with.",
+    highlight: "Coaches to grow with.",
+    description:
+      "Sport is compulsory at SIRS. That means real facilities, qualified coaches and a fixture calendar — not a token games period.",
+    image: "/images/sports-facilities (1).jpg",
+    imageAlt: "The SIRS athletics stadium and football turf",
+    features: [
+      {
+        title: "Stadium & track",
+        text: "A 400-metre track, football turf and a full stadium host inter-house and inter-school fixtures through the year.",
+      },
+      {
+        title: "Equestrian arena",
+        text: "Horse riding is taught on campus, with trained instructors and school-owned horses.",
+      },
+      {
+        title: "Courts & fitness",
+        text: "Basketball, badminton, table tennis, volleyball and an outdoor fitness zone are available every day.",
+      },
+      {
+        title: "Coaching & fixtures",
+        text: "Qualified coaches lead morning and evening sessions, and teams travel for competitions across the state and country.",
+      },
+    ],
+    gallery: [
+      {
+        src: "/images/stats-image-3.jpg",
+        alt: "SIRS students with a championship trophy",
+        label: "Champions",
+      },
+      {
+        src: "/images/strip-horse.webp",
+        alt: "A student horse riding",
+        label: "Equestrian",
+      },
+      {
+        src: "/images/strip-gym.webp",
+        alt: "Students training outdoors",
+        label: "Training",
+      },
+    ],
+  },
+  dining: {
+    eyebrow: "Campus · Dining",
+    title: "A kitchen that knows every child.",
+    highlight: "every child.",
+    description:
+      "One dining hall, one menu, one standard. Meals are cooked fresh on campus every day and served to boarders and staff together.",
+    image: "/images/strip-cafeteria.webp",
+    imageAlt: "Students being served in the SIRS dining hall",
+    features: [
+      {
+        title: "Cooked fresh, daily",
+        text: "The kitchen prepares breakfast, lunch, snacks and dinner on campus each day — no outside catering.",
+      },
+      {
+        title: "A reviewed menu",
+        text: "The rotating menu is reviewed for balance and variety, with seasonal Indian dishes through the year.",
+      },
+      {
+        title: "Dietary notes",
+        text: "Allergies and medical dietary needs are recorded at admission and shared with the kitchen and house staff.",
+      },
+      {
+        title: "Meals as community",
+        text: "Students and teachers eat together, and house dinners mark festivals and achievements.",
+      },
+    ],
+    gallery: [],
+  },
+  wellness: {
+    eyebrow: "Campus · Wellbeing",
+    title: "Looking after the whole child.",
+    highlight: "whole child.",
+    description:
+      "A residential school carries a duty of care that runs past the timetable. SIRS pairs medical support with counselling, mentoring and time outdoors.",
+    image: "/images/leader.webp",
+    imageAlt: "Dr. Silpi Sahoo speaking with students",
+    features: [
+      {
+        title: "Health room",
+        text: "A staffed health room handles daily needs, with referral to partner hospitals in Bhubaneswar when required.",
+      },
+      {
+        title: "Counselling",
+        text: "Confidential counselling is available to students, and house staff are trained to spot when a child needs more support.",
+      },
+      {
+        title: "Mentor groups",
+        text: "Every boarder belongs to a small mentor group that meets weekly and checks in on academics, friendships and rest.",
+      },
+      {
+        title: "Movement & quiet",
+        text: "Yoga, sport and garden time are scheduled into the week — not left to chance.",
+      },
+    ],
+    gallery: [
+      {
+        src: "/images/stats-image-1.jpg",
+        alt: "SIRS students celebrating outdoors",
+        label: "Wellbeing",
+      },
+      {
+        src: "/images/strip-gym.webp",
+        alt: "Students at the fitness zone",
+        label: "Movement",
+      },
+    ],
+  },
+  arts: {
+    eyebrow: "Campus · Creative Arts",
+    title: "Space to make, rehearse and perform.",
+    highlight: "perform.",
+    description:
+      "The art room, music block and auditorium are part of the school day. Every child performs — on stage, in a gallery or in the annual production.",
+    image: "/images/activities.jpg",
+    imageAlt: "Students performing a group dance",
+    features: [
+      {
+        title: "Art studio",
+        text: "Painting, sculpture and ceramics, with work exhibited across campus through the year.",
+      },
+      {
+        title: "Music block",
+        text: "Practice rooms, instruments and a school band, led by music faculty.",
+      },
+      {
+        title: "Auditorium",
+        text: "A full stage for assemblies, theatre, dance and the annual-day production.",
+      },
+      {
+        title: "Every child performs",
+        text: "Arts are timetabled for all grades, so participation is not reserved for the already-talented.",
+      },
+    ],
+    gallery: [],
+  },
+};
+
+const { slug = "" } = Astro.params;
+const facility = facilities[slug];
+
+if (!facility) {
+  return Astro.redirect("/sirs-experience");
+}
+
+const others = Object.entries(facilities)
+  .filter(([key]) => key !== slug)
+  .slice(0, 3);
 ---
 
-<Layout meta={{ title: "Campus" }}>
-  <DummySection name={`Campus — ${slug}`} />
+<Layout
+  meta={{ title: `Campus — ${facility.eyebrow.split("·").pop()?.trim()}` }}
+>
+  <PageHero
+    eyebrow={facility.eyebrow}
+    title={facility.title}
+    highlight={facility.highlight}
+    description={facility.description}
+    image={facility.image}
+    imageAlt={facility.imageAlt}
+    imageFit="cover"
+    frame="arch"
+    titleSize="compact"
+    dataSection="Campus Facility Page Hero"
+  >
+    <a
+      href="/contact-us"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600 md:px-8 md:py-4 md:text-base"
+    >
+      Visit This Space
+      <span aria-hidden="true">&rarr;</span>
+    </a>
+    <a
+      href="/admissions"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg border border-orange-500 px-6 py-3 text-sm font-semibold text-orange-500 transition-colors hover:bg-orange-500 hover:text-white md:px-8 md:py-4 md:text-base"
+    >
+      Explore Admissions
+    </a>
+  </PageHero>
+
+  <!-- Features -->
+  <section class="bg-n-50" data-section="Campus Facility Features">
+    <div class="container mx-auto px-6 py-16 md:py-20 lg:py-24 2xl:px-0">
+      <div
+        class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+      >
+        <div>
+          <p
+            class="font-secondary flex items-center gap-3 text-xs font-semibold tracking-[0.25em] text-orange-500 uppercase md:text-sm"
+          >
+            <span class="size-1.5 rotate-45 bg-orange-500" aria-hidden="true"
+            ></span>
+            What's here
+          </p>
+          <h2
+            class="text-n-800 mt-3 text-3xl leading-[1.12] font-medium md:text-4xl"
+          >
+            Built into the school day.
+          </h2>
+        </div>
+        <p
+          class="font-secondary text-n-600 max-w-sm text-sm leading-relaxed md:text-base"
+        >
+          Facilities at SIRS are not reserved for special occasions. They are
+          timetabled, staffed and used every week.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-3 sm:grid-cols-2">
+        {
+          facility.features.map((feature, index) => (
+            <article
+              class="card-anim card-bottom border-n-200 rounded-3xl border bg-white p-6 md:p-7"
+              style={`--delay: ${index * 0.06}s`}
+            >
+              <span class="flex size-8 items-center justify-center rounded-full bg-orange-500 text-[11px] font-semibold text-white">
+                0{index + 1}
+              </span>
+              <h3 class="text-n-800 mt-4 text-lg font-medium md:text-xl">
+                {feature.title}
+              </h3>
+              <p class="font-secondary text-n-600 mt-1.5 text-sm leading-relaxed">
+                {feature.text}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+
+      {
+        facility.gallery.length > 0 && (
+          <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {facility.gallery.map((image) => (
+              <figure class="bg-n-100 relative overflow-hidden rounded-3xl">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  class="aspect-[4/3] w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption class="font-secondary text-n-800 absolute bottom-4 left-4 rounded-full bg-white/90 px-3.5 py-1.5 text-[10px] font-semibold tracking-[0.14em] uppercase backdrop-blur">
+                  {image.label}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <!-- Other facilities -->
+  <section class="bg-n-100" data-section="Campus Other Facilities">
+    <div class="container mx-auto px-6 py-14 md:py-18 lg:py-20 2xl:px-0">
+      <div class="flex flex-wrap items-end justify-between gap-3">
+        <h2 class="text-n-800 text-2xl font-medium md:text-3xl">
+          Explore other spaces
+        </h2>
+        <a
+          href="/sirs-experience"
+          class="font-secondary inline-flex items-center gap-2 text-sm font-semibold text-orange-600 hover:text-orange-700"
+        >
+          The SIRS Experience
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+      <div class="mt-6 grid gap-3 sm:grid-cols-3">
+        {
+          others.map(([key, item]) => (
+            <a
+              href={`/campus/${key}`}
+              class="group flex items-center justify-between gap-4 rounded-2xl bg-white px-5 py-4 transition-colors hover:bg-orange-50 md:px-6 md:py-5"
+            >
+              <div>
+                <p class="font-secondary text-[10px] font-semibold tracking-[0.16em] text-orange-500 uppercase">
+                  {item.eyebrow}
+                </p>
+                <p class="text-n-800 mt-1 text-base font-medium md:text-lg">
+                  {item.title.split(".")[0]}.
+                </p>
+              </div>
+              <span
+                class="text-orange-500 transition-transform duration-300 group-hover:translate-x-1"
+                aria-hidden="true"
+              >
+                &rarr;
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA
+    eyebrow="See it for yourself"
+    title="Walk through the campus in person."
+    description="Photographs help. A visit tells you what a space feels like at 8 am on a Tuesday. We would be glad to arrange one."
+    primaryLabel="Book a Campus Visit"
+    primaryHref="/contact-us"
+    secondaryLabel="Start an Application"
+    secondaryHref="/admissions"
+  />
 </Layout>

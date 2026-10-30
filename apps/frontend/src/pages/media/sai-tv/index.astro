@@ -1,0 +1,205 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/ui/PageHero.astro";
+import FinalCTA from "@/sections/common/FinalCTA.astro";
+
+const films = [
+  {
+    title: "Campus from above",
+    strand: "Campus Life",
+    text: "A 49-acre campus between Bhubaneswar and Cuttack, seen from the sky.",
+    src: "/videos/home-hero/campus-aerial.mp4",
+    poster: "/images/strip-stadium.webp",
+  },
+  {
+    title: "Learning by doing",
+    strand: "Academics",
+    text: "A classroom day that moves between theory, lab and field.",
+    src: "/videos/home-hero/practical-learning.mp4",
+    poster: "/images/stats-image-6.jpg",
+  },
+  {
+    title: "Inside the science lab",
+    strand: "Academics",
+    text: "Where a hypothesis gets tested before it gets written down.",
+    src: "/videos/home-hero/science-lab.mp4",
+    poster: "/images/campus-map.webp",
+  },
+  {
+    title: "Built for sport",
+    strand: "Sports",
+    text: "The stadium, the track and the training that fills them.",
+    src: "/videos/home-hero/sports-facilities.mp4",
+    poster: "/images/sports-facilities (1).jpg",
+  },
+  {
+    title: "A day in the arts",
+    strand: "Creative Arts",
+    text: "Dance, music and rehearsal — the part of the timetable that performs.",
+    src: "/videos/home-hero/student-activities.mp4",
+    poster: "/images/activities.jpg",
+  },
+];
+
+const strands = [
+  "Campus Life",
+  "Academics",
+  "Sports",
+  "Creative Arts",
+  "Boarding",
+  "Alumni",
+];
+---
+
+<Layout meta={{ title: "SAI TV" }}>
+  <PageHero
+    eyebrow="SAI TV"
+    title="Stories, shot on campus."
+    highlight="on campus."
+    description="SAI TV is the school's own film unit — student crews, faculty mentors and a growing library of films about the way SIRS learns, plays and lives."
+    image="/images/strip-stadium.webp"
+    imageAlt="Aerial view of the SIRS campus"
+    imageFit="cover"
+    frame="arch"
+    titleSize="compact"
+    dataSection="SAI TV Page Hero"
+  >
+    <a
+      href="#films"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600 md:px-8 md:py-4 md:text-base"
+    >
+      Watch the Films
+      <span aria-hidden="true">&darr;</span>
+    </a>
+    <a
+      href="/media/albums"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg border border-orange-500 px-6 py-3 text-sm font-semibold text-orange-500 transition-colors hover:bg-orange-500 hover:text-white md:px-8 md:py-4 md:text-base"
+    >
+      Browse Albums
+    </a>
+  </PageHero>
+
+  <section id="films" class="bg-n-50" data-section="SAI TV Films">
+    <div class="container mx-auto px-6 py-16 md:py-20 lg:py-24 2xl:px-0">
+      <!-- Header -->
+      <div
+        class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between"
+      >
+        <div>
+          <p
+            class="font-secondary flex items-center gap-3 text-xs font-semibold tracking-[0.25em] text-orange-500 uppercase md:text-sm"
+          >
+            <span class="size-1.5 rotate-45 bg-orange-500" aria-hidden="true"
+            ></span>
+            The film library
+          </p>
+          <h2
+            class="text-n-800 mt-3 text-3xl leading-[1.12] font-medium md:text-4xl lg:text-5xl"
+          >
+            Five ways to see SIRS.
+          </h2>
+        </div>
+        <ul class="flex flex-wrap gap-2">
+          {
+            strands.map((strand) => (
+              <li class="font-secondary border-n-200 text-n-600 rounded-full border bg-white px-3.5 py-1.5 text-[11px] font-medium md:text-xs">
+                {strand}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Featured -->
+      <figure class="bg-n-950 mt-10 overflow-hidden rounded-[28px]">
+        <video
+          class="aspect-video w-full"
+          controls
+          playsinline
+          preload="metadata"
+          poster="/images/strip-stadium.webp"
+        >
+          <source src={films[0].src} type="video/mp4" />
+          Your browser does not support the video element.
+        </video>
+        <figcaption
+          class="flex flex-col gap-2 px-5 py-5 text-white md:flex-row md:items-center md:justify-between md:px-7 md:py-6"
+        >
+          <div>
+            <p
+              class="font-secondary text-[10px] font-semibold tracking-[0.2em] text-orange-300 uppercase"
+            >
+              {films[0].strand}
+            </p>
+            <p class="mt-1 text-xl font-medium md:text-2xl">{films[0].title}</p>
+          </div>
+          <p
+            class="font-secondary max-w-md text-xs leading-relaxed text-white/60 md:text-right md:text-sm"
+          >
+            {films[0].text}
+          </p>
+        </figcaption>
+      </figure>
+
+      <!-- Grid -->
+      <div class="mt-4 grid gap-4 md:grid-cols-2">
+        {
+          films.slice(1).map((film, index) => (
+            <figure
+              class="card-anim card-bottom border-n-200 overflow-hidden rounded-3xl border bg-white"
+              style={`--delay: ${index * 0.06}s`}
+            >
+              <video
+                class="bg-n-950 aspect-video w-full"
+                controls
+                playsinline
+                preload="metadata"
+                poster={film.poster}
+              >
+                <source src={film.src} type="video/mp4" />
+                Your browser does not support the video element.
+              </video>
+              <figcaption class="p-5 md:p-6">
+                <p class="font-secondary text-[10px] font-semibold tracking-[0.18em] text-orange-500 uppercase">
+                  {film.strand}
+                </p>
+                <p class="text-n-800 mt-1.5 text-lg font-medium md:text-xl">
+                  {film.title}
+                </p>
+                <p class="font-secondary text-n-600 mt-1.5 text-sm leading-relaxed">
+                  {film.text}
+                </p>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+
+      <div
+        class="bg-n-100 mt-8 flex flex-col gap-4 rounded-2xl p-6 md:flex-row md:items-center md:justify-between md:p-8"
+      >
+        <p class="text-n-800 text-lg leading-snug font-medium md:text-xl">
+          SAI TV is run by students. If you have a story from campus, the crew
+          wants to hear it.
+        </p>
+        <a
+          href="/contact-us"
+          class="font-secondary inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-orange-600 transition-colors hover:text-orange-700"
+        >
+          Pitch a story
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA
+    eyebrow="Admissions 2026–27"
+    title="The next film could be about your child."
+    description="Come and spend a day with us. You will see the campus, the classrooms and the crews that film them."
+    primaryLabel="Book a Campus Visit"
+    primaryHref="/contact-us"
+    secondaryLabel="Start an Application"
+    secondaryHref="/admissions"
+  />
+</Layout>

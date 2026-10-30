@@ -1,5 +1,180 @@
 ---
-import DummySection from "@/components/ui/DummySection.astro";
+interface Props {
+  showCta?: boolean;
+}
+
+const { showCta = true } = Astro.props;
+
+const programmes = [
+  {
+    title: "SAI Global Immersion",
+    text: "Short residencies with partner schools abroad, where SAIoneers attend classes, live with host families and return with a wider sense of what is possible.",
+  },
+  {
+    title: "Model United Nations",
+    text: "Research, negotiation and public speaking — practised in school, then tested at national and international MUN conferences.",
+  },
+  {
+    title: "Cambridge & SAT pathways",
+    text: "Optional international assessments and university counselling for students aiming at universities in India and overseas.",
+  },
+  {
+    title: "Exchange partnerships",
+    text: "Teacher and student exchanges across Asia, Europe and Australia bring other classrooms into ours — and ours into theirs.",
+  },
+];
+
+const destinations = [
+  "Singapore",
+  "United Kingdom",
+  "United States",
+  "Australia",
+  "UAE",
+  "Japan",
+];
 ---
-<!-- TODO: Replace with real section content -->
-<DummySection name="SIRS Experience — Global Mindset" />
+
+<section
+  id="global-mindset"
+  class="relative overflow-hidden bg-violet-900 text-white"
+  data-section="SIRS Global Mindset"
+>
+  <!-- Decoration -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+    <div
+      class="absolute -top-32 -right-24 size-[36rem] rounded-full bg-violet-500/25 blur-3xl"
+    >
+    </div>
+    <svg
+      class="absolute top-1/2 -right-40 w-[42rem] -translate-y-1/2 opacity-20"
+      viewBox="0 0 600 600"
+      fill="none"
+    >
+      <circle cx="300" cy="300" r="240" stroke="currentColor" stroke-width="1"
+      ></circle>
+      <circle cx="300" cy="300" r="180" stroke="currentColor" stroke-width="1"
+      ></circle>
+      <circle cx="300" cy="300" r="120" stroke="currentColor" stroke-width="1"
+      ></circle>
+      <ellipse
+        cx="300"
+        cy="300"
+        rx="240"
+        ry="90"
+        stroke="currentColor"
+        stroke-width="1"></ellipse>
+      <ellipse
+        cx="300"
+        cy="300"
+        rx="90"
+        ry="240"
+        stroke="currentColor"
+        stroke-width="1"></ellipse>
+      <path d="M60 300h480M300 60v480" stroke="currentColor" stroke-width="1"
+      ></path>
+      <circle cx="430" cy="180" r="6" fill="currentColor"></circle>
+      <circle cx="210" cy="380" r="5" fill="currentColor"></circle>
+      <circle cx="360" cy="440" r="4" fill="currentColor"></circle>
+    </svg>
+  </div>
+
+  <div class="relative container mx-auto px-6 py-16 md:py-20 lg:py-24 2xl:px-0">
+    <div
+      class="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16"
+    >
+      <div class="max-w-xl space-y-5">
+        <p
+          class="font-secondary flex items-center gap-3 text-xs font-semibold tracking-[0.25em] text-orange-300 uppercase md:text-sm"
+        >
+          <span class="size-1.5 rotate-45 bg-orange-300" aria-hidden="true"
+          ></span>
+          Global Mindset
+        </p>
+        <h2 class="text-4xl leading-[1.1] font-medium md:text-5xl lg:text-6xl">
+          Local roots. A global classroom.
+        </h2>
+        <p
+          class="font-secondary max-w-lg text-base leading-relaxed text-white/70 md:text-lg"
+        >
+          A SAIoneer should be able to hold a conversation in Bhubaneswar and in
+          Singapore. Our global programmes begin with Indian values and end with
+          the confidence to work anywhere in the world.
+        </p>
+
+        <figure class="mt-8 max-w-md border-l-2 border-orange-300/60 pl-5">
+          <blockquote
+            class="text-lg leading-relaxed text-white/90 italic md:text-xl"
+          >
+            “I debated in Singapore on a Monday and was back at house dinner by
+            Friday. The world got smaller.”
+          </blockquote>
+          <figcaption
+            class="font-secondary mt-3 text-xs font-semibold tracking-[0.15em] text-white/50 uppercase"
+          >
+            A SAIoneer, Class XII
+          </figcaption>
+        </figure>
+
+        <div class="pt-2">
+          <p
+            class="font-secondary text-xs font-semibold tracking-[0.2em] text-white/40 uppercase"
+          >
+            Where SAIoneers have gone
+          </p>
+          <ul class="mt-3 flex flex-wrap gap-2">
+            {
+              destinations.map((destination) => (
+                <li class="font-secondary rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white/80 md:text-sm">
+                  {destination}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <!-- Programmes -->
+      <div class="grid gap-3 self-start sm:grid-cols-2">
+        {
+          programmes.map((programme, index) => (
+            <article
+              class="card-anim card-bottom group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 transition-colors duration-300 hover:bg-white/[0.08] md:p-7"
+              style={`--delay: ${index * 0.07}s`}
+            >
+              <span class="font-secondary text-[11px] font-semibold tracking-[0.2em] text-orange-300/70">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3 class="mt-3 text-xl leading-snug font-medium">
+                {programme.title}
+              </h3>
+              <p class="font-secondary mt-2 text-sm leading-relaxed text-white/65">
+                {programme.text}
+              </p>
+              <span
+                class="absolute inset-x-6 bottom-0 h-px origin-left scale-x-0 bg-orange-300/70 transition-transform duration-500 group-hover:scale-x-100"
+                aria-hidden="true"
+              />
+            </article>
+          ))
+        }
+
+        {
+          showCta && (
+            <a
+              href="/global-connect"
+              class="font-secondary group flex items-center justify-between gap-4 rounded-3xl bg-orange-500 px-6 py-5 text-sm font-semibold text-white transition-colors hover:bg-orange-600 md:col-span-2 md:text-base"
+            >
+              Explore Global Connect
+              <span
+                class="transition-transform duration-300 group-hover:translate-x-1"
+                aria-hidden="true"
+              >
+                &rarr;
+              </span>
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>

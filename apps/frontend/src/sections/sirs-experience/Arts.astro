@@ -1,5 +1,151 @@
 ---
-import DummySection from "@/components/ui/DummySection.astro";
+const artForms = [
+  {
+    title: "Music",
+    text: "Choir, instruments and the school band — taught as a discipline, performed as a celebration.",
+  },
+  {
+    title: "Dance",
+    text: "Classical forms and contemporary movement, with annual productions that fill the auditorium.",
+  },
+  {
+    title: "Theatre",
+    text: "Improv, script work, stagecraft and lighting. Confidence is rehearsed before it is performed.",
+  },
+  {
+    title: "Visual Arts",
+    text: "Painting, sculpture, ceramics and design, exhibited across campus through the year.",
+  },
+];
 ---
-<!-- TODO: Replace with real section content -->
-<DummySection name="SIRS Experience — Arts" />
+
+<section
+  id="arts"
+  class="bg-n-50 relative overflow-hidden"
+  data-section="SIRS Arts"
+>
+  <div class="container mx-auto px-6 py-16 md:py-20 lg:py-24 2xl:px-0">
+    <!-- Header -->
+    <div
+      class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] lg:items-end lg:gap-16"
+    >
+      <div class="space-y-3">
+        <p
+          class="font-secondary flex items-center gap-3 text-xs font-semibold tracking-[0.25em] text-orange-500 uppercase md:text-sm"
+        >
+          <span class="size-1.5 rotate-45 bg-orange-500" aria-hidden="true"
+          ></span>
+          Creative Arts
+        </p>
+        <h2
+          class="text-n-800 max-w-2xl text-4xl leading-[1.1] font-medium md:text-5xl lg:text-6xl"
+        >
+          The stage is part of the timetable.
+        </h2>
+      </div>
+      <p class="font-secondary text-n-600 text-base leading-relaxed md:text-lg">
+        Not an after-school club. Not an optional extra. Every SAIoneer spends
+        time in the art room, the music block or the auditorium each week —
+        because expression is a skill, and it can be taught.
+      </p>
+    </div>
+
+    <!-- Body -->
+    <div
+      class="mt-12 grid gap-8 lg:mt-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-14"
+    >
+      <!-- Image -->
+      <div>
+        <figure class="relative">
+          <span
+            aria-hidden="true"
+            class="absolute -top-5 -left-5 hidden size-32 rounded-3xl bg-orange-100 sm:block"
+          ></span>
+          <div class="relative overflow-hidden rounded-[28px]">
+            <img
+              src="/images/activities.jpg"
+              alt="Students performing a group dance on the school lawn"
+              class="aspect-[5/4] w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <div
+            class="font-secondary border-n-200 absolute -bottom-4 left-6 rounded-2xl border bg-white px-5 py-4 shadow-lg sm:left-10"
+          >
+            <p class="text-2xl leading-none font-semibold text-orange-500">
+              25+
+            </p>
+            <p
+              class="text-n-500 mt-1.5 text-[10px] font-semibold tracking-[0.14em] uppercase"
+            >
+              Clubs &amp; societies
+            </p>
+          </div>
+        </figure>
+
+        <div
+          class="bg-n-100 mt-10 flex items-start gap-4 rounded-2xl p-5 md:p-6"
+        >
+          <span
+            class="text-5xl leading-none text-orange-400"
+            aria-hidden="true"
+          >
+            &ldquo;
+          </span>
+          <div>
+            <p class="text-n-800 text-lg leading-snug font-medium md:text-xl">
+              Every child performs. No exceptions.
+            </p>
+            <p class="font-secondary text-n-500 mt-2 text-sm leading-relaxed">
+              It is a line the arts faculty repeats every year — and then makes
+              true on the annual-day stage.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Art forms -->
+      <div>
+        <p
+          class="font-secondary text-n-500 text-xs font-semibold tracking-[0.2em] uppercase md:text-sm"
+        >
+          Four ways to make something
+        </p>
+        <ul class="mt-2">
+          {
+            artForms.map((form, index) => (
+              <li
+                class="card-anim card-right group border-n-200 border-b py-5 md:py-6"
+                style={`--delay: ${index * 0.06}s`}
+              >
+                <div class="flex items-baseline gap-4 md:gap-6">
+                  <span class="font-secondary w-8 shrink-0 text-xs font-semibold tracking-[0.18em] text-orange-500/60">
+                    0{index + 1}
+                  </span>
+                  <div>
+                    <h3 class="text-n-800 text-xl font-medium transition-colors duration-300 group-hover:text-orange-500 md:text-2xl">
+                      {form.title}
+                    </h3>
+                    <p class="font-secondary text-n-600 mt-1 text-sm leading-relaxed md:text-base">
+                      {form.text}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+
+        <a
+          href="/media/albums"
+          class="font-secondary mt-6 inline-flex items-center gap-2 text-sm font-semibold text-orange-600 transition-colors hover:text-orange-700"
+        >
+          See moments from the stage
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

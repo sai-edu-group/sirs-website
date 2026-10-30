@@ -105,7 +105,9 @@ import NewsLetterImage from "@/assets/images/news-letter.png";
         e.preventDefault();
 
         // Initialize button for Disable Effect
-        const btn = subscribeNewsletterButton.querySelector("button") as HTMLButtonElement;
+        const btn = subscribeNewsletterButton.querySelector(
+          "button",
+        ) as HTMLButtonElement;
         const originalText = btn.innerText;
 
         // Hide all previous errors
@@ -113,7 +115,9 @@ import NewsLetterImage from "@/assets/images/news-letter.png";
           .querySelectorAll("[data-error]")
           .forEach((p) => p.classList.add("hidden"));
 
-        const emailInput = document.querySelector('input[name="emailId"]') as HTMLInputElement;
+        const emailInput = document.querySelector(
+          'input[name="emailId"]',
+        ) as HTMLInputElement;
         const email = emailInput.value;
 
         if (!email) {

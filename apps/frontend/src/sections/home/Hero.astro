@@ -12,7 +12,7 @@ const INTERVAL = 5000;
 ---
 
 <section
-  class="bg-orange-500 relative flex items-center overflow-hidden pt-[140px] pb-12 lg:min-h-(--hero-h) lg:pt-(--hero-top) lg:pb-8 lg:[--hero-top:132px] lg:[--hero-h:max(42rem,calc(100vh-var(--qe-form-half,90px)))]"
+  class="relative flex items-center overflow-hidden bg-orange-500 pt-[140px] pb-12 lg:min-h-(--hero-h) lg:pt-(--hero-top) lg:pb-8 lg:[--hero-h:max(42rem,calc(100vh-var(--qe-form-half,90px)))] lg:[--hero-top:132px]"
   data-hero
   data-interval={INTERVAL}
 >
@@ -30,7 +30,10 @@ const INTERVAL = 5000;
   <div
     class="relative z-10 mx-auto grid w-full max-w-[1480px] grid-cols-1 items-center gap-8 px-4 md:px-6 lg:grid-cols-[0.90fr_2.6fr] lg:gap-0"
   >
-    <div class="relative z-20 order-2 lg:order-1 lg:min-w-0 lg:self-start" data-hero-textcol>
+    <div
+      class="relative z-20 order-2 lg:order-1 lg:min-w-0 lg:self-start"
+      data-hero-textcol
+    >
       <p class="font-secondary mb-4 text-lg text-white/75 italic md:text-xl">
         {eyebrowText}
       </p>
@@ -38,7 +41,7 @@ const INTERVAL = 5000;
       <h1
         data-hero-headline
         data-slides={JSON.stringify(heroSlides.map((slide) => slide.headline))}
-        class="max-w-xl text-[34px] leading-[1.15] font-bold text-white transition-all duration-500 ease-out md:text-[48px] lg:max-w-none lg:w-[600px] lg:text-[52px] xl:w-[660px] xl:text-[60px]"
+        class="max-w-xl text-[34px] leading-[1.15] font-bold text-white transition-all duration-500 ease-out md:text-[48px] lg:w-[600px] lg:max-w-none lg:text-[52px] xl:w-[660px] xl:text-[60px]"
       >
         {heroSlides[0].headline}
       </h1>

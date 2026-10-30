@@ -34,7 +34,7 @@ const { meta = {} } = Astro.props;
       <Footer />
     </main>
     <SocialStickyBar />
-    <DevNav />
+    {import.meta.env.DEV && <DevNav />}
 
     <script is:inline>
       (function () {
@@ -108,6 +108,5 @@ const { meta = {} } = Astro.props;
 
       containers.forEach((el) => io.observe(el));
     </script>
-
   </body>
 </html>

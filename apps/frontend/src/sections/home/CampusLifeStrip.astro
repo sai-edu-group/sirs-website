@@ -2,13 +2,15 @@
 // COMPONENTS //
 import SliderArrowButton from "@/components/ui/SliderArrowButton.astro";
 
-
 // Slider Photos
 const photos = [
   { src: "/images/strip-stadium.webp", alt: "Stadium and turf" },
   { src: "/images/strip-horse.webp", alt: "Horse riding" },
   { src: "/images/strip-gym.webp", alt: "Outdoor gym" },
-  { src: "/images/strip-chairperson.webp", alt: "Students with the Chairperson" },
+  {
+    src: "/images/strip-chairperson.webp",
+    alt: "Students with the Chairperson",
+  },
   { src: "/images/strip-cafeteria.webp", alt: "Cafeteria" },
 ];
 ---
@@ -18,11 +20,11 @@ const photos = [
     <div
       id="campus-life-strip"
       data-strip-viewport
-      class="flex gap-4 overflow-x-auto px-6 [scrollbar-width:none] md:gap-6 [&::-webkit-scrollbar]:hidden"
+      class="flex [scrollbar-width:none] gap-4 overflow-x-auto px-6 md:gap-6 [&::-webkit-scrollbar]:hidden"
     >
       {
         photos.map((photo) => (
-          <figure class="relative aspect-[4/3] w-[82%] shrink-0 overflow-hidden rounded-2xl bg-n-100 md:w-[42%] lg:w-[31%]">
+          <figure class="bg-n-100 relative aspect-[4/3] w-[82%] shrink-0 overflow-hidden rounded-2xl md:w-[42%] lg:w-[31%]">
             <img
               src={photo.src}
               alt={photo.alt}

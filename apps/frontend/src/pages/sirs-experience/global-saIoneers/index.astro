@@ -1,8 +1,95 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import DummySection from "@/components/ui/DummySection.astro";
+import PageHero from "@/components/ui/PageHero.astro";
+import SISPlacements from "@/sections/home/SISPlacements.astro";
+import Sioneers from "@/sections/home/Sioneers.astro";
+import FinalCTA from "@/sections/common/FinalCTA.astro";
 ---
 
 <Layout meta={{ title: "Global SAIoneers" }}>
-  <DummySection name="Global SAIoneers" />
+  <PageHero
+    eyebrow="Global SAIoneers"
+    title="Once a SAIoneer, always a SAIoneer."
+    highlight="always a SAIoneer."
+    description="Our graduates carry SIRS with them — to IITs and AIIMS, to the Ivy League and to workplaces across the world. These are their pathways."
+    image="/images/stats-image-4.jpg"
+    imageAlt="A SIRS graduate being felicitated"
+    imageFit="cover"
+    frame="arch"
+    titleSize="compact"
+    dataSection="Global SAIoneers Page Hero"
+  >
+    <a
+      href="/results"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600 md:px-8 md:py-4 md:text-base"
+    >
+      See Our Results
+      <span aria-hidden="true">&rarr;</span>
+    </a>
+    <a
+      href="/global-connect"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg border border-orange-500 px-6 py-3 text-sm font-semibold text-orange-500 transition-colors hover:bg-orange-500 hover:text-white md:px-8 md:py-4 md:text-base"
+    >
+      Explore Global Connect
+    </a>
+  </PageHero>
+
+  <!-- Intro -->
+  <section class="bg-n-50" data-section="Global SAIoneers Intro">
+    <div class="container mx-auto px-6 py-14 md:py-18 lg:py-20 2xl:px-0">
+      <div
+        class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:items-center lg:gap-16"
+      >
+        <div class="space-y-3">
+          <p
+            class="font-secondary flex items-center gap-3 text-xs font-semibold tracking-[0.25em] text-orange-500 uppercase md:text-sm"
+          >
+            <span class="size-1.5 rotate-45 bg-orange-500" aria-hidden="true"
+            ></span>
+            The alumni community
+          </p>
+          <h2
+            class="text-n-800 text-3xl leading-[1.12] font-medium md:text-4xl lg:text-5xl"
+          >
+            A SIRS education travels well.
+          </h2>
+          <p
+            class="font-secondary text-n-600 text-base leading-relaxed md:text-lg"
+          >
+            SAIoneers leave school able to study independently, speak in public
+            and live away from home. Those three habits show up again in
+            university seminars, in hostel kitchens and in first jobs.
+          </p>
+        </div>
+        <figure class="max-w-xl border-l-2 border-orange-300 pl-5 lg:pl-6">
+          <blockquote
+            class="text-n-700 text-lg leading-relaxed italic md:text-xl"
+          >
+            &ldquo;SIRS taught me how to structure a day when no one is telling
+            me what to do. That is the skill that carried me through my first
+            year abroad.&rdquo;
+          </blockquote>
+          <figcaption
+            class="font-secondary text-n-500 mt-3 text-xs font-semibold tracking-[0.15em] uppercase"
+          >
+            A SAIoneer, now at university overseas
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <SISPlacements />
+
+  <Sioneers />
+
+  <FinalCTA
+    eyebrow="Join the next cohort"
+    title="Begin the journey they will talk about."
+    description="Admissions are open for Classes IV–XII. Come and see the school that our alumni still call home."
+    primaryLabel="Start an Application"
+    primaryHref="/admissions"
+    secondaryLabel="Book a Campus Visit"
+    secondaryHref="/contact-us"
+  />
 </Layout>

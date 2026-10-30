@@ -1,5 +1,163 @@
 ---
-import DummySection from "@/components/ui/DummySection.astro";
+const features = [
+  {
+    title: "House parents on campus",
+    text: "Resident wardens and matrons live alongside students, so there is always an adult awake, aware and nearby.",
+  },
+  {
+    title: "Study hours that hold",
+    text: "A supervised prep hour every evening, with subject teachers on call for the questions that cannot wait until morning.",
+  },
+  {
+    title: "Meals cooked fresh, daily",
+    text: "A rotating, nutritionist-reviewed menu served in the dining hall — the same kitchen, the same care, every day.",
+  },
+  {
+    title: "Weekends that explore",
+    text: "Sports fixtures, movie nights, city outings and festival celebrations keep the campus alive on Saturdays and Sundays.",
+  },
+];
+
+const day = [
+  { time: "6:00", label: "Wake up", detail: "Morning drill and yoga" },
+  { time: "7:15", label: "Assembly", detail: "Thought for the day" },
+  { time: "8:00", label: "Classes", detail: "Six periods, two breaks" },
+  { time: "3:30", label: "Clubs & field", detail: "Sport, art, music" },
+  { time: "6:00", label: "Prep hour", detail: "Guided study" },
+  { time: "9:30", label: "Lights out", detail: "Roll call, quiet" },
+];
 ---
-<!-- TODO: Replace with real section content -->
-<DummySection name="SIRS Experience — Boarding" />
+
+<section
+  id="boarding"
+  class="bg-n-100 relative overflow-hidden"
+  data-section="SIRS Boarding"
+>
+  <div class="container mx-auto px-6 py-16 md:py-20 lg:py-24 2xl:px-0">
+    <div
+      class="grid gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center lg:gap-16"
+    >
+      <!-- Images -->
+      <div class="relative">
+        <figure class="relative overflow-hidden rounded-[28px]">
+          <img
+            src="/images/strip-cafeteria.webp"
+            alt="Students being served a fresh meal in the SIRS dining hall"
+            class="aspect-[4/5] w-full object-cover sm:aspect-[5/4] lg:aspect-[4/5]"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption
+            class="font-secondary text-n-800 absolute top-5 right-5 rounded-full bg-white/90 px-4 py-2 text-[11px] font-semibold tracking-[0.14em] uppercase backdrop-blur"
+          >
+            Dining hall · Every day
+          </figcaption>
+        </figure>
+
+        <figure
+          class="border-n-50 absolute -right-2 -bottom-8 w-[46%] overflow-hidden rounded-3xl border-4 shadow-xl sm:-right-4 sm:w-[40%] lg:-right-8"
+        >
+          <img
+            src="/images/strip-gym.webp"
+            alt="Students using the outdoor fitness zone"
+            class="aspect-square w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+
+        <div
+          class="absolute top-8 -left-3 hidden -rotate-3 rounded-xl bg-orange-500 px-5 py-3 text-white shadow-lg sm:block lg:-left-6"
+        >
+          <p class="text-2xl leading-none font-semibold">24/7</p>
+          <p
+            class="font-secondary mt-1 text-[10px] font-medium tracking-[0.14em] uppercase"
+          >
+            Care on campus
+          </p>
+        </div>
+      </div>
+
+      <!-- Copy -->
+      <div class="space-y-8">
+        <div class="space-y-3">
+          <p
+            class="font-secondary flex items-center gap-3 text-xs font-semibold tracking-[0.25em] text-orange-500 uppercase md:text-sm"
+          >
+            <span class="size-1.5 rotate-45 bg-orange-500" aria-hidden="true"
+            ></span>
+            Boarding
+          </p>
+          <h2
+            class="text-n-800 text-4xl leading-[1.1] font-medium md:text-5xl lg:text-6xl"
+          >
+            A home that happens to be a school.
+          </h2>
+          <p
+            class="font-secondary text-n-600 text-base leading-relaxed md:text-lg"
+          >
+            Children come to SIRS from across India and beyond. The boarding
+            house is where those different homes learn to live as one — with
+            routine, warmth and enough freedom to grow.
+          </p>
+        </div>
+
+        <div class="grid gap-x-8 gap-y-6 sm:grid-cols-2">
+          {
+            features.map((feature, index) => (
+              <article
+                class="card-anim card-bottom"
+                style={`--delay: ${index * 0.06}s`}
+              >
+                <span class="mb-3 flex size-8 items-center justify-center rounded-full bg-orange-500 text-xs font-semibold text-white">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 class="text-n-800 text-lg font-medium">{feature.title}</h3>
+                <p class="font-secondary text-n-600 mt-1.5 text-sm leading-relaxed">
+                  {feature.text}
+                </p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- A day in boarding -->
+    <div class="mt-16 lg:mt-24">
+      <div class="flex flex-wrap items-end justify-between gap-3">
+        <h3 class="text-n-800 text-2xl font-medium md:text-3xl">
+          A day in boarding
+        </h3>
+        <p class="font-secondary text-n-500 text-sm">
+          Structure first. Then space.
+        </p>
+      </div>
+
+      <ol class="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+        {
+          day.map((moment, index) => (
+            <li
+              class="card-anim card-bottom relative rounded-2xl bg-white p-4 md:p-5"
+              style={`--delay: ${index * 0.05}s`}
+            >
+              <p class="font-secondary text-xs font-semibold tracking-[0.12em] text-orange-500">
+                {moment.time}
+              </p>
+              <p class="text-n-800 mt-2 text-base leading-snug font-medium">
+                {moment.label}
+              </p>
+              <p class="font-secondary text-n-500 mt-1 text-xs leading-snug">
+                {moment.detail}
+              </p>
+              <span
+                class="bg-n-300 absolute top-1/2 -right-2 hidden h-px w-4 lg:block"
+                aria-hidden="true"
+              />
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,50 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/ui/PageHero.astro";
+import GlobalMindset from "@/sections/sirs-experience/GlobalMindset.astro";
+import SISPlacements from "@/sections/home/SISPlacements.astro";
+import FinalCTA from "@/sections/common/FinalCTA.astro";
+---
+
+<Layout meta={{ title: "Global Connect" }}>
+  <PageHero
+    eyebrow="Global Connect"
+    title="The world is part of the syllabus."
+    highlight="syllabus."
+    description="Through immersion programmes, Model United Nations, international assessments and partner schools, SIRS brings the world into the classroom — and takes the classroom into the world."
+    image="/images/about-hero.webp"
+    imageAlt="SAI students together on campus"
+    imageFit="cover"
+    frame="arch"
+    titleSize="compact"
+    dataSection="Global Connect Page Hero"
+  >
+    <a
+      href="/admissions"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600 md:px-8 md:py-4 md:text-base"
+    >
+      Join the Next Cohort
+      <span aria-hidden="true">&rarr;</span>
+    </a>
+    <a
+      href="/sirs-experience/global-saIoneers"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg border border-orange-500 px-6 py-3 text-sm font-semibold text-orange-500 transition-colors hover:bg-orange-500 hover:text-white md:px-8 md:py-4 md:text-base"
+    >
+      Meet Global SAIoneers
+    </a>
+  </PageHero>
+
+  <GlobalMindset showCta={false} />
+
+  <SISPlacements />
+
+  <FinalCTA
+    eyebrow="Global admissions"
+    title="Raise a child who can work anywhere."
+    description="Talk to our admissions team about international pathways, assessments and university counselling at SIRS."
+    primaryLabel="Talk to Admissions"
+    primaryHref="/contact-us"
+    secondaryLabel="Explore Admissions"
+    secondaryHref="/admissions"
+  />
+</Layout>

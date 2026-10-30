@@ -1,8 +1,264 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import DummySection from "@/components/ui/DummySection.astro";
+import PageHero from "@/components/ui/PageHero.astro";
+import HowItWorks from "@/sections/admissions/HowItWorks.astro";
+import FAQ from "@/sections/admissions/FAQ.astro";
+import FinalCTA from "@/sections/common/FinalCTA.astro";
+
+const essentials = [
+  {
+    title: "Who can apply",
+    text: "Students entering Classes IV to XII, for both boarding and day scholars, subject to seat availability in the grade.",
+  },
+  {
+    title: "When to apply",
+    text: "Applications are accepted through the year. Early applications get priority for the limited boarding seats each grade holds.",
+  },
+  {
+    title: "How it begins",
+    text: "One inquiry form, one conversation with a counsellor, and a campus visit if you would like to see the school first.",
+  },
+];
+
+const applicationDocs = [
+  "Birth certificate",
+  "Latest report card, and the previous year's",
+  "Four recent passport-size photographs",
+  "Aadhaar card of the student and parent",
+  "Residential address proof",
+  "Any medical or learning-support records",
+];
+
+const joiningDocs = [
+  "Transfer certificate from the previous school",
+  "Migration certificate, if applicable",
+  "Medical fitness and immunisation record",
+  "Two additional passport-size photographs",
+  "Previous school's progress report (original)",
+  "Guardian contact and emergency details",
+];
 ---
 
 <Layout meta={{ title: "Admission Guidelines" }}>
-  <DummySection name="Admissions — Guidelines" />
+  <PageHero
+    eyebrow="Admissions"
+    title="Everything you need, before you apply."
+    highlight="before you apply."
+    description="A clear view of eligibility, documents and the assessment process at SIRS — so the first conversation can be about your child, not the paperwork."
+    image="/images/admission-hero.webp"
+    imageAlt="A family meeting an admissions counsellor"
+    imageFit="cover"
+    frame="line"
+    archShape="wide"
+    titleSize="compact"
+    dataSection="Admission Guidelines Page Hero"
+  >
+    <a
+      href="/admissions"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600 md:px-8 md:py-4 md:text-base"
+    >
+      Start an Application
+      <span aria-hidden="true">&rarr;</span>
+    </a>
+    <a
+      href="#documents"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg border border-orange-500 px-6 py-3 text-sm font-semibold text-orange-500 transition-colors hover:bg-orange-500 hover:text-white md:px-8 md:py-4 md:text-base"
+    >
+      Document Checklist
+    </a>
+  </PageHero>
+
+  <!-- Essentials -->
+  <section class="bg-n-50" data-section="Admission Essentials">
+    <div class="container mx-auto px-6 py-14 md:py-18 lg:py-20 2xl:px-0">
+      <div class="grid gap-4 md:grid-cols-3">
+        {
+          essentials.map((item, index) => (
+            <article
+              class="card-anim card-bottom border-n-200 rounded-3xl border bg-white p-6 md:p-7"
+              style={`--delay: ${index * 0.07}s`}
+            >
+              <span class="flex size-9 items-center justify-center rounded-full bg-orange-500 text-xs font-semibold text-white">
+                0{index + 1}
+              </span>
+              <h2 class="text-n-800 mt-4 text-xl font-medium">{item.title}</h2>
+              <p class="font-secondary text-n-600 mt-2 text-sm leading-relaxed">
+                {item.text}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Documents -->
+  <section id="documents" class="bg-n-100" data-section="Admission Documents">
+    <div class="container mx-auto px-6 py-16 md:py-20 lg:py-24 2xl:px-0">
+      <div
+        class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+      >
+        <div>
+          <p
+            class="font-secondary flex items-center gap-3 text-xs font-semibold tracking-[0.25em] text-orange-500 uppercase md:text-sm"
+          >
+            <span class="size-1.5 rotate-45 bg-orange-500" aria-hidden="true"
+            ></span>
+            Checklist
+          </p>
+          <h2
+            class="text-n-800 mt-3 text-3xl leading-[1.12] font-medium md:text-4xl lg:text-5xl"
+          >
+            The paperwork, in two parts.
+          </h2>
+        </div>
+        <p
+          class="font-secondary text-n-600 max-w-sm text-sm leading-relaxed md:text-base"
+        >
+          Scanned copies are enough to apply. Originals are verified at the
+          campus before joining.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-4 lg:grid-cols-2">
+        <div class="rounded-3xl bg-white p-6 md:p-8">
+          <div class="flex items-center gap-3">
+            <span
+              class="flex size-10 items-center justify-center rounded-xl bg-orange-500 text-sm font-semibold text-white"
+            >
+              01
+            </span>
+            <h3 class="text-n-800 text-xl font-medium md:text-2xl">To apply</h3>
+          </div>
+          <ul class="mt-5 space-y-3">
+            {
+              applicationDocs.map((doc) => (
+                <li class="font-secondary text-n-700 flex items-start gap-3 text-sm leading-relaxed">
+                  <svg
+                    class="mt-0.5 size-4 shrink-0 text-orange-500"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="m4 10 4 4 8-8" />
+                  </svg>
+                  {doc}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="rounded-3xl bg-violet-900 p-6 text-white md:p-8">
+          <div class="flex items-center gap-3">
+            <span
+              class="flex size-10 items-center justify-center rounded-xl bg-white/15 text-sm font-semibold text-white"
+            >
+              02
+            </span>
+            <h3 class="text-xl font-medium md:text-2xl">Before joining</h3>
+          </div>
+          <ul class="mt-5 space-y-3">
+            {
+              joiningDocs.map((doc) => (
+                <li class="font-secondary flex items-start gap-3 text-sm leading-relaxed text-white/75">
+                  <svg
+                    class="mt-0.5 size-4 shrink-0 text-orange-300"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="m4 10 4 4 8-8" />
+                  </svg>
+                  {doc}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <p
+        class="font-secondary text-n-500 mt-6 text-xs leading-relaxed md:text-sm"
+      >
+        Additional documents may be requested for international applicants or
+        students transferring from another board. Your admissions counsellor
+        will confirm the exact list for your child's grade.
+      </p>
+    </div>
+  </section>
+
+  <HowItWorks />
+
+  <!-- Assessment note -->
+  <section class="bg-n-50" data-section="Admission Assessment">
+    <div class="container mx-auto px-6 pb-16 md:pb-20 lg:pb-24 2xl:px-0">
+      <div
+        class="border-n-200 grid gap-8 rounded-[28px] border p-6 md:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:items-center lg:gap-14"
+      >
+        <div class="space-y-3">
+          <p
+            class="font-secondary text-xs font-semibold tracking-[0.2em] text-orange-500 uppercase"
+          >
+            The assessment
+          </p>
+          <h2 class="text-n-800 text-2xl leading-snug font-medium md:text-3xl">
+            We are looking for readiness, not perfection.
+          </h2>
+          <p
+            class="font-secondary text-n-600 text-sm leading-relaxed md:text-base"
+          >
+            Younger applicants meet a teacher for an age-appropriate
+            interaction. From middle school onward, a short written assessment
+            in English and mathematics helps us place your child in the right
+            grade and support band. There is no separate coaching required.
+          </p>
+        </div>
+        <div class="bg-n-100 rounded-2xl p-6">
+          <p
+            class="font-secondary text-n-500 text-[11px] font-semibold tracking-[0.16em] uppercase"
+          >
+            Talk to a counsellor
+          </p>
+          <a
+            href="tel:+919337377701"
+            class="text-n-800 mt-2 block text-xl font-medium hover:text-orange-500 md:text-2xl"
+          >
+            +91 93373 77701
+          </a>
+          <a
+            href="mailto:admissions@sairesidentialschool.com"
+            class="font-secondary mt-1 block text-sm text-orange-600 underline decoration-orange-200 underline-offset-4"
+          >
+            admissions@sairesidentialschool.com
+          </a>
+          <p class="font-secondary text-n-500 mt-4 text-xs">
+            Monday – Saturday · 9:00 am – 5:00 pm
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="bg-n-100">
+    <FAQ />
+  </div>
+
+  <FinalCTA
+    eyebrow="Admissions 2026–27"
+    title="Questions answered. Ready when you are."
+    description="If the checklist is complete, the next step is a conversation. Our counsellors will walk you through the rest."
+    primaryLabel="Apply Now"
+    primaryHref="/admissions"
+    secondaryLabel="Book a Campus Visit"
+    secondaryHref="/contact-us"
+  />
 </Layout>

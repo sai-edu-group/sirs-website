@@ -1,5 +1,180 @@
 ---
-import DummySection from "@/components/ui/DummySection.astro";
+const stages = [
+  {
+    index: "01",
+    title: "Understand",
+    text: "Concepts begin with a question, a demonstration or a problem — not a definition to memorise. Teachers build the idea first, then name it.",
+  },
+  {
+    index: "02",
+    title: "Apply",
+    text: "Labs, field studies, debates and projects put the idea to work. A chemistry lesson becomes a water test; a civics chapter becomes a mock council.",
+  },
+  {
+    index: "03",
+    title: "Reflect",
+    text: "Weekly check-ins and assessment feedback show each child where they stand and what to do next, long before an exam makes it official.",
+  },
+];
+
+const subjects = [
+  "English",
+  "Mathematics",
+  "Sciences",
+  "Social Science",
+  "Computer Science",
+  "Commerce",
+  "Humanities",
+  "Physical Education",
+];
+
+const numbers = [
+  { value: "44.6%", label: "of students score above 90%" },
+  { value: "335+", label: "appearances in JEE, NEET, CLAT & SAT" },
+  { value: "20+", label: "Ivy League and global university offers" },
+];
 ---
-<!-- TODO: Replace with real section content -->
-<DummySection name="SIRS Experience — Academics" />
+
+<section
+  id="academics"
+  class="bg-n-50 relative overflow-hidden"
+  data-section="SIRS Academics"
+>
+  <div class="container mx-auto px-6 py-16 md:py-20 lg:py-24 2xl:px-0">
+    <!-- Header -->
+    <div
+      class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:items-end lg:gap-16"
+    >
+      <div class="space-y-3">
+        <p
+          class="font-secondary flex items-center gap-3 text-xs font-semibold tracking-[0.25em] text-orange-500 uppercase md:text-sm"
+        >
+          <span class="size-1.5 rotate-45 bg-orange-500" aria-hidden="true"
+          ></span>
+          Academics
+        </p>
+        <h2
+          class="text-n-800 max-w-2xl text-4xl leading-[1.1] font-medium md:text-5xl lg:text-6xl"
+        >
+          Lessons that leave the textbook.
+        </h2>
+      </div>
+      <p class="font-secondary text-n-600 text-base leading-relaxed md:text-lg">
+        SIRS follows the CBSE curriculum from Class IV to XII, taught through
+        the SAI Learning Foundation — a framework that pairs strong fundamentals
+        with inquiry, application and honest feedback.
+      </p>
+    </div>
+
+    <!-- Body -->
+    <div
+      class="mt-12 grid gap-10 lg:mt-16 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-14"
+    >
+      <!-- Photo -->
+      <figure class="relative">
+        <div class="bg-n-100 relative overflow-hidden rounded-[28px]">
+          <img
+            src="/images/stats-image-6.jpg"
+            alt="SAI students learning together"
+            class="aspect-[4/3] w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+            loading="lazy"
+            decoding="async"
+          />
+          <div
+            class="from-n-950/70 via-n-950/5 pointer-events-none absolute inset-0 bg-gradient-to-t to-transparent"
+            aria-hidden="true"
+          >
+          </div>
+          <figcaption
+            class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6 md:p-8"
+          >
+            <p
+              class="max-w-xs text-lg leading-snug font-medium text-white md:text-xl"
+            >
+              “Teach a child how to think, and the syllabus takes care of
+              itself.”
+            </p>
+            <span
+              class="font-secondary hidden rounded-full bg-white/15 px-3 py-1.5 text-[11px] font-semibold tracking-[0.15em] text-white uppercase backdrop-blur-md sm:block"
+            >
+              CBSE · IV–XII
+            </span>
+          </figcaption>
+        </div>
+
+        <!-- Numbers -->
+        <dl class="mt-3 grid grid-cols-3 gap-3">
+          {
+            numbers.map((number) => (
+              <div class="bg-n-100 rounded-2xl px-4 py-4 md:px-5 md:py-5">
+                <dt class="sr-only">{number.label}</dt>
+                <dd>
+                  <span class="block text-xl font-semibold text-orange-500 md:text-2xl">
+                    {number.value}
+                  </span>
+                  <span class="font-secondary text-n-600 mt-1 block text-[11px] leading-snug md:text-xs">
+                    {number.label}
+                  </span>
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+      </figure>
+
+      <!-- Learning rhythm -->
+      <div class="flex flex-col justify-between gap-8">
+        <div>
+          <p
+            class="font-secondary text-n-500 text-xs font-semibold tracking-[0.2em] uppercase md:text-sm"
+          >
+            The learning rhythm
+          </p>
+          <div class="mt-2">
+            {
+              stages.map((stage, index) => (
+                <article
+                  class:list={[
+                    "card-anim card-right group grid grid-cols-[48px_minmax(0,1fr)] gap-4 py-6 md:grid-cols-[64px_minmax(0,1fr)] md:gap-6",
+                    index !== stages.length - 1 && "border-n-200 border-b",
+                  ]}
+                  style={`--delay: ${index * 0.08}s`}
+                >
+                  <span class="pt-1 text-sm font-semibold tracking-[0.18em] text-orange-500/60 md:text-base">
+                    {stage.index}
+                  </span>
+                  <div>
+                    <h3 class="text-n-800 text-xl font-medium md:text-2xl">
+                      {stage.title}
+                    </h3>
+                    <p class="font-secondary text-n-600 mt-2 text-sm leading-relaxed md:text-base">
+                      {stage.text}
+                    </p>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Subjects -->
+        <div class="border-n-200 border-t pt-6">
+          <p
+            class="font-secondary text-n-500 text-xs font-semibold tracking-[0.2em] uppercase md:text-sm"
+          >
+            What they study
+          </p>
+          <ul class="mt-3 flex flex-wrap gap-2">
+            {
+              subjects.map((subject) => (
+                <li class="font-secondary border-n-200 text-n-700 rounded-full border bg-white px-4 py-2 text-xs font-medium md:text-sm">
+                  {subject}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

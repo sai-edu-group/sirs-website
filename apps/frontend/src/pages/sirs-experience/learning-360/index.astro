@@ -1,0 +1,143 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/ui/PageHero.astro";
+import Learning360 from "@/sections/home/Learning360.astro";
+import FinalCTA from "@/sections/common/FinalCTA.astro";
+
+const beyond = [
+  {
+    title: "Creative Arts",
+    text: "Music, dance, theatre and visual arts — timetabled, not optional.",
+    href: "/sirs-experience#arts",
+    image: "/images/activities.jpg",
+    alt: "Students performing a group dance",
+  },
+  {
+    title: "Physical Education",
+    text: "Twenty sports, coached on 335,000+ sq ft of real ground.",
+    href: "/sirs-experience#sports",
+    image: "/images/sports-facilities (1).jpg",
+    alt: "The SIRS athletics stadium",
+  },
+  {
+    title: "Boarding Life",
+    text: "A home with house parents, prep hours and weekends that explore.",
+    href: "/sirs-experience#boarding",
+    image: "/images/strip-cafeteria.webp",
+    alt: "Students in the SIRS dining hall",
+  },
+];
+---
+
+<Layout meta={{ title: "Learning @ 360" }}>
+  <PageHero
+    eyebrow="Learning @ 360"
+    title="Every side of a child, in one circle."
+    highlight="one circle."
+    description="Smart academics, creative arts and physical education are not three separate tracks at SIRS. They are three arcs of the same circle, drawn around the same child."
+    image="/images/leader.webp"
+    imageAlt="Dr. Silpi Sahoo talking with SIRS students"
+    imageFit="cover"
+    frame="arch"
+    titleSize="compact"
+    dataSection="Learning 360 Page Hero"
+  >
+    <a
+      href="/admissions"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600 md:px-8 md:py-4 md:text-base"
+    >
+      Apply to SIRS
+      <span aria-hidden="true">&rarr;</span>
+    </a>
+    <a
+      href="/sirs-experience"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg border border-orange-500 px-6 py-3 text-sm font-semibold text-orange-500 transition-colors hover:bg-orange-500 hover:text-white md:px-8 md:py-4 md:text-base"
+    >
+      Explore the SIRS Experience
+    </a>
+  </PageHero>
+
+  <Learning360 />
+
+  <!-- Beyond the circle -->
+  <section class="bg-n-50" data-section="Learning 360 Beyond">
+    <div class="container mx-auto px-6 py-16 md:py-20 lg:py-24 2xl:px-0">
+      <div
+        class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between"
+      >
+        <div>
+          <p
+            class="font-secondary flex items-center gap-3 text-xs font-semibold tracking-[0.25em] text-orange-500 uppercase md:text-sm"
+          >
+            <span class="size-1.5 rotate-45 bg-orange-500" aria-hidden="true"
+            ></span>
+            The circle in motion
+          </p>
+          <h2
+            class="text-n-800 mt-3 max-w-2xl text-3xl leading-[1.12] font-medium md:text-4xl lg:text-5xl"
+          >
+            Three arcs. One timetable.
+          </h2>
+        </div>
+        <p
+          class="font-secondary text-n-600 max-w-md text-sm leading-relaxed md:text-base"
+        >
+          A SAIoneer does not choose between the classroom, the stage and the
+          field. All three appear on the same weekly timetable — and all three
+          are assessed, coached and celebrated.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-4 md:grid-cols-3">
+        {
+          beyond.map((item, index) => (
+            <a
+              href={item.href}
+              class="card-anim card-bottom group bg-n-100 relative overflow-hidden rounded-3xl"
+              style={`--delay: ${index * 0.07}s`}
+            >
+              <img
+                src={item.image}
+                alt={item.alt}
+                class="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
+              />
+              <div
+                class="from-n-950/80 via-n-950/10 pointer-events-none absolute inset-0 bg-gradient-to-t to-transparent"
+                aria-hidden="true"
+              />
+              <div class="absolute inset-x-0 bottom-0 p-5 md:p-6">
+                <h3 class="text-lg font-medium text-white md:text-xl">
+                  {item.title}
+                </h3>
+                <p class="font-secondary mt-1 text-xs leading-relaxed text-white/75 md:text-sm">
+                  {item.text}
+                </p>
+                <span class="font-secondary mt-3 inline-flex items-center gap-2 text-xs font-semibold text-white">
+                  Read more
+                  <span
+                    class="transition-transform duration-300 group-hover:translate-x-1"
+                    aria-hidden="true"
+                  >
+                    &rarr;
+                  </span>
+                </span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA
+    eyebrow="Admissions 2026–27"
+    title="See the circle close around your child."
+    description="A campus visit is the quickest way to understand how academics, arts and sport fit into one SIRS day."
+    primaryLabel="Book a Campus Visit"
+    primaryHref="/contact-us"
+    secondaryLabel="Talk to Admissions"
+    secondaryHref="/admissions/guidelines"
+  />
+</Layout>

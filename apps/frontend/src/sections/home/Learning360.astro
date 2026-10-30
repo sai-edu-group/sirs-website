@@ -1,0 +1,356 @@
+---
+// DATA //
+import { learning360Header, learningPillars } from "@/data/home/learning-360";
+
+// ACCENTS //
+const accents = {
+  orange: {
+    dot: "bg-orange-500",
+    chip: "bg-orange-50 text-orange-700",
+    icon: "bg-orange-50 text-orange-600 group-hover:bg-orange-500 group-hover:text-n-50",
+    node: "group-hover:border-orange-500 group-hover:bg-orange-500 group-hover:text-n-50",
+  },
+  violet: {
+    dot: "bg-violet-500",
+    chip: "bg-violet-50 text-violet-600",
+    icon: "bg-violet-50 text-violet-600 group-hover:bg-violet-500 group-hover:text-n-50",
+    node: "group-hover:border-violet-500 group-hover:bg-violet-500 group-hover:text-n-50",
+  },
+  slate: {
+    dot: "bg-n-700",
+    chip: "bg-n-200 text-n-700",
+    icon: "bg-n-200 text-n-700 group-hover:bg-n-800 group-hover:text-n-50",
+    node: "group-hover:border-n-800 group-hover:bg-n-800 group-hover:text-n-50",
+  },
+} as const;
+---
+
+<section
+  class="border-n-200 bg-n-100 relative w-full overflow-hidden border-y"
+  id="learning-360"
+  data-section="Home Learning 360"
+  aria-labelledby="learning-360-title"
+>
+  <!-- Orbit rings, bleeding off the top-right -->
+  <div
+    class="pointer-events-none absolute inset-0 overflow-hidden"
+    aria-hidden="true"
+  >
+    <div
+      class="border-n-200 absolute -top-[420px] -right-[180px] size-[860px] rounded-full border"
+    >
+    </div>
+    <div
+      class="border-n-200/70 absolute -top-[260px] -right-[80px] size-[600px] rounded-full border"
+    >
+    </div>
+    <div
+      class="absolute -top-32 right-[12%] size-72 rounded-full bg-orange-100/50 blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute bottom-0 -left-24 size-80 rounded-full bg-violet-100/60 blur-3xl"
+    >
+    </div>
+  </div>
+
+  <div
+    class="relative container mx-auto grid grid-cols-1 gap-14 px-6 py-16 md:py-20 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-16 lg:px-8 lg:py-24 xl:gap-20 2xl:px-0"
+  >
+    <!-- LEFT — the idea: one circle around one child -->
+    <div class="flex flex-col justify-between gap-8 md:gap-10">
+      <div class="flex flex-col gap-4 md:gap-5">
+        <p
+          class="font-secondary flex items-center gap-3 text-xs font-semibold tracking-[0.22em] text-orange-600 uppercase md:text-sm"
+        >
+          <span class="size-1.5 rounded-full bg-orange-500"></span>
+          {learning360Header.eyebrow}
+          <span class="h-px w-10 bg-orange-300"></span>
+        </p>
+
+        <h2
+          id="learning-360-title"
+          class="text-n-800 text-[38px] leading-[1.1] font-medium md:text-5xl xl:text-[56px]"
+        >
+          {learning360Header.titleLead}{" "}
+          <span class="relative inline-block whitespace-nowrap">
+            {learning360Header.titleHighlight}
+            <svg
+              class="absolute -bottom-1 left-0 h-2.5 w-full text-orange-500 md:-bottom-1.5 md:h-3"
+              viewBox="0 0 353 48"
+              preserveAspectRatio="none"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M2.65555 37.4599C45.9937 21.9912 176.227 -18.7216 349.156 10.0028C351.335 10.3648 352.808 12.4252 352.447 14.6044C352.085 16.7836 350.024 18.2573 347.845 17.8954C176.774 -10.5203 48.0069 29.7668 5.345 44.994C3.26442 45.7367 0.975312 44.6518 0.232694 42.5712C-0.509571 40.4908 0.575204 38.2025 2.65555 37.4599Z"
+                fill="currentColor"></path>
+            </svg>
+          </span>{" "}
+          {learning360Header.titleTail}
+        </h2>
+
+        <p
+          class="font-secondary text-n-600 max-w-xl text-base leading-relaxed md:text-lg"
+        >
+          {learning360Header.subtitle}
+        </p>
+      </div>
+
+      <!-- The 360° seal -->
+      <div
+        class="scale-in flex flex-col items-start gap-5 py-2 md:gap-6 md:py-4"
+      >
+        <div class="relative size-56 shrink-0 md:size-72 xl:size-[21rem]">
+          <svg
+            class="absolute inset-0 size-full"
+            viewBox="0 0 200 200"
+            fill="none"
+            aria-hidden="true"
+          >
+            <defs>
+              <path
+                id="learning-seal-path"
+                d="M100 22a78 78 0 1 1 0 156a78 78 0 0 1 0-156"></path>
+            </defs>
+
+            <!-- Rotating orbit: dashed ring -->
+            <g class="seal-orbit">
+              <circle
+                cx="100"
+                cy="100"
+                r="94"
+                stroke="currentColor"
+                class="text-n-300"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-dasharray="2 7"></circle>
+            </g>
+
+            <!-- One dot per pillar, on the inner orbit -->
+            <g class="text-n-300" stroke="currentColor" stroke-width="1">
+              <circle
+                cx="100"
+                cy="36"
+                r="4.5"
+                fill="currentColor"
+                class="text-orange-500"></circle>
+              <circle
+                cx="44.56"
+                cy="132"
+                r="4.5"
+                fill="currentColor"
+                class="text-violet-500"></circle>
+              <circle
+                cx="155.44"
+                cy="132"
+                r="4.5"
+                fill="currentColor"
+                class="text-n-800"></circle>
+              <circle cx="100" cy="100" r="64" fill="none"></circle>
+            </g>
+
+            <text
+              class="fill-n-500 font-secondary text-[10.5px] font-medium"
+              textLength="464"
+              lengthAdjust="spacing"
+            >
+              <textPath href="#learning-seal-path" startOffset="0">
+                SMART ACADEMICS · CREATIVE ARTS · PHYSICAL EDUCATION
+              </textPath>
+            </text>
+          </svg>
+
+          <div
+            class="border-n-200 bg-n-50 absolute inset-[28%] flex flex-col items-center justify-center rounded-full border-2 shadow-sm"
+          >
+            <span
+              class="text-n-800 text-4xl font-medium md:text-5xl xl:text-6xl"
+            >
+              360°
+            </span>
+            <span
+              class="font-secondary mt-0.5 text-[9px] font-semibold tracking-[0.3em] text-orange-600 uppercase md:text-[10px] xl:text-xs"
+            >
+              Learning
+            </span>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <p class="text-n-800 text-lg leading-snug font-medium md:text-xl">
+            {learning360Header.note}
+          </p>
+          <p
+            class="font-secondary text-n-500 text-sm tracking-wide md:text-base"
+          >
+            {learning360Header.noteCaption}
+          </p>
+        </div>
+      </div>
+
+      <!-- The closing promise -->
+      <figure
+        class="flex max-w-md flex-col gap-2 border-l-2 border-orange-300 pl-5"
+      >
+        <blockquote
+          class="text-n-700 text-lg leading-snug font-medium italic md:text-xl"
+        >
+          “{learning360Header.promise}”
+        </blockquote>
+        <figcaption class="font-secondary text-n-500 text-sm">
+          {learning360Header.promiseBy}
+        </figcaption>
+      </figure>
+
+      <a
+        href="/sirs-experience/learning-360"
+        class="font-secondary group inline-flex w-fit items-center gap-2 rounded-xl bg-orange-500 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600"
+      >
+        Explore Learning @ 360
+        <span
+          class="transition-transform duration-300 group-hover:translate-x-1"
+          aria-hidden="true">&rarr;</span
+        >
+      </a>
+    </div>
+
+    <!-- RIGHT — the spine: three pillars on one orbit -->
+    <div class="flex flex-col gap-2 md:gap-3">
+      {
+        learningPillars.map((pillar, index) => (
+          <>
+            <article
+              class="card-anim card-right group hover:bg-n-50 relative rounded-3xl p-3 transition-colors duration-300 md:p-4"
+              style={`--delay: ${index * 0.12}s`}
+            >
+              <div class="grid grid-cols-[56px_minmax(0,1fr)] items-center gap-4 md:grid-cols-[64px_minmax(0,1fr)] md:gap-5">
+                {/* Orbit node */}
+                <div
+                  class={`font-secondary border-n-300 bg-n-50 text-n-500 relative z-10 flex size-14 items-center justify-center rounded-full border-2 text-lg font-semibold transition-colors duration-300 md:size-16 md:text-xl ${accents[pillar.accent].node}`}
+                >
+                  {pillar.index}
+                </div>
+
+                <div class="flex flex-col gap-3">
+                  <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
+                    <span
+                      class={`flex size-9 shrink-0 items-center justify-center rounded-xl transition-colors duration-300 ${accents[pillar.accent].icon}`}
+                    >
+                      {pillar.icon === "book" && (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="size-5"
+                          aria-hidden="true"
+                        >
+                          <path d="M12 7v14" />
+                          <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3Z" />
+                        </svg>
+                      )}
+                      {pillar.icon === "palette" && (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="size-5"
+                          aria-hidden="true"
+                        >
+                          <path d="M14.6 3.9a2.85 2.85 0 1 1 4 4l-8.1 8.1" />
+                          <path d="M7.1 14.9a3 3 0 0 0-3 3c0 1.34-2.5 1.52-2 2 1.08 1.1 2.5 2 4 2 2.2 0 4-1.8 4-4a3 3 0 0 0-3-3Z" />
+                          <path d="m9.5 12 2.5 2.5" />
+                        </svg>
+                      )}
+                      {pillar.icon === "pulse" && (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="size-5"
+                          aria-hidden="true"
+                        >
+                          <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                        </svg>
+                      )}
+                    </span>
+
+                    <h3 class="text-n-800 text-2xl font-medium md:text-[28px]">
+                      {pillar.title}
+                    </h3>
+
+                    <span
+                      class={`font-secondary rounded-full px-3 py-1 text-[11px] font-semibold tracking-[0.14em] uppercase ${accents[pillar.accent].chip}`}
+                    >
+                      {pillar.tagline}
+                    </span>
+                  </div>
+
+                  <p class="font-secondary text-n-500 max-w-2xl text-sm leading-relaxed md:text-[15px]">
+                    {pillar.lead}
+                  </p>
+
+                  <ul class="flex flex-col">
+                    {pillar.items.map((item) => (
+                      <li class="border-n-200/80 flex gap-3 border-t py-2 first:border-t-0 first:pt-0">
+                        <span
+                          class={`mt-[8px] size-1.5 shrink-0 rounded-full ${accents[pillar.accent].dot}`}
+                          aria-hidden="true"
+                        />
+                        <p class="font-secondary text-n-500 text-sm leading-relaxed md:text-[15px]">
+                          <span class="text-n-700 font-semibold">
+                            {item.title}
+                          </span>
+                          <span class="text-n-300 px-1.5">·</span>
+                          {item.description}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            {index < learningPillars.length - 1 && (
+              <span
+                class="border-n-300 ml-[39px] h-7 w-px border-l-2 border-dashed md:ml-[47px] md:h-9"
+                aria-hidden="true"
+              />
+            )}
+          </>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .seal-orbit {
+    transform-origin: 100px 100px;
+    animation: seal-spin 80s linear infinite;
+  }
+
+  @keyframes seal-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .seal-orbit {
+      animation: none;
+    }
+  }
+</style>

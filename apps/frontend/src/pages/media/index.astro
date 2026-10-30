@@ -1,0 +1,128 @@
+---
+// COMPONENTS //
+import PageHero from "@/components/ui/PageHero.astro";
+
+// SECTIONS //
+import FinalCTA from "@/sections/common/FinalCTA.astro";
+
+// OTHERS //
+import Layout from "@/layouts/Layout.astro";
+
+const channels = [
+  {
+    tag: "Written",
+    title: "News & Blogs",
+    body: "School announcements, exam results, campus stories and student writing, published through the year.",
+    href: "/media/blogs",
+    image: "/images/about-hero.webp",
+    alt: "SIRS students talking together on campus",
+  },
+  {
+    tag: "Photography",
+    title: "Photo Albums",
+    body: "Annual days, sports meets, excursions and everyday campus life, collected in albums by session.",
+    href: "/media/albums",
+    image: "/images/activities.jpg",
+    alt: "SIRS students performing on stage",
+  },
+  {
+    tag: "Audio",
+    title: "Radio Orange",
+    body: "The student-run campus station: shows on music, books, sport and the things SAIoneers argue about.",
+    href: "/media/radio-orange",
+    image: "/images/strip-chairperson.webp",
+    alt: "A SIRS student speaking into a microphone",
+  },
+  {
+    tag: "Video",
+    title: "SAI TV",
+    body: "Short films and campus coverage, filmed and edited by students in the media lab.",
+    href: "/media/sai-tv",
+    image: "/images/strip-stadium.webp",
+    alt: "The SIRS stadium on a match day",
+  },
+];
+---
+
+<Layout meta={{ title: "Media" }}>
+  <PageHero
+    dataSection="Media Hero"
+    eyebrow="Media"
+    title="The school, as the students record it."
+    highlight="the students record it."
+    description="Four channels run by SAIoneers: written stories, photo albums, a radio station and a television strand."
+    image="/images/commitment.webp"
+    imageAlt="SIRS students together at sunrise"
+    imageFit="cover"
+    titleSize="compact"
+    archShape="wide"
+    frame="line"
+  />
+
+  <section class="bg-white" data-section="Media Channels">
+    <div class="container mx-auto px-5 py-14 md:px-8 md:py-20 lg:py-24">
+      <div class="max-w-2xl">
+        <p
+          class="font-secondary text-xs font-semibold tracking-[0.2em] text-orange-500 uppercase"
+        >
+          Four channels
+        </p>
+        <h2
+          class="text-n-800 mt-4 text-3xl leading-tight font-medium md:text-4xl"
+        >
+          Pick a way in.
+        </h2>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+        {
+          channels.map((channel) => (
+            <a
+              href={channel.href}
+              class="group border-n-200 bg-n-50 relative flex flex-col overflow-hidden rounded-3xl border transition-colors hover:border-orange-300"
+            >
+              <div class="relative aspect-[16/10] overflow-hidden">
+                <img
+                  src={channel.image}
+                  alt={channel.alt}
+                  class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="font-secondary text-n-700 absolute top-4 left-4 rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold tracking-[0.16em] uppercase">
+                  {channel.tag}
+                </span>
+              </div>
+              <div class="flex flex-1 flex-col gap-2 p-6 md:p-7">
+                <div class="flex items-center justify-between gap-4">
+                  <h3 class="text-n-800 text-xl font-semibold md:text-2xl">
+                    {channel.title}
+                  </h3>
+                  <span
+                    class="text-orange-500 transition-transform duration-300 group-hover:translate-x-1"
+                    aria-hidden="true"
+                  >
+                    &rarr;
+                  </span>
+                </div>
+                <p class="font-secondary text-n-600 text-sm leading-relaxed md:text-base">
+                  {channel.body}
+                </p>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA
+    eyebrow="For the press"
+    title="Writing about SIRS?"
+    description="For interviews, campus photography or official statements, our communications office will help you directly."
+    primaryLabel="Contact the School"
+    primaryHref="/contact-us"
+    secondaryLabel="Awards & Recognition"
+    secondaryHref="/awards"
+  />
+</Layout>

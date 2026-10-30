@@ -22,6 +22,6 @@ export const contactDetails: QuickContactDetail[] = [
     icon: "campus",
     title: "Visit Our Campus",
     type: "location",
-    infoText: ["SAI Residential School, Odisha, India"],
+    infoText: ["SAI Residential School, Bhubaneswar, Odisha, India"],
   },
 ];

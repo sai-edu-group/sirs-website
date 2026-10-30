@@ -1,12 +1,249 @@
 ---
-// Placeholder route, rendered on demand until it has real content
-export const prerender = false;
+export const prerender = true;
+
+// COMPONENTS //
+import PageHero from "@/components/ui/PageHero.astro";
+
+// SECTIONS //
+import SISTeam from "@/sections/about/SISTeam.astro";
+import SIKeyMembers from "@/sections/about/SIKeyMembers.astro";
+import FinalCTA from "@/sections/common/FinalCTA.astro";
+
+// OTHERS //
 import Layout from "@/layouts/Layout.astro";
-import DummySection from "@/components/ui/DummySection.astro";
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: "leadership" } },
+    { params: { slug: "affiliations" } },
+  ];
+}
 
 const { slug } = Astro.params;
+
+const affiliations = [
+  {
+    tag: "Board",
+    title: "CBSE affiliated",
+    body: "SIRS follows the Central Board of Secondary Education curriculum from Class IV to XII, with board examinations conducted at the end of Classes X and XII.",
+  },
+  {
+    tag: "Group",
+    title: "Part of the SAI International Education Group",
+    body: "SIRS sits alongside SAI International School and SAI Angan, sharing faculty development, curriculum research and the group's leadership under Chairperson Dr. Silpi Sahoo.",
+  },
+  {
+    tag: "Outcomes",
+    title: "University recognition",
+    body: "CBSE results and SAT scores open doors to Indian universities and to global campuses, with SAIoneers holding offers from 20+ Ivy League and international institutions.",
+  },
+  {
+    tag: "Global",
+    title: "Exchange partnerships",
+    body: "Short residencies and partner-school exchanges abroad let students attend classes and live with host families, returning with a wider sense of what is possible.",
+  },
+];
+
+const leadership = [
+  {
+    name: "Dr. Silpi Sahoo",
+    role: "Chairperson, SAI International Education Group",
+    note: "Carries forward the legacy of Founder Dr. Bijaya Kumar Sahoo, with a focus on wellbeing, teacher quality and global exposure.",
+  },
+  {
+    name: "School leadership",
+    role: "Principal & academic directors",
+    note: "A resident leadership team that runs academics, boarding and pastoral care on campus, every day of the week.",
+  },
+  {
+    name: "Advisory board",
+    role: "Educators and industry leaders",
+    note: "External advisors from education, finance and policy review strategy and hold the school to outside benchmarks.",
+  },
+];
 ---
 
-<Layout meta={{ title: "About" }}>
-  <DummySection name={`About — ${slug}`} />
+<Layout meta={{ title: slug === "leadership" ? "Leadership" : "Affiliations" }}>
+  {
+    slug === "leadership" ? (
+      <>
+        <PageHero
+          dataSection="Leadership Hero"
+          eyebrow="About SIRS"
+          title="The people who keep the promise."
+          highlight="the promise."
+          description="A resident leadership team, a chairperson who answers to parents, and an advisory board that keeps the school honest."
+          image="/images/leader.webp"
+          imageAlt="Dr. Silpi Sahoo with SIRS students"
+          titleSize="compact"
+          archShape="arch"
+        />
+
+        <section class="bg-white" data-section="Leadership Message">
+          <div class="container mx-auto px-5 py-14 md:px-8 md:py-20 lg:py-24">
+            <div class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
+              <div class="lg:col-span-5">
+                <p class="font-secondary text-xs font-semibold tracking-[0.2em] text-orange-500 uppercase">
+                  A message to parents
+                </p>
+                <blockquote class="text-n-800 mt-5 text-2xl leading-snug font-medium italic md:text-[1.9rem] md:leading-[1.35]">
+                  &ldquo;Parents don&rsquo;t hand us marksheets to improve. They
+                  hand us their children. That is a promise we keep every single
+                  day and night.&rdquo;
+                </blockquote>
+                <div class="mt-6">
+                  <p class="text-lg font-semibold text-orange-500">
+                    Dr. Silpi Sahoo
+                  </p>
+                  <p class="font-secondary text-n-500 mt-1 text-sm leading-relaxed">
+                    Chairperson, SAI International Education Group
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-4 lg:col-span-7">
+                {leadership.map((item) => (
+                  <article class="border-n-200 bg-n-50 rounded-2xl border p-5 md:p-6">
+                    <div class="flex flex-wrap items-baseline justify-between gap-2">
+                      <h3 class="text-n-800 text-lg font-semibold md:text-xl">
+                        {item.name}
+                      </h3>
+                      <span class="font-secondary text-xs font-semibold tracking-wide text-violet-700 uppercase">
+                        {item.role}
+                      </span>
+                    </div>
+                    <p class="font-secondary text-n-600 mt-2 text-sm leading-relaxed">
+                      {item.note}
+                    </p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <SISTeam />
+        <SIKeyMembers />
+        <FinalCTA
+          eyebrow="Meet us in person"
+          title="Talk to the people who will teach your child."
+          description="Campus visits include a conversation with the academic team, not just a tour of the buildings."
+          primaryLabel="Book a Campus Visit"
+          primaryHref="/contact-us"
+          secondaryLabel="About SIRS"
+          secondaryHref="/about"
+        />
+      </>
+    ) : (
+      <>
+        <PageHero
+          dataSection="Affiliations Hero"
+          eyebrow="About SIRS"
+          title="Accountable to more than ourselves."
+          highlight="more than ourselves."
+          description="SIRS is a CBSE school within the SAI International Education Group, reviewed by external educators and measured against national and global benchmarks."
+          image="/images/about-hero.webp"
+          imageAlt="SIRS students on campus"
+          titleSize="compact"
+          archShape="wide"
+          frame="line"
+        />
+
+        <section class="bg-white" data-section="Affiliations">
+          <div class="container mx-auto px-5 py-14 md:px-8 md:py-20 lg:py-24">
+            <div class="max-w-2xl">
+              <p class="font-secondary text-xs font-semibold tracking-[0.2em] text-orange-500 uppercase">
+                Recognitions &amp; memberships
+              </p>
+              <h2 class="text-n-800 mt-4 text-3xl leading-tight font-medium md:text-4xl">
+                Four things that hold us to a standard.
+              </h2>
+            </div>
+
+            <div class="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
+              {affiliations.map((item) => (
+                <article class="border-n-200 bg-n-50 flex h-full flex-col gap-3 rounded-3xl border p-6 transition-colors hover:border-orange-300 md:p-8">
+                  <span class="font-secondary text-xs font-semibold tracking-[0.18em] text-orange-600 uppercase">
+                    {item.tag}
+                  </span>
+                  <h3 class="text-n-800 text-xl font-semibold md:text-2xl">
+                    {item.title}
+                  </h3>
+                  <p class="font-secondary text-n-600 text-sm leading-relaxed md:text-base">
+                    {item.body}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section class="bg-n-100" data-section="Affiliations Meaning">
+          <div class="container mx-auto px-5 py-14 md:px-8 md:py-20 lg:py-24">
+            <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14">
+              <div class="lg:col-span-5">
+                <h2 class="text-n-800 text-3xl leading-tight font-medium md:text-4xl">
+                  What this means for your child.
+                </h2>
+                <p class="font-secondary text-n-600 mt-4 text-base leading-relaxed">
+                  Affiliation is paperwork until it shows up in a classroom.
+                  Here is where ours does.
+                </p>
+                <a
+                  href="/results"
+                  class="font-secondary mt-6 inline-flex items-center gap-2 text-sm font-semibold text-orange-600 hover:underline"
+                >
+                  See results &amp; placements{" "}
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+
+              <div class="flex flex-col gap-5 lg:col-span-7">
+                <div class="border-n-200 rounded-2xl border bg-white p-6">
+                  <h3 class="text-n-800 text-lg font-semibold">
+                    A curriculum that transfers
+                  </h3>
+                  <p class="font-secondary text-n-600 mt-2 text-sm leading-relaxed">
+                    A CBSE Class XII certificate is accepted by every Indian
+                    university and by universities abroad, so a family move
+                    never costs a year.
+                  </p>
+                </div>
+                <div class="border-n-200 rounded-2xl border bg-white p-6">
+                  <h3 class="text-n-800 text-lg font-semibold">
+                    Review from outside
+                  </h3>
+                  <p class="font-secondary text-n-600 mt-2 text-sm leading-relaxed">
+                    Advisory members and group academic leadership sit outside
+                    day-to-day school life, which means decisions are tested
+                    against something other than habit.
+                  </p>
+                </div>
+                <div class="border-n-200 rounded-2xl border bg-white p-6">
+                  <h3 class="text-n-800 text-lg font-semibold">
+                    One group, shared standards
+                  </h3>
+                  <p class="font-secondary text-n-600 mt-2 text-sm leading-relaxed">
+                    Teacher training, assessment practice and safety protocols
+                    are shared across the SAI International Education Group, so
+                    a small school still runs on institutional knowledge.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <FinalCTA
+          eyebrow="Questions about affiliation"
+          title="Ask us for the documents."
+          description="We are happy to share our CBSE affiliation details, group structure and latest inspection outcomes before you apply."
+          primaryLabel="Talk to Admissions"
+          primaryHref="/contact-us"
+          secondaryLabel="Admission Guidelines"
+          secondaryHref="/admissions/guidelines"
+        />
+      </>
+    )
+  }
 </Layout>

@@ -38,9 +38,14 @@ import Image from "astro/components/Image.astro";
         <div class="hidden flex-col gap-8 xl:flex">
           <!-- Vision -->
           <div
-            class="group flex w-full cursor-pointer justify-end rounded-3xl bg-[url('/images/vision-mission-values/vision.jpg')] bg-cover bg-center py-25 pr-20"
+            class="group relative flex w-full cursor-pointer justify-end rounded-3xl bg-[url('/images/vision.webp')] bg-cover bg-center py-25 pr-20"
           >
-            <div class="flex w-[40%] flex-col gap-20">
+            <div
+              class="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-l from-white/90 via-white/40 to-transparent"
+              aria-hidden="true"
+            >
+            </div>
+            <div class="relative z-10 flex w-[40%] flex-col gap-20">
               <!-- Title -->
               <div class="relative">
                 <p
@@ -84,9 +89,14 @@ import Image from "astro/components/Image.astro";
 
           <!-- Mission -->
           <div
-            class="group relative flex w-full cursor-pointer justify-start rounded-3xl bg-[url('/images/vision-mission-values/mission.jpg')] bg-cover bg-center py-25 pl-20"
+            class="group relative flex w-full cursor-pointer justify-start rounded-3xl bg-[url('/images/mission.webp')] bg-cover bg-center py-25 pl-20"
           >
-            <div class="flex w-[40%] flex-col gap-16">
+            <div
+              class="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-r from-white/90 via-white/40 to-transparent"
+              aria-hidden="true"
+            >
+            </div>
+            <div class="relative z-10 flex w-[40%] flex-col gap-16">
               <!-- Title -->
               <div class="relative">
                 <p
@@ -128,9 +138,14 @@ import Image from "astro/components/Image.astro";
 
           <!-- Values -->
           <div
-            class="group flex w-full cursor-pointer justify-end rounded-3xl bg-[url('/images/vision-mission-values/values.jpg')] bg-cover bg-center py-25 pr-20"
+            class="group relative flex w-full cursor-pointer justify-end rounded-3xl bg-[url('/images/commitment.webp')] bg-cover bg-center py-25 pr-20"
           >
-            <div class="flex w-[40%] flex-col gap-20">
+            <div
+              class="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-l from-white/90 via-white/40 to-transparent"
+              aria-hidden="true"
+            >
+            </div>
+            <div class="relative z-10 flex w-[40%] flex-col gap-20">
               <!-- Title -->
               <div class="relative">
                 <p
@@ -171,10 +186,7 @@ import Image from "astro/components/Image.astro";
         <!-- Mobile & Tablet Cards -->
         <div class="flex flex-col gap-5 xl:hidden">
           <!-- Vision -->
-          <VisionMissionCard
-            img="/images/vision-mission-values/vision-mobile.jpg"
-            title="Our Vision"
-          >
+          <VisionMissionCard img="/images/vision.webp" title="Our Vision">
             <div class="flex flex-col gap-2 md:gap-3.5">
               <p
                 class="font-secondary text-n-600 text-sm leading-normal font-medium md:text-base"
@@ -193,10 +205,7 @@ import Image from "astro/components/Image.astro";
           </VisionMissionCard>
 
           <!-- Mission -->
-          <VisionMissionCard
-            img="/images/vision-mission-values/mission-mobile.jpg"
-            title="Our Mission"
-          >
+          <VisionMissionCard img="/images/mission.webp" title="Our Mission">
             <!-- Description -->
             <p
               class="font-secondary text-n-600 text-sm leading-normal font-medium"
@@ -211,10 +220,7 @@ import Image from "astro/components/Image.astro";
           </VisionMissionCard>
 
           <!-- Values -->
-          <VisionMissionCard
-            img="/images/vision-mission-values/values-mobile.jpg"
-            title="Our Values"
-          >
+          <VisionMissionCard img="/images/commitment.webp" title="Our Values">
             <p
               class="font-secondary text-n-600 text-sm leading-normal font-medium"
             >

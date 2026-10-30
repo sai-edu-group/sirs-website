@@ -1,6 +1,140 @@
 ---
-import DummySection from "@/components/ui/DummySection.astro";
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  primaryLabel?: string;
+  primaryHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+}
+
+const {
+  eyebrow = "Admissions 2026–27",
+  title = "Come and see a school day for yourself.",
+  description = "Walk the campus, sit in a class, meet a warden and ask the questions that matter to your family. Visits are arranged all year round.",
+  primaryLabel = "Book a Campus Visit",
+  primaryHref = "/contact-us",
+  secondaryLabel = "Start an Application",
+  secondaryHref = "/admissions",
+} = Astro.props;
 ---
-<!-- TODO: Replace with real section content -->
-<!-- TODO: Replace with real section content -->
-<DummySection name="Final CTA" />
+
+<section data-section="Final CTA" class="bg-n-50">
+  <div class="container mx-auto px-6 pb-16 md:pb-20 lg:pb-24 2xl:px-0">
+    <div
+      class="relative overflow-hidden rounded-[32px] bg-orange-500 px-6 py-12 text-white md:px-12 md:py-16 lg:px-16"
+    >
+      <!-- Decoration -->
+      <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+        <div
+          class="absolute -top-40 -right-32 size-[32rem] rounded-full border border-white/20"
+        >
+        </div>
+        <div
+          class="absolute -top-24 -right-16 size-[24rem] rounded-full border border-white/20"
+        >
+        </div>
+        <div
+          class="absolute -bottom-40 -left-24 size-[26rem] rounded-full bg-white/5"
+        >
+        </div>
+        <svg
+          class="absolute right-10 bottom-0 hidden w-72 text-white/10 lg:block"
+          viewBox="0 0 300 300"
+          fill="none"
+        >
+          <circle
+            cx="150"
+            cy="150"
+            r="120"
+            stroke="currentColor"
+            stroke-width="1"></circle>
+          <circle
+            cx="150"
+            cy="150"
+            r="80"
+            stroke="currentColor"
+            stroke-width="1"></circle>
+          <path
+            d="M30 150h240M150 30v240"
+            stroke="currentColor"
+            stroke-width="1"></path>
+          <circle
+            cx="150"
+            cy="150"
+            r="40"
+            stroke="currentColor"
+            stroke-width="1"></circle>
+        </svg>
+      </div>
+
+      <div
+        class="relative grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.62fr)] lg:items-center lg:gap-16"
+      >
+        <div class="max-w-2xl">
+          <p
+            class="font-secondary text-xs font-semibold tracking-[0.25em] text-white/70 uppercase md:text-sm"
+          >
+            {eyebrow}
+          </p>
+          <h2
+            class="mt-3 text-3xl leading-[1.12] font-medium md:text-4xl lg:text-5xl"
+          >
+            {title}
+          </h2>
+          <p
+            class="font-secondary mt-4 max-w-xl text-sm leading-relaxed text-white/80 md:text-base"
+          >
+            {description}
+          </p>
+
+          <div class="mt-7 flex flex-wrap gap-3">
+            <a
+              href={primaryHref}
+              class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-orange-600 transition-colors hover:bg-orange-50 md:px-7 md:py-3.5 md:text-base"
+            >
+              {primaryLabel}
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+            <a
+              href={secondaryHref}
+              class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg border border-white/60 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 md:px-7 md:py-3.5 md:text-base"
+            >
+              {secondaryLabel}
+            </a>
+          </div>
+        </div>
+
+        <!-- Contact card -->
+        <div
+          class="rounded-2xl border border-white/25 bg-white/10 p-5 backdrop-blur-sm md:p-6"
+        >
+          <p
+            class="font-secondary text-[11px] font-semibold tracking-[0.18em] text-white/60 uppercase"
+          >
+            Speak to admissions
+          </p>
+          <a
+            href="tel:+919337377701"
+            class="mt-2 block text-xl font-medium transition-colors hover:text-white/80 md:text-2xl"
+          >
+            +91 93373 77701
+          </a>
+          <a
+            href="mailto:admissions@sairesidentialschool.com"
+            class="font-secondary mt-1 block text-sm break-all text-white/75 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white"
+          >
+            admissions@sairesidentialschool.com
+          </a>
+          <div class="mt-4 border-t border-white/20 pt-4">
+            <p class="font-secondary text-xs text-white/60">Campus visits</p>
+            <p class="font-secondary mt-1 text-sm text-white/90">
+              Monday – Saturday · 9:00 am – 5:00 pm
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

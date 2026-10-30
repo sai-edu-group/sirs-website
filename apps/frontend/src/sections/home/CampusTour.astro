@@ -33,8 +33,7 @@ const CAMPUS_TOUR_URL =
             frameborder="0"
             allow="fullscreen; accelerometer; gyroscope; xr-spatial-tracking"
             allowfullscreen
-            data-campus-tour
-          ></iframe>
+            data-campus-tour></iframe>
         </div>
 
         <!-- Distance pills, top-left, tilted + stacked — hidden on mobile -->
@@ -43,7 +42,7 @@ const CAMPUS_TOUR_URL =
           data-campus-pills
         >
           <span
-            class="font-secondary bg-orange-500 -rotate-2 rounded-md px-4 py-2 text-sm font-medium text-white shadow-lg md:px-6 md:text-base"
+            class="font-secondary -rotate-2 rounded-md bg-orange-500 px-4 py-2 text-sm font-medium text-white shadow-lg md:px-6 md:text-base"
           >
             23km from Bhubaneswar
           </span>
@@ -53,7 +52,7 @@ const CAMPUS_TOUR_URL =
             30km from the Airport
           </span>
           <span
-            class="font-secondary bg-violet-800 ml-2 -rotate-2 rounded-md px-4 py-2 text-sm font-medium text-white shadow-lg md:ml-3 md:px-6 md:text-base"
+            class="font-secondary ml-2 -rotate-2 rounded-md bg-violet-800 px-4 py-2 text-sm font-medium text-white shadow-lg md:ml-3 md:px-6 md:text-base"
           >
             15km from Cuttack
           </span>
@@ -62,7 +61,7 @@ const CAMPUS_TOUR_URL =
         <!-- Centre play button -->
         <button
           type="button"
-          class="bg-orange-500 hover:bg-orange-600 absolute top-1/2 left-1/2 flex size-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full shadow-xl transition duration-300 ease-out md:size-24"
+          class="absolute top-1/2 left-1/2 flex size-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-orange-500 shadow-xl transition duration-300 ease-out hover:bg-orange-600 md:size-24"
           aria-label="Start the 360 degree campus tour"
           data-campus-play
         >
@@ -80,7 +79,7 @@ const CAMPUS_TOUR_URL =
         <!-- Hear pill, top-right -->
         <button
           type="button"
-          class="bg-orange-500 absolute top-5 right-4 flex items-center gap-2 rounded-full p-3 text-sm font-semibold text-white shadow-xl transition hover:brightness-110 sm:px-5 sm:py-3 md:top-8 md:right-8 md:text-base"
+          class="absolute top-5 right-4 flex items-center gap-2 rounded-full bg-orange-500 p-3 text-sm font-semibold text-white shadow-xl transition hover:brightness-110 sm:px-5 sm:py-3 md:top-8 md:right-8 md:text-base"
           aria-label="Hear what we hear"
           data-campus-audio
         >
@@ -119,27 +118,30 @@ const CAMPUS_TOUR_URL =
           <span class="hidden sm:inline">Hear What We Hear</span>
         </button>
 
-        <audio src="/audio/campus-sound.wav" preload="none" data-campus-audio-el></audio>
+        <audio src="/audio/campus-sound.wav" preload="none" data-campus-audio-el
+        ></audio>
       </div>
     </div>
 
     <!-- Overlapping white card, bottom-left -->
     <div class="relative z-10 px-2 md:px-8 lg:px-0">
       <div
-        class="-mt-8 w-full rounded-3xl bg-white p-6 shadow-[0_20px_60px] shadow-n-900/12 transition-opacity duration-500 ease-out lg:-mt-24 lg:w-[46%] lg:p-9"
+        class="shadow-n-900/12 -mt-8 w-full rounded-3xl bg-white p-6 shadow-[0_20px_60px] transition-opacity duration-500 ease-out lg:-mt-24 lg:w-[46%] lg:p-9"
         data-campus-card
       >
         <h2
-          class="text-orange-500 text-3xl leading-tight font-medium md:text-[2.75rem]"
+          class="text-3xl leading-tight font-medium text-orange-500 md:text-[2.75rem]"
         >
           49 Acres of Everything
         </h2>
-        <p class="font-secondary text-n-600 mt-4 leading-relaxed font-normal md:text-lg">
+        <p
+          class="font-secondary text-n-600 mt-4 leading-relaxed font-normal md:text-lg"
+        >
           Between Bhubaneswar and Cuttack, our green campus unfolds across
           playing fields, a boating lake and quiet garden paths. Forest gives
           way to stadium, stadium to hostel courtyard, each corner built for a
-          different kind of childhood. It&rsquo;s a big place to grow up in,
-          and every acre of it is built for exactly that.
+          different kind of childhood. It&rsquo;s a big place to grow up in, and
+          every acre of it is built for exactly that.
         </p>
       </div>
     </div>

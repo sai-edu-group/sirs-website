@@ -7,7 +7,7 @@ export const founderDetails = {
   img: "",
   bgImg: "",
   jpgImg: "",
-  landscapeImg: "/images/team/bijaya-kumar-sahoo.jpg",
+  landscapeImg: "/images/bijaya-sir.png",
   content: `
 <p class="text-orange-500">| <a class="relative w-1/2 min-w-[170px] text-lg leading-[24px] font-medium text-orange-500 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-current after:transition-[width] after:duration-300 hover:after:w-full md:w-fit md:text-xl" href="https://bijayaksahoo.com" target="_blank" >Website</a> | <a class="relative w-1/2 min-w-[170px] text-lg leading-[24px] font-medium text-orange-500 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-current after:transition-[width] after:duration-300 hover:after:w-full md:w-fit md:text-xl" href="https://en.wikipedia.org/wiki/Bijaya_Kumar_Sahoo" target="_blank" >Wikipedia</a> | <a class="relative w-1/2 min-w-[170px] text-lg leading-[24px] font-medium text-orange-500 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-current after:transition-[width] after:duration-300 hover:after:w-full md:w-fit md:text-xl" href="https://bijayaksahoo.com/ctbook/" target="_blank" >A Journey of Purpose</a> |</p>
 

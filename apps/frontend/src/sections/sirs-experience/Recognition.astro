@@ -1,5 +1,150 @@
 ---
-import DummySection from "@/components/ui/DummySection.astro";
+const accolades = [
+  {
+    year: "7 years",
+    title: "No.1 Co-educational Residential School",
+    by: "EducationWorld rankings",
+  },
+  {
+    year: "Global",
+    title: "Great Place to Study certification",
+    by: "International education audit",
+  },
+  {
+    year: "20+",
+    title: "Ivy League & global university offers",
+    by: "Graduating cohorts",
+  },
+  {
+    year: "State & national",
+    title: "Championships across sport and culture",
+    by: "Inter-school fixtures",
+  },
+];
 ---
-<!-- TODO: Replace with real section content -->
-<DummySection name="SIRS Experience — Recognition" />
+
+<section
+  id="recognition"
+  class="relative overflow-hidden bg-orange-50"
+  data-section="SIRS Recognition"
+>
+  <!-- Decoration -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -top-40 -right-40 size-[34rem] rounded-full border border-orange-200/70"
+  >
+  </div>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -top-24 -right-24 size-[22rem] rounded-full border border-orange-200/70"
+  >
+  </div>
+
+  <div class="relative container mx-auto px-6 py-16 md:py-20 lg:py-24 2xl:px-0">
+    <div
+      class="grid gap-12 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:items-center lg:gap-16"
+    >
+      <!-- Photo -->
+      <figure class="relative">
+        <div class="relative overflow-hidden rounded-[28px]">
+          <img
+            src="/images/stats-image-4.jpg"
+            alt="A SAI graduate being felicitated on stage"
+            class="aspect-[4/5] w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+          <div
+            class="from-n-950/60 pointer-events-none absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
+            aria-hidden="true"
+          >
+          </div>
+        </div>
+
+        <div
+          class="absolute -right-2 -bottom-6 max-w-[13rem] rounded-2xl border border-orange-100 bg-white p-5 shadow-xl md:-right-6 md:p-6"
+        >
+          <p
+            class="text-5xl leading-none font-semibold text-orange-500 md:text-6xl"
+          >
+            #1
+          </p>
+          <p
+            class="font-secondary text-n-600 mt-2 text-xs leading-snug font-medium md:text-sm"
+          >
+            Ranked India&rsquo;s No.1 school for seven consecutive years
+          </p>
+        </div>
+      </figure>
+
+      <!-- Accolades -->
+      <div class="pt-6 lg:pt-0">
+        <div class="max-w-xl space-y-3">
+          <p
+            class="font-secondary flex items-center gap-3 text-xs font-semibold tracking-[0.25em] text-orange-500 uppercase md:text-sm"
+          >
+            <span class="size-1.5 rotate-45 bg-orange-500" aria-hidden="true"
+            ></span>
+            Recognition
+          </p>
+          <h2
+            class="text-n-800 text-4xl leading-[1.1] font-medium md:text-5xl lg:text-6xl"
+          >
+            Celebrated, then asked to do better.
+          </h2>
+          <p
+            class="font-secondary text-n-600 text-base leading-relaxed md:text-lg"
+          >
+            Awards tell us that the work is being seen. They are never the
+            reason for it. Every certificate on this wall belongs to the
+            teachers, wardens and children who earned it.
+          </p>
+        </div>
+
+        <ul class="mt-8 border-t border-orange-200">
+          {
+            accolades.map((accolade, index) => (
+              <li
+                class="card-anim card-right group flex items-start gap-4 border-b border-orange-200 py-5 md:gap-6"
+                style={`--delay: ${index * 0.06}s`}
+              >
+                <span class="font-secondary w-20 shrink-0 pt-1 text-[11px] font-semibold tracking-[0.12em] text-orange-500 uppercase md:w-24 md:text-xs">
+                  {accolade.year}
+                </span>
+                <div class="flex-1">
+                  <h3 class="text-n-800 text-lg leading-snug font-medium md:text-xl">
+                    {accolade.title}
+                  </h3>
+                  <p class="font-secondary text-n-500 mt-1 text-sm">
+                    {accolade.by}
+                  </p>
+                </div>
+                <svg
+                  class="mt-1 size-5 shrink-0 text-orange-400"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="8" r="5" />
+                  <path d="M8.5 12.5 7 22l5-3 5 3-1.5-9.5" />
+                </svg>
+              </li>
+            ))
+          }
+        </ul>
+
+        <a
+          href="/awards"
+          class="font-secondary mt-6 inline-flex items-center gap-2 text-sm font-semibold text-orange-600 transition-colors hover:text-orange-700"
+        >
+          See the full awards archive
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

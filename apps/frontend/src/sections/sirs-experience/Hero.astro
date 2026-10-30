@@ -1,5 +1,72 @@
 ---
-import DummySection from "@/components/ui/DummySection.astro";
+// COMPONENTS //
+import PageHero from "@/components/ui/PageHero.astro";
 ---
-<!-- TODO: Replace with real section content -->
-<DummySection name="SIRS Experience — Hero" />
+
+<section data-section="SIRS Experience Hero">
+  <PageHero
+    eyebrow="SIRS Experience"
+    title="Seven days a week, one whole childhood."
+    highlight="whole childhood."
+    description="A residential school day at SIRS does not stop at the classroom door. It moves to the field, the stage, the dining hall and the boarding house — each hour shaped around the same child."
+    image="/images/commitment.webp"
+    imageAlt="SAI students walking together on campus at sunrise"
+    imageFit="cover"
+    frame="line"
+    archShape="wide"
+    titleSize="compact"
+    dataSection="SIRS Experience Page Hero"
+  >
+    <a
+      href="/contact-us"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600 md:px-8 md:py-4 md:text-base"
+    >
+      Book a Campus Visit
+      <span aria-hidden="true">&rarr;</span>
+    </a>
+    <a
+      href="/admissions"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg border border-orange-500 px-6 py-3 text-sm font-semibold text-orange-500 transition-colors hover:bg-orange-500 hover:text-white md:px-8 md:py-4 md:text-base"
+    >
+      Explore Admissions
+    </a>
+  </PageHero>
+
+  <!-- In-page chapters -->
+  <nav
+    aria-label="SIRS Experience chapters"
+    class="border-n-200 bg-n-50 relative border-y"
+  >
+    <div
+      class="container mx-auto [scrollbar-width:none] overflow-x-auto px-6 2xl:px-0 [&::-webkit-scrollbar]:hidden"
+    >
+      <ul
+        class="font-secondary text-n-700 divide-n-200 flex min-w-max items-stretch divide-x"
+      >
+        {
+          [
+            ["01", "Academics", "#academics"],
+            ["02", "Boarding", "#boarding"],
+            ["03", "Recognition", "#recognition"],
+            ["04", "Global Mindset", "#global-mindset"],
+            ["05", "Digital", "#digital"],
+            ["06", "Arts", "#arts"],
+            ["07", "Sports", "#sports"],
+          ].map(([number, label, href]) => (
+            <li class="flex-1">
+              <a
+                href={href}
+                class="group flex items-center gap-2.5 px-5 py-4 text-sm font-medium whitespace-nowrap transition-colors hover:text-orange-500 md:px-7 md:py-5"
+              >
+                <span class="text-[11px] font-semibold tracking-[0.18em] text-orange-500/70">
+                  {number}
+                </span>
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </nav>
+</section>

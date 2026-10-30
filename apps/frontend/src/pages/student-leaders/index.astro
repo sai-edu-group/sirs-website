@@ -1,0 +1,224 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/ui/PageHero.astro";
+import Sioneers from "@/sections/home/Sioneers.astro";
+import FinalCTA from "@/sections/common/FinalCTA.astro";
+
+const bodies = [
+  {
+    title: "Student Council",
+    text: "An elected Head Boy and Head Girl lead a council of secretaries and prefects who represent the student body to the school.",
+  },
+  {
+    title: "House System",
+    text: "House captains and vice-captains organise inter-house sport, culture and discipline through the year.",
+  },
+  {
+    title: "Clubs & Societies",
+    text: "Twenty-five student-led clubs — from debate and robotics to music and photography — plan their own calendar.",
+  },
+  {
+    title: "SAI SEVA",
+    text: "Community service led by students: village outreach, environmental drives and volunteering with local schools.",
+  },
+];
+
+const steps = [
+  {
+    index: "01",
+    title: "Nominate",
+    text: "Students put themselves forward, with a record of participation and a written statement of intent.",
+  },
+  {
+    index: "02",
+    title: "Campaign",
+    text: "Speeches, manifestos and house-level hustings — a real election, with real accountability.",
+  },
+  {
+    index: "03",
+    title: "Serve",
+    text: "A year in office: weekly council meetings, budgets, events and a handover to the next cohort.",
+  },
+];
+
+const roles = [
+  "Head Boy",
+  "Head Girl",
+  "Sports Captain",
+  "Cultural Secretary",
+  "Discipline Prefect",
+  "House Captain",
+  "Editor — Student Council",
+  "SAI SEVA Lead",
+];
+---
+
+<Layout meta={{ title: "Student Leaders" }}>
+  <PageHero
+    eyebrow="Student Leaders"
+    title="Leadership is a role, not a title."
+    highlight="a role"
+    description="At SIRS, students do not wait for graduation to lead. They run councils, captain houses, organise clubs and serve the community — with adults close enough to guide, and far enough to let them try."
+    image="/images/stats-image-1.jpg"
+    imageAlt="SIRS students celebrating together"
+    imageFit="cover"
+    frame="arch"
+    titleSize="compact"
+    dataSection="Student Leaders Page Hero"
+  >
+    <a
+      href="/admissions"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600 md:px-8 md:py-4 md:text-base"
+    >
+      Join the Next Cohort
+      <span aria-hidden="true">&rarr;</span>
+    </a>
+    <a
+      href="/sirs-experience"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg border border-orange-500 px-6 py-3 text-sm font-semibold text-orange-500 transition-colors hover:bg-orange-500 hover:text-white md:px-8 md:py-4 md:text-base"
+    >
+      Life at SIRS
+    </a>
+  </PageHero>
+
+  <!-- Leadership bodies -->
+  <section class="bg-n-50" data-section="Leadership Bodies">
+    <div class="container mx-auto px-6 py-16 md:py-20 lg:py-24 2xl:px-0">
+      <div
+        class="grid gap-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16"
+      >
+        <div class="space-y-4">
+          <p
+            class="font-secondary flex items-center gap-3 text-xs font-semibold tracking-[0.25em] text-orange-500 uppercase md:text-sm"
+          >
+            <span class="size-1.5 rotate-45 bg-orange-500" aria-hidden="true"
+            ></span>
+            Student Government
+          </p>
+          <h2 class="text-n-800 text-4xl leading-[1.1] font-medium md:text-5xl">
+            Four places to lead.
+          </h2>
+          <p
+            class="font-secondary text-n-600 text-base leading-relaxed md:text-lg"
+          >
+            Every leadership role at SIRS is accountable to a visible community
+            — a house, a club, a council, a village. That is what makes it
+            leadership, and not just a badge.
+          </p>
+          <blockquote class="mt-6 max-w-md border-l-2 border-orange-300 pl-5">
+            <p class="text-n-700 text-lg leading-relaxed italic md:text-xl">
+              “You learn quickly that a title gets you the meeting. It does not
+              get you the follow-through.”
+            </p>
+            <footer
+              class="font-secondary text-n-500 mt-3 text-xs font-semibold tracking-[0.15em] uppercase"
+            >
+              Student Council, SIRS
+            </footer>
+          </blockquote>
+        </div>
+
+        <div class="grid gap-3 sm:grid-cols-2">
+          {
+            bodies.map((body, index) => (
+              <article
+                class="card-anim card-bottom border-n-200 rounded-3xl border bg-white p-6 transition-colors duration-300 hover:border-orange-200 md:p-7"
+                style={`--delay: ${index * 0.06}s`}
+              >
+                <span class="font-secondary text-[11px] font-semibold tracking-[0.2em] text-orange-500/70">
+                  0{index + 1}
+                </span>
+                <h3 class="text-n-800 mt-3 text-xl font-medium">
+                  {body.title}
+                </h3>
+                <p class="font-secondary text-n-600 mt-2 text-sm leading-relaxed">
+                  {body.text}
+                </p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Election process -->
+  <section class="bg-violet-900 text-white" data-section="Leadership Election">
+    <div class="container mx-auto px-6 py-16 md:py-20 lg:py-24 2xl:px-0">
+      <div
+        class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+      >
+        <div>
+          <p
+            class="font-secondary flex items-center gap-3 text-xs font-semibold tracking-[0.25em] text-orange-300 uppercase md:text-sm"
+          >
+            <span class="size-1.5 rotate-45 bg-orange-300" aria-hidden="true"
+            ></span>
+            How a leader is made
+          </p>
+          <h2
+            class="mt-3 text-3xl leading-[1.12] font-medium md:text-4xl lg:text-5xl"
+          >
+            Nominate. Campaign. Serve.
+          </h2>
+        </div>
+        <p
+          class="font-secondary max-w-sm text-sm leading-relaxed text-white/65 md:text-base"
+        >
+          The election is held every year, and the whole school votes. Adults
+          set the guardrails; students run the rest.
+        </p>
+      </div>
+
+      <ol class="mt-10 grid gap-4 md:grid-cols-3">
+        {
+          steps.map((step, index) => (
+            <li
+              class="card-anim card-bottom relative rounded-3xl border border-white/10 bg-white/[0.04] p-6 md:p-8"
+              style={`--delay: ${index * 0.07}s`}
+            >
+              <span class="font-secondary text-3xl leading-none font-semibold text-orange-300/80 md:text-4xl">
+                {step.index}
+              </span>
+              <h3 class="mt-5 text-xl font-medium md:text-2xl">{step.title}</h3>
+              <p class="font-secondary mt-2 text-sm leading-relaxed text-white/65">
+                {step.text}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div
+        class="mt-8 rounded-3xl border border-white/10 bg-white/[0.04] p-6 md:p-8"
+      >
+        <p
+          class="font-secondary text-xs font-semibold tracking-[0.2em] text-white/40 uppercase"
+        >
+          Roles on the council
+        </p>
+        <ul class="mt-4 flex flex-wrap gap-2">
+          {
+            roles.map((role) => (
+              <li class="font-secondary rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium text-white/80 md:text-sm">
+                {role}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <Sioneers />
+
+  <FinalCTA
+    eyebrow="Admissions 2026–27"
+    title="Give them a place to lead."
+    description="Leadership begins with belonging. Visit SIRS and meet the students who already run its councils, houses and clubs."
+    primaryLabel="Book a Campus Visit"
+    primaryHref="/contact-us"
+    secondaryLabel="Start an Application"
+    secondaryHref="/admissions"
+  />
+</Layout>

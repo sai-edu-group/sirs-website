@@ -1,5 +1,189 @@
 ---
-import DummySection from "@/components/ui/DummySection.astro";
+const sports = [
+  "Football",
+  "Cricket",
+  "Athletics",
+  "Basketball",
+  "Swimming",
+  "Horse riding",
+  "Badminton",
+  "Table tennis",
+  "Yoga",
+  "Gymnastics",
+  "Volleyball",
+  "Kabaddi",
+];
+
+const gallery = [
+  {
+    src: "/images/sports-facilities (1).jpg",
+    alt: "The SIRS athletics stadium and football turf",
+    label: "The stadium",
+    note: "400m track · football turf",
+    span: "md:col-span-7",
+    aspect: "aspect-[16/10]",
+  },
+  {
+    src: "/images/strip-horse.webp",
+    alt: "A student horse riding at the SIRS equestrian arena",
+    label: "Equestrian",
+    note: "Riding arena",
+    span: "md:col-span-5",
+    aspect: "aspect-[16/10] md:aspect-[16/13]",
+  },
+  {
+    src: "/images/strip-stadium.webp",
+    alt: "Aerial view of the SIRS campus and grounds",
+    label: "The campus",
+    note: "49 acres",
+    span: "md:col-span-4",
+    aspect: "aspect-[4/3]",
+  },
+  {
+    src: "/images/stats-image-3.jpg",
+    alt: "SIRS students lifting a championship trophy",
+    label: "Champions",
+    note: "Inter-school fixtures",
+    span: "md:col-span-4",
+    aspect: "aspect-[4/3]",
+  },
+  {
+    src: "/images/strip-gym.webp",
+    alt: "Students training at the outdoor fitness zone",
+    label: "Fitness",
+    note: "Outdoor gym · courts",
+    span: "md:col-span-4",
+    aspect: "aspect-[4/3]",
+  },
+];
 ---
-<!-- TODO: Replace with real section content -->
-<DummySection name="SIRS Experience — Sports" />
+
+<section
+  id="sports"
+  class="bg-n-100 relative overflow-hidden"
+  data-section="SIRS Sports"
+>
+  <div class="container mx-auto px-6 py-16 md:py-20 lg:py-24 2xl:px-0">
+    <!-- Header -->
+    <div
+      class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between"
+    >
+      <div class="max-w-2xl space-y-3">
+        <p
+          class="font-secondary flex items-center gap-3 text-xs font-semibold tracking-[0.25em] text-orange-500 uppercase md:text-sm"
+        >
+          <span class="size-1.5 rotate-45 bg-orange-500" aria-hidden="true"
+          ></span>
+          Physical Education
+        </p>
+        <h2
+          class="text-n-800 text-4xl leading-[1.1] font-medium md:text-5xl lg:text-6xl"
+        >
+          Built for the field.
+        </h2>
+        <p
+          class="font-secondary text-n-600 max-w-xl text-base leading-relaxed md:text-lg"
+        >
+          Sport at SIRS is compulsory, coached and played on real ground — a
+          400-metre track, a full stadium, courts, an equestrian arena and a
+          fitness zone across a 49-acre campus.
+        </p>
+      </div>
+
+      <div class="flex shrink-0 gap-3">
+        <div class="rounded-2xl bg-white px-5 py-4 md:px-6 md:py-5">
+          <p
+            class="text-2xl leading-none font-semibold text-orange-500 md:text-3xl"
+          >
+            335K+
+          </p>
+          <p
+            class="font-secondary text-n-500 mt-1.5 max-w-[7rem] text-[10px] leading-snug font-medium tracking-[0.1em] uppercase"
+          >
+            sq ft of sports facilities
+          </p>
+        </div>
+        <div class="rounded-2xl bg-white px-5 py-4 md:px-6 md:py-5">
+          <p
+            class="text-2xl leading-none font-semibold text-orange-500 md:text-3xl"
+          >
+            20+
+          </p>
+          <p
+            class="font-secondary text-n-500 mt-1.5 max-w-[7rem] text-[10px] leading-snug font-medium tracking-[0.1em] uppercase"
+          >
+            sports and games on offer
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery -->
+    <div class="mt-10 grid grid-cols-1 gap-3 md:mt-14 md:grid-cols-12">
+      {
+        gallery.map((image, index) => (
+          <figure
+            class:list={[
+              "card-anim card-bottom group bg-n-200 relative overflow-hidden rounded-3xl",
+              image.span,
+              image.aspect,
+            ]}
+            style={`--delay: ${index * 0.05}s`}
+          >
+            <img
+              src={image.src}
+              alt={image.alt}
+              class="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+            />
+            <div
+              class="from-n-950/75 via-n-950/5 pointer-events-none absolute inset-0 bg-gradient-to-t to-transparent"
+              aria-hidden="true"
+            />
+            <figcaption class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4 md:p-5">
+              <div>
+                <p class="text-base font-medium text-white md:text-lg">
+                  {image.label}
+                </p>
+                <p class="font-secondary text-[11px] text-white/70 md:text-xs">
+                  {image.note}
+                </p>
+              </div>
+              <span class="font-secondary rounded-full bg-white/15 px-2.5 py-1 text-[9px] font-semibold tracking-[0.12em] text-white uppercase backdrop-blur">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+
+    <!-- Sports list -->
+    <div
+      class="border-n-200 mt-8 flex flex-col gap-6 border-t pt-7 lg:flex-row lg:items-center lg:justify-between"
+    >
+      <ul class="flex flex-wrap gap-2">
+        {
+          sports.map((sport) => (
+            <li class="font-secondary border-n-200 text-n-700 rounded-full border bg-white px-3.5 py-1.5 text-xs font-medium md:text-sm">
+              {sport}
+            </li>
+          ))
+        }
+      </ul>
+      <a
+        href="/campus/sports"
+        class="font-secondary group inline-flex w-fit shrink-0 items-center gap-2 text-sm font-semibold text-orange-500 transition-colors hover:text-orange-600"
+      >
+        Walk through the facilities
+        <span
+          class="transition-transform duration-300 group-hover:translate-x-1"
+          aria-hidden="true"
+        >
+          &rarr;
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
