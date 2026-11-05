@@ -12,42 +12,36 @@ import {
 import { getDeviceType } from "@/scripts/device";
 
 // SERVICES //
-import { admissionEnquiryRequest } from "@/services/api/form.api.service";
+import { contactEnquiryRequest } from "@/services/api/form.api.service";
 
-declare global {
-  interface Window {
-    /** Set by the LeadSquared tracker script, when it is on the page */
-    MXCProspectId?: string;
-  }
-}
+const ENQUIRY_SOURCE = "Apply Now — website admission page";
 
-/** Lead source label stored on the LeadSquared lead (mx_Source_V2) */
-const LEAD_SOURCE = "SIRS Website Admission Page";
-
-/** Convert the form fields → LeadSquared Attribute/Value array */
-const mapToLeadSquared = (formObj: Record<string, FormDataEntryValue>) => {
-  // Format date from YYYY-MM-DD to DD/MM/YYYY
-  const formatDate = (dateStr: string) => {
-    if (!dateStr) return "";
-    const [year, month, day] = dateStr.split("-");
-    return `${day}/${month}/${year}`;
-  };
-
-  return [
-    { Attribute: "FirstName", Value: formObj.firstName || "" },
-    { Attribute: "LastName", Value: formObj.lastName || "" },
-    { Attribute: "EmailAddress", Value: formObj.emailId || "" },
-    { Attribute: "Phone", Value: formObj.mobileNo || "" },
-    { Attribute: "mx_DOB", Value: formatDate(String(formObj.dob || "")) },
-    { Attribute: "mx_Grade", Value: formObj.className || "" },
-    { Attribute: "mx_Parent_Name", Value: formObj.parentName || "" },
-    { Attribute: "mx_Hostel_Facility", Value: formObj.hostel || "" },
-    { Attribute: "mx_Current_School", Value: formObj.currentSchool || "" },
-    { Attribute: "mx_City", Value: formObj.city || "" },
-    { Attribute: "mx_Message", Value: formObj.message || "" },
-    { Attribute: "mx_Source_V2", Value: LEAD_SOURCE },
-  ];
+/** Date of birth from YYYY-MM-DD to DD/MM/YYYY, the way the office writes it */
+const formatDate = (dateStr: string) => {
+  if (!dateStr) return "";
+  const [year, month, day] = dateStr.split("-");
+  return `${day}/${month}/${year}`;
 };
+
+/** Apply Now fields → the contact payload the enquiry API accepts */
+const mapToContactPayload = (
+  formObj: Record<string, FormDataEntryValue>,
+): Record<string, string> => ({
+  fullName: `${formObj.firstName ?? ""} ${formObj.lastName ?? ""}`.trim(),
+  phoneNumber: String(formObj.mobileNo ?? ""),
+  email: String(formObj.emailId ?? ""),
+  reason: "Admission enquiry",
+  message: [
+    `Class applied: ${formObj.className ?? ""}`,
+    `Date of birth: ${formatDate(String(formObj.dob ?? ""))}`,
+    `Parent/guardian: ${formObj.parentName ?? ""}`,
+    `Current school: ${formObj.currentSchool ?? ""}`,
+    `City: ${formObj.city ?? ""}`,
+    `Boarding preference: ${formObj.hostel ?? ""}`,
+    `Note: ${formObj.message ?? ""}`,
+    `Source: ${ENQUIRY_SOURCE}`,
+  ].join("\n"),
+});
 
 const initAdmissionForm = () => {
   const steps = [
@@ -90,9 +84,7 @@ const initAdmissionForm = () => {
 
     fields.forEach((el) => {
       const field = el as
-        | HTMLInputElement
-        | HTMLSelectElement
-        | HTMLTextAreaElement;
+        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
       const errorText = field
         .closest("[data-field]")
         ?.querySelector("[data-error]");
@@ -179,7 +171,6 @@ const initAdmissionForm = () => {
     e.preventDefault();
     if (!validateStep(steps[2])) return;
 
-    const prospectId = window.MXCProspectId || "";
     const totalDuration = (Date.now() - formStartTime) / 1000;
 
     // In hh:mm:ss format
@@ -196,11 +187,7 @@ const initAdmissionForm = () => {
     if (!formEl) return;
     const formObj = Object.fromEntries(new FormData(formEl).entries());
 
-    // Convert to LeadSquared format
-    const leadSquaredPayload = [
-      ...mapToLeadSquared(formObj),
-      { Attribute: "ProspectID", Value: prospectId },
-    ];
+    const enquiryPayload = mapToContactPayload(formObj);
 
     // Hide steps, reset visibility
     steps.forEach((el) => el?.classList.add("hidden"));
@@ -215,10 +202,10 @@ const initAdmissionForm = () => {
     submitting?.classList.remove("hidden");
 
     try {
-      const response = await admissionEnquiryRequest(leadSquaredPayload);
+      const response = await contactEnquiryRequest(enquiryPayload);
 
-      // Check LSQ errors — send the user back to the last step to retry
-      if (response.ExceptionMessage || response.Status !== "Success") {
+      // API rejected it — send the user back to the last step to retry
+      if (response.status === false) {
         submitting?.classList.add("hidden");
         steps[2]?.classList.remove("hidden");
         alert(

@@ -1,6 +1,11 @@
+const founderName = "Late Dr. Bijaya Kumar Sahoo";
+
+/** URL segment for the founder page; the route and every link share this */
+export const founderSlug = founderName.toLowerCase().replaceAll(" ", "-");
+
 export const founderDetails = {
   id: 1,
-  name: "Late Dr. Bijaya Kumar Sahoo",
+  name: founderName,
   position: "Founder of SAI International Education Group",
   quote:
     "Happiness is the foundation on which great lives are built and a happy learning environment creates a lifelong impact on students",

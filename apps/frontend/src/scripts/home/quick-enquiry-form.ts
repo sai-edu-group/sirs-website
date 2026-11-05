@@ -8,17 +8,10 @@ import {
 } from "@/scripts/analytics";
 
 // SERVICES //
-import { admissionEnquiryRequest } from "@/services/api/form.api.service";
+import { contactEnquiryRequest } from "@/services/api/form.api.service";
 
-declare global {
-  interface Window {
-    /** Set by the LeadSquared tracker script, when it is on the page */
-    MXCProspectId?: string;
-  }
-}
-
-/** Lead source label stored on the LeadSquared lead (mx_Source_V2) */
-const LEAD_SOURCE = "SIRS Website Home Page";
+/** Where the enquiry is labelled, so the office can tell the forms apart */
+const ENQUIRY_SOURCE = "Quick enquiry — website home page";
 const SUCCESS_VISIBLE_MS = 6000;
 const SUBMIT_ERROR =
   "Something went wrong submitting your enquiry. Please try again.";
@@ -43,7 +36,9 @@ function initEnquiryForm(form: HTMLFormElement) {
   const success = form.querySelector<HTMLElement>(
     "[data-quick-enquiry-success]",
   );
-  const nameInput = form.querySelector<HTMLInputElement>('[name="studentName"]');
+  const nameInput = form.querySelector<HTMLInputElement>(
+    '[name="studentName"]',
+  );
   const gradeInput = form.querySelector<HTMLInputElement>('[name="grade"]');
   const phoneInput = form.querySelector<HTMLInputElement>('[name="phone"]');
   if (!submitBtn || !nameInput || !gradeInput || !phoneInput) return;
@@ -85,7 +80,11 @@ function initEnquiryForm(form: HTMLFormElement) {
     }
 
     if (!/^[0-9]{10}$/.test(values.phone)) {
-      setError("phone", "Please enter a valid 10-digit phone number.", phoneInput);
+      setError(
+        "phone",
+        "Please enter a valid 10-digit phone number.",
+        phoneInput,
+      );
       valid = false;
     } else {
       setError("phone", "", phoneInput);
@@ -100,7 +99,9 @@ function initEnquiryForm(form: HTMLFormElement) {
   });
 
   // Clear a field's message as soon as the visitor starts fixing it
-  nameInput.addEventListener("input", () => setError("studentName", "", nameInput));
+  nameInput.addEventListener("input", () =>
+    setError("studentName", "", nameInput),
+  );
   phoneInput.addEventListener("input", () => setError("phone", "", phoneInput));
   form
     .querySelector("#dropdownMenu")
@@ -121,19 +122,17 @@ function initEnquiryForm(form: HTMLFormElement) {
     submitBtn.textContent = "Sending...";
 
     try {
-      const payload = [
-        { Attribute: "FirstName", Value: values.name },
-        { Attribute: "Phone", Value: values.phone },
-        { Attribute: "mx_Grade", Value: values.grade },
-        { Attribute: "mx_Hostel_Facility", Value: "Yes" },
-        { Attribute: "mx_Source_V2", Value: LEAD_SOURCE },
-        { Attribute: "ProspectID", Value: window.MXCProspectId || "" },
-      ];
+      const payload = {
+        fullName: values.name,
+        phoneNumber: values.phone,
+        email: "",
+        reason: "Admission enquiry",
+        message: `Class applied: ${values.grade}\nSource: ${ENQUIRY_SOURCE}`,
+      };
 
-      const response = await admissionEnquiryRequest(payload);
+      const response = await contactEnquiryRequest(payload);
 
-      // Check LSQ errors
-      if (response.ExceptionMessage || response.Status !== "Success") {
+      if (response.status === false) {
         alert(SUBMIT_ERROR);
         return;
       }

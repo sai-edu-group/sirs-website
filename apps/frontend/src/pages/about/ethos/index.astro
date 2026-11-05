@@ -1,0 +1,178 @@
+---
+export const prerender = true;
+
+import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/ui/PageHero.astro";
+import FinalCTA from "@/sections/common/FinalCTA.astro";
+
+import { URLS } from "@/infrastructure/constants/urls";
+import { ethosDetails } from "@/data/about/ethos";
+
+const dimensions = [
+  { name: "Physical", text: "Health, movement and the discipline of play." },
+  { name: "Social", text: "Living, eating and learning alongside others." },
+  { name: "Emotional", text: "Naming what you feel, and asking for help." },
+  { name: "Spiritual", text: "Stillness, values and a sense of purpose." },
+  { name: "Intellectual", text: "Curiosity that keeps working past the bell." },
+  { name: "Purposeful", text: "Work that matters to someone other than you." },
+];
+
+const related = [
+  {
+    eyebrow: "About · Direction",
+    title: "Vision, Mission & Values",
+    href: URLS.ABOUT.VISION_MISSION_VALUES,
+  },
+  {
+    eyebrow: "About · People",
+    title: "Our Founder",
+    href: URLS.ABOUT.FOUNDER,
+  },
+  {
+    eyebrow: "About · The School",
+    title: "Affiliations & Recognition",
+    href: URLS.ABOUT.AFFILIATIONS,
+  },
+];
+---
+
+<Layout meta={{ title: "Ethos of SAI" }}>
+  <PageHero
+    eyebrow="About · Ethos"
+    title="Education for the body, mind and soul."
+    highlight="mind and soul."
+    description="SIRS works on the whole child. Six areas of a person's life are given balanced, deliberate attention — not left to chance or to the last week before an exam."
+    image="/images/about-hero.webp"
+    imageAlt="Students and teachers on the SIRS campus"
+    imageFit="cover"
+    frame="arch"
+    titleSize="compact"
+    dataSection="Ethos Page Hero"
+  >
+    <a
+      href="/about"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600 md:px-8 md:py-4 md:text-base"
+    >
+      About SIRS
+      <span aria-hidden="true">&rarr;</span>
+    </a>
+    <a
+      href="/admissions"
+      class="font-secondary inline-flex items-center justify-center gap-2 rounded-lg border border-orange-500 px-6 py-3 text-sm font-semibold text-orange-500 transition-colors hover:bg-orange-500 hover:text-white md:px-8 md:py-4 md:text-base"
+    >
+      Explore Admissions
+    </a>
+  </PageHero>
+
+  <!-- The six areas -->
+  <section class="bg-n-50" data-section="Ethos Six Dimensions">
+    <div class="container mx-auto px-6 py-16 md:py-20 lg:py-24 2xl:px-0">
+      <div
+        class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+      >
+        <div>
+          <p
+            class="font-secondary flex items-center gap-3 text-xs font-semibold tracking-[0.25em] text-orange-500 uppercase md:text-sm"
+          >
+            <span class="size-1.5 rotate-45 bg-orange-500" aria-hidden="true"
+            ></span>
+            Where the effort goes
+          </p>
+          <h2
+            class="text-n-800 mt-3 text-3xl leading-[1.12] font-medium md:text-4xl"
+          >
+            Six areas, balanced on purpose.
+          </h2>
+        </div>
+        <p
+          class="font-secondary text-n-600 max-w-sm text-sm leading-relaxed md:text-base"
+        >
+          Wellness is not one subject. Each area is worked on through the year,
+          by teachers, house staff and the rhythm of boarding life.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          dimensions.map((dimension, index) => (
+            <article
+              class="card-anim card-bottom border-n-200 rounded-3xl border bg-white p-6 md:p-7"
+              style={`--delay: ${index * 0.05}s`}
+            >
+              <span class="flex size-8 items-center justify-center rounded-full bg-orange-500 text-[11px] font-semibold text-white">
+                0{index + 1}
+              </span>
+              <h3 class="text-n-800 mt-4 text-lg font-medium md:text-xl">
+                {dimension.name}
+              </h3>
+              <p class="font-secondary text-n-600 mt-1.5 text-sm leading-relaxed">
+                {dimension.text}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Full ethos writing -->
+  <section class="bg-white" data-section="Ethos Content">
+    <div class="container mx-auto px-6 py-16 md:py-20 lg:py-24 2xl:px-0">
+      <div
+        class="font-secondary text-n-600 [&_strong]:text-n-800 mx-auto max-w-4xl text-base leading-8 [&_a]:text-orange-600 [&_li]:marker:text-orange-500 [&_ol]:list-decimal [&_ol]:pl-5 [&_p+p]:mt-6"
+        set:html={ethosDetails.ethosContent.content}
+      />
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="bg-n-100" data-section="Ethos Related">
+    <div class="container mx-auto px-6 py-14 md:py-18 lg:py-20 2xl:px-0">
+      <div class="flex flex-wrap items-end justify-between gap-3">
+        <h2 class="text-n-800 text-2xl font-medium md:text-3xl">Read on</h2>
+        <a
+          href="/sirs-experience"
+          class="font-secondary inline-flex items-center gap-2 text-sm font-semibold text-orange-600 hover:text-orange-700"
+        >
+          The SIRS Experience
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+      <div class="mt-6 grid gap-3 sm:grid-cols-3">
+        {
+          related.map((item) => (
+            <a
+              href={item.href}
+              class="group flex items-center justify-between gap-4 rounded-2xl bg-white px-5 py-4 transition-colors hover:bg-orange-50 md:px-6 md:py-5"
+            >
+              <div>
+                <p class="font-secondary text-[10px] font-semibold tracking-[0.16em] text-orange-500 uppercase">
+                  {item.eyebrow}
+                </p>
+                <p class="text-n-800 mt-1 text-base font-medium md:text-lg">
+                  {item.title}
+                </p>
+              </div>
+              <span
+                class="text-orange-500 transition-transform duration-300 group-hover:translate-x-1"
+                aria-hidden="true"
+              >
+                &rarr;
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA
+    eyebrow="See it in daily life"
+    title="The ethos shows up in the timetable."
+    description="Talk to us about how these six areas run through a week at SIRS — from morning assembly to prep hour and weekend service."
+    primaryLabel="Book a Campus Visit"
+    primaryHref="/contact-us"
+    secondaryLabel="Start an Application"
+    secondaryHref="/admissions"
+  />
+</Layout>

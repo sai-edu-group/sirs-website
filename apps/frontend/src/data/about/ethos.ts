@@ -79,7 +79,7 @@ export const ethosDetails = {
 <p>In developing these concepts, we transform the inner virtues in children, enabling and empowering them to project their potential for greater insight and inspiration.</p>
 
 
-<p><strong>Guru Shishya Parampara for Harmonising Traditional Human Values</strong></p>
+<p class="text-n-800 mt-16 mb-3 scroll-mt-32 text-2xl font-medium md:text-4xl" id="guru-shishya-parampara"><strong>Guru Shishya Parampara for Harmonising Traditional Human Values</strong></p>
 
 <p>The school practices the Guru Shishya Parampara, harmonizing traditional human values of integrity and humility, with the best global practices, thus enhancing the capacity to <strong>lead India better through education</strong>. Our students and faculty truly depict unity in diversity. We have students from across the nation and the best of teachers too, from various parts of India to impart quality education.</p>
 
@@ -87,7 +87,7 @@ export const ethosDetails = {
 
 <p>SAI International creates a lively atmosphere for the development and use of intellectual curiosity, imagination and technical skill, thus motivating the learners to accept goals that stretch their talents and energies to greater heights thus creating thought leaders for the future.</p>
 
-<p><strong>SAIoneers Educating Volunteerism with Affirmation (SEVA)</strong></p>
+<p class="text-n-800 mt-16 mb-3 scroll-mt-32 text-2xl font-medium md:text-4xl"><strong>SAIoneers Educating Volunteerism with Affirmation (SEVA)</strong></p>
 
 
 <p>Our edification encourages fearlessness of mind, strengthening of conscience and integrity of purpose.<strong>S</strong>AIoneers <strong>E</strong>ducating <strong>V</strong>olunteerism with <strong>A</strong>ffirmation leads the SAIoneers to educate the world to volunteer for service to mankind with affirmation.</p>

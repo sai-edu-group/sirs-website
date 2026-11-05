@@ -19,9 +19,6 @@ export const menu: MenuItemData[] = [
   {
     title: "HOME",
     submenu: [
-      { title: "Ethos of SAI", href: URLS.ABOUT.ETHOS },
-      { title: "Guru Shishya Parampara", href: URLS.ABOUT.GURU_SHISHYA },
-      { title: "Our Founder", href: URLS.ABOUT.FOUNDER },
       { title: "Learning @360", href: URLS.ABOUT.LEARNING_360.ROOT },
       { title: "Awards", href: URLS.AWARDS },
     ],
@@ -31,6 +28,11 @@ export const menu: MenuItemData[] = [
   {
     title: "ABOUT US",
     submenu: [
+      { title: "Ethos of SAI", href: URLS.ABOUT.ETHOS },
+      {
+        title: "Guru Shishya Parampara",
+        href: URLS.ABOUT.GURU_SHISHYA,
+      },
       {
         title: "Vision, Mission & Values",
         href: URLS.ABOUT.VISION_MISSION_VALUES,

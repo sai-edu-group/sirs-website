@@ -1,5 +1,15 @@
 ---
+interface Option {
+  label: string;
+  value: string;
+}
+
 const { label, options = [], name, placeholder } = Astro.props;
+
+/** Accepts plain strings or label/value pairs so every grade list can share one source */
+const items: Option[] = (options as (string | Option)[]).map((option) =>
+  typeof option === "string" ? { label: option, value: option } : option,
+);
 ---
 
 <!-- Custom Dropdown -->
@@ -34,12 +44,12 @@ const { label, options = [], name, placeholder } = Astro.props;
     class="border-n-300 absolute z-100 mt-1 hidden max-h-[200px] w-full overflow-y-auto rounded-lg border bg-white shadow-lg transition-all duration-200"
   >
     {
-      options.map((option: string) => (
+      items.map((item) => (
         <li
           class="text-n-700 font-secondary cursor-pointer px-4 py-2 hover:bg-orange-100 hover:text-orange-700"
-          data-value={option}
+          data-value={item.value}
         >
-          {option}
+          {item.label}
         </li>
       ))
     }

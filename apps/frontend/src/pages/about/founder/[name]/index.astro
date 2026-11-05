@@ -17,14 +17,12 @@ import Layout from "@/layouts/Layout.astro";
 import MemberConsumption from "@/sections/member-consumption/MemberConsumption.astro";
 
 // DATA //
-import { founderDetails } from "@/data/about/members/founder";
+import { founderDetails, founderSlug } from "@/data/about/members/founder";
 
 export async function getStaticPaths() {
   return [
     {
-      params: {
-        name: founderDetails.name.toLowerCase().replaceAll(" ", "-"),
-      },
+      params: { name: founderSlug },
       props: { member: founderDetails as MemberData },
     },
   ];

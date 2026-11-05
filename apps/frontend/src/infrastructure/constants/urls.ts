@@ -1,12 +1,14 @@
+import { founderSlug } from "@/data/about/members/founder";
+
 export const URLS = {
   HOME: "/",
 
   ABOUT: {
     ROOT: "/about",
-    ETHOS: "/about#ethos",
-    GURU_SHISHYA: "/about#guru-shishya",
+    ETHOS: "/about/ethos",
+    GURU_SHISHYA: "/about/ethos#guru-shishya-parampara",
     VISION_MISSION_VALUES: "/about#vision-mission-values",
-    FOUNDER: "/about#our-founder",
+    FOUNDER: `/about/founder/${founderSlug}`,
     KEY_PERSONNEL: "/about#key-personnel",
     ADVISORY_BOARD: "/about#advisory-board",
     AFFILIATIONS: "/about/affiliations",
@@ -20,7 +22,8 @@ export const URLS = {
       CURRICULUM: (name: string) => `/sirs-experience/curriculum/${name}`,
       AMENITY: (name: string) => `/sirs-experience/amenities/${name}`,
       SAI_SEVA: (name: string) => `/sirs-experience/sai-seva/${name}`,
-      FLAGSHIP_EVENT: (name: string) => `/sirs-experience/flagship-events/${name}`,
+      FLAGSHIP_EVENT: (name: string) =>
+        `/sirs-experience/flagship-events/${name}`,
     },
     TEAM_MEMBER: (name: string) => `/about/team/${name}`,
     ADVISORY_MEMBER: (name: string) => `/about/advisory/${name}`,
