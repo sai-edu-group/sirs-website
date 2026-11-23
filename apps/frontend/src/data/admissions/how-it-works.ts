@@ -23,7 +23,7 @@ export const admissionSteps: AdmissionStepData[] = [
     icon: "/icons/form.svg",
     title: "Fill in a quick inquiry form",
     description:
-      "Just a few basic details to get started — nothing complicated.",
+      "Just a few basic details to get started - nothing complicated.",
   },
   {
     id: 2,
@@ -39,7 +39,7 @@ export const admissionSteps: AdmissionStepData[] = [
     icon: "/icons/campus.svg",
     title: "Visit the campus or take a virtual tour",
     description:
-      "Come see SAI for yourself — in person or online — and get a feel for where your child will spend their days.",
+      "Come see SAI for yourself - in person or online - and get a feel for where your child will spend their days.",
   },
   {
     id: 4,
@@ -55,7 +55,7 @@ export const admissionSteps: AdmissionStepData[] = [
     icon: "/icons/interaction.svg",
     title: "Assessment and interaction",
     description:
-      "Your child will have a friendly, age-appropriate conversation with our team — this isn't meant to be intimidating, just a chance for us to get to know them.",
+      "Your child will have a friendly, age-appropriate conversation with our team - this isn't meant to be intimidating, just a chance for us to get to know them.",
   },
   {
     id: 6,

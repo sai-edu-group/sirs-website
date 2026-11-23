@@ -14,7 +14,7 @@ import { getDeviceType } from "@/scripts/device";
 // SERVICES //
 import { contactEnquiryRequest } from "@/services/api/form.api.service";
 
-const ENQUIRY_SOURCE = "Apply Now — website admission page";
+const ENQUIRY_SOURCE = "Apply Now - website admission page";
 
 /** Date of birth from YYYY-MM-DD to DD/MM/YYYY, the way the office writes it */
 const formatDate = (dateStr: string) => {
@@ -204,7 +204,7 @@ const initAdmissionForm = () => {
     try {
       const response = await contactEnquiryRequest(enquiryPayload);
 
-      // API rejected it — send the user back to the last step to retry
+      // API rejected it - send the user back to the last step to retry
       if (response.status === false) {
         submitting?.classList.add("hidden");
         steps[2]?.classList.remove("hidden");

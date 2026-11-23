@@ -1,0 +1,103 @@
+---
+export const prerender = false; // Render on Server
+
+// LAYOUT //
+// ENUMS //
+import { IMAGE_TYPES } from "@/enums/image.enum";
+
+// COMPONENTS //
+import SectionHeaderMain from "@/components/ui/SectionHeaderMain.astro";
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
+import ResultsCard from "@/components/ui/ResultsCard.astro";
+import FilterBar from "@/components/ui/FilterBar.astro";
+import EmptyState from "@/components/ui/EmptyState.astro";
+
+// API SERVICES //
+import { fetchSioneersRequest } from "@/services/api/sioneers.api.service";
+import { fetchSessionsRequest } from "@/services/api/sessions.api.service";
+
+// UTILS //
+import { generateImagePath } from "@/utils/image.utils";
+
+// OTHERS //
+import Layout from "@/layouts/Layout.astro";
+
+// DATA //
+import globalSioneersMeta from "@/data/meta/student-leaders/global-sioneers/global-sioneers.json";
+import {
+  globalSioneersBreadcrumbItems,
+  globalSioneersSectionHeader,
+} from "@/data/student-leaders/global-sioneers";
+
+// The sessions API already returns only sessions that have sioneers,
+// so the session list needs no further filtering.
+const allSessions = await fetchSessionsRequest("global-sioneers");
+
+const requestedSession = Astro.url.searchParams.get("session")?.trim() ?? "";
+const selectedSession = allSessions.some(
+  (sessionItem) => sessionItem.sessionName === requestedSession,
+)
+  ? requestedSession
+  : (allSessions[0]?.sessionName ?? "");
+
+const students = await fetchSioneersRequest(selectedSession);
+---
+
+<Layout meta={globalSioneersMeta}>
+  <section class="bg-n-50 relative w-full overflow-hidden">
+    <div
+      class="container m-auto flex flex-col gap-10 px-5 pt-32 pb-14 md:gap-14 lg:gap-16 lg:pt-40"
+    >
+      <!-- Breadcrumbs -->
+      <Breadcrumbs items={globalSioneersBreadcrumbItems} />
+
+      <!-- Body of the Results -->
+      <div class="flex flex-col gap-8 md:gap-12 lg:gap-14">
+        <!-- Section Header -->
+        <SectionHeaderMain
+          title={globalSioneersSectionHeader.title}
+          subtitle={globalSioneersSectionHeader.subtitle}
+        />
+
+        <!-- Filter & Students -->
+        <div class="flex flex-col gap-7 md:gap-8 lg:gap-11">
+          <!-- Session Filters -->
+          <FilterBar
+            showSearch={false}
+            years={allSessions.map((sessionItem) => ({
+              value: sessionItem.sessionName,
+              label: sessionItem.sessionName,
+            }))}
+            shouldIncludeCurrentYear={false}
+            queryParamName="session"
+          />
+
+          <!-- Global Sioneers Images -->
+          {
+            students && students.length > 0 ? (
+              <div class="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+                {students.map((studentItem) => (
+                  <ResultsCard
+                    image={generateImagePath(
+                      studentItem.profilePicture || "",
+                      IMAGE_TYPES.GLOBAL_SIONEERS,
+                    )}
+                    studentName={studentItem.studentName}
+                    grade={studentItem.universityName}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div class="col-span-full">
+                <EmptyState
+                  title="No Sioneers Found"
+                  description="We couldn't find any global sioneers for the selected session. Please check back later."
+                />
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

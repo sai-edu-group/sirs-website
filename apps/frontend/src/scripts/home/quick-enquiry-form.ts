@@ -11,7 +11,7 @@ import {
 import { contactEnquiryRequest } from "@/services/api/form.api.service";
 
 /** Where the enquiry is labelled, so the office can tell the forms apart */
-const ENQUIRY_SOURCE = "Quick enquiry — website home page";
+const ENQUIRY_SOURCE = "Quick enquiry - website home page";
 const SUCCESS_VISIBLE_MS = 6000;
 const SUBMIT_ERROR =
   "Something went wrong submitting your enquiry. Please try again.";

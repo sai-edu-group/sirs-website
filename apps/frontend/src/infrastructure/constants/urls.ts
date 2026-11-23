@@ -32,12 +32,14 @@ export const URLS = {
   SIRS_EXPERIENCE: {
     ROOT: "/sirs-experience",
     DETAIL: (slug: string) => `/sirs-experience/${slug}`,
-    GLOBAL_SAIONEERSS: "/sirs-experience/global-saIoneers",
   },
 
   GLOBAL_CONNECT: "/global-connect",
 
-  STUDENT_LEADERS: "/student-leaders",
+  STUDENT_LEADERS: {
+    ROOT: "/student-leaders",
+    GLOBAL_SAIONEERS: "/student-leaders/global-sioneers",
+  },
 
   ADMISSIONS: {
     ROOT: "/admissions",

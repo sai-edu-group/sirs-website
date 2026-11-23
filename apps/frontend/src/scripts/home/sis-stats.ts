@@ -10,7 +10,7 @@ function boot() {
       }
     },
     // Fires once the section's midpoint crosses the viewport's midpoint,
-    // instead of as soon as a sliver of the section appears — otherwise
+    // instead of as soon as a sliver of the section appears - otherwise
     // most of the draw animation finishes before it's even in view.
     { rootMargin: "-50% 0px -50% 0px" },
   );

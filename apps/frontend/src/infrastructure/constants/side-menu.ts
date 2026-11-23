@@ -21,6 +21,7 @@ export const menu: MenuItemData[] = [
     submenu: [
       { title: "Learning @360", href: URLS.ABOUT.LEARNING_360.ROOT },
       { title: "Awards", href: URLS.AWARDS },
+      { title: "Contact Us", href: URLS.CONTACT },
     ],
     icon: "home",
     active: true,
@@ -57,7 +58,9 @@ export const menu: MenuItemData[] = [
   },
   {
     title: "STUDENT LEADERS",
-    submenu: [{ title: "Student Leaders", href: URLS.STUDENT_LEADERS }],
+    submenu: [
+      { title: "Global SAIoneers", href: URLS.STUDENT_LEADERS.GLOBAL_SAIONEERS },
+    ],
     icon: "leaders",
   },
   {

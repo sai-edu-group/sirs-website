@@ -25,7 +25,7 @@ export const subscribeNewsLetterRequest = async (data: { email: string }) => {
   }
 };
 
-/** Contact Enquiry Request — also receives admission enquiries from the
+/** Contact Enquiry Request - also receives admission enquiries from the
  *  home page and the Apply Now form (the API has no separate admission route) */
 export const contactEnquiryRequest = async (data: any) => {
   try {

@@ -1,11 +1,11 @@
 ---
 // ============================================================
-// CINEMATIC HERO — Ken Burns crossfade slideshow
+// CINEMATIC HERO - Ken Burns crossfade slideshow
 //
 // A video-free way to make a hero feel like motion footage:
 // each still slowly drifts and scales while crossfading into
 // the next. Only `opacity` and `transform` animate, so every
-// frame stays on the compositor — no layout, no repaint.
+// frame stays on the compositor - no layout, no repaint.
 //
 // Performance notes:
 //  - Slide 0 ships real srcset + fetchpriority=high (it is the LCP).
@@ -117,7 +117,7 @@ const MOBILE = "(max-width: 767px)";
 
   /* Without JS the first frame is simply the hero image. Once the
      script takes over it adds .is-enhanced, and `.is-active` alone
-     decides what is visible — otherwise slide 0 could never fade out. */
+     decides what is visible - otherwise slide 0 could never fade out. */
   .hero-stage:not(.is-enhanced) .hero-slide:first-child {
     opacity: 1;
   }
@@ -259,7 +259,7 @@ const MOBILE = "(max-width: 767px)";
         img.src = img.dataset.src;
         delete img.dataset.src;
       }
-      // decode() resolves once the bitmap is ready — prevents a half-painted fade
+      // decode() resolves once the bitmap is ready - prevents a half-painted fade
       return img.decode().catch(() => {});
     }
 

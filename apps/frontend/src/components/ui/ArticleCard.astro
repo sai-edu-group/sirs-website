@@ -14,6 +14,7 @@ interface Props {
   date?: string;
   href?: string;
   badgeText?: string;
+  objectFit?: "cover" | "contain";
 }
 const {
   img = "/images/commitment.webp",
@@ -24,6 +25,7 @@ const {
   href = "#",
   date = "",
   badgeText = "",
+  objectFit = "cover",
 } = Astro.props as Props;
 
 // Format the Date
@@ -43,7 +45,7 @@ const formattedDate = new Date(date).toLocaleDateString("en-GB", {
       <Image
         src={img}
         alt=""
-        class="scale-up-on-hover h-[215px] w-full lg:h-[276px]"
+        class={`scale-up-on-hover h-[215px] w-full lg:h-[276px] ${objectFit === "contain" ? "object-contain p-6" : "object-cover"}`}
         loading="lazy"
         decoding="async"
         width={500}

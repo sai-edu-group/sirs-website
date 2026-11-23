@@ -117,7 +117,7 @@ function initHero(hero: HeroEl) {
           textCol.style.transform = `translateY(${deltaY}px)`;
           // A single rAF (or even an offsetHeight read) isn't reliably
           // enough to force the inverted state to paint before the
-          // transition is switched back on — the browser can still
+          // transition is switched back on - the browser can still
           // batch both style changes into the same frame, leaving the
           // transform stuck instead of animating. The first rAF is
           // queued for the frame that follows the paint of the inverted

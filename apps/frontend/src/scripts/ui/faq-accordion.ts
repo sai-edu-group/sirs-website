@@ -1,4 +1,4 @@
-/** FaqItem accordion behaviour — imported by the component so every page that uses it works */
+/** FaqItem accordion behaviour - imported by the component so every page that uses it works */
 
 const setOpen = (accordion: HTMLElement, open: boolean) => {
   const content = accordion.querySelector<HTMLElement>(

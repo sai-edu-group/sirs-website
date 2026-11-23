@@ -4,7 +4,7 @@ export const learning360Header = {
   titleHighlight: "every side",
   titleTail: "of a child.",
   subtitle:
-    "Smart academics, creative arts and physical education — not three separate tracks, but one circle that closes around your child.",
+    "Smart academics, creative arts and physical education - not three separate tracks, but one circle that closes around your child.",
   note: "Three pillars. Nine programmes. One child.",
   noteCaption: "Academic · Artistic · Physical",
   promise:
@@ -27,7 +27,7 @@ export const learningPillars: LearningPillar[] = [
     index: "01",
     title: "Smart Academics",
     tagline: "Think",
-    lead: "Curiosity taught well — classrooms that question, labs that prove, and support that arrives before a child falls behind.",
+    lead: "Curiosity taught well - classrooms that question, labs that prove, and support that arrives before a child falls behind.",
     icon: "book",
     accent: "orange",
     items: [
@@ -53,7 +53,7 @@ export const learningPillars: LearningPillar[] = [
     index: "02",
     title: "Creative Arts",
     tagline: "Create",
-    lead: "A stage, a studio and an audience for every child — because expression is a skill, not an extra.",
+    lead: "A stage, a studio and an audience for every child - because expression is a skill, not an extra.",
     icon: "palette",
     accent: "violet",
     items: [
@@ -78,7 +78,7 @@ export const learningPillars: LearningPillar[] = [
     index: "03",
     title: "Physical Education",
     tagline: "Move",
-    lead: "Daily movement, coached properly — building stamina, discipline and the quiet confidence that comes from play.",
+    lead: "Daily movement, coached properly - building stamina, discipline and the quiet confidence that comes from play.",
     icon: "pulse",
     accent: "slate",
     items: [

@@ -4,12 +4,14 @@ interface Props {
   eyebrowText?: string;
   title: string;
   subtitle?: string;
+  description?: string;
   ctaText?: string;
 }
 const {
   eyebrowText = "",
   title = "",
   subtitle = "",
+  description = "",
   ctaText = "",
 } = Astro.props;
 ---
@@ -37,6 +39,14 @@ const {
         subtitle && (
           <p class="animatedText font-secondary text-n-600 text-base leading-normal font-medium md:text-xl lg:text-2xl">
             {subtitle}
+          </p>
+        )
+      }
+      <!-- Description -->
+      {
+        description && (
+          <p class="animatedText font-secondary text-n-600 text-sm md:text-base">
+            {description}
           </p>
         )
       }

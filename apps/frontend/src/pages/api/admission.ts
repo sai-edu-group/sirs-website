@@ -10,7 +10,7 @@ import type { APIRoute } from "astro";
 const LEAD_CAPTURE_URL =
   "https://api-in21.leadsquared.com/v2/LeadManagement.svc/Lead.Capture";
 
-/** Server-only credentials — set LEADSQUARED_ACCESS_KEY / LEADSQUARED_SECRET_KEY in .env and Vercel */
+/** Server-only credentials - set LEADSQUARED_ACCESS_KEY / LEADSQUARED_SECRET_KEY in .env and Vercel */
 const readEnv = (key: string): string | undefined =>
   import.meta.env[key] ?? process.env[key];
 

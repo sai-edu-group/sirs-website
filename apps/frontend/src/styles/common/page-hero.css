@@ -14,7 +14,7 @@
   }
 }
 
-/* Entrance animations — CSS-only so the hero never waits on JavaScript */
+/* Entrance animations - CSS-only so the hero never waits on JavaScript */
 .page-hero-rise {
   animation: page-hero-rise 0.7s ease-out both;
   animation-delay: var(--delay, 0s);

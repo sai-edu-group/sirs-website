@@ -50,7 +50,7 @@ const newsResponse = await fetchBlogsByYearRequest(year, page, limit);
 const news = newsResponse.blogs;
 const totalCount = newsResponse.total_count;
 
-// If streamId is missing or invalid — go back or redirect
+// If streamId is missing or invalid - go back or redirect
 if (!year) {
   return new Response(null, {
     status: 302,

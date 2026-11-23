@@ -1,5 +1,5 @@
 ---
-// PAGE HERO — shared hero for all sub pages.
+// PAGE HERO - shared hero for all sub pages.
 // Bright ivory canvas, the photo (optionally in a clean temple-niche arch), a slowly
 // turning Konark-style wheel, and an optional hairline that rises into an arch over the photo.
 // Height is 3/4 of the screen on desktop. Each page only passes text + image,
@@ -15,33 +15,33 @@ interface Props {
   /** Small label above the title, e.g. "Admissions" */
   eyebrow?: string;
   title: string;
-  /** Part of `title` rendered in the brand colour (keep it short — it never wraps) */
+  /** Part of `title` rendered in the brand colour (keep it short - it never wraps) */
   highlight?: string;
   description?: string;
   /** Path inside /public, e.g. "/images/admission-hero.webp" */
   image: string;
   imageAlt?: string;
   /**
-   * "cutout" — transparent PNG of people, standing in the arch
-   * "cover"  — regular photo, cropped to fill the arch
+   * "cutout" - transparent PNG of people, standing in the arch
+   * "cover"  - regular photo, cropped to fill the arch
    */
   imageFit?: "cutout" | "cover";
   /**
-   * "arch"  — photo inside a temple-niche arch (good for regular photos)
-   * "none"  — no frame, the photo stands straight on the page (good for cut-outs)
-   * "line"  — a line runs along the base of the hero and rises into an arch
+   * "arch"  - photo inside a temple-niche arch (good for regular photos)
+   * "none"  - no frame, the photo stands straight on the page (good for cut-outs)
+   * "line"  - a line runs along the base of the hero and rises into an arch
    *           outline over the photo; nothing under the photo (good for cut-outs)
    */
   frame?: "arch" | "none" | "line";
   /**
    * Shape of the arch outline when `frame="line"`:
-   * "tall" — dome stands well above a portrait or square-ish photo
-   * "wide" — dome hugs a wide, panoramic photo
+   * "tall" - dome stands well above a portrait or square-ish photo
+   * "wide" - dome hugs a wide, panoramic photo
    */
   archShape?: "tall" | "wide";
   /**
-   * "default" — big headline for short titles
-   * "compact" — one size smaller, for longer titles
+   * "default" - big headline for short titles
+   * "compact" - one size smaller, for longer titles
    */
   titleSize?: "default" | "compact";
   /** Extra classes for the <img>, to re-frame a particular photo */

@@ -41,7 +41,7 @@ const selectedSessionName = hasRequestedSession
   ? requestedSessionName
   : fallbackSessionName;
 
-// If streamId is missing or invalid — go back or redirect
+// If streamId is missing or invalid - go back or redirect
 if (!selectedSessionName) {
   return new Response(null, {
     status: 302,

@@ -1,8 +1,5 @@
 ---
-// COMPONENTS //
-import SliderArrowButton from "@/components/ui/SliderArrowButton.astro";
-
-// Slider Photos
+// Marquee Photos
 const photos = [
   { src: "/images/strip-stadium.webp", alt: "Stadium and turf" },
   { src: "/images/strip-horse.webp", alt: "Horse riding" },
@@ -15,35 +12,64 @@ const photos = [
 ];
 ---
 
-<section data-section="Home Campus Life Strip">
-  <div class="flex flex-col gap-6 py-12 md:py-16 lg:py-20">
-    <div
-      id="campus-life-strip"
-      data-strip-viewport
-      class="flex [scrollbar-width:none] gap-4 overflow-x-auto px-6 md:gap-6 [&::-webkit-scrollbar]:hidden"
-    >
-      {
-        photos.map((photo) => (
-          <figure class="bg-n-100 relative aspect-[4/3] w-[82%] shrink-0 overflow-hidden rounded-2xl md:w-[42%] lg:w-[31%]">
-            <img
-              src={photo.src}
-              alt={photo.alt}
-              class="absolute inset-0 h-full w-full object-cover"
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
-        ))
-      }
-    </div>
-
-    <div class="flex justify-end gap-3 px-6">
-      <SliderArrowButton direction="prev" data-strip-prev />
-      <SliderArrowButton direction="next" data-strip-next />
+<section data-section="Home Campus Life Strip" class="py-12 md:py-16 lg:py-20">
+  <div class="campus-marquee-container overflow-hidden">
+    <div class="campus-marquee-track">
+      {[...photos, ...photos].map((photo) => (
+        <figure class="bg-n-100 relative aspect-[4/3] flex-shrink-0 overflow-hidden rounded-2xl" style="width: 82%; min-width: 280px; max-width: 400px;">
+          <img
+            src={photo.src}
+            alt={photo.alt}
+            class="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      ))}
     </div>
   </div>
 </section>
 
-<script>
-  import "@/scripts/home/campus-life-strip";
-</script>
+<style>
+  .campus-marquee-container {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent
+    );
+  }
+
+  .campus-marquee-track {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    animation: campus-marquee 35s linear infinite;
+  }
+
+  @media (min-width: 768px) {
+    .campus-marquee-track {
+      gap: 1.5rem;
+    }
+  }
+
+  .campus-marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes campus-marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .campus-marquee-track {
+      animation: none;
+    }
+  }
+</style>
