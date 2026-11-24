@@ -1,6 +1,6 @@
 ---
 // ============================================================
-// HOME — 8-8-8 DESIGN PREVIEW
+// HOME - 8-8-8 DESIGN PREVIEW
 // Full home-page design proposal built on the existing design
 // system. Media placeholders are labelled with the exact asset
 // (drone shot / photo) that should replace them.
@@ -12,8 +12,9 @@ import SectionHeader from "@/components/ui/SectionHeader.astro";
 import IconsCard from "@/components/ui/IconsCard.astro";
 import CinematicHero from "@/components/ui/CinematicHero.astro";
 
-// ---- 01 · Hero slideshow -----------------------------------
+// ---- 01 · Hero marquee -----------------------------------
 // Order tells a story: architecture, then life, then sport, then land.
+// Marquee scrolls these automatically; hover to pause.
 const heroSlides = [
   { slug: "campus-facade", alt: "The main academic block at SAI International Residential School" },
   { slug: "horse-riding", alt: "A student riding in the campus sand arena" },
@@ -31,7 +32,7 @@ const eights = [
       "CBSE curriculum, Classes IV–XII",
       "Smart classrooms, labs & library",
       "The 'Joy of Learning' philosophy",
-      "Progress parents can see — continuous assessment",
+      "Progress parents can see - continuous assessment",
     ],
   },
   {
@@ -39,7 +40,7 @@ const eights = [
     title: "to Explore",
     accent: "violet",
     points: [
-      "40+ arenas — sport, arts, adventure",
+      "40+ arenas - sport, arts, adventure",
       "8-lane 400m stadium & turf football ground",
       "Horse riding, boating lake, rock climbing",
       "Student-run SAI TV & Radio Orange 99.9",
@@ -60,7 +61,7 @@ const eights = [
 
 // ---- 03 · Trust strip --------------------------------------
 const trustItems = [
-  "Odisha's No.1 School — 6 years in a row · EWISR",
+  "Odisha's No.1 School - 6 years in a row · EWISR",
   "49-acre green campus between Bhubaneswar & Cuttack",
   "Fully residential · CBSE · Classes IV–XII",
   "Phone-free policy · 24×7 pastoral care",
@@ -79,50 +80,50 @@ const results = [
 const arenas = [
   {
     title: "A stadium of their own",
-    copy: "8-lane 400m track & Odisha's finest turf football ground — home of the SAI Football League.",
-    photo: "Drone shot — stadium & turf",
+    copy: "8-lane 400m track & Odisha's finest turf football ground - home of the SAI Football League.",
+    photo: "Drone shot - stadium & turf",
     size: "large",
     accent: "violet",
   },
   {
     title: "Horse riding",
     copy: "Stables and a sand arena on campus.",
-    photo: "Photo — student on horseback",
+    photo: "Photo - student on horseback",
     size: "small",
     accent: "orange",
   },
   {
     title: "Two floors of rock",
     copy: "A climbing wall up the school building itself.",
-    photo: "Photo — climbing wall, low angle",
+    photo: "Photo - climbing wall, low angle",
     size: "small",
     accent: "slate",
   },
   {
     title: "A lake for boating",
     copy: "Calm water, life jackets, loud laughter.",
-    photo: "Photo — boating on the lake",
+    photo: "Photo - boating on the lake",
     size: "small",
     accent: "slate",
   },
   {
     title: "Swimming pool",
     copy: "Coached training, all levels.",
-    photo: "Photo — swim training",
+    photo: "Photo - swim training",
     size: "small",
     accent: "orange",
   },
   {
     title: "Music rooms",
     copy: "Drums, piano, tabla, guitar & more.",
-    photo: "Photo — music class",
+    photo: "Photo - music class",
     size: "small",
     accent: "violet",
   },
   {
     title: "Indoor sports arena",
     copy: "Basketball, badminton, yoga & rainy-day energy.",
-    photo: "Photo — indoor arena",
+    photo: "Photo - indoor arena",
     size: "wide",
     accent: "orange",
   },
@@ -145,22 +146,22 @@ const homeCards = [
   {
     title: "Arjuna Boys' Hostel",
     copy: "Air-conditioned rooms, recreational lounges and house masters who know every child by name.",
-    photo: "Photo — hostel room / lounge",
+    photo: "Photo - hostel room / lounge",
   },
   {
     title: "Sushila Devi Girls' Hostel",
-    copy: "Safe, warm and watched over — with wardens, tight security and space to be yourself.",
-    photo: "Photo — girls' hostel common area",
+    copy: "Safe, warm and watched over - with wardens, tight security and space to be yourself.",
+    photo: "Photo - girls' hostel common area",
   },
   {
     title: "Meals made with care",
-    copy: "Nutritionist-supervised menus from our own cafeteria — because growing minds need growing bodies.",
-    photo: "Photo — cafeteria mealtime",
+    copy: "Nutritionist-supervised menus from our own cafeteria - because growing minds need growing bodies.",
+    photo: "Photo - cafeteria mealtime",
   },
   {
     title: "Always looked after",
     copy: "On-campus infirmary, the serene SAI Temple, and evening yoga to end the day quietly.",
-    photo: "Photo — yoga at dusk",
+    photo: "Photo - yoga at dusk",
   },
 ];
 
@@ -175,39 +176,39 @@ const houses = [
 const beyond = [
   {
     title: "Global Immersion",
-    copy: "School partnerships, virtual classrooms and annual visits abroad — global leaders, grounded in Indian values.",
+    copy: "School partnerships, virtual classrooms and annual visits abroad - global leaders, grounded in Indian values.",
   },
   {
     title: "SAI Prashikshan",
-    copy: "Real internships for Classes IX–XII across 22 organisations — fintech, media, NGOs, hospitality and more.",
+    copy: "Real internships for Classes IX–XII across 22 organisations - fintech, media, NGOs, hospitality and more.",
   },
   {
     title: "Career Connect",
-    copy: "Psychometric assessments, career fairs and a dedicated counsellor — so choices become outcomes.",
+    copy: "Psychometric assessments, career fairs and a dedicated counsellor - so choices become outcomes.",
   },
 ];
 
-// ---- 11 · Voices (sample copy — replace with real quotes) --
+// ---- 11 · Voices (sample copy - replace with real quotes) --
 const voices = [
   {
     name: "Parent of a Class VII student",
     description:
-      "we sent our son 1,400 km from home. Within a month, SIRS felt closer than next door. He calls it his second home — and honestly, so do we.",
-    date: "Sample copy — replace with a real parent voice",
+      "we sent our son 1,400 km from home. Within a month, SIRS felt closer than next door. He calls it his second home - and honestly, so do we.",
+    date: "Sample copy - replace with a real parent voice",
   },
   {
     name: "Class X student",
     description:
       "on weekdays I solve equations. On weekends I host a radio show. Where else does that happen?",
-    date: "Sample copy — replace with a real student voice",
+    date: "Sample copy - replace with a real student voice",
   },
 ];
 
 const awards = [
-  "EWISR — No.1 School in Odisha, 6 years in a row",
+  "EWISR - No.1 School in Odisha, 6 years in a row",
   "BW Top Education Brand of India 2024",
-  "British Council — RIDS Recognition",
-  "Leading Residential School of India — BusinessWorld",
+  "British Council - RIDS Recognition",
+  "Leading Residential School of India - BusinessWorld",
 ];
 
 // ---- 12 · Admissions ---------------------------------------
@@ -256,94 +257,51 @@ const tileAccents: Record<string, string> = {
 ---
 
 <Layout
-  meta={{ title: "Home — 8-8-8 Design Preview", noIndex: true }}
+  meta={{ title: "Home - 8-8-8 Design Preview", noIndex: true }}
 >
   <!-- ======================================================
-       01 · HERO — Ken Burns crossfade over the 8-8-8 promise
-       Stills only, no video. See CinematicHero.astro.
+       01 · HERO - Photo marquee gallery
+       Horizontal scroll gallery replacing the old slider.
        ====================================================== -->
   <section
-    class="relative flex min-h-[92vh] w-full flex-col justify-end overflow-hidden bg-violet-950 pt-28 md:pt-40"
+    class="relative overflow-hidden bg-n-100 pt-24 md:pt-32 pb-12"
   >
-    <!-- Drifting photo stack -->
-    <CinematicHero slides={heroSlides} interval={6000} fade={1600} />
-
-    <!-- Scrim: keeps the headline legible over every frame -->
-    <div
-      aria-hidden="true"
-      class="pointer-events-none absolute inset-0 bg-violet-950/45"
-    >
-    </div>
-    <div
-      aria-hidden="true"
-      class="pointer-events-none absolute inset-0 bg-gradient-to-t from-violet-950 via-violet-950/45 to-transparent"
-    >
-    </div>
-
-    <div
-      class="relative container mx-auto flex flex-col gap-8 px-4 pb-16 md:px-6 md:pb-24 2xl:px-0"
-    >
-      <div class="fade-in flex max-w-3xl flex-col gap-5">
-        <p
-          class="font-secondary text-sm font-medium tracking-[0.2em] text-orange-300 uppercase md:text-base"
-        >
-          SAI International Residential School
-        </p>
-        <h1
-          class="text-5xl leading-[105%] font-medium text-n-50 md:text-7xl"
-          style="color:#ffffff"
-        >
-          A day well spent.
-        </h1>
-        <p
-          class="font-secondary text-lg leading-normal font-light text-violet-100 md:text-2xl"
-        >
-          8 hours to learn. 8 hours to explore. 8 hours to belong.<br />
-          India's global gurukul — so much more than a school.
-        </p>
-      </div>
-
-      <!-- CTAs -->
-      <div class="fade-in flex flex-wrap items-center gap-4">
-        <Button
-          text="Book a Campus Visit"
-          variant="solid"
-          size="large"
-          rightArrow
-          onClick="window.location.href='/contact-us'"
-        />
-        <Button
-          text="Download Brochure"
-          variant="outline"
-          size="large"
-          extraClasses="!text-orange-200 !border-orange-200 hover:!text-violet-900"
-        />
-      </div>
-
-      <!-- Hero trust chips -->
-      <div
-        class="font-secondary fade-in flex flex-wrap gap-x-6 gap-y-2 text-sm text-violet-200 md:text-base"
-      >
-        <span>Est. 2018</span>
-        <span aria-hidden="true">·</span>
-        <span>CBSE · Classes IV–XII</span>
-        <span aria-hidden="true">·</span>
-        <span>Fully residential</span>
-        <span aria-hidden="true">·</span>
-        <span>Odisha's No.1 — 6 years running</span>
+    <div class="marquee-container flex w-full overflow-hidden">
+      <div class="marquee-track flex gap-4 md:gap-6">
+        {[...heroSlides, ...heroSlides].map((slide, i) => (
+          <div
+            key={slide.slug}
+            class="marquee-item flex-shrink-0 w-full md:w-72 lg:w-80 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+          >
+            <img
+              src={"/images/hero/" + slide.slug + "-l-1280.jpg"}
+              alt={slide.alt}
+              class="w-full h-48 md:h-64 object-cover object-center"
+              loading="lazy"
+            />
+            <div class="p-4 md:p-5">
+              <p class="font-secondary text-xs text-orange-500 uppercase tracking-wider mb-2">
+                Campus Life
+              </p>
+              <p class="font-medium text-n-700 line-clamp-2 text-sm md:text-base">
+                {slide.alt}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
   <!-- ======================================================
-       02 · THE 8-8-8 BAND — the thesis of the whole page
+       02 · THE 8-8-8 BAND - the thesis of the whole page
        ====================================================== -->
   <section class="bg-n-50 w-full py-16 md:py-24">
     <div class="container mx-auto flex flex-col gap-12 px-4 md:px-6 2xl:px-0">
       <div class="max-w-3xl">
         <SectionHeader
           title="The 8-8-8 Advantage"
-          subtitle="One balanced day — study, sport, art and rest in equal measure. Repeated until it becomes character."
+          subtitle="One balanced day - study, sport, art and rest in equal measure. Repeated until it becomes character."
         />
       </div>
 
@@ -369,7 +327,7 @@ const tileAccents: Record<string, string> = {
           </div>
         </div>
         <p class="font-secondary text-n-500 text-xs md:text-sm">
-          One full day at SIRS — 24 hours, perfectly balanced.
+          One full day at SIRS - 24 hours, perfectly balanced.
         </p>
       </div>
 
@@ -408,7 +366,7 @@ const tileAccents: Record<string, string> = {
   </section>
 
   <!-- ======================================================
-       03 · TRUST STRIP — the anti-anxiety row
+       03 · TRUST STRIP - the anti-anxiety row
        ====================================================== -->
   <section class="w-full bg-orange-50 py-6 md:py-8">
     <div
@@ -430,7 +388,7 @@ const tileAccents: Record<string, string> = {
   </section>
 
   <!-- ======================================================
-       04 · 8H LEARN — results first, philosophy second
+       04 · 8H LEARN - results first, philosophy second
        ====================================================== -->
   <section class="bg-n-50 w-full py-16 md:py-24">
     <div class="container mx-auto flex flex-col gap-12 px-4 md:px-6 2xl:px-0">
@@ -440,7 +398,7 @@ const tileAccents: Record<string, string> = {
         <div class="max-w-2xl">
           <SectionHeader
             title="Results that open doors"
-            subtitle="Class of 2025 — CBSE, JEE & NEET. The first 8 hours, hard at work."
+            subtitle="Class of 2025 - CBSE, JEE & NEET. The first 8 hours, hard at work."
           />
         </div>
         <Button
@@ -482,7 +440,7 @@ const tileAccents: Record<string, string> = {
           <p
             class="font-secondary text-n-600 text-sm leading-normal md:text-base"
           >
-            Marks are a by-product. Curiosity is the curriculum — smart
+            Marks are a by-product. Curiosity is the curriculum - smart
             classrooms, hands-on labs and continuous assessment that shows
             parents real progress, not just report cards.
           </p>
@@ -499,7 +457,7 @@ const tileAccents: Record<string, string> = {
   </section>
 
   <!-- ======================================================
-       05 · 8H EXPLORE — "A Second Classroom" bento
+       05 · 8H EXPLORE - "A Second Classroom" bento
        ====================================================== -->
   <section class="bg-n-100 w-full py-16 md:py-24">
     <div class="container mx-auto flex flex-col gap-12 px-4 md:px-6 2xl:px-0">
@@ -560,7 +518,7 @@ const tileAccents: Record<string, string> = {
         >
           <p class="text-3xl font-medium text-violet-100">40+</p>
           <p class="font-secondary text-xs text-violet-200 md:text-sm">
-            arenas in all — sport, arts & adventure
+            arenas in all - sport, arts & adventure
           </p>
           <Button
             text="Explore Campus"
@@ -576,7 +534,7 @@ const tileAccents: Record<string, string> = {
   </section>
 
   <!-- ======================================================
-       06 · FLAGSHIP EVENTS — marquee reel
+       06 · FLAGSHIP EVENTS - marquee reel
        ====================================================== -->
   <section
     class="border-n-200 bg-n-50 w-full overflow-hidden border-y py-8 md:py-10"
@@ -600,7 +558,7 @@ const tileAccents: Record<string, string> = {
   </section>
 
   <!-- ======================================================
-       07 · STUDENT MEDIA — On air, every week
+       07 · STUDENT MEDIA - On air, every week
        ====================================================== -->
   <section class="w-full bg-violet-900 py-16 md:py-24">
     <div class="container mx-auto flex flex-col gap-12 px-4 md:px-6 2xl:px-0">
@@ -626,7 +584,7 @@ const tileAccents: Record<string, string> = {
         <p
           class="font-secondary text-base leading-normal font-light text-violet-200 md:text-xl"
         >
-          Not a media club. A real radio station and a real TV channel —
+          Not a media club. A real radio station and a real TV channel -
           scripted, anchored and produced by students.
         </p>
       </div>
@@ -639,7 +597,7 @@ const tileAccents: Record<string, string> = {
           <p
             class="font-secondary text-xs font-semibold tracking-[0.14em] text-violet-300 uppercase"
           >
-            Photo — students in the radio studio
+            Photo - students in the radio studio
           </p>
           <p class="text-2xl font-medium text-orange-300 md:text-4xl">
             Radio Orange 99.9
@@ -648,7 +606,7 @@ const tileAccents: Record<string, string> = {
             class="font-secondary text-sm leading-normal font-light text-violet-200 md:text-base"
           >
             The in-house virtual radio station where students find their voice
-            — literally. Interviews, music, opinions, confidence.
+            - literally. Interviews, music, opinions, confidence.
           </p>
         </div>
 
@@ -659,13 +617,13 @@ const tileAccents: Record<string, string> = {
           <p
             class="font-secondary text-xs font-semibold tracking-[0.14em] text-violet-300 uppercase"
           >
-            Photo — SAI TV set with student anchors
+            Photo - SAI TV set with student anchors
           </p>
           <p class="text-2xl font-medium text-orange-300 md:text-4xl">SAI TV</p>
           <p
             class="font-secondary text-sm leading-normal font-light text-violet-200 md:text-base"
           >
-            A student-led TV channel covering campus life — from SAI Olympics
+            A student-led TV channel covering campus life - from SAI Olympics
             highlights to interviews with visiting mentors.
           </p>
         </div>
@@ -674,7 +632,7 @@ const tileAccents: Record<string, string> = {
   </section>
 
   <!-- ======================================================
-       08 · 8H BELONG — the second home
+       08 · 8H BELONG - the second home
        ====================================================== -->
   <section class="w-full bg-orange-50 py-16 md:py-24">
     <div class="container mx-auto flex flex-col gap-12 px-4 md:px-6 2xl:px-0">
@@ -722,7 +680,7 @@ const tileAccents: Record<string, string> = {
           <p
             class="font-secondary text-n-600 text-sm leading-normal md:text-base"
           >
-            Every child belongs to a house from day one — teamwork,
+            Every child belongs to a house from day one - teamwork,
             responsibility and pride, built in.
           </p>
         </div>
@@ -755,7 +713,7 @@ const tileAccents: Record<string, string> = {
         <p
           class="font-secondary text-n-500 text-[10px] font-semibold tracking-[0.14em] uppercase md:text-xs"
         >
-          Photo — Dr. Silpi Sahoo with students on campus
+          Photo - Dr. Silpi Sahoo with students on campus
         </p>
       </div>
 
@@ -764,14 +722,14 @@ const tileAccents: Record<string, string> = {
           class="text-2xl leading-snug font-medium text-n-800 italic md:text-4xl md:leading-snug"
         >
           "Parents don't hand us marksheets to improve. They hand us their
-          children. That is a promise we keep every single day — and night."
+          children. That is a promise we keep every single day - and night."
         </blockquote>
         <div class="flex flex-col gap-0.5">
           <p class="text-lg font-semibold text-orange-500 md:text-xl">
             Dr. Silpi Sahoo
           </p>
           <p class="font-secondary text-n-500 text-sm md:text-base">
-            Chairperson, SAI International Education Group — carrying forward
+            Chairperson, SAI International Education Group - carrying forward
             the legacy of Founder Dr. Bijaya Kumar Sahoo
           </p>
         </div>
@@ -787,14 +745,14 @@ const tileAccents: Record<string, string> = {
   </section>
 
   <!-- ======================================================
-       10 · BEYOND SCHOOL — global + future readiness
+       10 · BEYOND SCHOOL - global + future readiness
        ====================================================== -->
   <section class="bg-n-100 w-full py-16 md:py-24">
     <div class="container mx-auto flex flex-col gap-12 px-4 md:px-6 2xl:px-0">
       <div class="max-w-3xl">
         <SectionHeader
           title="Ready for the world"
-          subtitle="From Bhubaneswar to Boston — the runway starts here."
+          subtitle="From Bhubaneswar to Boston - the runway starts here."
         />
       </div>
 
@@ -861,7 +819,7 @@ const tileAccents: Record<string, string> = {
   </section>
 
   <!-- ======================================================
-       12 · ADMISSIONS — the closing invitation
+       12 · ADMISSIONS - the closing invitation
        ====================================================== -->
   <section class="w-full bg-violet-700 py-16 md:py-24">
     <div class="container mx-auto flex flex-col gap-12 px-4 md:px-6 2xl:px-0">
@@ -875,7 +833,7 @@ const tileAccents: Record<string, string> = {
         <p
           class="font-secondary text-base leading-normal font-light text-violet-200 md:text-xl"
         >
-          Admissions open for Classes IV–XII. Three simple steps — and the
+          Admissions open for Classes IV–XII. Three simple steps - and the
           first one takes two minutes.
         </p>
       </div>
@@ -922,8 +880,8 @@ const tileAccents: Record<string, string> = {
 </Layout>
 
 <style>
-  /* Flagship events marquee */
-  .marquee-mask {
+  /* Photo gallery marquee */
+  .marquee-container {
     mask-image: linear-gradient(
       to right,
       transparent,
@@ -934,7 +892,8 @@ const tileAccents: Record<string, string> = {
   }
 
   .marquee-track {
-    animation: marquee 32s linear infinite;
+    animation: marquee 35s linear infinite;
+    width: max-content;
   }
 
   .marquee-track:hover {
@@ -954,5 +913,20 @@ const tileAccents: Record<string, string> = {
     .marquee-track {
       animation: none;
     }
+  }
+
+  /* Flagship events marquee - reuse same styles */
+  .marquee-mask {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent
+    );
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
   }
 </style>

@@ -78,6 +78,29 @@ const options = [
     name: "Photo + Overlapping Card",
     note: "Wide photo with the topics card overlapping it.",
   },
+  {
+    id: "option-6",
+    num: "06",
+    name: "Triptych - All Three at Once",
+  },
+  {
+    id: "option-7",
+    num: "07",
+    name: "Photo + Topic Panel",
+    note: "One tall photo beside a clean topic panel.",
+  },
+  {
+    id: "option-8",
+    num: "08",
+    name: "Dark Feature Band",
+    note: "Contrast band, photo thumbnail per pillar.",
+  },
+  {
+    id: "option-9",
+    num: "09",
+    name: "Centered Image Cards",
+    note: "Equal image cards with tagline chip overlay.",
+  },
 ];
 ---
 
@@ -85,7 +108,7 @@ const options = [
   meta={{
     title: "Learning 360 - Design Options",
     description:
-      "Five design options for the Learning @ 360 section - internal review page.",
+      "Nine design options for the Learning @ 360 section - internal review page.",
   }}
 >
   <!-- PAGE INTRO -->
@@ -104,7 +127,7 @@ const options = [
         Learning @ 360 - design options
       </h1>
       <p class="font-secondary text-n-600 max-w-2xl text-sm leading-relaxed md:text-base">
-        Five compact layouts for the section. Main topics and images side by
+        Nine compact layouts for the section. Main topics and images side by
         side - shortlist one and it gets built.
       </p>
 
@@ -220,7 +243,7 @@ const options = [
                             <span class="text-n-700 font-semibold">
                               {item.title}
                             </span>
-                            <span class="text-n-400">{item.description}</span>
+                            <span class="text-n-500">{item.description}</span>
                           </p>
                         ))}
                       </div>
@@ -290,7 +313,7 @@ const options = [
                             <span class="text-n-700 font-semibold">
                               {item.title}
                             </span>
-                            <span class="text-n-400">{item.description}</span>
+                            <span class="text-n-500">{item.description}</span>
                           </p>
                         ))}
                       </div>
@@ -303,191 +326,144 @@ const options = [
         )}
 
         <!-- ============================================================
-             OPTION 3 - PHOTO + TOPIC PANEL
+             OPTION 3 - STACKED ROWS
              ============================================================ -->
         {optionIndex === 2 && (
-          <div class="bg-n-100">
+          <div class="bg-white">
             <div class="container m-auto px-5 py-6 md:py-8 lg:px-8 2xl:px-0">
-              <div class="grid grid-cols-1 gap-4 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-5">
-                <!-- Photo -->
-                <div class="relative overflow-hidden rounded-2xl">
-                  <img
-                    src="/images/about-hero.webp"
-                    alt="The SIRS campus"
-                    class="h-40 w-full object-cover md:h-48 lg:h-full lg:min-h-[300px]"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div
-                    class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/35 to-transparent px-4 pt-10 pb-3.5"
-                  >
-                    <p
-                      class="font-secondary text-[10px] font-semibold tracking-[0.24em] text-white/75 uppercase"
-                    >
-                      {learning360Header.eyebrow}
-                    </p>
-                    <p class="mt-1 text-sm leading-snug font-medium text-white md:text-base">
-                      {learning360Header.note}
-                    </p>
-                  </div>
-                </div>
-
-                <!-- Topic panel -->
-                <div class="bg-white border-n-200 flex flex-col gap-3.5 rounded-2xl border p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)] md:p-5">
-                  <div class="flex flex-col gap-1.5">
-                    <p class="font-secondary text-orange-600 text-[11px] font-semibold tracking-[0.24em] uppercase">
-                      {learning360Header.eyebrow}
-                    </p>
-                    <h3 class="text-n-800 text-lg font-medium tracking-tight md:text-xl">
-                      {learning360Header.titleLead}{" "}
-                      <span class="text-orange-500">
-                        {learning360Header.titleHighlight}
-                      </span>{" "}
-                      {learning360Header.titleTail}
-                    </h3>
-                  </div>
-
-                  {learningPillars.map((pillar, index) => (
-                    <div
-                      class:list={[
-                        "flex flex-col gap-2",
-                        index > 0 && "border-n-100 border-t pt-3.5",
-                      ]}
-                    >
-                      <div class="flex flex-wrap items-center gap-2.5">
-                        <span
-                          class:list={[
-                            "font-secondary flex size-7 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold",
-                            accents[pillar.accent].chip,
-                          ]}
-                        >
-                          {pillar.index}
-                        </span>
-                        <h4 class="text-n-800 text-base font-medium tracking-tight md:text-lg">
-                          {pillar.title}
-                        </h4>
-                        <span
-                          class:list={[
-                            "font-secondary rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-[0.16em] uppercase",
-                            accents[pillar.accent].chip,
-                          ]}
-                        >
-                          {pillar.tagline}
-                        </span>
-                      </div>
-
-                      <div class="grid grid-cols-1 gap-x-6 gap-y-1.5 sm:grid-cols-2">
-                        {pillar.items.map((item) => (
-                          <p class="font-secondary flex gap-2 text-[13px] leading-snug">
-                            <span
-                              class:list={[
-                                "mt-1.5 size-1.5 shrink-0 rounded-full",
-                                accents[pillar.accent].dot,
-                              ]}
-                              aria-hidden="true"
-                            />
-                            <span class="text-n-700 font-semibold">
-                              {item.title}
-                            </span>
-                            <span class="text-n-400">{item.description}</span>
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        <!-- ============================================================
-             OPTION 4 - DARK FEATURE BAND
-             ============================================================ -->
-        {optionIndex === 3 && (
-          <div class="bg-n-900 relative overflow-hidden">
-            <div
-              class="pointer-events-none absolute -top-32 -right-24 size-80 rounded-full bg-orange-500/10 blur-3xl"
-              aria-hidden="true"
-            />
-            <div
-              class="pointer-events-none absolute -bottom-32 -left-24 size-80 rounded-full bg-violet-500/15 blur-3xl"
-              aria-hidden="true"
-            />
-
-            <div class="container relative m-auto px-5 py-6 md:py-8 lg:px-8 2xl:px-0">
-              <div
-                class="flex flex-col gap-1.5 border-b border-white/10 pb-4 md:flex-row md:items-end md:justify-between"
-              >
-                <div class="flex flex-col gap-1.5">
-                  <p class="font-secondary text-orange-400 text-[11px] font-semibold tracking-[0.24em] uppercase">
-                    {learning360Header.eyebrow}
-                  </p>
-                  <h3 class="text-n-50 text-xl font-medium tracking-tight md:text-2xl">
-                    {learning360Header.titleLead}{" "}
-                    <span class="text-orange-400">
-                      {learning360Header.titleHighlight}
-                    </span>{" "}
-                    {learning360Header.titleTail}
-                  </h3>
-                </div>
-                <p class="font-secondary hidden text-n-400 text-sm md:block">
-                  {learning360Header.noteCaption}
+              <div class="flex flex-col items-center gap-4 md:gap-6">
+                <p class="font-secondary text-orange-600 text-[11px] font-semibold tracking-[0.24em] uppercase md:text-xs">
+                  {learning360Header.eyebrow}
+                </p>
+                <h2 class="text-n-800 text-2xl font-medium tracking-tight text-center md:text-3xl">
+                  {learning360Header.titleLead}{" "}
+                  <span class="text-orange-500">{learning360Header.titleHighlight}</span>{" "}
+                  {learning360Header.titleTail}
+                </h2>
+                <p class="font-secondary text-n-600 text-[13px] leading-relaxed md:text-sm max-w-2xl text-center">
+                  {learning360Header.subtitle}
                 </p>
               </div>
-
-              <div class="mt-5 grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
+              <div class="flex flex-col gap-3 pt-4">
                 {learningPillars.map((pillar, index) => (
-                  <article class="flex flex-col gap-3">
-                    <div class="relative overflow-hidden rounded-xl">
+                  <article
+                    class:list={[
+                      "flex items-center gap-6 rounded-2xl border border-n-100 p-4 md:p-6 shadow-sm transition-all duration-300 hover:bg-n-50 hover:shadow-md",
+                      index % 2 === 0 && "bg-n-50",
+                    ]}
+                  >
+                    <!-- Image left -->
+                    <div class="relative shrink-0 size-24 md:size-32 rounded-xl overflow-hidden border border-n-200 bg-n-200">
                       <img
                         src={pillarImages[index].src}
                         alt={pillarImages[index].alt}
-                        class="h-24 w-full object-cover md:h-28"
+                        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
                         decoding="async"
                       />
-                      <span class="font-secondary absolute top-2 left-2 flex size-7 items-center justify-center rounded-md bg-white/95 text-[11px] font-semibold text-n-800">
+                      <span class="absolute top-2 left-2 font-secondary size-4 shrink-0 items-center justify-center rounded-full border border-n-200 bg-white text-[9px] font-semibold">
                         {pillar.index}
                       </span>
                     </div>
 
-                    <div class="flex flex-col gap-2">
-                      <div class="flex flex-wrap items-center gap-2">
-                        <h4 class="text-n-50 text-base font-medium tracking-tight md:text-lg">
+                    <!-- Text right -->
+                    <div class="flex flex-col gap-2 flex-1 min-w-0">
+                      <div class="flex items-center gap-2.5">
+                        <h3 class="text-n-800 text-base font-medium tracking-tight md:text-lg">
                           {pillar.title}
-                        </h4>
+                        </h3>
                         <span
                           class:list={[
-                            "font-secondary rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-[0.16em] uppercase",
-                            accents[pillar.accent].darkChip,
+                            "font-secondary rounded-full px-2 py-0.5 text-[9px] font-semibold tracking-[0.16em] uppercase",
+                            pillar.accent === "orange" && "bg-orange-50 text-orange-700",
+                            pillar.accent === "violet" && "bg-violet-50 text-violet-700",
+                            pillar.accent === "slate" && "bg-n-100 text-n-700",
                           ]}
                         >
                           {pillar.tagline}
                         </span>
                       </div>
-
-                      <div class="flex flex-col gap-1.5">
+                      <p class="font-secondary text-n-500 text-[13px] leading-relaxed md:text-sm">
+                        {pillar.lead}
+                      </p>
+                      <ul class="flex flex-wrap gap-1.5 mt-2">
                         {pillar.items.map((item) => (
-                          <p class="font-secondary flex gap-2 text-[13px] leading-snug">
-                            <span
-                              class:list={[
-                                "mt-1.5 size-1.5 shrink-0 rounded-full",
-                                accents[pillar.accent].dot,
-                              ]}
-                              aria-hidden="true"
-                            />
-                            <span class="text-n-100 font-semibold">
-                              {item.title}
-                            </span>
-                            <span class="text-n-400">{item.description}</span>
-                          </p>
+                          <span class="font-secondary rounded-md bg-n-100 px-2 py-1 text-[11px] text-n-600">
+                            {item.title}
+                          </span>
                         ))}
-                      </div>
+                      </ul>
                     </div>
                   </article>
                 ))}
               </div>
+              <p class="font-secondary text-n-500 mt-6 text-center text-[13px] md:text-sm">
+                {learning360Header.noteCaption}
+              </p>
+            </div>
+          </div>
+        )}
+
+        <!-- ============================================================
+             OPTION 4 - CIRCULAR MINIMAL
+             ============================================================ -->
+        {optionIndex === 3 && (
+          <div class="bg-n-50">
+            <div class="container m-auto px-5 py-6 md:py-10 lg:px-8 2xl:px-0">
+              <div class="flex flex-col items-center gap-4 md:gap-8 text-center">
+                <p class="font-secondary text-orange-600 text-[11px] font-semibold tracking-[0.24em] uppercase md:text-xs">
+                  {learning360Header.eyebrow}
+                </p>
+                <h2 class="text-n-800 text-2xl font-medium tracking-tight md:text-3xl">
+                  {learning360Header.titleLead}{" "}
+                  <span class="text-orange-500">{learning360Header.titleHighlight}</span>{" "}
+                  {learning360Header.titleTail}
+                </h2>
+                <p class="font-secondary text-n-600 text-[13px] leading-relaxed md:text-sm max-w-2xl">
+                  {learning360Header.subtitle}
+                </p>
+              </div>
+              <div class="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10 pt-8">
+                {learningPillars.map((pillar, index) => (
+                  <article class="flex flex-col items-center gap-4 p-4 md:p-6 rounded-2xl border border-n-100 bg-white shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="relative size-24 md:size-32 shrink-0 rounded-full overflow-hidden border border-n-200 shadow-sm">
+                      <img
+                        src={pillarImages[index].src}
+                        alt={pillarImages[index].alt}
+                        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <span class="absolute -bottom-2 -right-2 font-secondary size-5 shrink-0 items-center justify-center rounded-full border border-white bg-n-50 text-[10px] font-semibold">
+                        {pillar.index}
+                      </span>
+                    </div>
+                    <h3 class="text-n-800 text-base font-medium tracking-tight md:text-lg">
+                      {pillar.title}
+                    </h3>
+                    <span
+                      class:list={[
+                        "font-secondary rounded-full px-2 py-0.5 text-[9px] font-semibold tracking-[0.16em] uppercase",
+                        pillar.accent === "orange" && "bg-orange-50 text-orange-700",
+                        pillar.accent === "violet" && "bg-violet-50 text-violet-700",
+                        pillar.accent === "slate" && "bg-n-100 text-n-700",
+                      ]}
+                    >
+                      {pillar.tagline}
+                    </span>
+                    <div class="flex flex-wrap justify-center gap-1.5 mt-3">
+                      {pillar.items.map((item) => (
+                        <span class="font-secondary rounded-md bg-n-100 px-2 py-1 text-[11px] text-n-600">
+                          {item.title}
+                        </span>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+              </div>
+              <p class="font-secondary text-n-500 mt-6 text-center text-[13px] md:text-sm">
+                {learning360Header.noteCaption}
+              </p>
             </div>
           </div>
         )}
@@ -547,14 +523,14 @@ const options = [
                             </h4>
                             <span
                               class:list={[
-                                "font-secondary rounded-full px-2 py-0.5 text-[9px] font-semibold tracking-[0.16em] uppercase",
+                                "font-secondary rounded-full px-2 py-0.5 text-[10px] font-semibold tracking-[0.16em] uppercase",
                                 accents[pillar.accent].chip,
                               ]}
                             >
                               {pillar.tagline}
                             </span>
                           </div>
-                          <p class="font-secondary text-n-400 line-clamp-2 text-[13px]">
+                          <p class="font-secondary text-n-500 line-clamp-2 text-[13px]">
                             {pillar.items
                               .map((item) => item.title)
                               .join("  ·  ")}
@@ -579,7 +555,261 @@ const options = [
             </div>
           </div>
         )}
+
+        <!-- ============================================================
+             OPTION 6 - TRIPTYCH - ALL THREE AT ONCE
+             ============================================================ -->
+        {optionIndex === 5 && (
+          <div class="bg-n-100">
+            <div class="container m-auto px-5 py-6 md:py-8 lg:px-8 2xl:px-0">
+              <div class="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5">
+                {learningPillars.map((pillar, index) => (
+                  <article class="group relative overflow-hidden rounded-2xl">
+                    <img
+                      src={pillarImages[index].src}
+                      alt={pillarImages[index].alt}
+                      class="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-105 md:h-72"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div
+                      class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent"
+                      aria-hidden="true"
+                    />
+                    <span
+                      class="font-secondary absolute top-3 left-3 flex size-8 items-center justify-center rounded-lg bg-white/95 text-xs font-semibold text-n-800"
+                    >
+                      {pillar.index}
+                    </span>
+
+                    <div class="absolute inset-x-0 bottom-0 flex flex-col gap-2 p-4 md:p-5">
+                      <span
+                        class:list={[
+                          "font-secondary w-fit rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-[0.16em] uppercase",
+                          pillar.accent === "orange" &&
+                            "bg-orange-500/90 text-white",
+                          pillar.accent === "violet" &&
+                            "bg-violet-500/90 text-white",
+                          pillar.accent === "slate" &&
+                            "bg-white/90 text-n-800",
+                        ]}
+                      >
+                        {pillar.tagline}
+                      </span>
+                      <h3 class="text-lg font-medium tracking-tight text-white md:text-xl">
+                        {pillar.title}
+                      </h3>
+                      <div class="flex flex-wrap gap-1.5">
+                        {pillar.items.map((item) => (
+                          <span class="font-secondary rounded-md bg-white/15 px-2 py-1 text-[11px] text-white/90 backdrop-blur-sm">
+                            {item.title}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+
+              <p class="font-secondary text-n-500 mt-5 text-center text-[13px] md:text-sm">
+                {learning360Header.note} - {learning360Header.noteCaption}
+              </p>
+            </div>
+          </div>
+        )}
+        <!-- ============================================================
+        <!-- ============================================================
+             OPTION 7 - SPLIT SCREEN CARDS
+             ============================================================ -->
+        {optionIndex === 6 && (
+          <div class="bg-n-50">
+            <div class="container m-auto px-5 py-6 md:py-8 lg:px-8 2xl:px-0">
+              <div class="flex flex-col items-center gap-4 md:gap-6">
+                <p class="font-secondary text-orange-600 text-[11px] font-semibold tracking-[0.24em] uppercase md:text-xs">
+                  {learning360Header.eyebrow}
+                </p>
+                <h2 class="text-n-800 text-2xl font-medium tracking-tight text-center md:text-3xl">
+                  {learning360Header.titleLead}{" "}
+                  <span class="text-orange-500">{learning360Header.titleHighlight}</span>{" "}
+                  {learning360Header.titleTail}
+                </h2>
+              </div>
+              <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+                {learningPillars.map((pillar, index) => (
+                  <article class="group relative overflow-hidden rounded-2xl border border-n-200 bg-white shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="grid grid-cols-1 md:grid-cols-2">
+                      <!-- Image side -->
+                      <div class="relative h-40 md:h-48 overflow-hidden rounded-l-2xl md:rounded-l-none md:rounded-r-2xl">
+                        <img
+                          src={pillarImages[index].src}
+                          alt={pillarImages[index].alt}
+                          class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        <span class="absolute top-3 left-3 font-secondary text-[10px] font-semibold tracking-[0.16em] uppercase bg-white/90 backdrop-blur-sm border border-n-200 px-2 py-1 rounded-full">
+                          {pillar.tagline}
+                        </span>
+                      </div>
+                      <!-- Content side -->
+                      <div class="p-5 md:p-6 flex flex-col justify-between">
+                        <div>
+                          <div class="flex items-center gap-2.5 mb-3">
+                            <span class="font-secondary flex size-7 shrink-0 items-center justify-center rounded-full border border-n-200 text-[11px] font-semibold">
+                              {pillar.index}
+                            </span>
+                            <h3 class="text-n-800 text-lg font-medium tracking-tight md:text-xl">
+                              {pillar.title}
+                            </h3>
+                          </div>
+                          <p class="font-secondary text-n-500 text-[13px] leading-relaxed md:text-sm">
+                            {pillar.lead}
+                          </p>
+                        </div>
+                        <div class="flex flex-wrap gap-1.5 mt-4">
+                          {pillar.items.map((item) => (
+                            <span class="font-secondary rounded-md bg-n-100 px-2 py-1 text-[11px] text-n-600">
+                              {item.title}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+              <p class="font-secondary text-n-500 mt-6 text-center text-[13px] md:text-sm">
+                {learning360Header.noteCaption}
+              </p>
+            </div>
+          </div>
+        )}
+
+        <!-- ============================================================
+             OPTION 8 - MINIMALIST TYPOGRAPHY
+             ============================================================ -->
+        {optionIndex === 7 && (
+          <div class="bg-white">
+            <div class="container m-auto px-5 py-6 md:py-10 lg:px-8 2xl:px-0">
+              <div class="flex flex-col items-center gap-4 md:gap-8 text-center">
+                <p class="font-secondary text-orange-600 text-[11px] font-semibold tracking-[0.24em] uppercase md:text-xs">
+                  {learning360Header.eyebrow}
+                </p>
+                <h2 class="text-n-800 text-2xl font-medium tracking-tight md:text-4xl">
+                  {learning360Header.titleLead}{" "}
+                  <span class="text-orange-500">{learning360Header.titleHighlight}</span>{" "}
+                  {learning360Header.titleTail}
+                </h2>
+                <p class="font-secondary text-n-600 text-[13px] leading-relaxed md:text-sm max-w-2xl">
+                  {learning360Header.subtitle}
+                </p>
+              </div>
+              <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 mt-8">
+                {learningPillars.map((pillar, index) => (
+                  <article class="flex flex-col items-start gap-4 p-6 md:p-8 rounded-2xl border border-n-100 bg-white shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="flex items-center gap-3">
+                      <div class="relative shrink-0">
+                        <img
+                          src={pillarImages[index].src}
+                          alt={pillarImages[index].alt}
+                          class="size-16 object-cover rounded-full border border-n-200 shadow-sm"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        <span class="absolute -bottom-1 -right-1 font-secondary size-4 shrink-0 items-center justify-center rounded-full border border-white bg-n-50 text-[10px] font-semibold">
+                          {pillar.index}
+                        </span>
+                      </div>
+                      <div>
+                        <h3 class="text-n-800 text-base font-medium tracking-tight md:text-lg">
+                          {pillar.title}
+                        </h3>
+                        <span class="font-secondary text-[11px] font-semibold tracking-[0.16em] uppercase text-orange-600">
+                          {pillar.tagline}
+                        </span>
+                      </div>
+                    </div>
+                    <ul class="flex flex-col gap-2">
+                      {pillar.items.map((item) => (
+                        <li class="font-secondary flex gap-2 text-n-500 text-[13px] leading-snug">
+                          <span class="mt-1.5 size-1.5 shrink-0 rounded-full bg-n-200" aria-hidden="true" />
+                          <span class="text-n-700 font-semibold">{item.title}</span>
+                          <span class="text-n-400">{item.description}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+              <p class="font-secondary text-n-500 mt-8 text-center text-[13px] md:text-sm">
+                {learning360Header.noteCaption}
+              </p>
+            </div>
+          </div>
+        )}
+        <!-- ============================================================
+             OPTION 9 - CENTERED IMAGE CARDS
+             ============================================================ -->
+        {optionIndex === 8 && (
+          <div class="bg-n-50">
+            <div class="container m-auto px-5 py-6 md:py-8 lg:px-8 2xl:px-0">
+              <div class="flex flex-col items-center gap-4 md:gap-6">
+                <p class="font-secondary text-orange-600 text-[11px] font-semibold tracking-[0.24em] uppercase md:text-xs">
+                  {learning360Header.eyebrow}
+                </p>
+                <h2 class="text-n-800 text-2xl font-medium tracking-tight text-center md:text-3xl">
+                  {learning360Header.titleLead}{" "}
+                  <span class="text-orange-500">{learning360Header.titleHighlight}</span>{" "}
+                  {learning360Header.titleTail}
+                </h2>
+                <p class="font-secondary text-n-600 text-[13px] leading-relaxed md:text-sm max-w-2xl text-center">
+                  {learning360Header.subtitle}
+                </p>
+              </div>
+              <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 pt-4">
+                {learningPillars.map((pillar, index) => (
+                  <article class="group relative overflow-hidden rounded-2xl border border-n-200 bg-white shadow-sm transition-shadow duration-300 hover:shadow-md">
+                    <div class="relative h-48 w-full overflow-hidden rounded-t-2xl md:h-56">
+                      <img
+                        src={pillarImages[index].src}
+                        alt={pillarImages[index].alt}
+                        class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <span class="absolute top-3 left-3 z-10 font-secondary text-[10px] font-semibold tracking-[0.16em] uppercase bg-white/90 backdrop-blur-sm border border-n-200 px-2 py-1 rounded-full">
+                        {pillar.tagline}
+                      </span>
+                    </div>
+                    <div class="flex flex-col gap-2 p-5 md:p-6">
+                      <div class="flex items-center gap-3">
+                        <span class="font-secondary flex size-7 shrink-0 items-center justify-center rounded-full border border-n-200 text-[11px] font-semibold">
+                          {pillar.index}
+                        </span>
+                        <h3 class="text-n-800 text-lg font-medium tracking-tight md:text-xl">
+                          {pillar.title}
+                        </h3>
+                      </div>
+                      <div class="flex flex-wrap gap-1.5">
+                        {pillar.items.map((item) => (
+                          <span class="font-secondary rounded-md bg-n-100 px-2 py-1 text-[11px] text-n-600">
+                            {item.title}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+              <p class="font-secondary text-n-500 mt-5 text-center text-[13px] md:text-sm">
+                {learning360Header.noteCaption}
+              </p>
+            </div>
+          </div>
+        )}
       </section>
+    ))
+  }
     ))
   }
 
@@ -587,7 +817,7 @@ const options = [
   <section class="border-t border-n-200 bg-white">
     <div class="container m-auto flex flex-col gap-1.5 px-5 py-7 md:py-9">
       <p class="text-n-800 text-base font-medium md:text-lg">
-        Pick one - Option 01 to 05.
+        Pick one - Option 01 to 09.
       </p>
       <p class="font-secondary text-n-500 max-w-2xl text-[13px] leading-relaxed md:text-sm">
         Temporary page. The chosen layout gets ported into{" "}

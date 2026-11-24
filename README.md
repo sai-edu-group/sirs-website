@@ -1,6 +1,6 @@
 # SAI Residential School
 
-Official website for SAI Residential School — built with [Astro](https://astro.build) and Tailwind CSS.
+Official website for SAI Residential School - built with [Astro](https://astro.build) and Tailwind CSS.
 
 ## Tech Stack
 
