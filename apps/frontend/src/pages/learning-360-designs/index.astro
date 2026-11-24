@@ -414,7 +414,7 @@ const options = [
                 <p class="font-secondary text-orange-600 text-[11px] font-semibold tracking-[0.24em] uppercase md:text-xs">
                   {learning360Header.eyebrow}
                 </p>
-                <h2 class="text-n-800 text-2xl font-medium tracking-tight md:text-3xl">
+                <h2 class="text-n-800 text-2xl font-medium tracking-tight md:text-4xl">
                   {learning360Header.titleLead}{" "}
                   <span class="text-orange-500">{learning360Header.titleHighlight}</span>{" "}
                   {learning360Header.titleTail}
@@ -426,11 +426,11 @@ const options = [
               <div class="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10 pt-8">
                 {learningPillars.map((pillar, index) => (
                   <article class="flex flex-col items-center gap-4 p-4 md:p-6 rounded-2xl border border-n-100 bg-white shadow-sm hover:shadow-md transition-all duration-300">
-                    <div class="relative size-24 md:size-32 shrink-0 rounded-full overflow-hidden border border-n-200 shadow-sm">
+                    <div class="relative size-36 md:size-48 shrink-0 rounded-full overflow-hidden border border-n-200 shadow-sm">
                       <img
                         src={pillarImages[index].src}
                         alt={pillarImages[index].alt}
-                        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                         loading="lazy"
                         decoding="async"
                       />
@@ -623,7 +623,7 @@ const options = [
              ============================================================ -->
         {optionIndex === 6 && (
           <div class="bg-n-50">
-            <div class="container m-auto px-5 py-6 md:py-8 lg:px-8 2xl:px-0">
+            <div class="container m-auto px-5 py-6 md:py-10 lg:px-8 2xl:px-0">
               <div class="flex flex-col items-center gap-4 md:gap-6">
                 <p class="font-secondary text-orange-600 text-[11px] font-semibold tracking-[0.24em] uppercase md:text-xs">
                   {learning360Header.eyebrow}
@@ -634,12 +634,12 @@ const options = [
                   {learning360Header.titleTail}
                 </h2>
               </div>
-              <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+              <div class="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10">
                 {learningPillars.map((pillar, index) => (
                   <article class="group relative overflow-hidden rounded-2xl border border-n-200 bg-white shadow-sm hover:shadow-lg transition-all duration-300">
                     <div class="grid grid-cols-1 md:grid-cols-2">
                       <!-- Image side -->
-                      <div class="relative h-40 md:h-48 overflow-hidden rounded-l-2xl md:rounded-l-none md:rounded-r-2xl">
+                      <div class="relative h-52 md:h-64 overflow-hidden rounded-l-2xl md:rounded-l-none md:rounded-r-2xl">
                         <img
                           src={pillarImages[index].src}
                           alt={pillarImages[index].alt}
@@ -652,7 +652,7 @@ const options = [
                         </span>
                       </div>
                       <!-- Content side -->
-                      <div class="p-5 md:p-6 flex flex-col justify-between">
+                      <div class="p-6 md:p-8 flex flex-col justify-between">
                         <div>
                           <div class="flex items-center gap-2.5 mb-3">
                             <span class="font-secondary flex size-7 shrink-0 items-center justify-center rounded-full border border-n-200 text-[11px] font-semibold">
@@ -707,16 +707,16 @@ const options = [
               <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 mt-8">
                 {learningPillars.map((pillar, index) => (
                   <article class="flex flex-col items-start gap-4 p-6 md:p-8 rounded-2xl border border-n-100 bg-white shadow-sm hover:shadow-md transition-all duration-300">
-                    <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-4">
                       <div class="relative shrink-0">
                         <img
                           src={pillarImages[index].src}
                           alt={pillarImages[index].alt}
-                          class="size-16 object-cover rounded-full border border-n-200 shadow-sm"
+                          class="h-32 md:h-40 w-full object-cover rounded-xl border border-n-200 shadow-sm"
                           loading="lazy"
                           decoding="async"
                         />
-                        <span class="absolute -bottom-1 -right-1 font-secondary size-4 shrink-0 items-center justify-center rounded-full border border-white bg-n-50 text-[10px] font-semibold">
+                        <span class="absolute -bottom-1 -right-1 font-secondary size-5 shrink-0 items-center justify-center rounded-full border border-white bg-n-50 text-[10px] font-semibold">
                           {pillar.index}
                         </span>
                       </div>
