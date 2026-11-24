@@ -97,7 +97,7 @@ const imageClasses =
   >
     <!-- Text -->
     <div
-      class="flex flex-col justify-center gap-5 lg:w-xl lg:max-w-[52%] lg:gap-4"
+      class="flex flex-col justify-center gap-5 lg:w-xl lg:max-w-[75%] lg:gap-4"
     >
       {
         eyebrow && (
@@ -122,14 +122,14 @@ const imageClasses =
         class:list={[
           "page-hero-rise text-n-800 leading-[112%] font-medium",
           titleSize === "compact"
-            ? "text-3xl md:text-4xl xl:text-5xl 2xl:text-6xl"
-            : "text-4xl md:text-5xl xl:text-6xl 2xl:text-7xl",
+            ? "text-3xl md:text-4xl lg:text-4xl"
+            : "text-4xl md:text-5xl lg:text-5xl",
         ]}
         style="--delay: 0.15s"
       >
         {titleBefore}{
           hasHighlight && (
-            <span class="whitespace-nowrap text-orange-500">{highlight}</span>
+            <span class="text-orange-500">{highlight}</span>
           )
         }{titleAfter}
       </h1>
