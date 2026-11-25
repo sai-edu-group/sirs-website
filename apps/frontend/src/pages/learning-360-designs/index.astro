@@ -114,7 +114,7 @@ const options = [
   meta={{
     title: "Learning 360 - Design Options",
     description:
-      "Nine design options for the Learning @ 360 section - internal review page.",
+      "Ten design options for the Learning @ 360 section - internal review page.",
   }}
 >
   <!-- PAGE INTRO -->
@@ -818,12 +818,12 @@ const options = [
              ============================================================ -->
         {optionIndex === 9 && (
           <div class="bg-n-50">
-            <div class="container m-auto px-5 py-6 md:py-8 lg:px-8 2xl:px-0">
-              <div class="flex flex-col items-center gap-4 md:gap-6">
+            <div class="container m-auto px-5 py-6 md:py-10 lg:px-8 2xl:px-0">
+              <div class="flex flex-col items-center gap-4 md:gap-8">
                 <p class="font-secondary text-orange-600 text-[11px] font-semibold tracking-[0.24em] uppercase md:text-xs">
                   {learning360Header.eyebrow}
                 </p>
-                <h2 class="text-n-800 text-2xl font-medium tracking-tight text-center md:text-3xl">
+                <h2 class="text-n-800 text-3xl font-medium tracking-tight md:text-4xl">
                   {learning360Header.titleLead}{" "}
                   <span class="text-orange-500">{learning360Header.titleHighlight}</span>{" "}
                   {learning360Header.titleTail}
@@ -832,48 +832,57 @@ const options = [
                   {learning360Header.subtitle}
                 </p>
               </div>
-              <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 pt-4">
+              <div class="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10 pt-4">
                 {learningPillars.map((pillar, index) => (
-                  <article class="group relative overflow-hidden rounded-2xl border border-n-200 bg-white shadow-sm transition-shadow duration-300 hover:shadow-md">
-                    <div class="relative h-60 md:h-72 overflow-hidden rounded-t-2xl">
+                  <article
+                    class="group relative overflow-hidden rounded-3xl border border-n-200 bg-white shadow-sm transition-all duration-300 hover:border-orange-400 hover:shadow-[0_20px_40px_rgba(15,23,42,0.12)] hover:-translate-y-2"
+                  >
+                    <div class="relative h-64 md:h-80 overflow-hidden rounded-t-3xl">
                       <img
                         src={pillarImages[index].src}
                         alt={pillarImages[index].alt}
-                        class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                         loading="lazy"
                         decoding="async"
                       />
-                      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                      <span class="absolute top-3 left-3 z-10 font-secondary text-[10px] font-semibold tracking-[0.16em] uppercase bg-white/90 backdrop-blur-sm border border-n-200 px-2 py-1 rounded-full">
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                      <span class="absolute top-4 left-4 z-10 font-secondary text-[11px] font-semibold tracking-[0.16em] uppercase bg-white/95 backdrop-blur-sm border border-n-200 px-3 py-1.5 rounded-full">
                         {pillar.index}
                       </span>
-                    </div>
-                    <div class="absolute inset-x-0 bottom-0 p-5 md:p-6">
-                      <span
-                        class:list={[
-                          "font-secondary rounded-full px-2 py-0.5 text-[9px] font-semibold tracking-[0.16em] uppercase",
-                          pillar.accent === "orange" && "bg-orange-50 text-orange-700",
-                          pillar.accent === "violet" && "bg-violet-50 text-violet-700",
-                          pillar.accent === "slate" && "bg-n-100 text-n-700",
-                        ]}
-                      >
+                      <span class="absolute top-4 right-4 z-10 font-secondary text-[11px] font-semibold tracking-[0.16em] uppercase bg-white/95 backdrop-blur-sm border border-n-200 px-3 py-1.5 rounded-full">
                         {pillar.tagline}
                       </span>
-                      <h3 class="text-n-800 text-lg font-medium tracking-tight text-white md:text-xl">
+                    </div>
+                    <div class="absolute inset-x-0 bottom-0 p-5 md:p-6 pt-8">
+                      <h3 class="text-n-800 text-lg font-medium tracking-tight text-white md:text-xl mb-2">
                         {pillar.title}
                       </h3>
-                      <div class="flex flex-wrap gap-1.5 mt-2">
+                      <p class="font-secondary text-white/80 text-[12px] leading-snug md:text-sm mb-4 max-w-[240px]">
+                        {pillar.lead}
+                      </p>
+                      <div class="flex flex-wrap gap-1.5">
                         {pillar.items.map((item) => (
-                          <span class="font-secondary rounded-md bg-white/15 px-2 py-1 text-[11px] text-n-200 backdrop-blur-sm">
+                          <span class="font-secondary rounded-md bg-white/15 px-2.5 py-1 text-[11px] text-n-200 backdrop-blur-sm border border-white/10">
                             {item.title}
                           </span>
                         ))}
                       </div>
                     </div>
+                    <div
+                      class="absolute inset-x-0 bottom-0 p-5 md:p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    >
+                      <a
+                        href="/sirs-experience/learning-360"
+                        class="font-secondary inline-flex items-center gap-2 rounded-lg bg-orange-500 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600"
+                      >
+                        Explore {pillar.title}
+                        <span class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+                      </a>
+                    </div>
                   </article>
                 ))}
               </div>
-              <p class="font-secondary text-n-500 mt-5 text-center text-[13px] md:text-sm">
+              <p class="font-secondary text-n-500 mt-6 text-center text-[13px] md:text-sm">
                 {learning360Header.noteCaption}
               </p>
             </div>
@@ -889,7 +898,7 @@ const options = [
   <section class="border-t border-n-200 bg-white">
     <div class="container m-auto flex flex-col gap-1.5 px-5 py-7 md:py-9">
       <p class="text-n-800 text-base font-medium md:text-lg">
-        Pick one - Option 01 to 09.
+        Pick one - Option 01 to 10.
       </p>
       <p class="font-secondary text-n-500 max-w-2xl text-[13px] leading-relaxed md:text-sm">
         Temporary page. The chosen layout gets ported into{" "}
