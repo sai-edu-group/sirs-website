@@ -84,32 +84,20 @@ const options = [
     name: "Triptych - All Three at Once",
   },
   {
-    id: "option-7",
-    num: "07",
-    name: "Photo + Topic Panel",
-    note: "One tall photo beside a clean topic panel.",
-  },
-  {
-    id: "option-8",
-    num: "08",
-    name: "Dark Feature Band",
-    note: "Contrast band, photo thumbnail per pillar.",
-  },
-  {
     id: "option-9",
-    num: "09",
+    num: "07",
     name: "Centered Image Cards",
     note: "Equal image cards with tagline chip overlay.",
   },
   {
     id: "option-10",
-    num: "10",
+    num: "08",
     name: "Bottom Overlay Cards",
     note: "Image cards with tagline + title overlay at bottom.",
   },
   {
     id: "option-11",
-    num: "11",
+    num: "09",
     name: "Full Image Cards",
     note: "Each card is the image itself with centered text overlay.",
   },
@@ -231,7 +219,6 @@ const options = [
                             accents[pillar.accent].border,
                           ]}
                         >
-                          {pillar.index}
                         </span>
                         <h3 class="text-n-800 text-lg font-medium tracking-tight md:text-xl">
                           {pillar.title}
@@ -303,7 +290,6 @@ const options = [
                             accents[pillar.accent].text,
                           ]}
                         >
-                          {pillar.index}
                         </span>
                         <h3 class="text-n-800 text-base font-medium tracking-tight md:text-lg">
                           {pillar.title}
@@ -374,7 +360,6 @@ const options = [
                         decoding="async"
                       />
                       <span class="absolute top-2 left-2 font-secondary size-4 shrink-0 items-center justify-center rounded-full border border-n-200 bg-white text-[9px] font-semibold">
-                        {pillar.index}
                       </span>
                     </div>
 
@@ -447,7 +432,6 @@ const options = [
                         decoding="async"
                       />
                       <span class="absolute -bottom-2 -right-2 font-secondary size-5 shrink-0 items-center justify-center rounded-full border border-white bg-n-50 text-[10px] font-semibold">
-                        {pillar.index}
                       </span>
                     </div>
                     <h3 class="text-n-800 text-base font-medium tracking-tight md:text-lg">
@@ -591,7 +575,6 @@ const options = [
                     <span
                       class="font-secondary absolute top-3 left-3 flex size-8 items-center justify-center rounded-lg bg-white/95 text-xs font-semibold text-n-800"
                     >
-                      {pillar.index}
                     </span>
 
                     <div class="absolute inset-x-0 bottom-0 flex flex-col gap-2 p-4 md:p-5">
@@ -668,7 +651,6 @@ const options = [
                         <div>
                           <div class="flex items-center gap-2.5 mb-3">
                             <span class="font-secondary flex size-7 shrink-0 items-center justify-center rounded-full border border-n-200 text-[11px] font-semibold">
-                              {pillar.index}
                             </span>
                             <h3 class="text-n-800 text-lg font-medium tracking-tight md:text-xl">
                               {pillar.title}
@@ -729,7 +711,6 @@ const options = [
                           decoding="async"
                         />
                         <span class="absolute -bottom-1 -right-1 font-secondary size-5 shrink-0 items-center justify-center rounded-full border border-white bg-n-50 text-[10px] font-semibold">
-                          {pillar.index}
                         </span>
                       </div>
                       <div>
@@ -762,7 +743,7 @@ const options = [
         <!-- ============================================================
              OPTION 9 - CENTERED IMAGE CARDS
              ============================================================ -->
-        {optionIndex === 8 && (
+        {optionIndex === 6 && (
           <div class="bg-n-50">
             <div class="container m-auto px-5 py-6 md:py-8 lg:px-8 2xl:px-0">
               <div class="flex flex-col items-center gap-4 md:gap-6">
@@ -796,7 +777,6 @@ const options = [
                     <div class="flex flex-col gap-2 p-5 md:p-6">
                       <div class="flex items-center gap-3">
                         <span class="font-secondary flex size-7 shrink-0 items-center justify-center rounded-full border border-n-200 text-[11px] font-semibold">
-                          {pillar.index}
                         </span>
                         <h3 class="text-n-800 text-lg font-medium tracking-tight md:text-xl">
                           {pillar.title}
@@ -822,7 +802,7 @@ const options = [
         <!-- ============================================================
              OPTION 10 - BOTTOM OVERLAY CARDS
              ============================================================ -->
-        {optionIndex === 9 && (
+        {optionIndex === 7 && (
           <div class="bg-n-50">
             <div class="container m-auto px-5 py-6 md:py-10 lg:px-8 2xl:px-0">
               <div class="flex flex-col items-center gap-4 md:gap-8">
@@ -853,7 +833,6 @@ const options = [
                       />
                       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                       <span class="absolute top-4 left-4 z-10 font-secondary text-[11px] font-semibold tracking-[0.16em] uppercase bg-white/95 backdrop-blur-sm border border-n-200 px-3 py-1.5 rounded-full">
-                        {pillar.index}
                       </span>
                       <span class="absolute top-4 right-4 z-10 font-secondary text-[11px] font-semibold tracking-[0.16em] uppercase bg-white/95 backdrop-blur-sm border border-n-200 px-3 py-1.5 rounded-full">
                         {pillar.tagline}
@@ -897,7 +876,7 @@ const options = [
         <!-- ============================================================
              OPTION 11 - FULL IMAGE CARDS
              ============================================================ -->
-        {optionIndex === 10 && (
+        {optionIndex === 8 && (
           <div class="bg-n-50">
             <div class="container m-auto px-5 py-6 md:py-10 lg:px-8 2xl:px-0">
               <div class="flex flex-col items-center gap-4 md:gap-8">
@@ -926,7 +905,6 @@ const options = [
                       />
                       <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
                       <span class="absolute top-4 left-4 z-10 font-secondary text-[11px] font-semibold tracking-[0.16em] uppercase bg-white/95 backdrop-blur-sm border border-n-200 px-3 py-1.5 rounded-full">
-                        {pillar.index}
                       </span>
                     </div>
                     <div class="absolute inset-x-0 bottom-0 p-6 md:p-8">
@@ -979,4 +957,9 @@ const options = [
       </p>
     </div>
   </section>
+  <script>
+    document.querySelectorAll('span').forEach(s => {
+      if (!s.textContent.trim()) s.remove();
+    });
+  </script>
 </Layout>
