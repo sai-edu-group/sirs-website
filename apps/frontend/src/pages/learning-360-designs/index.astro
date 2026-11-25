@@ -871,13 +871,15 @@ const options = [
                     <div
                       class="absolute inset-x-0 bottom-0 p-5 md:p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     >
-                      <a
-                        href="/sirs-experience/learning-360"
-                        class="font-secondary inline-flex items-center gap-2 rounded-lg bg-orange-500 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600"
-                      >
-                        Explore {pillar.title}
-                        <span class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
-                      </a>
+                      <div class="flex justify-end">
+                        <a
+                          href="/sirs-experience/learning-360"
+                          class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-orange-500 text-white transition-colors hover:bg-orange-600 hover:scale-110"
+                          aria-label="Explore {pillar.title}"
+                        >
+                          <span class="text-sm">&rarr;</span>
+                        </a>
+                      </div>
                     </div>
                   </article>
                 ))}
