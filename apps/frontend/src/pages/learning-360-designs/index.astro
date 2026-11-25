@@ -101,6 +101,12 @@ const options = [
     name: "Centered Image Cards",
     note: "Equal image cards with tagline chip overlay.",
   },
+  {
+    id: "option-10",
+    num: "10",
+    name: "Bottom Overlay Cards",
+    note: "Image cards with tagline + title overlay at bottom.",
+  },
 ];
 ---
 
@@ -793,6 +799,72 @@ const options = [
                       <div class="flex flex-wrap gap-1.5">
                         {pillar.items.map((item) => (
                           <span class="font-secondary rounded-md bg-n-100 px-2 py-1 text-[11px] text-n-600">
+                            {item.title}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+              <p class="font-secondary text-n-500 mt-5 text-center text-[13px] md:text-sm">
+                {learning360Header.noteCaption}
+              </p>
+            </div>
+          </div>
+        )}
+        <!-- ============================================================
+             OPTION 10 - BOTTOM OVERLAY CARDS
+             ============================================================ -->
+        {optionIndex === 9 && (
+          <div class="bg-n-50">
+            <div class="container m-auto px-5 py-6 md:py-8 lg:px-8 2xl:px-0">
+              <div class="flex flex-col items-center gap-4 md:gap-6">
+                <p class="font-secondary text-orange-600 text-[11px] font-semibold tracking-[0.24em] uppercase md:text-xs">
+                  {learning360Header.eyebrow}
+                </p>
+                <h2 class="text-n-800 text-2xl font-medium tracking-tight text-center md:text-3xl">
+                  {learning360Header.titleLead}{" "}
+                  <span class="text-orange-500">{learning360Header.titleHighlight}</span>{" "}
+                  {learning360Header.titleTail}
+                </h2>
+                <p class="font-secondary text-n-600 text-[13px] leading-relaxed md:text-sm max-w-2xl text-center">
+                  {learning360Header.subtitle}
+                </p>
+              </div>
+              <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 pt-4">
+                {learningPillars.map((pillar, index) => (
+                  <article class="group relative overflow-hidden rounded-2xl border border-n-200 bg-white shadow-sm transition-shadow duration-300 hover:shadow-md">
+                    <div class="relative h-60 md:h-72 overflow-hidden rounded-t-2xl">
+                      <img
+                        src={pillarImages[index].src}
+                        alt={pillarImages[index].alt}
+                        class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                      <span class="absolute top-3 left-3 z-10 font-secondary text-[10px] font-semibold tracking-[0.16em] uppercase bg-white/90 backdrop-blur-sm border border-n-200 px-2 py-1 rounded-full">
+                        {pillar.index}
+                      </span>
+                    </div>
+                    <div class="absolute inset-x-0 bottom-0 p-5 md:p-6">
+                      <span
+                        class:list={[
+                          "font-secondary rounded-full px-2 py-0.5 text-[9px] font-semibold tracking-[0.16em] uppercase",
+                          pillar.accent === "orange" && "bg-orange-50 text-orange-700",
+                          pillar.accent === "violet" && "bg-violet-50 text-violet-700",
+                          pillar.accent === "slate" && "bg-n-100 text-n-700",
+                        ]}
+                      >
+                        {pillar.tagline}
+                      </span>
+                      <h3 class="text-n-800 text-lg font-medium tracking-tight text-white md:text-xl">
+                        {pillar.title}
+                      </h3>
+                      <div class="flex flex-wrap gap-1.5 mt-2">
+                        {pillar.items.map((item) => (
+                          <span class="font-secondary rounded-md bg-white/15 px-2 py-1 text-[11px] text-n-200 backdrop-blur-sm">
                             {item.title}
                           </span>
                         ))}
