@@ -98,8 +98,8 @@ const options = [
   {
     id: "option-11",
     num: "09",
-    name: "Full Image Cards",
-    note: "Each card is the image itself with centered text overlay.",
+    name: "Editorial List",
+    note: "Editorial list layout with circular avatar images and clean typography.",
   },
 ];
 ---
@@ -108,7 +108,7 @@ const options = [
   meta={{
     title: "Learning 360 - Design Options",
     description:
-      "Eleven design options for the Learning @ 360 section - internal review page.",
+      "Nine design options for the Learning @ 360 section - internal review page.",
   }}
 >
   <!-- PAGE INTRO -->
@@ -874,16 +874,19 @@ const options = [
         )}
       </section>
         <!-- ============================================================
-             OPTION 11 - FULL IMAGE CARDS
+             OPTION 11 - EDITORIAL LIST
+             ============================================================ -->
+        <!-- ============================================================
+             OPTION 11 - MINIMALIST EDITORIAL LIST
              ============================================================ -->
         {optionIndex === 8 && (
-          <div class="bg-n-50">
+          <div class="bg-white">
             <div class="container m-auto px-5 py-6 md:py-10 lg:px-8 2xl:px-0">
-              <div class="flex flex-col items-center gap-4 md:gap-8">
+              <div class="flex flex-col items-center gap-4 md:gap-8 text-center">
                 <p class="font-secondary text-orange-600 text-[11px] font-semibold tracking-[0.24em] uppercase md:text-xs">
                   {learning360Header.eyebrow}
                 </p>
-                <h2 class="text-n-800 text-2xl font-medium tracking-tight text-center md:text-3xl">
+                <h2 class="text-n-800 text-3xl font-medium tracking-tight md:text-4xl">
                   {learning360Header.titleLead}{" "}
                   <span class="text-orange-500">{learning360Header.titleHighlight}</span>{" "}
                   {learning360Header.titleTail}
@@ -892,59 +895,50 @@ const options = [
                   {learning360Header.subtitle}
                 </p>
               </div>
-              <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 pt-4">
+              <div class="grid grid-cols-1 gap-6 md:grid-cols-1 md:gap-8 pt-4">
                 {learningPillars.map((pillar, index) => (
-                  <article class="group relative overflow-hidden rounded-3xl border border-n-200 bg-white shadow-sm hover:shadow-[0_25px_50px_rgba(15,23,42,0.15)] transition-all duration-500 hover:-translate-y-4 hover:scale-[1.02]">
-                    <div class="relative h-80 md:h-96 overflow-hidden rounded-3xl">
-                      <img
-                        src={pillarImages[index].src}
-                        alt={pillarImages[index].alt}
-                        class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                      <span class="absolute top-4 left-4 z-10 font-secondary text-[10px] font-semibold tracking-[0.16em] uppercase bg-white/90 backdrop-blur-sm border border-white/40 px-3 py-1.5 rounded-full">
-                      </span>
-                    </div>
-                    <div class="absolute inset-x-0 bottom-0 p-6 md:p-8">
-                      <div class="flex items-end justify-between gap-3">
-                        <div class="flex flex-col gap-1.5">
-                          <span
-                            class:list={[
-                              "font-secondary rounded-full px-2 py-0.5 text-[9px] font-semibold tracking-[0.16em] uppercase",
-                              pillar.accent === "orange" && "bg-orange-50 text-orange-700",
-                              pillar.accent === "violet" && "bg-violet-50 text-violet-700",
-                              pillar.accent === "slate" && "bg-n-100 text-n-700",
-                            ]}
-                          >
-                            {pillar.tagline}
+                  <article class="group relative overflow-hidden rounded-2xl border border-n-200 bg-white shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-0 items-center">
+                      <!-- Image left -->
+                      <div class="relative h-48 md:h-60 overflow-hidden rounded-l-2xl md:rounded-l-none md:rounded-r-2xl bg-n-50 flex items-center justify-center">
+                        <img
+                          src={pillarImages[index].src}
+                          alt={pillarImages[index].alt}
+                          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
+                      <!-- Content right -->
+                      <div class="p-6 md:p-8 flex flex-col justify-center">
+                        <div class="flex items-center gap-2.5 mb-3">
+                          <span class="font-secondary flex size-8 shrink-0 items-center justify-center rounded-full border border-n-200 text-[11px] font-semibold">
+                            {pillar.index}
                           </span>
-                          <h3 class="text-n-800 text-lg font-medium tracking-tight text-white md:text-xl mb-2">
+                          <h3 class="text-n-800 text-lg font-medium tracking-tight md:text-xl">
                             {pillar.title}
                           </h3>
-                          <p class="font-secondary text-white/70 text-[12px] leading-snug md:text-sm max-w-[240px] mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
-                            {pillar.lead}
-                          </p>
                         </div>
-                        <div class="flex justify-end">
-                          <a
-                            href="/sirs-experience/learning-360"
-                            class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-orange-500 text-white transition-all duration-300 hover:bg-orange-600 hover:scale-110 opacity-0 group-hover:opacity-100"
-                            aria-label="Explore {pillar.title}"
-                          >
-                            <span class="text-sm">&rarr;</span>
-                          </a>
+                        <span
+                          class:list={[
+                            "font-secondary rounded-full px-2 py-0.5 text-[9px] font-semibold tracking-[0.16em] uppercase",
+                            pillar.accent === "orange" && "bg-orange-50 text-orange-700",
+                            pillar.accent === "violet" && "bg-violet-50 text-violet-700",
+                            pillar.accent === "slate" && "bg-n-100 text-n-700",
+                          ]}
+                        >
+                          {pillar.tagline}
+                        </span>
+                        <p class="font-secondary text-n-500 text-[13px] leading-relaxed md:text-sm mt-4">
+                          {pillar.lead}
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-5">
+                          {pillar.items.map((item) => (
+                            <span class="font-secondary rounded-md bg-n-100 px-2 py-1 text-[11px] text-n-600">
+                              {item.title}
+                            </span>
+                          ))}
                         </div>
-                      </div>
-                    </div>
-                    <div class="absolute inset-x-0 bottom-0 p-4 md:p-6">
-                      <div class="flex flex-wrap gap-1.5">
-                        {pillar.items.map((item) => (
-                          <span class="font-secondary rounded-md bg-white/10 px-2 py-1 text-[11px] text-n-300 backdrop-blur-sm border border-white/10">
-                            {item.title}
-                          </span>
-                        ))}
                       </div>
                     </div>
                   </article>
@@ -965,7 +959,7 @@ const options = [
   <section class="border-t border-n-200 bg-white">
     <div class="container m-auto flex flex-col gap-1.5 px-5 py-7 md:py-9">
       <p class="text-n-800 text-base font-medium md:text-lg">
-        Pick one - Option 01 to 11.
+        Pick one - Option 01 to 09.
       </p>
       <p class="font-secondary text-n-500 max-w-2xl text-[13px] leading-relaxed md:text-sm">
         Temporary page. The chosen layout gets ported into{" "}
