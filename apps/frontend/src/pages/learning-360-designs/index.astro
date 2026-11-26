@@ -704,7 +704,17 @@ const options = [
                         decoding="async"
                       />
                       <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
-                      <span class="font-secondary absolute top-4 right-4 z-10 rounded-full border border-white/40 bg-white/95 px-3 py-1.5 text-[11px] font-semibold tracking-[0.16em] uppercase backdrop-blur-sm">
+                      <span
+                        class:list={[
+                          "font-secondary absolute top-4 right-4 z-10 rounded-full px-3.5 py-1.5 text-[11px] font-semibold tracking-[0.16em] uppercase shadow-lg backdrop-blur-sm",
+                          pillar.accent === "orange" &&
+                            "bg-orange-500 text-white shadow-orange-500/40",
+                          pillar.accent === "violet" &&
+                            "bg-violet-500 text-white shadow-violet-500/40",
+                          pillar.accent === "slate" &&
+                            "bg-n-800 text-white shadow-n-800/40",
+                        ]}
+                      >
                         {pillar.tagline}
                       </span>
                       <div class="absolute inset-x-0 bottom-0 p-5 md:p-6">
