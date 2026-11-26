@@ -894,36 +894,54 @@ const options = [
               </div>
               <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 pt-4">
                 {learningPillars.map((pillar, index) => (
-                  <article class="group relative overflow-hidden rounded-3xl border border-n-200 bg-white shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div class="relative h-72 md:h-96 overflow-hidden rounded-3xl">
+                  <article class="group relative overflow-hidden rounded-3xl border border-n-200 bg-white shadow-sm hover:shadow-[0_25px_50px_rgba(15,23,42,0.15)] transition-all duration-500 hover:-translate-y-4 hover:scale-[1.02]">
+                    <div class="relative h-80 md:h-96 overflow-hidden rounded-3xl">
                       <img
                         src={pillarImages[index].src}
                         alt={pillarImages[index].alt}
-                        class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                         loading="lazy"
                         decoding="async"
                       />
-                      <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-                      <span class="absolute top-4 left-4 z-10 font-secondary text-[11px] font-semibold tracking-[0.16em] uppercase bg-white/95 backdrop-blur-sm border border-n-200 px-3 py-1.5 rounded-full">
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                      <span class="absolute top-4 left-4 z-10 font-secondary text-[10px] font-semibold tracking-[0.16em] uppercase bg-white/90 backdrop-blur-sm border border-white/40 px-3 py-1.5 rounded-full">
                       </span>
                     </div>
                     <div class="absolute inset-x-0 bottom-0 p-6 md:p-8">
-                      <span
-                        class:list={[
-                          "font-secondary rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-[0.16em] uppercase",
-                          pillar.accent === "orange" && "bg-orange-50 text-orange-700",
-                          pillar.accent === "violet" && "bg-violet-50 text-violet-700",
-                          pillar.accent === "slate" && "bg-n-100 text-n-700",
-                        ]}
-                      >
-                        {pillar.tagline}
-                      </span>
-                      <h3 class="text-n-800 text-lg font-medium tracking-tight text-white md:text-xl mb-2">
-                        {pillar.title}
-                      </h3>
+                      <div class="flex items-end justify-between gap-3">
+                        <div class="flex flex-col gap-1.5">
+                          <span
+                            class:list={[
+                              "font-secondary rounded-full px-2 py-0.5 text-[9px] font-semibold tracking-[0.16em] uppercase",
+                              pillar.accent === "orange" && "bg-orange-50 text-orange-700",
+                              pillar.accent === "violet" && "bg-violet-50 text-violet-700",
+                              pillar.accent === "slate" && "bg-n-100 text-n-700",
+                            ]}
+                          >
+                            {pillar.tagline}
+                          </span>
+                          <h3 class="text-n-800 text-lg font-medium tracking-tight text-white md:text-xl mb-2">
+                            {pillar.title}
+                          </h3>
+                          <p class="font-secondary text-white/70 text-[12px] leading-snug md:text-sm max-w-[240px] mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
+                            {pillar.lead}
+                          </p>
+                        </div>
+                        <div class="flex justify-end">
+                          <a
+                            href="/sirs-experience/learning-360"
+                            class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-orange-500 text-white transition-all duration-300 hover:bg-orange-600 hover:scale-110 opacity-0 group-hover:opacity-100"
+                            aria-label="Explore {pillar.title}"
+                          >
+                            <span class="text-sm">&rarr;</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="absolute inset-x-0 bottom-0 p-4 md:p-6">
                       <div class="flex flex-wrap gap-1.5">
                         {pillar.items.map((item) => (
-                          <span class="font-secondary rounded-md bg-white/15 px-2 py-1 text-[11px] text-n-200 backdrop-blur-sm border border-white/10">
+                          <span class="font-secondary rounded-md bg-white/10 px-2 py-1 text-[11px] text-n-300 backdrop-blur-sm border border-white/10">
                             {item.title}
                           </span>
                         ))}
