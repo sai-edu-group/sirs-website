@@ -26,8 +26,9 @@ const accents = {
     border: "border-orange-300",
     solid: "bg-orange-500",
     darkChip: "bg-orange-500/15 text-orange-300",
-  },
-  violet: {
+    softHex: "#fff5f3",
+    accentHex: "#cc554d",
+  },  violet: {
     dot: "bg-violet-500",
     chip: "bg-violet-50 text-violet-600",
     text: "text-violet-600",
@@ -35,6 +36,8 @@ const accents = {
     border: "border-violet-300",
     solid: "bg-violet-500",
     darkChip: "bg-violet-500/20 text-violet-200",
+    softHex: "#f7f5fa",
+    accentHex: "#5c3e70",
   },
   slate: {
     dot: "bg-n-700",
@@ -44,6 +47,8 @@ const accents = {
     border: "border-n-300",
     solid: "bg-n-800",
     darkChip: "bg-white/10 text-n-200",
+    softHex: "#f1f5f9",
+    accentHex: "#1e293b",
   },
 } as const;
 
@@ -67,37 +72,31 @@ const options = [
     note: "One tall photo beside a clean topic panel.",
   },
   {
-    id: "option-4",
-    num: "04",
-    name: "Dark Feature Band",
-    note: "Contrast band, photo thumbnail per pillar.",
-  },
-  {
     id: "option-5",
-    num: "05",
+    num: "04",
     name: "Photo + Overlapping Card",
     note: "Wide photo with the topics card overlapping it.",
   },
   {
     id: "option-6",
-    num: "06",
+    num: "05",
     name: "Triptych - All Three at Once",
   },
   {
     id: "option-9",
-    num: "07",
+    num: "06",
     name: "Centered Image Cards",
     note: "Equal image cards with tagline chip overlay.",
   },
   {
     id: "option-10",
-    num: "08",
+    num: "07",
     name: "Image Card + Pointers",
     note: "Photo header card with programme details as bullet pointers.",
   },
   {
     id: "option-11",
-    num: "09",
+    num: "08",
     name: "Editorial List",
     note: "Editorial list layout with circular avatar images and clean typography.",
   },
@@ -108,7 +107,7 @@ const options = [
   meta={{
     title: "Learning 360 - Design Options",
     description:
-      "Nine design options for the Learning @ 360 section - internal review page.",
+      "Eight design options for the Learning @ 360 section - internal review page.",
   }}
 >
   <!-- PAGE INTRO -->
@@ -127,7 +126,7 @@ const options = [
         Learning @ 360 - design options
       </h1>
       <p class="font-secondary text-n-600 max-w-2xl text-sm leading-relaxed md:text-base">
-        Nine compact layouts for the section. Main topics and images side by
+        Eight compact layouts for the section. Main topics and images side by
         side - shortlist one and it gets built.
       </p>
 
@@ -402,84 +401,65 @@ const options = [
         )}
 
         <!-- ============================================================
-             OPTION 4 - CIRCULAR MINIMAL
+             OPTION 4 - PHOTO + OVERLAPPING CARD
              ============================================================ -->
         {optionIndex === 3 && (
-          <div class="bg-n-50">
-            <div class="container m-auto px-5 py-6 md:py-10 lg:px-8 2xl:px-0">
-              <div class="flex flex-col items-center gap-4 md:gap-8 text-center">
-                <p class="font-secondary text-orange-600 text-[11px] font-semibold tracking-[0.24em] uppercase md:text-xs">
-                  {learning360Header.eyebrow}
-                </p>
-                <h2 class="text-n-800 text-2xl font-medium tracking-tight md:text-4xl">
-                  {learning360Header.titleLead}{" "}
-                  <span class="text-orange-500">{learning360Header.titleHighlight}</span>{" "}
-                  {learning360Header.titleTail}
-                </h2>
-                <p class="font-secondary text-n-600 text-[13px] leading-relaxed md:text-sm max-w-2xl">
-                  {learning360Header.subtitle}
-                </p>
-              </div>
-              <div class="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10 pt-8">
-                {learningPillars.map((pillar, index) => (
-                  <article class="flex flex-col items-center gap-4 p-4 md:p-6 rounded-2xl border border-n-100 bg-white shadow-sm hover:shadow-md transition-all duration-300">
-                    <div class="relative size-36 md:size-48 shrink-0 rounded-full overflow-hidden border border-n-200 shadow-sm">
-                      <img
-                        src={pillarImages[index].src}
-                        alt={pillarImages[index].alt}
-                        class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <span class="absolute -bottom-2 -right-2 font-secondary size-5 shrink-0 items-center justify-center rounded-full border border-white bg-n-50 text-[10px] font-semibold">
-                      </span>
-                    </div>
-                    <h3 class="text-n-800 text-base font-medium tracking-tight md:text-lg">
-                      {pillar.title}
-                    </h3>
-                    <span
-                      class:list={[
-                        "font-secondary rounded-full px-2 py-0.5 text-[9px] font-semibold tracking-[0.16em] uppercase",
-                        pillar.accent === "orange" && "bg-orange-50 text-orange-700",
-                        pillar.accent === "violet" && "bg-violet-50 text-violet-700",
-                        pillar.accent === "slate" && "bg-n-100 text-n-700",
-                      ]}
-                    >
-                      {pillar.tagline}
-                    </span>
-                    <div class="flex flex-wrap justify-center gap-1.5 mt-3">
-                      {pillar.items.map((item) => (
-                        <span class="font-secondary rounded-md bg-n-100 px-2 py-1 text-[11px] text-n-600">
-                          {item.title}
-                        </span>
-                      ))}
-                    </div>
-                  </article>
-                ))}
-              </div>
-              <p class="font-secondary text-n-500 mt-6 text-center text-[13px] md:text-sm">
-                {learning360Header.noteCaption}
-              </p>
-            </div>
-          </div>
-        )}
-
-        <!-- ============================================================
-             OPTION 5 - PHOTO + OVERLAPPING CARD
-             ============================================================ -->
-        {optionIndex === 4 && (
           <div class="bg-n-100">
             <div class="container m-auto px-5 py-6 md:py-8 lg:px-8 2xl:px-0">
-              <div class="grid grid-cols-1 items-center lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-                <!-- Photo -->
-                <div class="overflow-hidden rounded-2xl">
-                  <img
-                    src="/images/strip-stadium.webp"
-                    alt="SIRS campus life"
-                    class="h-44 w-full object-cover md:h-60 lg:h-[400px]"
-                    loading="lazy"
-                    decoding="async"
-                  />
+              <div
+                class="grid grid-cols-1 items-center lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]"
+                data-l360-widget
+              >
+                <!-- Photo - auto-switches through the three pillars -->
+                <div
+                  class="relative h-44 w-full overflow-hidden rounded-2xl md:h-60 lg:h-[400px]"
+                >
+                  {learningPillars.map((pillar, i) => (
+                    <div
+                      class:list={[
+                        "absolute inset-0 transition-opacity duration-700 ease-in-out",
+                        i === 0 ? "opacity-100" : "opacity-0",
+                      ]}
+                      data-l360-slide={i}
+                      aria-hidden={i === 0 ? "false" : "true"}
+                    >
+                      <img
+                        src={pillarImages[i].src}
+                        alt={pillarImages[i].alt}
+                        class="h-full w-full object-cover"
+                        loading={i === 0 ? "eager" : "lazy"}
+                        decoding="async"
+                      />
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
+                      <div class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4 md:p-5">
+                        <div class="flex flex-col gap-1.5">
+                          <span
+                            class:list={[
+                              "font-secondary w-fit rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-[0.16em] uppercase",
+                              accents[pillar.accent].darkChip,
+                            ]}
+                          >
+                            {pillar.tagline}
+                          </span>
+                          <p class="text-white text-lg font-medium tracking-tight md:text-xl">
+                            {pillar.title}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  <!-- Slide indicators -->
+                  <div class="absolute top-4 right-4 flex gap-1.5">
+                    {learningPillars.map((_, i) => (
+                      <span
+                        class:list={[
+                          "h-1.5 rounded-full transition-all duration-500",
+                          i === 0 ? "w-6 bg-white" : "w-1.5 bg-white/50",
+                        ]}
+                        data-l360-dot={i}
+                      />
+                    ))}
+                  </div>
                 </div>
 
                 <!-- Overlapping card -->
@@ -504,7 +484,15 @@ const options = [
 
                   <div class="border-n-100 mt-4 flex flex-col divide-y divide-n-100 border-t">
                     {learningPillars.map((pillar, index) => (
-                      <div class="flex items-center gap-3 py-2.5">
+                      <div
+                        class="flex items-center gap-3 px-2 -mx-2 py-2.5 rounded-lg transition-colors duration-500"
+                        data-l360-row={index}
+                        data-soft={accents[pillar.accent].softHex}
+                        data-accent={accents[pillar.accent].accentHex}
+                        style={index === 0
+                          ? `background-color: ${accents[pillar.accent].softHex};`
+                          : undefined}
+                      >
                         <img
                           src={pillarImages[index].src}
                           alt={pillarImages[index].alt}
@@ -514,7 +502,10 @@ const options = [
                         />
                         <div class="flex min-w-0 flex-col gap-0.5">
                           <div class="flex flex-wrap items-center gap-2">
-                            <h4 class="text-n-800 text-sm font-medium md:text-base">
+                            <h4
+                              class="text-n-800 text-sm font-medium transition-colors duration-500 md:text-base"
+                              data-l360-title
+                            >
                               {pillar.title}
                             </h4>
                             <span
@@ -553,9 +544,9 @@ const options = [
         )}
 
         <!-- ============================================================
-             OPTION 6 - TRIPTYCH - ALL THREE AT ONCE
+             OPTION 5 - TRIPTYCH - ALL THREE AT ONCE
              ============================================================ -->
-        {optionIndex === 5 && (
+        {optionIndex === 4 && (
           <div class="bg-n-100">
             <div class="container m-auto px-5 py-6 md:py-8 lg:px-8 2xl:px-0">
               <div class="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5">
@@ -613,9 +604,9 @@ const options = [
           </div>
         )}
         <!-- ============================================================
-             OPTION 9 - CENTERED IMAGE CARDS
+             OPTION 6 - CENTERED IMAGE CARDS
              ============================================================ -->
-        {optionIndex === 6 && (
+        {optionIndex === 5 && (
           <div class="bg-n-50">
             <div class="container m-auto px-5 py-6 md:py-8 lg:px-8 2xl:px-0">
               <div class="flex flex-col items-center gap-4 md:gap-6">
@@ -672,9 +663,9 @@ const options = [
           </div>
         )}
         <!-- ============================================================
-             OPTION 10 - BOTTOM OVERLAY CARDS
+             OPTION 7 - IMAGE CARD + POINTERS
              ============================================================ -->
-        {optionIndex === 7 && (
+        {optionIndex === 6 && (
           <div class="bg-n-50">
             <div class="container m-auto px-5 py-6 md:py-10 lg:px-8 2xl:px-0">
               <div class="flex flex-col items-center gap-4 md:gap-8">
@@ -779,9 +770,9 @@ const options = [
           </div>
         )}
         <!-- ============================================================
-             OPTION 11 - EDITORIAL LIST
+             OPTION 8 - EDITORIAL LIST
              ============================================================ -->
-        {optionIndex === 8 && (
+        {optionIndex === 7 && (
           <div class="bg-white">
             <div class="container m-auto px-5 py-6 md:py-10 lg:px-8 2xl:px-0">
               <div class="flex flex-col items-center gap-4 md:gap-8 text-center">
@@ -860,7 +851,7 @@ const options = [
   <section class="border-t border-n-200 bg-white">
     <div class="container m-auto flex flex-col gap-1.5 px-5 py-7 md:py-9">
       <p class="text-n-800 text-base font-medium md:text-lg">
-        Pick one - Option 01 to 09.
+        Pick one - Option 01 to 08.
       </p>
       <p class="font-secondary text-n-500 max-w-2xl text-[13px] leading-relaxed md:text-sm">
         Temporary page. The chosen layout gets ported into{" "}
@@ -871,8 +862,77 @@ const options = [
     </div>
   </section>
   <script>
-    document.querySelectorAll('span').forEach(s => {
-      if (!s.textContent.trim()) s.remove();
+    // Auto-switch: cycle the three Learning @ 360 pillars
+    document.querySelectorAll("[data-l360-widget]").forEach((widget) => {
+      const slides = [...widget.querySelectorAll("[data-l360-slide]")];
+      const dots = [...widget.querySelectorAll("[data-l360-dot]")];
+      const rows = [...widget.querySelectorAll("[data-l360-row]")];
+      if (slides.length < 2) return;
+
+      const INTERVAL = 4000;
+      let current = 0;
+      let timer = null;
+
+      const show = (next) => {
+        current = (next + slides.length) % slides.length;
+
+        slides.forEach((slide, i) => {
+          const active = i === current;
+          slide.classList.toggle("opacity-100", active);
+          slide.classList.toggle("opacity-0", !active);
+          slide.setAttribute("aria-hidden", active ? "false" : "true");
+        });
+
+        dots.forEach((dot, i) => {
+          const active = i === current;
+          dot.classList.toggle("w-6", active);
+          dot.classList.toggle("bg-white", active);
+          dot.classList.toggle("w-1.5", !active);
+          dot.classList.toggle("bg-white/50", !active);
+        });
+
+        rows.forEach((row, i) => {
+          const active = i === current;
+          row.style.backgroundColor = active ? row.dataset.soft : "";
+          const title = row.querySelector("[data-l360-title]");
+          if (title) {
+            title.style.color = active ? row.dataset.accent : "";
+          }
+        });
+      };
+
+      const start = () => {
+        stop();
+        timer = window.setInterval(() => show(current + 1), INTERVAL);
+      };
+
+      function stop() {
+        if (timer) {
+          window.clearInterval(timer);
+          timer = null;
+        }
+      }
+
+      // Pause on hover so readers can dwell on a pillar
+      widget.addEventListener("mouseenter", stop);
+      widget.addEventListener("mouseleave", start);
+
+      // Click a row to jump to its pillar
+      rows.forEach((row, i) => {
+        row.style.cursor = "pointer";
+        row.addEventListener("click", () => {
+          show(i);
+          start();
+        });
+      });
+
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+      show(0);
+      if (!reduce.matches) start();
+      reduce.addEventListener("change", (e) => {
+        if (e.matches) stop();
+        else start();
+      });
     });
   </script>
 </Layout>
