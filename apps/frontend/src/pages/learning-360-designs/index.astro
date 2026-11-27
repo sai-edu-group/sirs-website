@@ -1,5 +1,5 @@
 ---
-// TEMPORARY REVIEW PAGE - eleven design options for the Learning @ 360 section.
+// TEMPORARY REVIEW PAGE - eight design options for the Learning @ 360 section.
 // Pick one and it gets ported into sections/home/Learning360.astro.
 
 import Layout from "@/layouts/Layout.astro";
@@ -82,61 +82,43 @@ const options = [
     note: "Photo and text swap sides, one row per pillar.",
   },
   {
-    id: "option-2",
-    num: "02",
-    name: "Photo Cards",
-    note: "Three cards, photo header on top of each.",
-  },
-  {
-    id: "option-3",
-    num: "03",
-    name: "Photo + Topic Panel",
-    note: "One tall photo beside a clean topic panel.",
-  },
-  {
     id: "option-5",
-    num: "04",
+    num: "02",
     name: "Photo + Overlapping Card",
     note: "Wide photo with the topics card overlapping it.",
   },
   {
     id: "option-6",
-    num: "05",
+    num: "03",
     name: "Triptych - All Three at Once",
   },
   {
     id: "option-9",
-    num: "06",
+    num: "04",
     name: "Centered Image Cards",
     note: "Equal image cards with tagline chip overlay.",
   },
   {
     id: "option-10",
-    num: "07",
+    num: "05",
     name: "Image Card + Pointers",
     note: "Photo header card with programme details as bullet pointers.",
   },
   {
-    id: "option-11",
-    num: "08",
-    name: "Editorial List",
-    note: "Editorial list layout with circular avatar images and clean typography.",
-  },
-  {
     id: "option-12",
-    num: "09",
+    num: "06",
     name: "The Cinematic Strip",
     note: "Image-led: gutterless full-bleed photo band with columns hanging beneath.",
   },
   {
     id: "option-13",
-    num: "10",
+    num: "07",
     name: "The Prospectus",
     note: "Typographic-led: hairline rules, tracked caps, photos on a shared baseline.",
   },
   {
     id: "option-14",
-    num: "11",
+    num: "08",
     name: "Feature and Rails",
     note: "Asymmetric: one hero pillar beside two compact horizontal rails.",
   },
@@ -147,7 +129,7 @@ const options = [
   meta={{
     title: "Learning 360 - Design Options",
     description:
-      "Eleven design options for the Learning @ 360 section - internal review page.",
+      "Eight design options for the Learning @ 360 section - internal review page.",
   }}
 >
   <!-- PAGE INTRO -->
@@ -166,7 +148,7 @@ const options = [
         Learning @ 360 - design options
       </h1>
       <p class="font-secondary text-n-600 max-w-2xl text-sm leading-relaxed md:text-base">
-        Eleven compact layouts for the section. Main topics and images side by
+        Eight compact layouts for the section. Main topics and images side by
         side - shortlist one and it gets built.
       </p>
 
@@ -294,156 +276,9 @@ const options = [
         )}
 
         <!-- ============================================================
-             OPTION 2 - PHOTO CARDS
+             OPTION 2 - PHOTO + OVERLAPPING CARD
              ============================================================ -->
         {optionIndex === 1 && (
-          <div class="bg-n-100">
-            <div class="container m-auto px-5 py-6 md:py-8 lg:px-8 2xl:px-0">
-              <div class="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5">
-                {learningPillars.map((pillar, index) => (
-                  <article class="bg-white border-n-200 group flex flex-col overflow-hidden rounded-2xl border shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(15,23,42,0.09)]">
-                    <div class="relative h-32 overflow-hidden md:h-36">
-                      <img
-                        src={pillarImages[index].src}
-                        alt={pillarImages[index].alt}
-                        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <span
-                        class:list={[
-                          "font-secondary absolute bottom-2.5 left-2.5 rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-[0.16em] uppercase",
-                          accents[pillar.accent].chip,
-                        ]}
-                      >
-                        {pillar.tagline}
-                      </span>
-                    </div>
-
-                    <div class="flex flex-1 flex-col gap-2.5 p-4 md:p-5">
-                      <div class="flex items-center gap-2.5">
-                        <span
-                          class:list={[
-                            "font-secondary flex size-7 shrink-0 items-center justify-center rounded-lg text-[11px] font-semibold",
-                            accents[pillar.accent].soft,
-                            accents[pillar.accent].text,
-                          ]}
-                        >
-                        </span>
-                        <h3 class="text-n-800 text-base font-medium tracking-tight md:text-lg">
-                          {pillar.title}
-                        </h3>
-                      </div>
-
-                      <p class="font-secondary text-n-500 text-[13px] leading-relaxed">
-                        {pillar.lead}
-                      </p>
-
-                      <div class="border-n-100 mt-auto flex flex-col border-t pt-1">
-                        {pillar.items.map((item, itemIndex) => (
-                          <p
-                            class:list={[
-                              "font-secondary flex gap-2 py-1.5 text-[13px] leading-snug",
-                              itemIndex > 0 && "border-n-100 border-t",
-                            ]}
-                          >
-                            <span class="text-n-700 font-semibold">
-                              {item.title}
-                            </span>
-                            <span class="text-n-500">{item.description}</span>
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        <!-- ============================================================
-             OPTION 3 - STACKED ROWS
-             ============================================================ -->
-        {optionIndex === 2 && (
-          <div class="bg-white">
-            <div class="container m-auto px-5 py-6 md:py-8 lg:px-8 2xl:px-0">
-              <div class="flex flex-col items-center gap-4 md:gap-6">
-                <p class="font-secondary text-orange-600 text-[11px] font-semibold tracking-[0.24em] uppercase md:text-xs">
-                  {learning360Header.eyebrow}
-                </p>
-                <h2 class="text-n-800 text-2xl font-medium tracking-tight text-center md:text-3xl">
-                  {learning360Header.titleLead}{" "}
-                  <span class="text-orange-500">{learning360Header.titleHighlight}</span>{" "}
-                  {learning360Header.titleTail}
-                </h2>
-                <p class="font-secondary text-n-600 text-[13px] leading-relaxed md:text-sm max-w-2xl text-center">
-                  {learning360Header.subtitle}
-                </p>
-              </div>
-              <div class="flex flex-col gap-3 pt-4">
-                {learningPillars.map((pillar, index) => (
-                  <article
-                    class:list={[
-                      "flex items-center gap-6 rounded-2xl border border-n-100 p-4 md:p-6 shadow-sm transition-all duration-300 hover:bg-n-50 hover:shadow-md",
-                      index % 2 === 0 && "bg-n-50",
-                    ]}
-                  >
-                    <!-- Image left -->
-                    <div class="relative shrink-0 size-24 md:size-32 rounded-xl overflow-hidden border border-n-200 bg-n-200">
-                      <img
-                        src={pillarImages[index].src}
-                        alt={pillarImages[index].alt}
-                        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <span class="absolute top-2 left-2 font-secondary size-4 shrink-0 items-center justify-center rounded-full border border-n-200 bg-white text-[9px] font-semibold">
-                      </span>
-                    </div>
-
-                    <!-- Text right -->
-                    <div class="flex flex-col gap-2 flex-1 min-w-0">
-                      <div class="flex items-center gap-2.5">
-                        <h3 class="text-n-800 text-base font-medium tracking-tight md:text-lg">
-                          {pillar.title}
-                        </h3>
-                        <span
-                          class:list={[
-                            "font-secondary rounded-full px-2 py-0.5 text-[9px] font-semibold tracking-[0.16em] uppercase",
-                            pillar.accent === "orange" && "bg-orange-50 text-orange-700",
-                            pillar.accent === "violet" && "bg-violet-50 text-violet-700",
-                            pillar.accent === "slate" && "bg-n-100 text-n-700",
-                          ]}
-                        >
-                          {pillar.tagline}
-                        </span>
-                      </div>
-                      <p class="font-secondary text-n-500 text-[13px] leading-relaxed md:text-sm">
-                        {pillar.lead}
-                      </p>
-                      <ul class="flex flex-wrap gap-1.5 mt-2">
-                        {pillar.items.map((item) => (
-                          <span class="font-secondary rounded-md bg-n-100 px-2 py-1 text-[11px] text-n-600">
-                            {item.title}
-                          </span>
-                        ))}
-                      </ul>
-                    </div>
-                  </article>
-                ))}
-              </div>
-              <p class="font-secondary text-n-500 mt-6 text-center text-[13px] md:text-sm">
-                {learning360Header.noteCaption}
-              </p>
-            </div>
-          </div>
-        )}
-
-        <!-- ============================================================
-             OPTION 4 - PHOTO + OVERLAPPING CARD
-             ============================================================ -->
-        {optionIndex === 3 && (
           <div class="bg-n-100">
             <div class="container m-auto px-5 py-6 md:py-8 lg:px-8 2xl:px-0">
               <div
@@ -584,9 +419,9 @@ const options = [
         )}
 
         <!-- ============================================================
-             OPTION 5 - TRIPTYCH - ALL THREE AT ONCE
+             OPTION 3 - TRIPTYCH - ALL THREE AT ONCE
              ============================================================ -->
-        {optionIndex === 4 && (
+        {optionIndex === 2 && (
           <div class="bg-n-100">
             <div class="container m-auto px-5 py-6 md:py-8 lg:px-8 2xl:px-0">
               <div class="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5">
@@ -644,9 +479,9 @@ const options = [
           </div>
         )}
         <!-- ============================================================
-             OPTION 6 - CENTERED IMAGE CARDS
+             OPTION 4 - CENTERED IMAGE CARDS
              ============================================================ -->
-        {optionIndex === 5 && (
+        {optionIndex === 3 && (
           <div class="bg-n-50">
             <div class="container m-auto px-5 py-6 md:py-8 lg:px-8 2xl:px-0">
               <div class="flex flex-col items-center gap-4 md:gap-6">
@@ -703,9 +538,9 @@ const options = [
           </div>
         )}
         <!-- ============================================================
-             OPTION 7 - IMAGE CARD + POINTERS
+             OPTION 5 - IMAGE CARD + POINTERS
              ============================================================ -->
-        {optionIndex === 6 && (
+        {optionIndex === 4 && (
           <div class="bg-n-50">
             <div class="container m-auto px-5 py-6 md:py-10 lg:px-8 2xl:px-0">
               <div class="flex flex-col items-center gap-4 md:gap-8">
@@ -809,85 +644,11 @@ const options = [
             </div>
           </div>
         )}
-        <!-- ============================================================
-             OPTION 8 - EDITORIAL LIST
-             ============================================================ -->
-        {optionIndex === 7 && (
-          <div class="bg-white">
-            <div class="container m-auto px-5 py-6 md:py-10 lg:px-8 2xl:px-0">
-              <div class="flex flex-col items-center gap-4 md:gap-8 text-center">
-                <p class="font-secondary text-orange-600 text-[11px] font-semibold tracking-[0.24em] uppercase md:text-xs">
-                  {learning360Header.eyebrow}
-                </p>
-                <h2 class="text-n-800 text-3xl font-medium tracking-tight md:text-4xl">
-                  {learning360Header.titleLead}{" "}
-                  <span class="text-orange-500">{learning360Header.titleHighlight}</span>{" "}
-                  {learning360Header.titleTail}
-                </h2>
-                <p class="font-secondary text-n-600 text-[13px] leading-relaxed md:text-sm max-w-2xl text-center">
-                  {learning360Header.subtitle}
-                </p>
-              </div>
-              <div class="grid grid-cols-1 gap-6 md:grid-cols-1 md:gap-8 pt-4">
-                {learningPillars.map((pillar, index) => (
-                  <article class="group relative overflow-hidden rounded-2xl border border-n-200 bg-white shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-0 items-center">
-                      <!-- Image left -->
-                      <div class="relative h-48 md:h-60 overflow-hidden rounded-l-2xl md:rounded-l-none md:rounded-r-2xl bg-n-50 flex items-center justify-center">
-                        <img
-                          src={pillarImages[index].src}
-                          alt={pillarImages[index].alt}
-                          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </div>
-                      <!-- Content right -->
-                      <div class="p-6 md:p-8 flex flex-col justify-center">
-                        <div class="flex items-center gap-2.5 mb-3">
-                          <span class="font-secondary flex size-8 shrink-0 items-center justify-center rounded-full border border-n-200 text-[11px] font-semibold">
-                            {pillar.index}
-                          </span>
-                          <h3 class="text-n-800 text-lg font-medium tracking-tight md:text-xl">
-                            {pillar.title}
-                          </h3>
-                        </div>
-                        <span
-                          class:list={[
-                            "font-secondary rounded-full px-2 py-0.5 text-[9px] font-semibold tracking-[0.16em] uppercase",
-                            pillar.accent === "orange" && "bg-orange-50 text-orange-700",
-                            pillar.accent === "violet" && "bg-violet-50 text-violet-700",
-                            pillar.accent === "slate" && "bg-n-100 text-n-700",
-                          ]}
-                        >
-                          {pillar.tagline}
-                        </span>
-                        <p class="font-secondary text-n-500 text-[13px] leading-relaxed md:text-sm mt-4">
-                          {pillar.lead}
-                        </p>
-                        <div class="flex flex-wrap gap-1.5 mt-5">
-                          {pillar.items.map((item) => (
-                            <span class="font-secondary rounded-md bg-n-100 px-2 py-1 text-[11px] text-n-600">
-                              {item.title}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-              <p class="font-secondary text-n-500 mt-6 text-center text-[13px] md:text-sm">
-                {learning360Header.noteCaption}
-              </p>
-            </div>
-          </div>
-        )}
 
         <!-- ============================================================
-             OPTION 9 - THE CINEMATIC STRIP
+             OPTION 6 - THE CINEMATIC STRIP
              ============================================================ -->
-        {optionIndex === 8 && (
+        {optionIndex === 5 && (
           <div class="bg-white">
             <!-- Header -->
             <div
@@ -1038,9 +799,9 @@ const options = [
         )}
 
         <!-- ============================================================
-             OPTION 10 - THE PROSPECTUS
+             OPTION 7 - THE PROSPECTUS
              ============================================================ -->
-        {optionIndex === 9 && (
+        {optionIndex === 6 && (
           <div class="bg-white">
             <!-- Header: two-column split -->
             <div class="container m-auto px-5 pt-6 md:pt-8 lg:px-8 2xl:px-0">
@@ -1206,9 +967,9 @@ const options = [
         )}
 
         <!-- ============================================================
-             OPTION 11 - FEATURE AND RAILS
+             OPTION 8 - FEATURE AND RAILS
              ============================================================ -->
-        {optionIndex === 10 && (
+        {optionIndex === 7 && (
           <div class="bg-white">
             <!-- Header, left aligned -->
             <div class="container m-auto px-5 pt-6 md:pt-8 lg:px-8 2xl:px-0">
@@ -1462,7 +1223,7 @@ const options = [
   <section class="border-t border-n-200 bg-white">
     <div class="container m-auto flex flex-col gap-1.5 px-5 py-7 md:py-9">
       <p class="text-n-800 text-base font-medium md:text-lg">
-        Pick one - Option 01 to 11.
+        Pick one - Option 01 to 08.
       </p>
       <p class="font-secondary text-n-500 max-w-2xl text-[13px] leading-relaxed md:text-sm">
         Temporary page. The chosen layout gets ported into{" "}
