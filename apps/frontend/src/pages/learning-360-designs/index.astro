@@ -1,5 +1,5 @@
 ---
-// TEMPORARY REVIEW PAGE - five design options for the Learning @ 360 section.
+// TEMPORARY REVIEW PAGE - eleven design options for the Learning @ 360 section.
 // Pick one and it gets ported into sections/home/Learning360.astro.
 
 import Layout from "@/layouts/Layout.astro";
@@ -16,6 +16,28 @@ const pillarImages = [
     alt: "The SIRS athletics stadium",
   },
 ];
+
+// Stroke icon paths for the three pillar icons (book / palette / pulse).
+const iconPaths: Record<string, string[]> = {
+  book: [
+    "M4 5.5A2.5 2.5 0 0 1 6.5 3H20v14H6.5A2.5 2.5 0 0 0 4 19.5V5.5Z",
+    "M4 19.5A2.5 2.5 0 0 1 6.5 17H20v4H6.5A2.5 2.5 0 0 1 4 19.5Z",
+  ],
+  palette: [
+    "M12 21a9 9 0 1 1 9-9 3 3 0 0 1-3 3h-1.5a2.5 2.5 0 0 0-2 4A6.5 6.5 0 0 1 12 21Z",
+    "M7.5 10.5h.01",
+    "M10.5 7h.01",
+    "M14.5 7.5h.01",
+  ],
+  pulse: ["M3 12h4l2.5-6 4 12 2.5-6h5"],
+};
+
+// Option 11 (Feature and Rails): first pillar is the hero feature,
+// the remaining two are the compact rails beside it.
+const featurePillar = learningPillars[0];
+const railPillars = learningPillars.slice(1);
+const featureImage = pillarImages[0];
+const railImages = pillarImages.slice(1);
 
 const accents = {
   orange: {
@@ -100,6 +122,24 @@ const options = [
     name: "Editorial List",
     note: "Editorial list layout with circular avatar images and clean typography.",
   },
+  {
+    id: "option-12",
+    num: "09",
+    name: "The Cinematic Strip",
+    note: "Image-led: gutterless full-bleed photo band with columns hanging beneath.",
+  },
+  {
+    id: "option-13",
+    num: "10",
+    name: "The Prospectus",
+    note: "Typographic-led: hairline rules, tracked caps, photos on a shared baseline.",
+  },
+  {
+    id: "option-14",
+    num: "11",
+    name: "Feature and Rails",
+    note: "Asymmetric: one hero pillar beside two compact horizontal rails.",
+  },
 ];
 ---
 
@@ -107,7 +147,7 @@ const options = [
   meta={{
     title: "Learning 360 - Design Options",
     description:
-      "Eight design options for the Learning @ 360 section - internal review page.",
+      "Eleven design options for the Learning @ 360 section - internal review page.",
   }}
 >
   <!-- PAGE INTRO -->
@@ -126,7 +166,7 @@ const options = [
         Learning @ 360 - design options
       </h1>
       <p class="font-secondary text-n-600 max-w-2xl text-sm leading-relaxed md:text-base">
-        Eight compact layouts for the section. Main topics and images side by
+        Eleven compact layouts for the section. Main topics and images side by
         side - shortlist one and it gets built.
       </p>
 
@@ -843,6 +883,577 @@ const options = [
             </div>
           </div>
         )}
+
+        <!-- ============================================================
+             OPTION 9 - THE CINEMATIC STRIP
+             ============================================================ -->
+        {optionIndex === 8 && (
+          <div class="bg-white">
+            <!-- Header -->
+            <div
+              class="container m-auto px-5 pt-6 pb-9 text-center md:pt-8 md:pb-12 lg:px-8 2xl:px-0"
+            >
+              <p
+                class="font-secondary text-orange-600 text-[11px] font-semibold tracking-[0.24em] uppercase md:text-xs"
+              >
+                {learning360Header.eyebrow}
+              </p>
+              <h2
+                class="text-n-800 mx-auto mt-3 max-w-[720px] text-3xl leading-[1.15] font-medium tracking-tight md:text-5xl"
+              >
+                {learning360Header.titleLead}{" "}
+                <span class="text-orange-500"
+                  >{learning360Header.titleHighlight}</span
+                >{" "}
+                {learning360Header.titleTail}
+              </h2>
+              <p
+                class="font-secondary text-n-600 mx-auto mt-4 max-w-[640px] text-[15px] leading-relaxed"
+              >
+                {learning360Header.subtitle}
+              </p>
+            </div>
+
+            <!-- Full-bleed photo band with text columns hanging beneath -->
+            <div
+              class="mx-auto grid max-w-[1760px] grid-cols-1 md:grid-cols-3"
+            >
+              {learningPillars.map((pillar, index) => (
+                <article
+                  class:list={[
+                    "group/col flex flex-col",
+                    index > 0 && "border-t border-n-200 md:border-t-0",
+                  ]}
+                >
+                  <!-- Photo -->
+                  <div class="h-[260px] overflow-hidden md:h-[420px]">
+                    <img
+                      src={pillarImages[index].src}
+                      alt={pillarImages[index].alt}
+                      class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover/col:scale-[1.04]"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+
+                  <!-- Text -->
+                  <div
+                    class:list={[
+                      "relative px-6 pt-10 pb-9 md:px-8",
+                      index > 0 && "md:border-l md:border-n-200",
+                    ]}
+                  >
+                    <!-- Icon badge straddling the photo-to-text seam -->
+                    <span
+                      class:list={[
+                        "absolute -top-[22px] left-6 z-10 flex size-11 items-center justify-center rounded-full text-white shadow-[0_6px_16px_rgba(15,23,42,0.18)] transition-all duration-300 group-hover/col:-translate-y-0.5 group-hover/col:shadow-[0_10px_24px_rgba(15,23,42,0.24)] md:left-8",
+                        accents[pillar.accent].solid,
+                      ]}
+                    >
+                      <svg
+                        class="size-5"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        {iconPaths[pillar.icon].map((d) => <path d={d} />)}
+                      </svg>
+                    </span>
+
+                    <p
+                      class:list={[
+                        "font-secondary text-[11px] font-semibold tracking-[0.16em] uppercase",
+                        accents[pillar.accent].text,
+                      ]}
+                    >
+                      {pillar.tagline}
+                    </p>
+                    <h3
+                      class="text-n-800 mt-2 text-[26px] leading-tight font-medium tracking-tight"
+                    >
+                      {pillar.title}
+                    </h3>
+                    <p
+                      class="font-secondary text-n-500 mt-2.5 text-[14.5px] leading-[1.7]"
+                    >
+                      {pillar.lead}
+                    </p>
+
+                    <div class="bg-n-100 my-[18px] h-px" aria-hidden="true" />
+
+                    <ul class="flex flex-col gap-3.5">
+                      {pillar.items.map((item) => (
+                        <li class="group/item flex gap-3">
+                          <span
+                            class:list={[
+                              "mt-[7px] size-1.5 shrink-0 rounded-full transition-transform duration-150 group-hover/item:scale-[1.4]",
+                              accents[pillar.accent].dot,
+                            ]}
+                            aria-hidden="true"
+                          />
+                          <span class="font-secondary text-[13px] leading-snug">
+                            <span
+                              class:list={[
+                                "text-n-800 font-semibold transition-colors duration-150",
+                                pillar.accent === "orange" &&
+                                  "group-hover/item:text-orange-600",
+                                pillar.accent === "violet" &&
+                                  "group-hover/item:text-violet-600",
+                                pillar.accent === "slate" &&
+                                  "group-hover/item:text-n-700",
+                              ]}
+                            >
+                              {item.title}
+                            </span>
+                            <span class="text-n-500 block"
+                              >{item.description}</span
+                            >
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <!-- Footer -->
+            <div
+              class="container m-auto px-5 py-9 text-center md:py-12 lg:px-8 2xl:px-0"
+            >
+              <p
+                class="font-secondary text-n-500 text-[11px] font-semibold tracking-[0.24em] uppercase"
+              >
+                {learning360Header.noteCaption}
+              </p>
+              <p class="text-n-800 mt-2 text-[13px] md:text-sm">
+                {learning360Header.note}
+              </p>
+            </div>
+          </div>
+        )}
+
+        <!-- ============================================================
+             OPTION 10 - THE PROSPECTUS
+             ============================================================ -->
+        {optionIndex === 9 && (
+          <div class="bg-white">
+            <!-- Header: two-column split -->
+            <div class="container m-auto px-5 pt-6 md:pt-8 lg:px-8 2xl:px-0">
+              <div class="grid grid-cols-1 gap-5 md:grid-cols-12 md:gap-8">
+                <div class="md:col-span-7">
+                  <p
+                    class="font-secondary text-orange-600 text-[11px] font-semibold tracking-[0.24em] uppercase md:text-xs"
+                  >
+                    {learning360Header.eyebrow}
+                  </p>
+                  <h2
+                    class="text-n-800 mt-3 max-w-[560px] text-3xl leading-[1.15] font-medium tracking-tight md:text-5xl"
+                  >
+                    {learning360Header.titleLead}{" "}
+                    <span class="text-orange-500"
+                      >{learning360Header.titleHighlight}</span
+                    >{" "}
+                    {learning360Header.titleTail}
+                  </h2>
+                </div>
+                <div class="flex items-end md:col-span-5">
+                  <p
+                    class="font-secondary text-n-600 max-w-[480px] text-[15px] leading-relaxed"
+                  >
+                    {learning360Header.subtitle}
+                  </p>
+                </div>
+              </div>
+              <div class="bg-n-200 mt-8 h-px w-full" aria-hidden="true" />
+            </div>
+
+            <!-- Body: three hairline columns, photos on a shared baseline -->
+            <div class="container m-auto px-5 lg:px-8 2xl:px-0">
+              <div class="grid grid-cols-1 md:grid-cols-3">
+                {learningPillars.map((pillar, index) => (
+                  <article
+                    class:list={[
+                      "group/col flex flex-col py-7 md:py-9",
+                      index > 0 &&
+                        "border-t border-n-200 transition-colors duration-200 md:border-t-0 md:border-l md:pl-8",
+                      index < 2 && "md:pr-8",
+                      index > 0 &&
+                        pillar.accent === "orange" &&
+                        "group-hover/col:border-orange-300",
+                      index > 0 &&
+                        pillar.accent === "violet" &&
+                        "group-hover/col:border-violet-300",
+                      index > 0 &&
+                        pillar.accent === "slate" &&
+                        "group-hover/col:border-n-300",
+                    ]}
+                  >
+                    <!-- Label row: icon + tagline + accent rule -->
+                    <div class="flex items-center gap-2.5">
+                      <svg
+                        class:list={["size-4 shrink-0", accents[pillar.accent].text]}
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        {iconPaths[pillar.icon].map((d) => <path d={d} />)}
+                      </svg>
+                      <span
+                        class:list={[
+                          "font-secondary text-[11px] font-semibold tracking-[0.16em] uppercase",
+                          accents[pillar.accent].text,
+                        ]}
+                      >
+                        {pillar.tagline}
+                      </span>
+                      <span
+                        class="h-px flex-1 opacity-40"
+                        style={`background-color: ${accents[pillar.accent].accentHex};`}
+                        aria-hidden="true"
+                      />
+                    </div>
+
+                    <h3
+                      class="text-n-800 mt-5 text-[26px] leading-tight font-medium tracking-tight"
+                    >
+                      {pillar.title}
+                    </h3>
+                    <p
+                      class="font-secondary text-n-500 mt-2.5 text-[14.5px] leading-[1.7]"
+                    >
+                      {pillar.lead}
+                    </p>
+
+                    <!-- Ruled programme rows -->
+                    <div class="border-n-100 mt-6 border-b">
+                      {pillar.items.map((item) => (
+                        <div
+                          class:list={[
+                            "group/row border-n-100 relative border-t py-3 pl-3 transition-colors duration-200",
+                            pillar.accent === "orange" && "hover:bg-orange-50",
+                            pillar.accent === "violet" && "hover:bg-violet-50",
+                            pillar.accent === "slate" && "hover:bg-n-50",
+                          ]}
+                        >
+                          <span
+                            class="absolute top-0 left-0 h-full w-0.5 origin-top scale-y-0 transition-transform duration-200 group-hover/row:scale-y-100"
+                            style={`background-color: ${accents[pillar.accent].accentHex};`}
+                            aria-hidden="true"
+                          />
+                          <p class="font-secondary text-[14px] leading-snug">
+                            <span
+                              class:list={[
+                                "text-n-800 font-semibold transition-colors duration-200",
+                                pillar.accent === "orange" &&
+                                  "group-hover/row:text-orange-600",
+                                pillar.accent === "violet" &&
+                                  "group-hover/row:text-violet-600",
+                                pillar.accent === "slate" &&
+                                  "group-hover/row:text-n-700",
+                              ]}
+                            >
+                              {item.title}
+                            </span>
+                          </p>
+                          <p
+                            class="font-secondary text-n-500 mt-1 text-[13px] leading-snug"
+                          >
+                            {item.description}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <!-- Photo pinned to the column baseline -->
+                    <div class="mt-auto pt-7">
+                      <div class="overflow-hidden">
+                        <img
+                          src={pillarImages[index].src}
+                          alt={pillarImages[index].alt}
+                          class="h-[224px] w-full object-cover saturate-[0.8] transition-all duration-500 group-hover/col:scale-[1.03] group-hover/col:saturate-100 md:h-[260px]"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="container m-auto px-5 lg:px-8 2xl:px-0">
+              <div class="bg-n-200 h-px w-full" aria-hidden="true" />
+              <div class="py-8 text-center md:py-10">
+                <p class="text-n-800 text-lg">{learning360Header.note}</p>
+                <p
+                  class="font-secondary text-n-500 mt-2 text-[11px] font-semibold tracking-[0.24em] uppercase"
+                >
+                  {learning360Header.noteCaption}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <!-- ============================================================
+             OPTION 11 - FEATURE AND RAILS
+             ============================================================ -->
+        {optionIndex === 10 && (
+          <div class="bg-white">
+            <!-- Header, left aligned -->
+            <div class="container m-auto px-5 pt-6 md:pt-8 lg:px-8 2xl:px-0">
+              <p
+                class="font-secondary text-orange-600 text-[11px] font-semibold tracking-[0.24em] uppercase md:text-xs"
+              >
+                {learning360Header.eyebrow}
+              </p>
+              <h2
+                class="text-n-800 mt-3 max-w-[720px] text-3xl leading-[1.15] font-medium tracking-tight md:text-[46px]"
+              >
+                {learning360Header.titleLead}{" "}
+                <span class="text-orange-500"
+                  >{learning360Header.titleHighlight}</span
+                >{" "}
+                {learning360Header.titleTail}
+              </h2>
+              <p
+                class="font-secondary text-n-600 mt-4 max-w-[640px] text-[15px] leading-relaxed"
+              >
+                {learning360Header.subtitle}
+              </p>
+            </div>
+
+            <!-- Body: 7/5 asymmetric grid -->
+            <div
+              class="container m-auto px-5 pt-9 pb-2 md:pt-12 lg:px-8 2xl:px-0"
+            >
+              <div
+                class="grid grid-cols-1 gap-9 md:grid-cols-12 md:gap-8 lg:gap-10"
+              >
+                <!-- Feature: Think pillar -->
+                <article
+                  class="group/feat md:col-span-12 lg:col-span-6 xl:col-span-7"
+                >
+                  <div class="relative">
+                    <div class="overflow-hidden">
+                      <img
+                        src={featureImage.src}
+                        alt={featureImage.alt}
+                        class="h-[300px] w-full object-cover transition-transform duration-[800ms] ease-out group-hover/feat:scale-[1.04] md:h-[380px] xl:h-[456px]"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                    <!-- Badge overlapping the photo's bottom-left corner -->
+                    <span
+                      class:list={[
+                        "absolute -bottom-[22px] left-5 z-10 inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-white shadow-[0_8px_20px_rgba(15,23,42,0.2)]",
+                        accents[featurePillar.accent].solid,
+                      ]}
+                    >
+                      <svg
+                        class="size-4"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        {iconPaths[featurePillar.icon].map((d) => (
+                          <path d={d} />
+                        ))}
+                      </svg>
+                      <span
+                        class="font-secondary text-[11px] font-semibold tracking-[0.16em] uppercase"
+                      >
+                        {featurePillar.tagline}
+                      </span>
+                    </span>
+                  </div>
+
+                  <div class="mt-9">
+                    <h3
+                      class="text-n-800 text-[28px] leading-tight font-medium tracking-tight md:text-[30px]"
+                    >
+                      {featurePillar.title}
+                    </h3>
+                    <span
+                      class:list={[
+                        "mt-3 block h-px w-10 transition-all duration-300 group-hover/feat:w-[100px]",
+                        accents[featurePillar.accent].solid,
+                      ]}
+                      aria-hidden="true"
+                    />
+                    <p
+                      class="font-secondary text-n-500 mt-4 max-w-[560px] text-[15px] leading-[1.7]"
+                    >
+                      {featurePillar.lead}
+                    </p>
+                    <div class="border-n-100 mt-6 border-b">
+                      {featurePillar.items.map((item) => (
+                        <div
+                          class="group/frow border-n-100 flex gap-3 border-t py-3"
+                        >
+                          <span
+                            class:list={[
+                              "mt-[7px] size-1.5 shrink-0 rounded-full transition-transform duration-150 group-hover/frow:scale-[1.4]",
+                              accents[featurePillar.accent].dot,
+                            ]}
+                            aria-hidden="true"
+                          />
+                          <span class="font-secondary text-[14px] leading-snug">
+                            <span
+                              class:list={[
+                                "text-n-800 font-semibold transition-colors duration-150",
+                                featurePillar.accent === "orange" &&
+                                  "group-hover/frow:text-orange-600",
+                                featurePillar.accent === "violet" &&
+                                  "group-hover/frow:text-violet-600",
+                                featurePillar.accent === "slate" &&
+                                  "group-hover/frow:text-n-700",
+                              ]}
+                            >
+                              {item.title}
+                            </span>
+                            <span class="text-n-500 block"
+                              >{item.description}</span
+                            >
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Rails: Create + Move -->
+                <div
+                  class="flex flex-col md:col-span-12 md:grid md:grid-cols-2 md:gap-8 lg:col-span-6 lg:flex lg:flex-col lg:gap-0 lg:pt-10 xl:col-span-5"
+                >
+                  {railPillars.map((pillar, railIndex) => (
+                    <article
+                      class:list={[
+                        "group/rail",
+                        railIndex > 0 &&
+                          "border-n-200 mt-8 border-t pt-8 md:mt-0 md:border-t-0 md:border-l md:pl-8 md:pt-0 lg:mt-10 lg:border-t lg:border-l-0 lg:pl-0 lg:pt-10",
+                      ]}
+                    >
+                      <div class="flex flex-col gap-5 lg:flex-row">
+                        <div
+                          class="h-[224px] w-full shrink-0 overflow-hidden md:h-[240px] lg:h-[250px] lg:w-[45%] lg:max-w-[250px]"
+                        >
+                          <img
+                            src={railImages[railIndex].src}
+                            alt={railImages[railIndex].alt}
+                            class="h-full w-full object-cover transition-transform duration-500 group-hover/rail:scale-[1.05]"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>
+                        <div class="flex min-w-0 flex-1 flex-col">
+                          <div class="flex items-center gap-2">
+                            <svg
+                              class:list={[
+                                "size-4 shrink-0",
+                                accents[pillar.accent].text,
+                              ]}
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="1.7"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              aria-hidden="true"
+                            >
+                              {iconPaths[pillar.icon].map((d) => (
+                                <path d={d} />
+                              ))}
+                            </svg>
+                            <span
+                              class:list={[
+                                "font-secondary text-[11px] font-semibold tracking-[0.16em] uppercase",
+                                accents[pillar.accent].text,
+                              ]}
+                            >
+                              {pillar.tagline}
+                            </span>
+                          </div>
+                          <h3
+                            class="text-n-800 mt-2 text-xl leading-tight font-medium tracking-tight"
+                          >
+                            {pillar.title}
+                          </h3>
+                          <p
+                            class="font-secondary text-n-500 mt-2 text-[13.5px] leading-[1.6]"
+                          >
+                            {pillar.lead}
+                          </p>
+                          <ul class="mt-4 flex flex-col gap-2.5">
+                            {pillar.items.map((item) => (
+                              <li class="group/rrow flex gap-2.5">
+                                <span
+                                  class:list={[
+                                    "mt-[6px] size-1.5 shrink-0 rounded-full transition-transform duration-150 group-hover/rrow:scale-[1.4]",
+                                    accents[pillar.accent].dot,
+                                  ]}
+                                  aria-hidden="true"
+                                />
+                                <span
+                                  class="font-secondary text-[13.5px] leading-snug"
+                                >
+                                  <span
+                                    class:list={[
+                                      "text-n-800 font-semibold transition-colors duration-150",
+                                      pillar.accent === "orange" &&
+                                        "group-hover/rrow:text-orange-600",
+                                      pillar.accent === "violet" &&
+                                        "group-hover/rrow:text-violet-600",
+                                      pillar.accent === "slate" &&
+                                        "group-hover/rrow:text-n-700",
+                                    ]}
+                                  >
+                                    {item.title}
+                                  </span>
+                                  <span class="text-n-500 block text-[12.5px]"
+                                    >{item.description}</span
+                                  >
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="container m-auto px-5 pt-7 lg:px-8 2xl:px-0">
+              <div class="bg-n-200 h-px w-full" aria-hidden="true" />
+              <div class="py-8 text-center md:py-10">
+                <p class="text-n-800 text-lg">{learning360Header.note}</p>
+                <p
+                  class="font-secondary text-n-500 mt-2 text-[11px] font-semibold tracking-[0.24em] uppercase"
+                >
+                  {learning360Header.noteCaption}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
       </section>
     ))
   }
@@ -851,7 +1462,7 @@ const options = [
   <section class="border-t border-n-200 bg-white">
     <div class="container m-auto flex flex-col gap-1.5 px-5 py-7 md:py-9">
       <p class="text-n-800 text-base font-medium md:text-lg">
-        Pick one - Option 01 to 08.
+        Pick one - Option 01 to 11.
       </p>
       <p class="font-secondary text-n-500 max-w-2xl text-[13px] leading-relaxed md:text-sm">
         Temporary page. The chosen layout gets ported into{" "}
